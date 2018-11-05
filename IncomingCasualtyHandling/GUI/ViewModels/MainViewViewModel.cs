@@ -5,18 +5,22 @@ using OurPatient = IncomingCasualtyHandling.BL.Models.OurPatient;
 
 namespace IncomingCasualtyHandling.GUI.ViewModels
 {
-    internal class ViewModel
+    internal class MainViewViewModel
     {
         private string _test;
         private List<OurPatient> _listOfPatients;
 
-        public ViewModel()
+        public MainViewViewModel()
         {
-            initialize();
+            Initialize();
+
+            //Setup the current workspace aka the view to be shown
+            //CurrentWorkspace = _overviewViewViewModel;
+            //ChangeViewCommand = new Rel
         }
-        private void initialize()
+        private void Initialize()
         {
-            //Data layer initialize
+            //Data layer Initialize
             LoadConfigurationSettings lcs = new LoadConfigurationSettings();
             GetPatientsFromFhir fhirCommands = new GetPatientsFromFhir(lcs);
 
@@ -28,6 +32,8 @@ namespace IncomingCasualtyHandling.GUI.ViewModels
 
             //Dette bliver til vores "Main", der initializer alt der skal initializes
         }
+
+
         public string TestProperty
         {
             get { return _test; }

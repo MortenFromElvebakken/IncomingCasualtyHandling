@@ -72,7 +72,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="GUI\ViewModels\ViewModel.cs" />
+    <Compile Include="GUI\ViewModels\MainViewViewModel.cs" />
     <Page Include="GUI\View\MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -88,6 +88,8 @@
     <Compile Include="DAL\SerialiseToPatient.cs" />
     <Compile Include="DAL\SubjectObserverPatients.cs" />
     <Compile Include="DAL\TestSubScriptionClass.cs" />
+    <Compile Include="GUI\ViewModels\ObservableObject.cs" />
+    <Compile Include="GUI\ViewModels\RelayCommand.cs" />
     <Compile Include="GUI\View\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
@@ -95,6 +97,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BL\Models\Patient.cs" />
+    <Compile Include="Properties\Annotations.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
