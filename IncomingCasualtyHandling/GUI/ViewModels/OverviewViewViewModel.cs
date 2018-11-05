@@ -1,13 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using IncomingCasualtyHandling.GUI.ViewModels;
-using WindowTest2.BLL;
+using IncomingCasualtyHandling.BL.Models;
 
-namespace WindowTest2.GUI.ViewModel
+namespace IncomingCasualtyHandling.GUI.ViewModels
 {
     public class OverviewViewViewModel : WorkspaceViewModel
     {
