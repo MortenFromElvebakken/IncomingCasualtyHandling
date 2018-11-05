@@ -27,15 +27,15 @@ namespace IncomingCasualtyHandling.GUI.ViewModels
             CurrentWorkspace = _overviewViewViewModel;
             ChangeViewCommand = new RelayCommand(ChangeView);
 
-            DateTime d;
-            d = DateTime.Now;
-            string day = d.Day.ToString().PadLeft(2, '0');
-            string month = d.ToString("MMM", culture);
-            string year = d.Year.ToString();
-            string hour = d.Hour.ToString().PadLeft(2, '0');
-            string minute = d.Minute.ToString().PadLeft(2, '0');
+            //DateTime d;
+            //d = DateTime.Now;
+            //string day = d.Day.ToString().PadLeft(2, '0');
+            //string month = d.ToString("MMM", _culture);
+            //string year = d.Year.ToString();
+            //string hour = d.Hour.ToString().PadLeft(2, '0');
+            //string minute = d.Minute.ToString().PadLeft(2, '0');
 
-            CurrentDateTime = day + ". " + month + ". " + year + "\t" + hour + ":" + minute;
+            //CurrentDateTime = day + ". " + month + ". " + year + "\t" + hour + ":" + minute;
             _timer.Tick += new EventHandler(Timer_Click);
             //_timer.Interval = new TimeSpan(0, 0, 1);
             _timer.Interval = TimeSpan.FromSeconds(1);
@@ -93,17 +93,12 @@ namespace IncomingCasualtyHandling.GUI.ViewModels
         // Timer made with inspiration from:
         // https://stackoverflow.com/a/5410783
 
-        System.Windows.Threading.DispatcherTimer _timer = new System.Windows.Threading.DispatcherTimer();
+        readonly System.Windows.Threading.DispatcherTimer _timer = new System.Windows.Threading.DispatcherTimer();
 
         // Property for binding 
-        private string _currentDateTime;
-        public string CurrentDateTime
-        {
-            get => _currentDateTime;
-            set => _currentDateTime = value;
-        }
+        public string CurrentDateTime { get; set; }
 
-        private CultureInfo culture = System.Globalization.CultureInfo.CurrentCulture;
+        private readonly CultureInfo _culture = CultureInfo.CurrentCulture;
 
         private void Timer_Click(object sender, EventArgs e)
         {
@@ -111,14 +106,13 @@ namespace IncomingCasualtyHandling.GUI.ViewModels
 
             d = DateTime.Now;
             string day = d.Day.ToString().PadLeft(2, '0');
-            string month = d.ToString("MMM", culture);
+            string month = d.ToString("MMM", _culture);
             string year = d.Year.ToString();
             string hour = d.Hour.ToString().PadLeft(2, '0');
             string minute = d.Minute.ToString().PadLeft(2, '0');
 
             CurrentDateTime = day + ". " + month + ". " + year + "\t" + hour + ":" + minute;
-            OnPropertyChanged();
-
+            OnPropertyChanged(CurrentDateTime);
         }
 
 
