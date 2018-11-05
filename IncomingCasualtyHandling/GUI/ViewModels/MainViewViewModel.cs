@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Globalization;
 using System.Windows.Input;
 using IncomingCasualtyHandling.BL;
 using IncomingCasualtyHandling.DAL;
@@ -24,8 +26,21 @@ namespace IncomingCasualtyHandling.GUI.ViewModels
             //Setup the current workspace aka the view to be shown
             CurrentWorkspace = _overviewViewViewModel;
             ChangeViewCommand = new RelayCommand(ChangeView);
-        }
 
+            DateTime d;
+            d = DateTime.Now;
+            string day = d.Day.ToString().PadLeft(2, '0');
+            string month = d.ToString("MMM", culture);
+            string year = d.Year.ToString();
+            string hour = d.Hour.ToString().PadLeft(2, '0');
+            string minute = d.Minute.ToString().PadLeft(2, '0');
+
+            CurrentDateTime = day + ". " + month + ". " + year + "\t" + hour + ":" + minute;
+            _timer.Tick += new EventHandler(Timer_Click);
+            //_timer.Interval = new TimeSpan(0, 0, 1);
+            _timer.Interval = TimeSpan.FromSeconds(1);
+            _timer.Start();
+        }
         
         private void Initialize()
         {
@@ -72,6 +87,37 @@ namespace IncomingCasualtyHandling.GUI.ViewModels
             {
                 CurrentWorkspace = _overviewViewViewModel;
             }
+
+        }
+
+        // Timer made with inspiration from:
+        // https://stackoverflow.com/a/5410783
+
+        System.Windows.Threading.DispatcherTimer _timer = new System.Windows.Threading.DispatcherTimer();
+
+        // Property for binding 
+        private string _currentDateTime;
+        public string CurrentDateTime
+        {
+            get => _currentDateTime;
+            set => _currentDateTime = value;
+        }
+
+        private CultureInfo culture = System.Globalization.CultureInfo.CurrentCulture;
+
+        private void Timer_Click(object sender, EventArgs e)
+        {
+            DateTime d;
+
+            d = DateTime.Now;
+            string day = d.Day.ToString().PadLeft(2, '0');
+            string month = d.ToString("MMM", culture);
+            string year = d.Year.ToString();
+            string hour = d.Hour.ToString().PadLeft(2, '0');
+            string minute = d.Minute.ToString().PadLeft(2, '0');
+
+            CurrentDateTime = day + ". " + month + ". " + year + "\t" + hour + ":" + minute;
+            OnPropertyChanged();
 
         }
 
