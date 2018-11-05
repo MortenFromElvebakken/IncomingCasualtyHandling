@@ -76,7 +76,6 @@
     <Compile Include="GUI\ViewModels\MainViewViewModel.cs" />
     <Compile Include="BL\Models\Specialty.cs" />
     <Compile Include="BL\Models\Triage.cs" />
-    <Compile Include="GUI\ViewModels\ViewModel.cs" />
     <Page Include="GUI\View\MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
