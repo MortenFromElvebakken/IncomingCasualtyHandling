@@ -4,8 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Hl7.Fhir.Model;
-using IncomingCasualtyHandling.Models;
 using Hl7.Fhir.Serialization;
+using IncomingCasualtyHandling.BL.Models;
 
 
 namespace IncomingCasualtyHandling.DAL

@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Hl7.Fhir.Model;
 using Hl7.Fhir.Rest;
-using IncomingCasualtyHandling.Models;
+using IncomingCasualtyHandling.BL.Models;
 
 namespace IncomingCasualtyHandling.DAL
 {

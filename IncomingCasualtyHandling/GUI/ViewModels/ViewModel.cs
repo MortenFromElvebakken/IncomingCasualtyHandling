@@ -1,15 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Hl7.Fhir.Model;
+﻿using System.Collections.Generic;
 using IncomingCasualtyHandling.BL;
 using IncomingCasualtyHandling.DAL;
-using IncomingCasualtyHandling.Models;
-using OurPatient = IncomingCasualtyHandling.Models.OurPatient;
+using OurPatient = IncomingCasualtyHandling.BL.Models.OurPatient;
 
-namespace IncomingCasualtyHandling
+namespace IncomingCasualtyHandling.GUI.ViewModels
 {
     internal class ViewModel
     {

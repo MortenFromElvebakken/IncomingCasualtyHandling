@@ -4,7 +4,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using IncomingCasualtyHandling.DAL;
-using IncomingCasualtyHandling.Models;
 
 namespace IncomingCasualtyHandling.BL
 {
