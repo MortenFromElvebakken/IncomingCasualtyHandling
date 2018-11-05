@@ -3,10 +3,13 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:local="clr-namespace:IncomingCasualtyHandling"
              xmlns:viewmodel="clr-namespace:IncomingCasualtyHandling.GUI.ViewModels"
+             xmlns:view="clr-namespace:IncomingCasualtyHandling.GUI.View"
              StartupUri="GUI/View/MainView.xaml">
 
     <Application.Resources>
-        
+        <DataTemplate DataType="{x:Type viewmodel:OverviewViewViewModel}">
+            <view:OverviewView/>
+        </DataTemplate>
         <Style TargetType="Button" x:Key="RoundedButtonAsBar">
             <Setter Property="Template">
                 <Setter.Value>

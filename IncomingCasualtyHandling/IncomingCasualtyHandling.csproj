@@ -115,6 +115,10 @@
       <DependentUpon>MainView.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="GUI\View\OverviewView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="GUI\View\SpecialtyComponent.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -130,6 +134,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BL\Models\Patient.cs" />
+    <Compile Include="GUI\View\OverviewView.xaml.cs">
+      <DependentUpon>OverviewView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="GUI\View\SpecialtyComponent.xaml.cs">
       <DependentUpon>SpecialtyComponent.xaml</DependentUpon>
     </Compile>
