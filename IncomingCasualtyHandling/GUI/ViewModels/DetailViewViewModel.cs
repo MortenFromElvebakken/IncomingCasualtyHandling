@@ -1,6 +1,6 @@
 ﻿namespace IncomingCasualtyHandling.GUI.ViewModels
 {
-    class DetailViewViewModel : WorkspaceViewModel
+    public class DetailViewViewModel : WorkspaceViewModel
     {
     }
 }

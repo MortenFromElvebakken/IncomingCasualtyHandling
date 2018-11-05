@@ -7,7 +7,7 @@
              StartupUri="GUI/View/MainView.xaml">
 
     <Application.Resources>
-        <DataTemplate DataType="{x:Type viewmodel:OverviewViewViewModel}">
+        <DataTemplate DataType="{x:Type viewmodel:OverviewViewViewModel}" >
             <view:OverviewView/>
         </DataTemplate>
         <DataTemplate DataType="{x:Type viewmodel:DetailViewViewModel}">
@@ -64,3 +64,4 @@
 
     </Application.Resources>
 </Application>
+
