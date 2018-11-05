@@ -16,7 +16,7 @@
 
 
         <Grid Grid.Column="1">
-            <Label Name="DateTimeLabel" Foreground="White" HorizontalContentAlignment="Right" VerticalContentAlignment="Center" Content="{Binding CurrentDateTime}"></Label>
+            <Label Name="DateTimeLabel" Foreground="White" HorizontalContentAlignment="Right" VerticalContentAlignment="Center" Content="{Binding RelativeSource={RelativeSource AncestorType=Window}, Path=DataContext.CurrentDateTime}"></Label>
         </Grid>
 
     </Grid>
