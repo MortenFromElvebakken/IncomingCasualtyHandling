@@ -1,0 +1,14 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using IncomingCasualtyHandling.Models;
+
+namespace IncomingCasualtyHandling.DAL.Interface
+{
+    public interface IObserver
+    {
+        void Update(List<OurPatient> s); // Indsæt at den notify'er med en liste af aircrafts
+    }
+}
