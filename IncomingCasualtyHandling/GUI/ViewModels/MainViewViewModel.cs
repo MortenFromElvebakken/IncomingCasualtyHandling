@@ -18,13 +18,15 @@ namespace IncomingCasualtyHandling.GUI.ViewModels
 
         public MainViewViewModel()
         {
-            Initialize();
+            // Udkommenteret under View-Viewmodel test
+            //Initialize();
 
             //Setup the current workspace aka the view to be shown
             CurrentWorkspace = _overviewViewViewModel;
             ChangeViewCommand = new RelayCommand(ChangeView);
         }
 
+        
         private void Initialize()
         {
             //Data layer Initialize
