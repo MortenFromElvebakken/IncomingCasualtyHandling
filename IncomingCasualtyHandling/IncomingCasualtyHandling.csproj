@@ -112,11 +112,18 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="GUI\View\TriageComponent.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BL\Models\Patient.cs" />
     <Compile Include="GUI\View\TopComponent.xaml.cs">
       <DependentUpon>TopComponent.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\View\TriageComponent.xaml.cs">
+      <DependentUpon>TriageComponent.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\Annotations.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
