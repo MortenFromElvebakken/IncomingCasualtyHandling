@@ -85,7 +85,7 @@
     <Compile Include="GUI\ViewModels\MainViewViewModel.cs" />
     <Compile Include="BL\Models\Specialty.cs" />
     <Compile Include="BL\Models\Triage.cs" />
-    <Page Include="GUI\View\MainWindow.xaml">
+    <Page Include="GUI\View\MainView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -104,13 +104,20 @@
     <Compile Include="GUI\ViewModels\OverviewViewViewModel.cs" />
     <Compile Include="GUI\RelayCommand.cs" />
     <Compile Include="GUI\ViewModels\WorkspaceViewModel.cs" />
-    <Compile Include="GUI\View\MainWindow.xaml.cs">
-      <DependentUpon>MainWindow.xaml</DependentUpon>
+    <Compile Include="GUI\View\MainView.xaml.cs">
+      <DependentUpon>MainView.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="GUI\View\TopComponent.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BL\Models\Patient.cs" />
+    <Compile Include="GUI\View\TopComponent.xaml.cs">
+      <DependentUpon>TopComponent.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Properties\Annotations.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
