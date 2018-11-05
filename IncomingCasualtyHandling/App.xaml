@@ -10,6 +10,9 @@
         <DataTemplate DataType="{x:Type viewmodel:OverviewViewViewModel}">
             <view:OverviewView/>
         </DataTemplate>
+        <DataTemplate DataType="{x:Type viewmodel:DetailViewViewModel}">
+            <view:DetailView/>
+        </DataTemplate>
         <Style TargetType="Button" x:Key="RoundedButtonAsBar">
             <Setter Property="Template">
                 <Setter.Value>
