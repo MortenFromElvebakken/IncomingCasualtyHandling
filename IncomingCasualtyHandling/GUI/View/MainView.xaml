@@ -22,7 +22,7 @@
         </Grid.RowDefinitions>
 
         <Grid Grid.Row="0">
-            <view:TopComponent x:Name="TopComponent"></view:TopComponent>
+            <view:TopComponent x:Name="TopComponent" DataContext="viewModels:MainViewViewModel.CurrentDateTime"></view:TopComponent>
         </Grid>
 
         <Grid Grid.Row="1">
