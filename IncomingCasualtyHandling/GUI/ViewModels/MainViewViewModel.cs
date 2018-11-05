@@ -10,6 +10,9 @@ namespace IncomingCasualtyHandling.GUI.ViewModels
         private string _test;
         private List<OurPatient> _listOfPatients;
 
+        // Objects for the two subviews
+
+
         public MainViewViewModel()
         {
             Initialize();

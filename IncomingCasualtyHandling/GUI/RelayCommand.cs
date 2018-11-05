@@ -1,12 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Input;
 
-namespace WindowTest2.GUI
+namespace IncomingCasualtyHandling.GUI.ViewModels
 {
     // The below is from the course SWD, taken in the spring 2018.
 
