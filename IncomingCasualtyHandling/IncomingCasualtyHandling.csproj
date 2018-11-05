@@ -85,6 +85,10 @@
     <Compile Include="GUI\ViewModels\MainViewViewModel.cs" />
     <Compile Include="BL\Models\Specialty.cs" />
     <Compile Include="BL\Models\Triage.cs" />
+    <Page Include="GUI\View\ETAComponent.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="GUI\View\MainView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -104,6 +108,9 @@
     <Compile Include="GUI\ViewModels\OverviewViewViewModel.cs" />
     <Compile Include="GUI\RelayCommand.cs" />
     <Compile Include="GUI\ViewModels\WorkspaceViewModel.cs" />
+    <Compile Include="GUI\View\ETAComponent.xaml.cs">
+      <DependentUpon>ETAComponent.xaml</DependentUpon>
+    </Compile>
     <Compile Include="GUI\View\MainView.xaml.cs">
       <DependentUpon>MainView.xaml</DependentUpon>
       <SubType>Code</SubType>
