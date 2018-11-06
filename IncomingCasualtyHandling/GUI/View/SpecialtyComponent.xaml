@@ -14,7 +14,7 @@
         </Grid.RowDefinitions>
 
         <Grid Grid.Row="0">
-            <Label Name="SpecialtyHeaderLabel" VerticalAlignment="Center" HorizontalAlignment="Center">SPECIALTY</Label>
+            <Label Name="SpecialtyHeader" VerticalAlignment="Center" HorizontalAlignment="Center">SPECIALTY</Label>
         </Grid>
         <Grid Grid.Row="1">
             <UniformGrid Name="SpecialtyGrid" Columns="1" Margin="10,0,10,10" VerticalAlignment="Stretch">

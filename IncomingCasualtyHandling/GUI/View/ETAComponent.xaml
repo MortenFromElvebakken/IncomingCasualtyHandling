@@ -14,7 +14,7 @@
         </Grid.RowDefinitions>
 
         <Grid Grid.Row="0">
-            <Label Name="HeaderEtaLabel" VerticalAlignment="Center" HorizontalAlignment="Center">ETA</Label>
+            <Label Name="EtaHeader" VerticalAlignment="Center" HorizontalAlignment="Center">ETA</Label>
         </Grid>
 
         <Grid Grid.Row="1">
