@@ -37,6 +37,9 @@ namespace IncomingCasualtyHandling.GUI.ViewModels
         private int counter;
         private double barHeight;
 
+        private int _maximumTriages = 10;
+        public int MaximumTriages => _maximumTriages;
+
         private Triage _redTriage;
         private Triage _orangeTriage;
         private Triage _yellowTriage;
