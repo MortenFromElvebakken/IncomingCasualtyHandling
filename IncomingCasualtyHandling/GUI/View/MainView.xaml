@@ -1,0 +1,32 @@
+﻿<Window x:Class="IncomingCasualtyHandling.GUI.View.MainView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:IncomingCasualtyHandling"
+        xmlns:viewModels="clr-namespace:IncomingCasualtyHandling.GUI.ViewModels"
+        xmlns:view="clr-namespace:IncomingCasualtyHandling.GUI.View"
+        mc:Ignorable="d"
+        Title="MainWindow" Width="1366" Height="768" Background="#252E37" BorderBrush="Black"
+        WindowStyle="None" AllowsTransparency="True"
+        WindowStartupLocation="Manual" Top="0" Left="0">
+
+    <Window.DataContext>
+        <viewModels:MainViewViewModel/>
+    </Window.DataContext>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0.05*"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="0">
+            <view:TopComponent x:Name="TopComponent" DataContext="viewModels:MainViewViewModel.CurrentDateTime"></view:TopComponent>
+        </Grid>
+
+        <Grid Grid.Row="1">
+            <ContentControl Content="{Binding CurrentWorkspace}"/>
+        </Grid>
+    </Grid>
+</Window>
