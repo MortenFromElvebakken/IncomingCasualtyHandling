@@ -5,7 +5,7 @@ VisualStudioVersion = 15.0.28010.2050
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IncomingCasualtyHandling", "IncomingCasualtyHandling\IncomingCasualtyHandling.csproj", "{E5721ADA-CA2A-4845-B432-B2FBF1EE6B16}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UserControlLibrary.Windows.Theme", "..\Projects\SimpleTest\UserControlLibrary.Windows.Theme\UserControlLibrary.Windows.Theme.csproj", "{794E7C44-BB9C-47A6-AFE2-7BB541CB5A5F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UserControlLibrary", "UserControlLibrary\UserControlLibrary.csproj", "{6C23562F-26AD-47D7-9D2B-595543EB0A0E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,10 +17,10 @@ Global
 		{E5721ADA-CA2A-4845-B432-B2FBF1EE6B16}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E5721ADA-CA2A-4845-B432-B2FBF1EE6B16}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E5721ADA-CA2A-4845-B432-B2FBF1EE6B16}.Release|Any CPU.Build.0 = Release|Any CPU
-		{794E7C44-BB9C-47A6-AFE2-7BB541CB5A5F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{794E7C44-BB9C-47A6-AFE2-7BB541CB5A5F}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{794E7C44-BB9C-47A6-AFE2-7BB541CB5A5F}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{794E7C44-BB9C-47A6-AFE2-7BB541CB5A5F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6C23562F-26AD-47D7-9D2B-595543EB0A0E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6C23562F-26AD-47D7-9D2B-595543EB0A0E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6C23562F-26AD-47D7-9D2B-595543EB0A0E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6C23562F-26AD-47D7-9D2B-595543EB0A0E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
