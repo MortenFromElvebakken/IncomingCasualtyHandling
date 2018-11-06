@@ -41,6 +41,7 @@ namespace IncomingCasualtyHandling.DAL
             _hospital = configFile.LastChild.LastChild.InnerText;
             return _hospital;
         }
+        //Metode til at indhente triage og speciale
 
     }
 }

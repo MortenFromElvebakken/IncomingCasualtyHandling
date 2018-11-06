@@ -3,22 +3,25 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using IncomingCasualtyHandling.BL.Models;
 using IncomingCasualtyHandling.DAL;
+using IncomingCasualtyHandling.DAL.Interface;
 
 namespace IncomingCasualtyHandling.BL
 {
-     class SortPatients
-    {
+     class SortPatients : IObserver
+     {
+        private List<OurPatient> listOfPatients;
 
-        public SortPatients()
+         public SortPatients()
         {
 
         }
 
-
-        //public List<OurPatient> recievePatients()
-        //{
-        //    return ctrlDAL.GetAllPatients();
-        //}
+        
+        public void Update(List<OurPatient> s)
+        {
+            listOfPatients = s;
+        }
     }
 }

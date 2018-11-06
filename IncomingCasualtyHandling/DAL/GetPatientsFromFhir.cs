@@ -9,57 +9,54 @@ using IncomingCasualtyHandling.BL.Models;
 
 namespace IncomingCasualtyHandling.DAL
 {
-    internal class GetPatientsFromFhir
+    internal class GetPatientsFromFhir: SubjectObserverPatients
     {
         private string fhirServerURL;
         private string hospitalShortName;
         private FhirClient client;
-        private SerialiseToPatient stp;
-        private GetPatientsFromFhir fhirPatients;
-        private LoadConfigurationSettings lcs;
+        private SerialiseToPatient serialisePatient;
+        private LoadConfigurationSettings loadConfigSettings;
 
         public GetPatientsFromFhir(LoadConfigurationSettings _lcs)
         {
-
-
-            fhirServerURL = lcs.ReturnServerName();
-            hospitalShortName = lcs.ReturnHospitalShortName();
+            fhirServerURL = loadConfigSettings.ReturnServerName();
+            hospitalShortName = loadConfigSettings.ReturnHospitalShortName();
             client = new FhirClient(fhirServerURL);
-            stp = new SerialiseToPatient();
+            serialisePatient = new SerialiseToPatient();
+            GetAllPatients();
             
         }
 
-        private List<OurPatient> GetAllPatients()
+        private void GetAllPatients()
         {
             
             SearchParams sParameters = new SearchParams();
             sParameters.Add("active", "true");
             //sParameters.Add("family", "Doe");
-            //sParameters.Add("Valuestring", "AUH");
+            sParameters.Add("Valuestring", hospitalShortName);
 
             //Her er parametrene lagt ind, så det er disse en query er bygget på. De er meget case sensitive
             
             //http://docs.simplifier.net/fhirnetapi/client/search.html
             
-            List<OurPatient> test = new List<OurPatient>();
+            List<OurPatient> listOfPatients = new List<OurPatient>();
 
-            var result = client.Search<Patient>(sParameters);
+            var resultOfSearch = client.Search<Patient>(sParameters);
             //Result er en bundle med "pages" i, hvor hver page loades med 10 patienter i. Hvis der er flere end 10 læses de 10 første og
             //går til næste side
-            while (result !=null)
+            while (resultOfSearch != null)
             {
-                foreach (var x in result.Entry)
+                foreach (var x in resultOfSearch.Entry)
                 {
                     var testpatient = (Patient)x.Resource;
-                    OurPatient op = stp.returnPatient(testpatient);
-                    test.Add(op);
+                    OurPatient op = serialisePatient.returnPatient(testpatient);
+                    listOfPatients.Add(op);
                 }
-                result = client.Continue(result,PageDirection.Next);
+                resultOfSearch = client.Continue(resultOfSearch, PageDirection.Next);
             }
-             
-            return test;
+            Notify(listOfPatients);
             
-              
+            
         }
     }
 }
