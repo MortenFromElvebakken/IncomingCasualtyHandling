@@ -36,7 +36,7 @@
                         <MouseBinding MouseAction="LeftClick" Command="{Binding RelativeSource={RelativeSource AncestorType=Window}, Path=DataContext.ChangeViewCommand}"></MouseBinding>
                     </Grid.InputBindings>
 
-                    <ProgressBar Grid.Row="0" Name="RedTriageBar" Foreground="{Binding RedTriage.Colour}" Height="Auto" Maximum="10" Value="{Binding RedTriage.Amount}" Orientation="Vertical"></ProgressBar>
+                    <ProgressBar Grid.Row="0" Name="RedTriageBar" Foreground="{Binding RedTriage.Colour}" Height="Auto" Maximum="{Binding MaximumTriages}" Value="{Binding RedTriage.Amount}" Orientation="Vertical"></ProgressBar>
                     <Label Grid.Row="1" Name="RedTriageLabel" HorizontalAlignment="Center" VerticalAlignment="Bottom" Content="{Binding RedTriage.Amount}"></Label>
                 </Grid>
                 <Grid Name="OrangeTriageGrid" Visibility="{Binding OrangeTriage.ShowAs}">
@@ -48,7 +48,7 @@
                     <Grid.InputBindings>
                         <MouseBinding MouseAction="LeftClick" Command="{Binding RelativeSource={RelativeSource AncestorType=Window}, Path=DataContext.ChangeViewCommand}"></MouseBinding>
                     </Grid.InputBindings>
-                    <ProgressBar Grid.Row="0" Name="OrangeTriageBar" Foreground="{Binding OrangeTriage.Colour}" Height="Auto" Maximum="10" Value="{Binding OrangeTriage.Amount}" Orientation="Vertical"></ProgressBar>
+                    <ProgressBar Grid.Row="0" Name="OrangeTriageBar" Foreground="{Binding OrangeTriage.Colour}" Height="Auto" Maximum="{Binding MaximumTriages}" Value="{Binding OrangeTriage.Amount}" Orientation="Vertical"></ProgressBar>
                     <Label Grid.Row="1" Name="OrangeTriageLabel" HorizontalAlignment="Center" VerticalAlignment="Bottom" Content="{Binding OrangeTriage.Amount}"></Label>
                 </Grid>
                 <Grid Name="YellowTriageGrid" Visibility="{Binding YellowTriage.ShowAs}">
@@ -60,7 +60,7 @@
                     <Grid.InputBindings>
                         <MouseBinding MouseAction="LeftClick" Command="{Binding RelativeSource={RelativeSource AncestorType=Window}, Path=DataContext.ChangeViewCommand}"></MouseBinding>
                     </Grid.InputBindings>
-                    <ProgressBar Grid.Row="0" Name="YellowTriageBar" Foreground="{Binding YellowTriage.Colour}" Height="Auto" Maximum="10" Value="{Binding YellowTriage.Amount}" Orientation="Vertical"></ProgressBar>
+                    <ProgressBar Grid.Row="0" Name="YellowTriageBar" Foreground="{Binding YellowTriage.Colour}" Height="Auto" Maximum="{Binding MaximumTriages}" Value="{Binding YellowTriage.Amount}" Orientation="Vertical"></ProgressBar>
                     <Label Grid.Row="1" Name="YellowTriageLabel" HorizontalAlignment="Center" VerticalAlignment="Bottom" Content="{Binding YellowTriage.Amount}"></Label>
                 </Grid>
                 <Grid Name="GreenTriageGrid" Visibility="{Binding GreenTriage.ShowAs}">
@@ -73,7 +73,7 @@
                         <MouseBinding MouseAction="LeftClick" Command="{Binding RelativeSource={RelativeSource AncestorType=Window}, Path=DataContext.ChangeViewCommand}"></MouseBinding>
                     </Grid.InputBindings>
 
-                    <ProgressBar Grid.Row="0" Name="GreenTriageBar" Foreground="{Binding GreenTriage.Colour}" Height="Auto" Maximum="10" Value="{Binding GreenTriage.Amount}" Orientation="Vertical"></ProgressBar>
+                    <ProgressBar Grid.Row="0" Name="GreenTriageBar" Foreground="{Binding GreenTriage.Colour}" Height="Auto" Maximum="{Binding MaximumTriages}" Value="{Binding GreenTriage.Amount}" Orientation="Vertical"></ProgressBar>
                     <Label Grid.Row="1" Name="GreenTriageLabel" HorizontalAlignment="Center" VerticalAlignment="Bottom" Content="{Binding GreenTriage.Amount}"></Label>
                 </Grid>
                 <Grid Name="BlueTriageGrid" Visibility="{Binding BlueTriage.ShowAs}">
@@ -86,7 +86,7 @@
                         <MouseBinding MouseAction="LeftClick" Command="{Binding RelativeSource={RelativeSource AncestorType=Window}, Path=DataContext.ChangeViewCommand}"></MouseBinding>
                     </Grid.InputBindings>
 
-                    <ProgressBar Grid.Row="0" Name="BlueTriageBar" Foreground="{Binding RedTriage.Colour}" Height="Auto" Maximum="10" Value="{Binding BlueTriage.Amount}" Orientation="Vertical"></ProgressBar>
+                    <ProgressBar Grid.Row="0" Name="BlueTriageBar" Foreground="{Binding RedTriage.Colour}" Height="Auto" Maximum="{Binding MaximumTriages}" Value="{Binding BlueTriage.Amount}" Orientation="Vertical"></ProgressBar>
                     <Label Grid.Row="1" Name="BlueTriageLabel" HorizontalAlignment="Center" VerticalAlignment="Bottom" Content="{Binding BlueTriage.Amount}"></Label>
                 </Grid>
             </UniformGrid>
