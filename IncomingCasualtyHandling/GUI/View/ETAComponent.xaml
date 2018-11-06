@@ -14,13 +14,13 @@
         </Grid.RowDefinitions>
 
         <Grid Grid.Row="0">
-            <Label Name="EtaHeader" VerticalAlignment="Center" HorizontalAlignment="Center">ETA</Label>
+            <Label Name="EtaHeaderText" VerticalAlignment="Center" HorizontalAlignment="Center">ETA</Label>
         </Grid>
 
         <Grid Grid.Row="1">
             <UniformGrid Name="EtaGrid" Columns="1" Margin="10,0,10,10" VerticalAlignment="Stretch" >
-                <Label Name="EtaAbsoluteLabel" VerticalAlignment="Center" HorizontalAlignment="Center" Style="{StaticResource AbsoluteLabel}" Foreground="Black">10:42</Label>
-                <Label Name="EtaRelativeLabel" VerticalAlignment="Center" HorizontalAlignment="Center" Style="{StaticResource RelativeLabel}" Foreground="DarkGray">(-09:00)</Label>
+                <Label Name="EtaAbsoluteTimeText" VerticalAlignment="Center" HorizontalAlignment="Center" Style="{StaticResource AbsoluteLabel}" Foreground="Black">10:42</Label>
+                <Label Name="EtaRelativeTimeText" VerticalAlignment="Center" HorizontalAlignment="Center" Style="{StaticResource RelativeLabel}" Foreground="DarkGray">(-09:00)</Label>
             </UniformGrid>
         </Grid>
 
