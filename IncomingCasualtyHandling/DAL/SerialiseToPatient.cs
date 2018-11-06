@@ -23,9 +23,8 @@ namespace IncomingCasualtyHandling.DAL
             
             OurPatient _newPatient = new OurPatient();
             
-            _newPatient.PatientId = newEntry.Identifier[0].Value.ToString();
-            _newPatient.GivenName = newEntry.Name[0].GivenElement[0].ToString();
-            _newPatient.FamilyName = newEntry.Name[0].Family.ToString();
+            _newPatient.PatientId = newEntry.Identifier[0].Value;
+            _newPatient.Name = newEntry.Name[0].ToString();
             _newPatient.Gender = newEntry.Gender.ToString();
 
             //Logic i forhold til extensions her og lav logic der ser om felter er lig null?

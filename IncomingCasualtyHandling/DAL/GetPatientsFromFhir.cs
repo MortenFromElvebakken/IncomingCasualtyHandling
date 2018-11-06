@@ -19,6 +19,7 @@ namespace IncomingCasualtyHandling.DAL
 
         public GetPatientsFromFhir(LoadConfigurationSettings _lcs)
         {
+            loadConfigSettings = _lcs;
             fhirServerURL = loadConfigSettings.ReturnServerName();
             hospitalShortName = loadConfigSettings.ReturnHospitalShortName();
             client = new FhirClient(fhirServerURL);
@@ -33,7 +34,7 @@ namespace IncomingCasualtyHandling.DAL
             SearchParams sParameters = new SearchParams();
             sParameters.Add("active", "true");
             //sParameters.Add("family", "Doe");
-            sParameters.Add("Valuestring", hospitalShortName);
+            //sParameters.Add("Valuestring", hospitalShortName);
 
             //Her er parametrene lagt ind, så det er disse en query er bygget på. De er meget case sensitive
             

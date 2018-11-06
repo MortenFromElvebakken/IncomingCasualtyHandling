@@ -4,10 +4,9 @@ namespace IncomingCasualtyHandling.BL.Models
 {
     public class OurPatient
     {
-        private string _patientID;
+        private string _patientId;
 
-        private string _givenName;
-        private string _familyName;
+        private string _name;
         private string _gender;
 
         private string _triage;
@@ -23,34 +22,25 @@ namespace IncomingCasualtyHandling.BL.Models
 
         public string PatientId
         {
-            get { return _patientID; }
+            get => _patientId;
             internal set
             {
-                if (value == _patientID) return;
-                _patientID = value;
+                if (value == _patientId) return;
+                _patientId = value;
             }
         }
-        public string GivenName
+        public string Name
         {
-            get { return _givenName; }
+            get => _name;
             internal set
             {
-                if (value == _givenName) return;
-                _givenName = value;
-            }
-        }
-        public string FamilyName
-        {
-            get { return _familyName; }
-            internal set
-            {
-                if (value == _familyName) return;
-                _familyName = value;
+                if (value == _name) return;
+                _name = value;
             }
         }
         public string Gender
         {
-            get { return _gender; }
+            get => _gender;
             internal set
             {
                 if (value == _gender) return;
@@ -59,7 +49,7 @@ namespace IncomingCasualtyHandling.BL.Models
         }
         public string Triage
         {
-            get { return _triage; }
+            get => _triage;
             internal set
             {
                 if (value == _triage) return;
@@ -68,7 +58,7 @@ namespace IncomingCasualtyHandling.BL.Models
         }
         public string Specialty
         {
-            get { return _specialty; }
+            get => _specialty;
             internal set
             {
                 if (value == _specialty) return;
@@ -77,7 +67,7 @@ namespace IncomingCasualtyHandling.BL.Models
         }
         public DateTime ETA
         {
-            get { return _eta; }
+            get => _eta;
             internal set
             {
                 if (value == _eta) return;
@@ -87,7 +77,7 @@ namespace IncomingCasualtyHandling.BL.Models
 
         public string toHospital
         {
-            get { return _toHospital; }
+            get => _toHospital;
             internal set
             {
                 if (value == _toHospital) return;
