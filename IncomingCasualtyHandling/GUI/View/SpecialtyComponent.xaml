@@ -10,7 +10,7 @@
     <Grid>
         <Grid.Resources>
             <Style x:Key="ColourColumn" TargetType="{x:Type ColumnDefinition}">
-                <Setter Property="Width" Value="50px"/>
+                <Setter Property="Width" Value="10px"/>
             </Style>
             <Style x:Key="AmountColumn" TargetType="{x:Type ColumnDefinition}">
                 <Setter Property="Width" Value="50px"/>
