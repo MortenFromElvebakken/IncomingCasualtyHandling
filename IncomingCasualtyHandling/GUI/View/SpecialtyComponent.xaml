@@ -8,16 +8,255 @@
              d:DesignHeight="450" d:DesignWidth="800"
              Background="White">
     <Grid>
+        <Grid.Resources>
+            <Style x:Key="ColourColumn" TargetType="{x:Type ColumnDefinition}">
+                <Setter Property="Width" Value="50px"/>
+            </Style>
+            <Style x:Key="AmountColumn" TargetType="{x:Type ColumnDefinition}">
+                <Setter Property="Width" Value="50px"/>
+            </Style>
+        </Grid.Resources>
+
         <Grid.RowDefinitions>
             <RowDefinition Height="50px"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
 
         <Grid Grid.Row="0">
-            <Label Name="SpecialtyHeader" VerticalAlignment="Center" HorizontalAlignment="Center">SPECIALTY</Label>
+            <Label Name="SpecialtyHeaderText" VerticalAlignment="Center" HorizontalAlignment="Center">SPECIALTY</Label>
         </Grid>
         <Grid Grid.Row="1">
             <UniformGrid Name="SpecialtyGrid" Columns="1" Margin="10,0,10,10" VerticalAlignment="Stretch">
+
+                <Grid Name="Specialty1Panel" VerticalAlignment="Bottom" Margin="10,2.5,10,2.5" Visibility="{Binding Specialty1.ShowAs}">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Style="{StaticResource ColourColumn}"/>
+                        <ColumnDefinition Width="1*"/>
+                        <ColumnDefinition Style="{StaticResource AmountColumn}"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.InputBindings>
+                        <MouseBinding MouseAction="LeftClick"  Command="{Binding RelativeSource={RelativeSource AncestorType=Window}, Path=DataContext.ChangeViewCommand}"></MouseBinding>
+                    </Grid.InputBindings>
+                    <Button Grid.Column="0" Name="Specialty1Colour" Style="{StaticResource SquaredRoundedButton}" Background="{Binding Specialty1.Colour}" Width="10"></Button>
+                    <Label Grid.Column="1" Name="Specialty1Name" Width="100" Content="{Binding Specialty1.Name}" VerticalAlignment="Center" HorizontalAlignment="Left"></Label>
+                    <Label Grid.Column="2" Name="Specialty1Amount" Width="50" Content="{Binding Specialty1.Amount}" VerticalAlignment="Center" HorizontalAlignment="Right"></Label>
+                </Grid>
+
+                <Grid Name="Specialty2Panel" VerticalAlignment="Bottom" Margin="10,2.5,10,2.5" Visibility="{Binding Specialty2.ShowAs}">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Style="{StaticResource ColourColumn}"/>
+                        <ColumnDefinition Width="1*"/>
+                        <ColumnDefinition Style="{StaticResource AmountColumn}"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.InputBindings>
+                        <MouseBinding MouseAction="LeftClick"  Command="{Binding RelativeSource={RelativeSource AncestorType=Window}, Path=DataContext.ChangeViewCommand}"></MouseBinding>
+                    </Grid.InputBindings>
+                    <Button Grid.Column="0" Name="Specialty2Colour" Style="{StaticResource SquaredRoundedButton}" Background="{Binding Specialty2.Colour}" Width="10"></Button>
+                    <Label Grid.Column="1" Name="Specialty2Name" Width="100" Content="{Binding Specialty2.Name}" VerticalAlignment="Center" HorizontalAlignment="Left"></Label>
+                    <Label Grid.Column="2" Name="Specialty2Amount" Width="50" Content="{Binding Specialty2.Amount}" VerticalAlignment="Center" HorizontalAlignment="Right"></Label>
+                </Grid>
+
+                <Grid Name="Specialty3Panel" VerticalAlignment="Bottom" Margin="10,2.5,10,2.5" Visibility="{Binding Specialty3.ShowAs}">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Style="{StaticResource ColourColumn}"/>
+                        <ColumnDefinition Width="1*"/>
+                        <ColumnDefinition Style="{StaticResource AmountColumn}"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.InputBindings>
+                        <MouseBinding MouseAction="LeftClick"  Command="{Binding RelativeSource={RelativeSource AncestorType=Window}, Path=DataContext.ChangeViewCommand}"></MouseBinding>
+                    </Grid.InputBindings>
+                    <Button Grid.Column="0" Name="Specialty3Colour" Style="{StaticResource SquaredRoundedButton}" Background="{Binding Specialty3.Colour}" Width="10"></Button>
+                    <Label Grid.Column="1" Name="Specialty3Name" Width="100" Content="{Binding Specialty3.Name}" VerticalAlignment="Center" HorizontalAlignment="Left"></Label>
+                    <Label Grid.Column="2" Name="Specialty3Amount" Width="50" Content="{Binding Specialty3.Amount}" VerticalAlignment="Center" HorizontalAlignment="Right"></Label>
+                </Grid>
+
+                <Grid Name="Specialty4Panel" VerticalAlignment="Bottom" Margin="10,2.5,10,2.5" Visibility="{Binding Specialty4.ShowAs}">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Style="{StaticResource ColourColumn}"/>
+                        <ColumnDefinition Width="1*"/>
+                        <ColumnDefinition Style="{StaticResource AmountColumn}"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.InputBindings>
+                        <MouseBinding MouseAction="LeftClick"  Command="{Binding RelativeSource={RelativeSource AncestorType=Window}, Path=DataContext.ChangeViewCommand}"></MouseBinding>
+                    </Grid.InputBindings>
+                    <Button Grid.Column="0" Name="Specialty4Colour" Style="{StaticResource SquaredRoundedButton}" Background="{Binding Specialty4.Colour}" Width="10"></Button>
+                    <Label Grid.Column="1" Name="Specialty4Name" Width="100" Content="{Binding Specialty4.Name}" VerticalAlignment="Center" HorizontalAlignment="Left"></Label>
+                    <Label Grid.Column="2" Name="Specialty4Amount" Width="50" Content="{Binding Specialty4.Amount}" VerticalAlignment="Center" HorizontalAlignment="Right"></Label>
+                </Grid>
+
+                <Grid Name="Specialty5Panel" VerticalAlignment="Bottom" Margin="10,2.5,10,2.5" Visibility="{Binding Specialty5.ShowAs}">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Style="{StaticResource ColourColumn}"/>
+                        <ColumnDefinition Width="1*"/>
+                        <ColumnDefinition Style="{StaticResource AmountColumn}"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.InputBindings>
+                        <MouseBinding MouseAction="LeftClick"  Command="{Binding RelativeSource={RelativeSource AncestorType=Window}, Path=DataContext.ChangeViewCommand}"></MouseBinding>
+                    </Grid.InputBindings>
+                    <Button Grid.Column="0" Name="Specialty5Colour" Style="{StaticResource SquaredRoundedButton}" Background="{Binding Specialty5.Colour}" Width="10"></Button>
+                    <Label Grid.Column="1" Name="Specialty5Name" Width="100" Content="{Binding Specialty5.Name}" VerticalAlignment="Center" HorizontalAlignment="Left"></Label>
+                    <Label Grid.Column="2" Name="Specialty5Amount" Width="50" Content="{Binding Specialty5.Amount}" VerticalAlignment="Center" HorizontalAlignment="Right"></Label>
+                </Grid>
+
+                <Grid Name="Specialty6Panel" VerticalAlignment="Bottom" Margin="10,2.5,10,2.5" Visibility="{Binding Specialty6.ShowAs}">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Style="{StaticResource ColourColumn}"/>
+                        <ColumnDefinition Width="1*"/>
+                        <ColumnDefinition Style="{StaticResource AmountColumn}"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.InputBindings>
+                        <MouseBinding MouseAction="LeftClick"  Command="{Binding RelativeSource={RelativeSource AncestorType=Window}, Path=DataContext.ChangeViewCommand}"></MouseBinding>
+                    </Grid.InputBindings>
+                    <Button Grid.Column="0" Name="Specialty6Colour" Style="{StaticResource SquaredRoundedButton}" Background="{Binding Specialty6.Colour}" Width="10"></Button>
+                    <Label Grid.Column="1" Name="Specialty6Name" Width="100" Content="{Binding Specialty6.Name}" VerticalAlignment="Center" HorizontalAlignment="Left"></Label>
+                    <Label Grid.Column="2" Name="Specialty6Amount" Width="50" Content="{Binding Specialty6.Amount}" VerticalAlignment="Center" HorizontalAlignment="Right"></Label>
+                </Grid>
+
+                <Grid Name="Specialty7Panel" VerticalAlignment="Bottom" Margin="10,2.5,10,2.5" Visibility="{Binding Specialty7.ShowAs}">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Style="{StaticResource ColourColumn}"/>
+                        <ColumnDefinition Width="1*"/>
+                        <ColumnDefinition Style="{StaticResource AmountColumn}"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.InputBindings>
+                        <MouseBinding MouseAction="LeftClick"  Command="{Binding RelativeSource={RelativeSource AncestorType=Window}, Path=DataContext.ChangeViewCommand}"></MouseBinding>
+                    </Grid.InputBindings>
+                    <Button Grid.Column="0" Name="Specialty7Colour" Style="{StaticResource SquaredRoundedButton}" Background="{Binding Specialty7.Colour}" Width="10"></Button>
+                    <Label Grid.Column="1" Name="Specialty7Name" Width="100" Content="{Binding Specialty7.Name}" VerticalAlignment="Center" HorizontalAlignment="Left"></Label>
+                    <Label Grid.Column="2" Name="Specialty7Amount" Width="50" Content="{Binding Specialty7.Amount}" VerticalAlignment="Center" HorizontalAlignment="Right"></Label>
+                </Grid>
+
+                <Grid Name="Specialty8Panel" VerticalAlignment="Bottom" Margin="10,2.5,10,2.5" Visibility="{Binding Specialty8.ShowAs}">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Style="{StaticResource ColourColumn}"/>
+                        <ColumnDefinition Width="1*"/>
+                        <ColumnDefinition Style="{StaticResource AmountColumn}"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.InputBindings>
+                        <MouseBinding MouseAction="LeftClick"  Command="{Binding RelativeSource={RelativeSource AncestorType=Window}, Path=DataContext.ChangeViewCommand}"></MouseBinding>
+                    </Grid.InputBindings>
+                    <Button Grid.Column="0" Name="Specialty8Colour" Style="{StaticResource SquaredRoundedButton}" Background="{Binding Specialty8.Colour}" Width="10"></Button>
+                    <Label Grid.Column="1" Name="Specialty8Name" Width="100" Content="{Binding Specialty8.Name}" VerticalAlignment="Center" HorizontalAlignment="Left"></Label>
+                    <Label Grid.Column="2" Name="Specialty8Amount" Width="50" Content="{Binding Specialty8.Amount}" VerticalAlignment="Center" HorizontalAlignment="Right"></Label>
+                </Grid>
+
+                <Grid Name="Specialty9Panel" VerticalAlignment="Bottom" Margin="10,2.5,10,2.5" Visibility="{Binding Specialty9.ShowAs}">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Style="{StaticResource ColourColumn}"/>
+                        <ColumnDefinition Width="1*"/>
+                        <ColumnDefinition Style="{StaticResource AmountColumn}"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.InputBindings>
+                        <MouseBinding MouseAction="LeftClick"  Command="{Binding RelativeSource={RelativeSource AncestorType=Window}, Path=DataContext.ChangeViewCommand}"></MouseBinding>
+                    </Grid.InputBindings>
+                    <Button Grid.Column="0" Name="Specialty9Colour" Style="{StaticResource SquaredRoundedButton}" Background="{Binding Specialty9.Colour}" Width="10"></Button>
+                    <Label Grid.Column="1" Name="Specialty9Name" Width="100" Content="{Binding Specialty9.Name}" VerticalAlignment="Center" HorizontalAlignment="Left"></Label>
+                    <Label Grid.Column="2" Name="Specialty9Amount" Width="50" Content="{Binding Specialty9.Amount}" VerticalAlignment="Center" HorizontalAlignment="Right"></Label>
+                </Grid>
+
+                <Grid Name="Specialty10Panel" VerticalAlignment="Bottom" Margin="10,2.5,10,2.5" Visibility="{Binding Specialty10.ShowAs}">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Style="{StaticResource ColourColumn}"/>
+                        <ColumnDefinition Width="1*"/>
+                        <ColumnDefinition Style="{StaticResource AmountColumn}"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.InputBindings>
+                        <MouseBinding MouseAction="LeftClick"  Command="{Binding RelativeSource={RelativeSource AncestorType=Window}, Path=DataContext.ChangeViewCommand}"></MouseBinding>
+                    </Grid.InputBindings>
+                    <Button Grid.Column="0" Name="Specialty10Colour" Style="{StaticResource SquaredRoundedButton}" Background="{Binding Specialty10.Colour}" Width="10"></Button>
+                    <Label Grid.Column="1" Name="Specialty10Name" Width="100" Content="{Binding Specialty10.Name}" VerticalAlignment="Center" HorizontalAlignment="Left"></Label>
+                    <Label Grid.Column="2" Name="Specialty10Amount" Width="50" Content="{Binding Specialty10.Amount}" VerticalAlignment="Center" HorizontalAlignment="Right"></Label>
+                </Grid>
+
+                <Grid Name="Specialty11Panel" VerticalAlignment="Bottom" Margin="10,2.5,10,2.5" Visibility="{Binding Specialty11.ShowAs}">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Style="{StaticResource ColourColumn}"/>
+                        <ColumnDefinition Width="1*"/>
+                        <ColumnDefinition Style="{StaticResource AmountColumn}"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.InputBindings>
+                        <MouseBinding MouseAction="LeftClick"  Command="{Binding RelativeSource={RelativeSource AncestorType=Window}, Path=DataContext.ChangeViewCommand}"></MouseBinding>
+                    </Grid.InputBindings>
+                    <Button Grid.Column="0" Name="Specialty11Colour" Style="{StaticResource SquaredRoundedButton}" Background="{Binding Specialty11.Colour}" Width="10"></Button>
+                    <Label Grid.Column="1" Name="Specialty11Name" Width="100" Content="{Binding Specialty11.Name}" VerticalAlignment="Center" HorizontalAlignment="Left"></Label>
+                    <Label Grid.Column="2" Name="Specialty11Amount" Width="50" Content="{Binding Specialty11.Amount}" VerticalAlignment="Center" HorizontalAlignment="Right"></Label>
+                </Grid>
+
+                <Grid Name="Specialty12Panel" VerticalAlignment="Bottom" Margin="10,2.5,10,2.5" Visibility="{Binding Specialty12.ShowAs}">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Style="{StaticResource ColourColumn}"/>
+                        <ColumnDefinition Width="1*"/>
+                        <ColumnDefinition Style="{StaticResource AmountColumn}"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.InputBindings>
+                        <MouseBinding MouseAction="LeftClick"  Command="{Binding RelativeSource={RelativeSource AncestorType=Window}, Path=DataContext.ChangeViewCommand}"></MouseBinding>
+                    </Grid.InputBindings>
+                    <Button Grid.Column="0" Name="Specialty12Colour" Style="{StaticResource SquaredRoundedButton}" Background="{Binding Specialty12.Colour}" Width="10"></Button>
+                    <Label Grid.Column="1" Name="Specialty12Name" Width="100" Content="{Binding Specialty12.Name}" VerticalAlignment="Center" HorizontalAlignment="Left"></Label>
+                    <Label Grid.Column="2" Name="Specialty12Amount" Width="50" Content="{Binding Specialty12.Amount}" VerticalAlignment="Center" HorizontalAlignment="Right"></Label>
+                </Grid>
+
+                <Grid Name="Specialty13Panel" VerticalAlignment="Bottom" Margin="10,2.5,10,2.5" Visibility="{Binding Specialty13.ShowAs}">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Style="{StaticResource ColourColumn}"/>
+                        <ColumnDefinition Width="1*"/>
+                        <ColumnDefinition Style="{StaticResource AmountColumn}"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.InputBindings>
+                        <MouseBinding MouseAction="LeftClick"  Command="{Binding RelativeSource={RelativeSource AncestorType=Window}, Path=DataContext.ChangeViewCommand}"></MouseBinding>
+                    </Grid.InputBindings>
+                    <Button Grid.Column="0" Name="Specialty13Colour" Style="{StaticResource SquaredRoundedButton}" Background="{Binding Specialty13.Colour}" Width="10"></Button>
+                    <Label Grid.Column="1" Name="Specialty13Name" Width="100" Content="{Binding Specialty13.Name}" VerticalAlignment="Center" HorizontalAlignment="Left"></Label>
+                    <Label Grid.Column="2" Name="Specialty13Amount" Width="50" Content="{Binding Specialty13.Amount}" VerticalAlignment="Center" HorizontalAlignment="Right"></Label>
+                </Grid>
+
+                <Grid Name="Specialty14Panel" VerticalAlignment="Bottom" Margin="10,2.5,10,2.5" Visibility="{Binding Specialty14.ShowAs}">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Style="{StaticResource ColourColumn}"/>
+                        <ColumnDefinition Width="1*"/>
+                        <ColumnDefinition Style="{StaticResource AmountColumn}"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.InputBindings>
+                        <MouseBinding MouseAction="LeftClick"  Command="{Binding RelativeSource={RelativeSource AncestorType=Window}, Path=DataContext.ChangeViewCommand}"></MouseBinding>
+                    </Grid.InputBindings>
+                    <Button Grid.Column="0" Name="Specialty14Colour" Style="{StaticResource SquaredRoundedButton}" Background="{Binding Specialty14.Colour}" Width="10"></Button>
+                    <Label Grid.Column="1" Name="Specialty14Name" Width="100" Content="{Binding Specialty14.Name}" VerticalAlignment="Center" HorizontalAlignment="Left"></Label>
+                    <Label Grid.Column="2" Name="Specialty14Amount" Width="50" Content="{Binding Specialty14.Amount}" VerticalAlignment="Center" HorizontalAlignment="Right"></Label>
+                </Grid>
+
+                <Grid Name="Specialty15Panel" VerticalAlignment="Bottom" Margin="10,2.5,10,2.5" Visibility="{Binding Specialty15.ShowAs}">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Style="{StaticResource ColourColumn}"/>
+                        <ColumnDefinition Width="1*"/>
+                        <ColumnDefinition Style="{StaticResource AmountColumn}"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.InputBindings>
+                        <MouseBinding MouseAction="LeftClick"  Command="{Binding RelativeSource={RelativeSource AncestorType=Window}, Path=DataContext.ChangeViewCommand}"></MouseBinding>
+                    </Grid.InputBindings>
+                    <Button Grid.Column="0" Name="Specialty15Colour" Style="{StaticResource SquaredRoundedButton}" Background="{Binding Specialty15.Colour}" Width="10"></Button>
+                    <Label Grid.Column="1" Name="Specialty15Name" Width="100" Content="{Binding Specialty15.Name}" VerticalAlignment="Center" HorizontalAlignment="Left"></Label>
+                    <Label Grid.Column="2" Name="Specialty15Amount" Width="50" Content="{Binding Specialty15.Amount}" VerticalAlignment="Center" HorizontalAlignment="Right"></Label>
+                </Grid>
+
+                <Grid Name="Specialty16Panel" VerticalAlignment="Bottom" Margin="10,2.5,10,2.5" Visibility="{Binding Specialty16.ShowAs}">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Style="{StaticResource ColourColumn}"/>
+                        <ColumnDefinition Width="1*"/>
+                        <ColumnDefinition Style="{StaticResource AmountColumn}"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.InputBindings>
+                        <MouseBinding MouseAction="LeftClick"  Command="{Binding RelativeSource={RelativeSource AncestorType=Window}, Path=DataContext.ChangeViewCommand}"></MouseBinding>
+                    </Grid.InputBindings>
+                    <Button Grid.Column="0" Name="Specialty16Colour" Style="{StaticResource SquaredRoundedButton}" Background="{Binding Specialty16.Colour}" Width="10"></Button>
+                    <Label Grid.Column="1" Name="Specialty16Name" Width="100" Content="{Binding Specialty16.Name}" VerticalAlignment="Center" HorizontalAlignment="Left"></Label>
+                    <Label Grid.Column="2" Name="Specialty16Amount" Width="50" Content="{Binding Specialty16.Amount}" VerticalAlignment="Center" HorizontalAlignment="Right"></Label>
+                </Grid>
+
+             
+            </UniformGrid>
+
+            <!-- Old grid with stackpanel -->
+            <!--<UniformGrid Name="SpecialtyGrid" Columns="1" Margin="10,0,10,10" VerticalAlignment="Stretch">
 
                 <StackPanel Name="Specialty1StackPanel"  Orientation="Horizontal" VerticalAlignment="Bottom" Margin="10,2.5,10,2.5" Visibility="{Binding Specialty1.ShowAs}">
                     <StackPanel.InputBindings>
@@ -103,7 +342,7 @@
                     <Label Name="Specialty16Name" Width="100" Content="{Binding Specialty1.Name}" VerticalAlignment="Center" HorizontalAlignment="Left"></Label>
                     <Label Name="Specialty16Count" Width="50" Content="{Binding Specialty1.Amount}" VerticalAlignment="Center" HorizontalAlignment="Right"></Label>
                 </StackPanel>
-            </UniformGrid>
+            </UniformGrid>-->
         </Grid>
     </Grid>
 </UserControl>
