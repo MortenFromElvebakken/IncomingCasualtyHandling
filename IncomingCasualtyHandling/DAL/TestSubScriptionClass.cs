@@ -17,7 +17,7 @@ namespace IncomingCasualtyHandling.DAL
     {
         Subscription testSubscription;
         FhirClient testSubClient;
-        string fhirURL = "http://localhost:8080/hapi-fhir-jpaserver-example/baseDstu3";
+        //string fhirURL = "http://localhost:8080/hapi-fhir-jpaserver-example/baseDstu3";
         
         public TestSubScriptionClass()
         {

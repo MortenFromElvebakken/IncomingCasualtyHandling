@@ -29,12 +29,10 @@ namespace IncomingCasualtyHandling.DAL
 
             //Logic i forhold til extensions her og lav logic der ser om felter er lig null?
 
-            _newPatient.toHospital = Convert.ToString(newEntry.Extension[0].Value);
+            _newPatient.ToHospital = Convert.ToString(newEntry.Extension[0].Value);
             _newPatient.Triage = Convert.ToString(newEntry.Extension[1].Value);
             _newPatient.Specialty = Convert.ToString(newEntry.Extension[2].Value);
             _newPatient.ETA = Convert.ToDateTime(newEntry.Extension[3].Value.ToString());
-            
-
 
             return _newPatient;
             

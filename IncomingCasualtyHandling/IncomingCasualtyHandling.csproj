@@ -72,6 +72,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="BL\SortETA.cs" />
+    <Compile Include="BL\SortSpecialty.cs" />
+    <Compile Include="BL\SortTriage.cs" />
     <Compile Include="GUI\ViewModels\DetailViewViewModel.cs" />
     <Compile Include="GUI\ViewModels\MainViewViewModel.cs" />
     <Compile Include="BL\Models\Specialty.cs" />
@@ -92,10 +95,10 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="BL\SortPatients.cs" />
+    <Compile Include="BL\PatientHandlingLogic.cs" />
     <Compile Include="DAL\GetPatientsFromFhir.cs" />
     <Compile Include="DAL\Interface\IObserver.cs" />
-    <Compile Include="DAL\LoadConfigurationSettings.cs" />
+    <Compile Include="DAL\LoadConfigurationSettingsFromXMLDocument.cs" />
     <Compile Include="DAL\SerialiseToPatient.cs" />
     <Compile Include="DAL\SubjectObserverPatients.cs" />
     <Compile Include="DAL\TestSubScriptionClass.cs" />
