@@ -27,19 +27,19 @@ namespace IncomingCasualtyHandling.GUI.ViewModels
             CurrentWorkspace = _overviewViewViewModel;
             ChangeViewCommand = new RelayCommand(ChangeView);
 
-            //DateTime d;
-            //d = DateTime.Now;
-            //string day = d.Day.ToString().PadLeft(2, '0');
-            //string month = d.ToString("MMM", _culture);
-            //string year = d.Year.ToString();
-            //string hour = d.Hour.ToString().PadLeft(2, '0');
-            //string minute = d.Minute.ToString().PadLeft(2, '0');
+            ////DateTime d;
+            ////d = DateTime.Now;
+            ////string day = d.Day.ToString().PadLeft(2, '0');
+            ////string month = d.ToString("MMM", _culture);
+            ////string year = d.Year.ToString();
+            ////string hour = d.Hour.ToString().PadLeft(2, '0');
+            ////string minute = d.Minute.ToString().PadLeft(2, '0');
 
-            //CurrentDateTime = day + ". " + month + ". " + year + "\t" + hour + ":" + minute;
-            _timer.Tick += new EventHandler(Timer_Click);
-            //_timer.Interval = new TimeSpan(0, 0, 1);
-            _timer.Interval = TimeSpan.FromSeconds(1);
-            _timer.Start();
+            ////CurrentDateTime = day + ". " + month + ". " + year + "\t" + hour + ":" + minute;
+            //_timer.Tick += new EventHandler(Timer_Click);
+            ////_timer.Interval = new TimeSpan(0, 0, 1);
+            //_timer.Interval = TimeSpan.FromSeconds(1);
+            //_timer.Start();
         }
         
         private void Initialize()
@@ -90,30 +90,32 @@ namespace IncomingCasualtyHandling.GUI.ViewModels
 
         }
 
-        // Timer made with inspiration from:
-        // https://stackoverflow.com/a/5410783
+        //// Timer made with inspiration from:
+        //// https://stackoverflow.com/a/5410783
 
-        readonly System.Windows.Threading.DispatcherTimer _timer = new System.Windows.Threading.DispatcherTimer();
+        //readonly System.Windows.Threading.DispatcherTimer _timer = new System.Windows.Threading.DispatcherTimer();
 
+        // Model for ViewModel
+        private MainViewModel mainModel = new MainViewModel();
         // Property for binding 
-        public string CurrentDateTime { get; set; }
+        public string CurrentDateTime { get mainModel.CurrentDateTime; set; }
 
-        private readonly CultureInfo _culture = CultureInfo.CurrentCulture;
+        //private readonly CultureInfo _culture = CultureInfo.CurrentCulture;
 
-        private void Timer_Click(object sender, EventArgs e)
-        {
-            DateTime d;
+        //private void Timer_Click(object sender, EventArgs e)
+        //{
+        //    DateTime d;
 
-            d = DateTime.Now;
-            string day = d.Day.ToString().PadLeft(2, '0');
-            string month = d.ToString("MMM", _culture);
-            string year = d.Year.ToString();
-            string hour = d.Hour.ToString().PadLeft(2, '0');
-            string minute = d.Minute.ToString().PadLeft(2, '0');
+        //    d = DateTime.Now;
+        //    string day = d.Day.ToString().PadLeft(2, '0');
+        //    string month = d.ToString("MMM", _culture);
+        //    string year = d.Year.ToString();
+        //    string hour = d.Hour.ToString().PadLeft(2, '0');
+        //    string minute = d.Minute.ToString().PadLeft(2, '0');
 
-            CurrentDateTime = day + ". " + month + ". " + year + "\t" + hour + ":" + minute;
-            OnPropertyChanged("CurrentDateTime");
-        }
+        //    CurrentDateTime = day + ". " + month + ". " + year + "\t" + hour + ":" + minute;
+        //    OnPropertyChanged("CurrentDateTime");
+        //}
 
 
         public string TestProperty
