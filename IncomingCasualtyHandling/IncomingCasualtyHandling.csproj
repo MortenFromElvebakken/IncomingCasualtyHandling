@@ -72,8 +72,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="BL\Models\MainViewModel.cs" />
     <Compile Include="BL\Models\OverviewViewModel.cs" />
     <Compile Include="BL\Object classes\ETA.cs" />
+    <Compile Include="BL\ObservableObject.cs" />
     <Compile Include="GUI\ViewModels\DetailViewViewModel.cs" />
     <Compile Include="GUI\ViewModels\MainViewViewModel.cs" />
     <Compile Include="BL\Object classes\Specialty.cs" />
