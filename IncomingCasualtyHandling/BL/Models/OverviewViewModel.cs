@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace IncomingCasualtyHandling.BL.Models
 {
@@ -109,6 +110,30 @@ namespace IncomingCasualtyHandling.BL.Models
             set => listOfSpecialities[11] = value;
         }
 
+        public Specialty Specialty13
+        {
+            get => listOfSpecialities[12];
+            set => listOfSpecialities[11] = value;
+        }
+
+        public Specialty Specialty14
+        {
+            get => listOfSpecialities[13];
+            set => listOfSpecialities[13] = value;
+        }
+
+        public Specialty Specialty15
+        {
+            get => listOfSpecialities[14];
+            set => listOfSpecialities[14] = value;
+        }
+
+        public Specialty Specialty16
+        {
+            get => listOfSpecialities[15];
+            set => listOfSpecialities[15] = value;
+        }
+
 
         private List<Specialty> specialties = new List<Specialty>();
 
@@ -120,5 +145,90 @@ namespace IncomingCasualtyHandling.BL.Models
         public ETA Eta { get; set; }
 
         #endregion
+
+        #region Constructor
+
+        public OverviewViewModel()
+        {
+            specialties.Add(new Specialty
+            {
+                Name = "Orthopaedic",
+                Colour = "#af3205",
+                Amount = 5,
+                ShowAs = Visibility.Visible
+            });
+            specialties.Add(new Specialty
+            {
+                Name = "Medicinal",
+                Colour = "#9400D3",
+                Amount = 9,
+                ShowAs = Visibility.Visible
+            });
+            specialties.Add(new Specialty
+            {
+                Name = "Thoracic surgery",
+                Colour = "#003865",
+                Amount = 4,
+                ShowAs = Visibility.Visible
+            });
+
+            var counter = 0;
+            Array.Clear(listOfSpecialities, 0, listOfSpecialities.Length);
+            specialties.Sort((x, y) => y.Amount.CompareTo(x.Amount));
+            foreach (var specialty in specialties)
+            {
+                if (specialty != null)
+                {
+                    listOfSpecialities[counter] = specialty;
+                    counter++;
+                }
+            }
+
+            Triage1 = new Triage
+            {
+                Amount = 8,
+                Colour = "#f60e0e",
+                Name = "Red",
+                ShowAs = Visibility.Visible
+            };
+
+            Triage2 = new Triage
+            {
+                Amount = 0,
+                Colour = "#f28d0e",
+                Name = "Orange",
+                ShowAs = Visibility.Collapsed
+            };
+
+            Triage3 = new Triage
+            {
+                Amount = 5,
+                Colour = "#ffe913",
+                Name = "Yellow",
+                ShowAs = Visibility.Visible
+            };
+           Triage4 = new Triage
+            {
+                Amount = 2,
+                Colour = "#0bdd2e",
+                Name = "Green",
+                ShowAs = Visibility.Visible
+            };
+            Triage5 = new Triage
+            {
+                Amount = 0,
+                Colour = "#1e38ff",
+                Name = "Blue",
+                ShowAs = Visibility.Collapsed
+            };
+
+            Eta = new ETA
+            {
+                AbsoluteTime = "10:42",
+                RelativeTime = "(-08:00)"
+            };
+        }
+
+#endregion
     }
 }
