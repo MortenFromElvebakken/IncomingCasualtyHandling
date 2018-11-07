@@ -112,7 +112,7 @@ namespace IncomingCasualtyHandling.GUI.ViewModels
             string minute = d.Minute.ToString().PadLeft(2, '0');
 
             CurrentDateTime = day + ". " + month + ". " + year + "\t" + hour + ":" + minute;
-            OnPropertyChanged(CurrentDateTime);
+            OnPropertyChanged("CurrentDateTime");
         }
 
 
