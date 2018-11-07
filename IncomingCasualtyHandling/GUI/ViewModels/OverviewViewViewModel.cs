@@ -7,6 +7,53 @@ namespace IncomingCasualtyHandling.GUI.ViewModels
 {
     public class OverviewViewViewModel : WorkspaceViewModel
     {
+
+        #region Triages
+
+        private int _maximumTriages = 10;
+        public int MaximumTriages => _maximumTriages;
+
+        private Triage _triage1;
+        private Triage _triage2;
+        private Triage _triage3;
+        private Triage _triage4;
+        private Triage _triage5;
+
+        public Triage Triage1
+        {
+            get => _triage1;
+            set => _triage1 = value;
+        }
+
+        public Triage Triage2
+        {
+            get => _triage2;
+            set => _triage2 = value;
+        }
+
+        public Triage Triage3
+        {
+            get => _triage3;
+            set => _triage3 = value;
+        }
+
+        public Triage Triage4
+        {
+            get => _triage4;
+            set => _triage4 = value;
+        }
+
+        public Triage Triage5
+        {
+            get => _triage5;
+            set => _triage5 = value;
+        }
+
+        #endregion
+
+
+        #region Specialties
+
         private Specialty[] listOfSpecialities = new Specialty[16];
 
         public Specialty Specialty1
@@ -18,7 +65,7 @@ namespace IncomingCasualtyHandling.GUI.ViewModels
             set
             {
                 listOfSpecialities[0] = value;
-                OnPropertyChanged();
+                OnPropertyChanged("Specialty1");
                 
             }
         }
@@ -29,88 +76,73 @@ namespace IncomingCasualtyHandling.GUI.ViewModels
             {
                 return listOfSpecialities[1];
             }
-            set => listOfSpecialities[1] = value;
+            set
+            {
+                listOfSpecialities[1] = value; 
+                OnPropertyChanged("Specialty2");
+            }
+        }
+
+        public Specialty Specialty3
+        {
+            get
+            {
+                return listOfSpecialities[2];
+            }
+            set
+            {
+                listOfSpecialities[1] = value;
+                OnPropertyChanged("Specialty3");
+            }
         }
 
         private List<Specialty> specialties = new List<Specialty>();
 
-        private int counter;
-        private double barHeight;
+        #endregion
 
-        private int _maximumTriages = 10;
-        public int MaximumTriages => _maximumTriages;
 
-        private Triage _redTriage;
-        private Triage _orangeTriage;
-        private Triage _yellowTriage;
-        private Triage _greenTriage;
-        private Triage _blueTriage;
-
-        public Triage RedTriage
-        {
-            get => _redTriage;
-            set => _redTriage = value;
-        }
-
-        public Triage OrangeTriage
-        {
-            get => _orangeTriage;
-            set => _orangeTriage = value;
-        }
-
-        public Triage YellowTriage
-        {
-            get => _yellowTriage;
-            set => _yellowTriage = value;
-        }
-
-        public Triage GreenTriage
-        {
-            get => _greenTriage;
-            set => _greenTriage = value;
-        }
-
-        public Triage BlueTriage
-        {
-            get => _blueTriage;
-            set => _blueTriage = value;
-        }
-
+        #region Constructor
         public OverviewViewViewModel()
         {
-            barHeight = 200 / 10;
-            listOfSpecialities[0] = new Specialty
+            //listOfSpecialities[0] = new Specialty
+            //{
+            //    Name = "Orthopaedic",
+            //    Colour = "#4e7454",
+            //    Amount = 5,
+            //    ShowAs = Visibility.Collapsed
+            //};
+
+            //listOfSpecialities[1] = new Specialty
+            //{
+            //    Name = "Medicinal",
+            //    Colour = "#9400D3",
+            //    Amount = 9,
+            //    ShowAs = Visibility.Visible
+            //};
+
+            specialties.Add(new Specialty
             {
                 Name = "Orthopaedic",
-                Colour = "#4e7454",
+                Colour = "#af3205",
                 Amount = 5,
-                ShowAs = Visibility.Collapsed
-            };
-
-            listOfSpecialities[1] = new Specialty
+                ShowAs = Visibility.Visible
+            });
+            specialties.Add(new Specialty
             {
                 Name = "Medicinal",
                 Colour = "#9400D3",
                 Amount = 9,
                 ShowAs = Visibility.Visible
-            };
-
-            specialties.Add(new Specialty
-            {
-                Name = "Orthopaedic",
-                Colour = "#FFFFFF",
-                Amount = 5,
-                ShowAs = Visibility.Collapsed
             });
             specialties.Add(new Specialty
             {
-                Name = "Medicinal",
-                Colour = "#9400D3",
-                Amount = 9,
+                Name = "Thoracic surgery",
+                Colour = "#003865",
+                Amount = 4,
                 ShowAs = Visibility.Visible
             });
 
-            counter = 0;
+            var counter = 0;
             Array.Clear(listOfSpecialities, 0, listOfSpecialities.Length);
             specialties.Sort((x, y) => y.Amount.CompareTo(x.Amount));
             foreach (var specialty in specialties)
@@ -122,7 +154,7 @@ namespace IncomingCasualtyHandling.GUI.ViewModels
                 }
             }
 
-            _redTriage = new Triage
+            _triage1 = new Triage
             {
                 Amount = 8,
                 Colour = "#f60e0e",
@@ -130,7 +162,7 @@ namespace IncomingCasualtyHandling.GUI.ViewModels
                 ShowAs = Visibility.Visible
             };
 
-            _orangeTriage = new Triage
+            _triage2 = new Triage
             {
                 Amount = 0,
                 Colour = "#f28d0e",
@@ -138,34 +170,29 @@ namespace IncomingCasualtyHandling.GUI.ViewModels
                 ShowAs = Visibility.Collapsed
             };
 
-            _yellowTriage = new Triage
+            _triage3 = new Triage
             {
                 Amount = 5,
                 Colour = "#ffe913",
                 Name = "Yellow",
                 ShowAs = Visibility.Visible
             };
-            _greenTriage = new Triage
+            _triage4 = new Triage
             {
                 Amount = 2,
                 Colour = "#0bdd2e",
                 Name = "Green",
                 ShowAs = Visibility.Visible
             };
-            _blueTriage = new Triage
+            _triage5 = new Triage
             {
                 Amount = 0,
                 Colour = "#1e38ff",
                 Name = "Blue",
                 ShowAs = Visibility.Collapsed
             };
-
-            _redTriage.Height = _redTriage.Amount * barHeight;
-            _orangeTriage.Height = _orangeTriage.Amount * barHeight;
-            _yellowTriage.Height = _yellowTriage.Amount * barHeight;
-            _greenTriage.Height = _greenTriage.Amount * barHeight;
-            _blueTriage.Height = _blueTriage.Amount * barHeight;
-
         }
+
+        #endregion
     }
 }
