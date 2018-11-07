@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Globalization;
 using System.Windows.Input;
 using IncomingCasualtyHandling.BL;
@@ -19,8 +20,12 @@ namespace IncomingCasualtyHandling.GUI.ViewModels
         OverviewViewViewModel _overviewViewViewModel = new OverviewViewViewModel();
         DetailViewViewModel _detailViewViewModel = new DetailViewViewModel();
 
+        // Model for ViewModel
+        private MainViewModel _mainModel = new MainViewModel();
+
         public MainViewViewModel()
         {
+            _mainModel.PropertyChanged += MainModelOnPropertyChanged;
             // Udkommenteret under View-Viewmodel test
             //Initialize();
 
@@ -42,7 +47,13 @@ namespace IncomingCasualtyHandling.GUI.ViewModels
             //_timer.Interval = TimeSpan.FromSeconds(1);
             //_timer.Start();
         }
-        
+
+        private void MainModelOnPropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            
+            OnPropertyChanged(e.PropertyName);
+        }
+
         private void Initialize()
         {
             //Data layer Initialize
@@ -96,10 +107,14 @@ namespace IncomingCasualtyHandling.GUI.ViewModels
 
         //readonly System.Windows.Threading.DispatcherTimer _timer = new System.Windows.Threading.DispatcherTimer();
 
-        // Model for ViewModel
-        private MainViewModel _mainModel = new MainViewModel();
         // Property for binding 
-        public string CurrentDateTime { get => _mainModel.CurrentDateTime; set; }
+        public string CurrentDateTime
+        {
+            get
+            {
+                return _mainModel.CurrentDateTime;
+            }
+        }
 
         //private readonly CultureInfo _culture = CultureInfo.CurrentCulture;
 

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace IncomingCasualtyHandling.BL.Models
 {
-    class MainViewModel : ObservableObject
+    public class MainViewModel : ObservableObject
     {
 
         public MainViewModel()
@@ -32,8 +32,20 @@ namespace IncomingCasualtyHandling.BL.Models
 
         readonly System.Windows.Threading.DispatcherTimer _timer = new System.Windows.Threading.DispatcherTimer();
 
+        private string _currentDateTime;
         // Property for binding 
-        public string CurrentDateTime { get; set; }
+        public string CurrentDateTime
+        {
+            get => _currentDateTime;
+            set
+            {
+                if (_currentDateTime != value)
+                {
+                    _currentDateTime = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
 
         private readonly CultureInfo _culture = CultureInfo.CurrentCulture;
 
@@ -49,7 +61,7 @@ namespace IncomingCasualtyHandling.BL.Models
             string minute = d.Minute.ToString().PadLeft(2, '0');
 
             CurrentDateTime = day + ". " + month + ". " + year + "\t" + hour + ":" + minute;
-            OnPropertyChanged("CurrentDateTime");
+            //OnPropertyChanged("CurrentDateTime");
         }
 
     }
