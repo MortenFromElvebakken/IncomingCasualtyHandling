@@ -95,8 +95,10 @@ namespace IncomingCasualtyHandling.GUI.ViewModels
 
         //readonly System.Windows.Threading.DispatcherTimer _timer = new System.Windows.Threading.DispatcherTimer();
 
-        //// Property for binding 
-        //public string CurrentDateTime { get; set; }
+        // Model for ViewModel
+        private MainViewModel mainModel = new MainViewModel();
+        // Property for binding 
+        public string CurrentDateTime { get mainModel.CurrentDateTime; set; }
 
         //private readonly CultureInfo _culture = CultureInfo.CurrentCulture;
 
