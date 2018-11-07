@@ -72,11 +72,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="BL\Models\ETA.cs" />
+    <Compile Include="BL\Object classes\ETA.cs" />
     <Compile Include="GUI\ViewModels\DetailViewViewModel.cs" />
     <Compile Include="GUI\ViewModels\MainViewViewModel.cs" />
-    <Compile Include="BL\Models\Specialty.cs" />
-    <Compile Include="BL\Models\Triage.cs" />
+    <Compile Include="BL\Object classes\Specialty.cs" />
+    <Compile Include="BL\Object classes\Triage.cs" />
     <Page Include="GUI\View\DetailView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -132,7 +132,7 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BL\Models\Patient.cs" />
+    <Compile Include="BL\Object classes\Patient.cs" />
     <Compile Include="GUI\View\OverviewView.xaml.cs">
       <DependentUpon>OverviewView.xaml</DependentUpon>
     </Compile>
@@ -177,6 +177,9 @@
       <Project>{6c23562f-26ad-47d7-9d2b-595543eb0a0e}</Project>
       <Name>UserControlLibrary</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="BL\Models\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
