@@ -72,6 +72,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="BL\Models\OverviewViewModel.cs" />
     <Compile Include="BL\Object classes\ETA.cs" />
     <Compile Include="GUI\ViewModels\DetailViewViewModel.cs" />
     <Compile Include="GUI\ViewModels\MainViewViewModel.cs" />
@@ -178,8 +179,6 @@
       <Name>UserControlLibrary</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="BL\Models\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
