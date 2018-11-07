@@ -8,11 +8,11 @@ namespace IncomingCasualtyHandling.GUI.ViewModels
     public class OverviewViewViewModel : WorkspaceViewModel
     {
         // Set Model for ViewModel
-        OverviewViewModel overviewModel = new OverviewViewModel();
+        OverviewViewModel _overviewModel = new OverviewViewModel();
 
         #region Triages
 
-        public int MaximumTriages => overviewModel.MaximumTriages;
+        public int MaximumTriages => _overviewModel.MaximumTriages;
 
         //private Triage _triage1;
         //private Triage _triage2;
@@ -20,15 +20,15 @@ namespace IncomingCasualtyHandling.GUI.ViewModels
         //private Triage _triage4;
         //private Triage _triage5;
 
-        public Triage Triage1 => overviewModel.Triage1;
+        public Triage Triage1 => _overviewModel.Triage1;
 
-        public Triage Triage2 => overviewModel.Triage2;
+        public Triage Triage2 => _overviewModel.Triage2;
 
-        public Triage Triage3 => overviewModel.Triage3;
+        public Triage Triage3 => _overviewModel.Triage3;
 
-        public Triage Triage4 => overviewModel.Triage4;
+        public Triage Triage4 => _overviewModel.Triage4;
 
-        public Triage Triage5 => overviewModel.Triage5;
+        public Triage Triage5 => _overviewModel.Triage5;
 
         #endregion
 
@@ -38,37 +38,37 @@ namespace IncomingCasualtyHandling.GUI.ViewModels
         //private Specialty[] listOfSpecialities = new Specialty[16];
         //private List<Specialty> specialties = new List<Specialty>();
 
-        public Specialty Specialty1 => overviewModel.Specialty1;
+        public Specialty Specialty1 => _overviewModel.Specialty1;
 
-        public Specialty Specialty2 => overviewModel.Specialty2;
+        public Specialty Specialty2 => _overviewModel.Specialty2;
 
-        public Specialty Specialty3 => overviewModel.Specialty3;
+        public Specialty Specialty3 => _overviewModel.Specialty3;
 
-        public Specialty Specialty4 => overviewModel.Specialty4;
+        public Specialty Specialty4 => _overviewModel.Specialty4;
 
-        public Specialty Specialty5 => overviewModel.Specialty5;
+        public Specialty Specialty5 => _overviewModel.Specialty5;
 
-        public Specialty Specialty6 => overviewModel.Specialty6;
+        public Specialty Specialty6 => _overviewModel.Specialty6;
 
-        public Specialty Specialty7 => overviewModel.Specialty7;
+        public Specialty Specialty7 => _overviewModel.Specialty7;
 
-        public Specialty Specialty8 => overviewModel.Specialty8;
+        public Specialty Specialty8 => _overviewModel.Specialty8;
 
-        public Specialty Specialty9 => overviewModel.Specialty9;
+        public Specialty Specialty9 => _overviewModel.Specialty9;
 
-        public Specialty Specialty10 => overviewModel.Specialty10;
+        public Specialty Specialty10 => _overviewModel.Specialty10;
 
-        public Specialty Specialty11 => overviewModel.Specialty11;
+        public Specialty Specialty11 => _overviewModel.Specialty11;
 
-        public Specialty Specialty12 => overviewModel.Specialty12;
+        public Specialty Specialty12 => _overviewModel.Specialty12;
 
-        public Specialty Specialty13 => overviewModel.Specialty13;
+        public Specialty Specialty13 => _overviewModel.Specialty13;
 
-        public Specialty Specialty14 => overviewModel.Specialty14;
+        public Specialty Specialty14 => _overviewModel.Specialty14;
 
-        public Specialty Specialty15 => overviewModel.Specialty15;
+        public Specialty Specialty15 => _overviewModel.Specialty15;
 
-        public Specialty Specialty16 => overviewModel.Specialty16;
+        public Specialty Specialty16 => _overviewModel.Specialty16;
 
         #endregion
 

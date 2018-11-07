@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Windows.Input;
 using IncomingCasualtyHandling.BL;
+using IncomingCasualtyHandling.BL.Models;
 using IncomingCasualtyHandling.DAL;
 using OurPatient = IncomingCasualtyHandling.BL.Models.OurPatient;
 
@@ -96,9 +97,9 @@ namespace IncomingCasualtyHandling.GUI.ViewModels
         //readonly System.Windows.Threading.DispatcherTimer _timer = new System.Windows.Threading.DispatcherTimer();
 
         // Model for ViewModel
-        private MainViewModel mainModel = new MainViewModel();
+        private MainViewModel _mainModel = new MainViewModel();
         // Property for binding 
-        public string CurrentDateTime { get mainModel.CurrentDateTime; set; }
+        public string CurrentDateTime { get => _mainModel.CurrentDateTime; set; }
 
         //private readonly CultureInfo _culture = CultureInfo.CurrentCulture;
 
