@@ -141,22 +141,6 @@ namespace IncomingCasualtyHandling.GUI.ViewModels
         #region Constructor
         public OverviewViewViewModel()
         {
-            //listOfSpecialities[0] = new Specialty
-            //{
-            //    Name = "Orthopaedic",
-            //    Colour = "#4e7454",
-            //    Amount = 5,
-            //    ShowAs = Visibility.Collapsed
-            //};
-
-            //listOfSpecialities[1] = new Specialty
-            //{
-            //    Name = "Medicinal",
-            //    Colour = "#9400D3",
-            //    Amount = 9,
-            //    ShowAs = Visibility.Visible
-            //};
-
             specialties.Add(new Specialty
             {
                 Name = "Orthopaedic",
@@ -227,6 +211,12 @@ namespace IncomingCasualtyHandling.GUI.ViewModels
                 Colour = "#1e38ff",
                 Name = "Blue",
                 ShowAs = Visibility.Collapsed
+            };
+
+            _eta = new ETA
+            {
+                AbsoluteTime = "10:42",
+                RelativeTime = "(-08:00)"
             };
         }
 
