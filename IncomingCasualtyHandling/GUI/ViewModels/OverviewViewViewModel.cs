@@ -22,31 +22,51 @@ namespace IncomingCasualtyHandling.GUI.ViewModels
         public Triage Triage1
         {
             get => _triage1;
-            set => _triage1 = value;
+            set
+            {
+                _triage1 = value;
+                OnPropertyChanged("Triage1");
+            }
         }
 
         public Triage Triage2
         {
             get => _triage2;
-            set => _triage2 = value;
+            set
+            {
+                _triage2 = value;
+                OnPropertyChanged("Triage2");
+            }
         }
 
         public Triage Triage3
         {
             get => _triage3;
-            set => _triage3 = value;
+            set
+            {
+                _triage3 = value;
+                OnPropertyChanged("Triage3");
+            }
         }
 
         public Triage Triage4
         {
             get => _triage4;
-            set => _triage4 = value;
+            set
+            {
+                _triage4 = value;
+                OnPropertyChanged("Triage4");
+            }
         }
 
         public Triage Triage5
         {
             get => _triage5;
-            set => _triage5 = value;
+            set
+            {
+                _triage5 = value;
+                OnPropertyChanged("Triage5");
+            }
         }
 
         #endregion
@@ -97,6 +117,23 @@ namespace IncomingCasualtyHandling.GUI.ViewModels
         }
 
         private List<Specialty> specialties = new List<Specialty>();
+
+        #endregion
+
+
+        #region ETA
+
+        private ETA _eta;
+
+        public ETA Eta
+        {
+            get => _eta;
+            set
+            {
+                _eta = value;
+                OnPropertyChanged("ETA");
+            }
+        }
 
         #endregion
 
