@@ -131,7 +131,7 @@ namespace IncomingCasualtyHandling.GUI.ViewModels
             set
             {
                 _eta = value;
-                OnPropertyChanged("ETA");
+                OnPropertyChanged("Eta");
             }
         }
 
