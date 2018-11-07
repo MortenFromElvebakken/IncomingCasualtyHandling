@@ -184,6 +184,59 @@ namespace IncomingCasualtyHandling.BL.Models
                 }
             }
 
+            Specialty4 = new Specialty
+            {
+                ShowAs = Visibility.Collapsed
+            };
+            Specialty5 = new Specialty
+            {
+                ShowAs = Visibility.Collapsed
+            };
+            Specialty6 = new Specialty
+            {
+                ShowAs = Visibility.Collapsed
+            };
+            Specialty7 = new Specialty
+            {
+                ShowAs = Visibility.Collapsed
+            };
+            Specialty8 = new Specialty
+            {
+                ShowAs = Visibility.Collapsed
+            };
+            Specialty9 = new Specialty
+            {
+                ShowAs = Visibility.Collapsed
+            };
+            Specialty10 = new Specialty
+            {
+                ShowAs = Visibility.Collapsed
+            };
+            Specialty11 = new Specialty
+            {
+                ShowAs = Visibility.Collapsed
+            };
+            Specialty12 = new Specialty
+            {
+                ShowAs = Visibility.Collapsed
+            };
+            Specialty13 = new Specialty
+            {
+                ShowAs = Visibility.Collapsed
+            };
+            Specialty14 = new Specialty
+            {
+                ShowAs = Visibility.Collapsed
+            };
+            Specialty15 = new Specialty
+            {
+                ShowAs = Visibility.Collapsed
+            };
+            Specialty16 = new Specialty
+            {
+                ShowAs = Visibility.Collapsed
+            };
+
             Triage1 = new Triage
             {
                 Amount = 8,
