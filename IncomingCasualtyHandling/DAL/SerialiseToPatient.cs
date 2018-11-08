@@ -18,14 +18,14 @@ namespace IncomingCasualtyHandling.DAL
 
         }
 
-        public OurPatient returnPatient(Patient newEntry)
+        public PatientModel ReturnPatient(Patient newEntry)
         {
-            OurPatient newPatient = new OurPatient();
+            PatientModel newPatientModel = new PatientModel();
 
             // Uses ?? Operand to determine if lefthandside of argument is null, in that case use right hand side.
-             newPatient.PatientId = newEntry.Identifier[0].Value ?? "*E_CPR";
-            newPatient.Name = newEntry.Name[0].Text ?? "John Doe";
-            newPatient.Gender = newEntry.Gender ?? AdministrativeGender.Unknown;
+             newPatientModel.PatientId = newEntry.Identifier[0].Value ?? "*E_CPR";
+            newPatientModel.Name = newEntry.Name[0].Text ?? "John Doe";
+            newPatientModel.Gender = newEntry.Gender ?? AdministrativeGender.Unknown;
 
 
             //Logic i forhold til extensions her og lav logic der ser om felter er lig null?
@@ -34,32 +34,32 @@ namespace IncomingCasualtyHandling.DAL
             //_newPatient.Specialty = Convert.ToString(newEntry.Extension[2].Value);
             //_newPatient.ETA = Convert.ToDateTime(newEntry.Extension[3].Value.ToString());
 
-            newPatient.ToHospital =
+            newPatientModel.ToHospital =
                 newEntry.GetStringExtension("http://www.example.com/hospitalTest") ?? "To hospital went wrong";
-            newPatient.Triage =
+            newPatientModel.Triage =
                 newEntry.GetStringExtension("http://www.example.com/triagetest") ?? "Unknown";
-            newPatient.Specialty =
+            newPatientModel.Specialty =
                 newEntry.GetStringExtension("http://www.example.com/SpecialtyTest") ?? "Unknown";
-            newPatient.ETA = 
-                Convert.ToDateTime(newEntry.GetExtension("http://www.example.com/datetimeTest")); 
+            newPatientModel.ETA = 
+                Convert.ToDateTime(newEntry.GetExtension("http://www.example.com/datetimeTest").Value.ToString()); 
             // Hvad  kan vi gøre hvis der ingen ETA er?
             
             
            
-            return newPatient;
+            return newPatientModel;
             
         }
 
         //Todo with clinical impression ressource on fhir
-        public void setMedicinalNote()
+        public void SetMedicinalNote()
         {
             //Lav kald til database lag der tjekker på patientens id om der ligger en clinical impression?
         }
-        public void setTraumaNote()
+        public void SetTraumaNote()
         {
 
         }
-        public void setAmbulanceNumber()
+        public void SetAmbulanceNumber()
         {
 
         }

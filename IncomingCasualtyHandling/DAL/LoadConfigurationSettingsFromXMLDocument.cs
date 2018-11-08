@@ -13,14 +13,19 @@ namespace IncomingCasualtyHandling.DAL
 {
     public class LoadConfigurationSettingsFromXMLDocument
     {
-        private string xmlserver;
+        private readonly string xmlserver;
         private string _server;
         private string _hospital;
         private XmlDocument configFile;
 
+        public List<Triage> TriageList { get; set; }
+        public List<Specialty> SpecialtiesList { get; set; }
+        public string ServerName { get; set; }
+        public string HospitalShortName { get; set; }
+
         public LoadConfigurationSettingsFromXMLDocument()
         {
-            xmlserver = "http://localhost:8080/Conf.Fapi/Configuration.xml";
+            xmlserver = "http://localhost:8080/Conf.Fapi/Configuration.xml"; //Muligt at sætte denne ved opstart af program?
             configFile = new XmlDocument();
             try
             {
@@ -31,25 +36,27 @@ namespace IncomingCasualtyHandling.DAL
                 //Fejlmeddelelse
                 Debug.WriteLine("Configuration file could not be found on server");
             }
-            //XmlNode configNode
-            //Lav noget så det gemmer som en configurations.cs klasse, hvori variablerne gemmes og kan hentes andre steder i applikation
-            ReturnTriageList();
-            ReturnSpecialtyList();
+
+
+            GetHospitalShortName();
+            GetServerName();
+            CreateTriageList();
+            CreateSpecialtyList();
 
         }
 
-        public string ReturnServerName()
+        private void GetServerName()
         {
             _server = configFile.LastChild.ChildNodes[0].InnerText; //Ikke pænt, lav noget med indexering og den leder efter navn
-            return _server;
+            ServerName = _server;
         }
-        public string ReturnHospitalShortName()
+        private void GetHospitalShortName()
         {
             _hospital = configFile.LastChild.ChildNodes[1].InnerText;
-            return _hospital;
+            HospitalShortName = _hospital;
         }
 
-        public void ReturnTriageList()
+        private void CreateTriageList()
         {
             List<Triage> _triageList = new List<Triage>();
             
@@ -65,10 +72,13 @@ namespace IncomingCasualtyHandling.DAL
 
                 _triageList.Add(_triage);
             }
-            
-        }
 
-        public void ReturnSpecialtyList()
+            TriageList = _triageList;
+
+        }
+        
+
+        private void CreateSpecialtyList()
         {
             List<Specialty> _specialtiesList = new List<Specialty>();
             foreach (XmlNode c in configFile.LastChild.ChildNodes[3])
@@ -81,7 +91,7 @@ namespace IncomingCasualtyHandling.DAL
                 _specialtiesList.Add(_specialty);
             }
 
-            //return _specialtiesList;
+            SpecialtiesList = _specialtiesList;
         }
 
     }

@@ -9,6 +9,6 @@ namespace IncomingCasualtyHandling.DAL.Interface
 {
     public interface IObserver
     {
-        void Update(List<OurPatient> s); // Indsæt at den notify'er med en liste af aircrafts
+        void Update(List<PatientModel> s); // Indsæt at den notify'er med en liste af aircrafts
     }
 }

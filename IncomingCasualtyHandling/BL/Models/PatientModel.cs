@@ -3,7 +3,7 @@ using Hl7.Fhir.Model;
 
 namespace IncomingCasualtyHandling.BL.Models
 {
-    public class OurPatient
+    public class PatientModel
     {
         public string PatientId { get; set; }
         public string Name { get; set; }

@@ -28,7 +28,7 @@ namespace IncomingCasualtyHandling.DAL
             ObserverList.Remove(o);
         }
 
-        public void Notify(List<OurPatient> s)
+        public void Notify(List<PatientModel> s)
         {
             foreach (var item in ObserverList)
             {

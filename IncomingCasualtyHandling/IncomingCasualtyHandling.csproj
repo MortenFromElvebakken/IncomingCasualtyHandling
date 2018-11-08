@@ -72,6 +72,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="BL\Models\TriageDTO.cs" />
     <Compile Include="BL\SortETA.cs" />
     <Compile Include="BL\SortSpecialty.cs" />
     <Compile Include="BL\SortTriage.cs" />
@@ -134,7 +135,7 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BL\Models\Patient.cs" />
+    <Compile Include="BL\Models\PatientModel.cs" />
     <Compile Include="GUI\View\OverviewView.xaml.cs">
       <DependentUpon>OverviewView.xaml</DependentUpon>
     </Compile>

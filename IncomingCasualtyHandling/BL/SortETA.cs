@@ -9,9 +9,10 @@ namespace IncomingCasualtyHandling.BL
 {
     class SortETA
     {
-        public void SortForETA(List<OurPatient> listOfPatients)
+        public void SortForETA(List<PatientModel> listOfPatients)
         {
-            List<OurPatient> SortedETAList = listOfPatients.OrderBy(o => o.ETA).ToList();
+            List<PatientModel> SortedETAList = listOfPatients.OrderBy(o => o.ETA).ToList();
+            //Læg denne over i model
             
         }
     }

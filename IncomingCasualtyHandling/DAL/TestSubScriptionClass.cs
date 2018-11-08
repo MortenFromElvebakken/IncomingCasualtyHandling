@@ -26,7 +26,7 @@ namespace IncomingCasualtyHandling.DAL
             //setupSubscription(); // er gjordt, subscription id vi fik tilbage er 4952
             //setupWebsocket();
         }
-        public void setupSubscription()
+        public void SetupSubscription()
         {
             testSubscription = new Hl7.Fhir.Model.Subscription();
             testSubClient = new Hl7.Fhir.Rest.FhirClient("http://localhost:8080/hapi-fhir-jpaserver-example/baseDstu3");

@@ -11,7 +11,7 @@ namespace IncomingCasualtyHandling.BL
 {
      class PatientHandlingLogic : IObserver
      {
-        private List<OurPatient> listOfPatients;
+        private List<PatientModel> listOfPatients;
          private SortETA sortEta;
          private SortSpecialty sortSpecialty;
          private SortTriage sortTriage;
@@ -25,11 +25,11 @@ namespace IncomingCasualtyHandling.BL
          }
 
         
-        public void Update(List<OurPatient> s)
+        public void Update(List<PatientModel> s)
         {
             listOfPatients = s;
             sortEta.SortForETA(listOfPatients);
-            sortSpecialty.sortForSpecialty(listOfPatients);
+            sortSpecialty.SortForSpecialty(listOfPatients);
             sortTriage.SortForTriage(listOfPatients);
         }
     }
