@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Globalization;
 using System.Windows.Input;
 using IncomingCasualtyHandling.BL;
+using IncomingCasualtyHandling.BL.Models;
 using IncomingCasualtyHandling.DAL;
 using OurPatient = IncomingCasualtyHandling.BL.Models.OurPatient;
 
@@ -18,8 +20,12 @@ namespace IncomingCasualtyHandling.GUI.ViewModels
         OverviewViewViewModel _overviewViewViewModel = new OverviewViewViewModel();
         DetailViewViewModel _detailViewViewModel = new DetailViewViewModel();
 
+        // Model for ViewModel
+        private MainViewModel _mainModel = new MainViewModel();
+
         public MainViewViewModel()
         {
+            _mainModel.PropertyChanged += MainModelOnPropertyChanged;
             // Udkommenteret under View-Viewmodel test
             //Initialize();
 
@@ -27,39 +33,40 @@ namespace IncomingCasualtyHandling.GUI.ViewModels
             CurrentWorkspace = _overviewViewViewModel;
             ChangeViewCommand = new RelayCommand(ChangeView);
 
-            //DateTime d;
-            //d = DateTime.Now;
-            //string day = d.Day.ToString().PadLeft(2, '0');
-            //string month = d.ToString("MMM", _culture);
-            //string year = d.Year.ToString();
-            //string hour = d.Hour.ToString().PadLeft(2, '0');
-            //string minute = d.Minute.ToString().PadLeft(2, '0');
+            ////DateTime d;
+            ////d = DateTime.Now;
+            ////string day = d.Day.ToString().PadLeft(2, '0');
+            ////string month = d.ToString("MMM", _culture);
+            ////string year = d.Year.ToString();
+            ////string hour = d.Hour.ToString().PadLeft(2, '0');
+            ////string minute = d.Minute.ToString().PadLeft(2, '0');
 
-            //CurrentDateTime = day + ". " + month + ". " + year + "\t" + hour + ":" + minute;
-            _timer.Tick += new EventHandler(Timer_Click);
-            //_timer.Interval = new TimeSpan(0, 0, 1);
-            _timer.Interval = TimeSpan.FromSeconds(1);
-            _timer.Start();
-
-            Initialize();
+            ////CurrentDateTime = day + ". " + month + ". " + year + "\t" + hour + ":" + minute;
+            //_timer.Tick += new EventHandler(Timer_Click);
+            ////_timer.Interval = new TimeSpan(0, 0, 1);
+            //_timer.Interval = TimeSpan.FromSeconds(1);
+            //_timer.Start();
         }
-        
+
+        private void MainModelOnPropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            
+            OnPropertyChanged(e.PropertyName);
+        }
+
         private void Initialize()
         {
-            //Dette bliver til vores "Main", der initializer alt der skal initializes
-
             //Data layer Initialize
-            var lcs = new LoadConfigurationSettingsFromXMLDocument();
-            var fhirCommands = new GetPatientsFromFhir(lcs);
+            LoadConfigurationSettings lcs = new LoadConfigurationSettings();
+            GetPatientsFromFhir fhirCommands = new GetPatientsFromFhir(lcs);
 
-            //Business layer initialize, attach sortpatients as an observer for the pattern that sends the first full
-            //list of patients up to be sorted. 
-            var sortETA = new SortETA();
-            var sortSpecialty = new SortSpecialty();
-            var sortTriage = new SortTriage();
-            PatientHandlingLogic patientHandlingLogic = new PatientHandlingLogic(sortETA, sortSpecialty, sortTriage);
-            fhirCommands.Attach(patientHandlingLogic);
-            fhirCommands.GetAllPatients();
+
+            TestProperty = "test";
+            SortPatients ctrlBL = new SortPatients();
+            //_listOfPatients = ctrlBL.recievePatients();
+
+
+            //Dette bliver til vores "Main", der initializer alt der skal initializes
         }
 
         // Property for databinding in MainView
@@ -95,30 +102,36 @@ namespace IncomingCasualtyHandling.GUI.ViewModels
 
         }
 
-        // Timer made with inspiration from:
-        // https://stackoverflow.com/a/5410783
+        //// Timer made with inspiration from:
+        //// https://stackoverflow.com/a/5410783
 
-        readonly System.Windows.Threading.DispatcherTimer _timer = new System.Windows.Threading.DispatcherTimer();
+        //readonly System.Windows.Threading.DispatcherTimer _timer = new System.Windows.Threading.DispatcherTimer();
 
         // Property for binding 
-        public string CurrentDateTime { get; set; }
-
-        private readonly CultureInfo _culture = CultureInfo.CurrentCulture;
-
-        private void Timer_Click(object sender, EventArgs e)
+        public string CurrentDateTime
         {
-            DateTime d;
-
-            d = DateTime.Now;
-            string day = d.Day.ToString().PadLeft(2, '0');
-            string month = d.ToString("MMM", _culture);
-            string year = d.Year.ToString();
-            string hour = d.Hour.ToString().PadLeft(2, '0');
-            string minute = d.Minute.ToString().PadLeft(2, '0');
-
-            CurrentDateTime = day + ". " + month + ". " + year + "\t" + hour + ":" + minute;
-            OnPropertyChanged(CurrentDateTime);
+            get
+            {
+                return _mainModel.CurrentDateTime;
+            }
         }
+
+        //private readonly CultureInfo _culture = CultureInfo.CurrentCulture;
+
+        //private void Timer_Click(object sender, EventArgs e)
+        //{
+        //    DateTime d;
+
+        //    d = DateTime.Now;
+        //    string day = d.Day.ToString().PadLeft(2, '0');
+        //    string month = d.ToString("MMM", _culture);
+        //    string year = d.Year.ToString();
+        //    string hour = d.Hour.ToString().PadLeft(2, '0');
+        //    string minute = d.Minute.ToString().PadLeft(2, '0');
+
+        //    CurrentDateTime = day + ". " + month + ". " + year + "\t" + hour + ":" + minute;
+        //    OnPropertyChanged("CurrentDateTime");
+        //}
 
 
         public string TestProperty

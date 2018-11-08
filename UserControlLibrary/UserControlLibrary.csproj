@@ -4,19 +4,17 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{E5721ADA-CA2A-4845-B432-B2FBF1EE6B16}</ProjectGuid>
-    <OutputType>WinExe</OutputType>
-    <RootNamespace>IncomingCasualtyHandling</RootNamespace>
-    <AssemblyName>IncomingCasualtyHandling</AssemblyName>
+    <ProjectGuid>{6C23562F-26AD-47D7-9D2B-595543EB0A0E}</ProjectGuid>
+    <OutputType>library</OutputType>
+    <RootNamespace>UserControlLibrary</RootNamespace>
+    <AssemblyName>UserControlLibrary</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <WarningLevel>4</WarningLevel>
-    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -26,7 +24,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
@@ -68,87 +65,6 @@
     <Reference Include="PresentationFramework" />
   </ItemGroup>
   <ItemGroup>
-    <ApplicationDefinition Include="App.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </ApplicationDefinition>
-    <Compile Include="BL\Models\MainViewModel.cs" />
-    <Compile Include="BL\Models\OverviewViewModel.cs" />
-    <Compile Include="BL\Object classes\ETA.cs" />
-    <Compile Include="BL\ObservableObject.cs" />
-    <Compile Include="GUI\ViewModels\DetailViewViewModel.cs" />
-    <Compile Include="GUI\ViewModels\MainViewViewModel.cs" />
-    <Compile Include="BL\Object classes\Specialty.cs" />
-    <Compile Include="BL\Object classes\Triage.cs" />
-    <Page Include="GUI\View\DetailView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="GUI\View\ETAComponent.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="GUI\View\MainView.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Compile Include="App.xaml.cs">
-      <DependentUpon>App.xaml</DependentUpon>
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="BL\SortPatients.cs" />
-    <Compile Include="DAL\GetPatientsFromFhir.cs" />
-    <Compile Include="DAL\Interface\IObserver.cs" />
-    <Compile Include="DAL\LoadConfigurationSettings.cs" />
-    <Compile Include="DAL\SerialiseToPatient.cs" />
-    <Compile Include="DAL\SubjectObserverPatients.cs" />
-    <Compile Include="DAL\TestSubScriptionClass.cs" />
-    <Compile Include="GUI\ObservableObject.cs" />
-    <Compile Include="GUI\ViewModels\OverviewViewViewModel.cs" />
-    <Compile Include="GUI\RelayCommand.cs" />
-    <Compile Include="GUI\ViewModels\WorkspaceViewModel.cs" />
-    <Compile Include="GUI\View\DetailView.xaml.cs">
-      <DependentUpon>DetailView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="GUI\View\ETAComponent.xaml.cs">
-      <DependentUpon>ETAComponent.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="GUI\View\MainView.xaml.cs">
-      <DependentUpon>MainView.xaml</DependentUpon>
-      <SubType>Code</SubType>
-    </Compile>
-    <Page Include="GUI\View\OverviewView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="GUI\View\SpecialtyComponent.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="GUI\View\TopComponent.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="GUI\View\TriageComponent.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Include="BL\Object classes\Patient.cs" />
-    <Compile Include="GUI\View\OverviewView.xaml.cs">
-      <DependentUpon>OverviewView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="GUI\View\SpecialtyComponent.xaml.cs">
-      <DependentUpon>SpecialtyComponent.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="GUI\View\TopComponent.xaml.cs">
-      <DependentUpon>TopComponent.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="GUI\View\TriageComponent.xaml.cs">
-      <DependentUpon>TriageComponent.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Properties\Annotations.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -166,6 +82,7 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="app.config" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -173,14 +90,14 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
+    <Page Include="BarStyle.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="LabelStyle.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\UserControlLibrary\UserControlLibrary.csproj">
-      <Project>{6c23562f-26ad-47d7-9d2b-595543eb0a0e}</Project>
-      <Name>UserControlLibrary</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

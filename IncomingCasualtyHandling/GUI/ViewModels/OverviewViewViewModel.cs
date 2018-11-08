@@ -7,162 +7,171 @@ namespace IncomingCasualtyHandling.GUI.ViewModels
 {
     public class OverviewViewViewModel : WorkspaceViewModel
     {
-        private Specialty[] listOfSpecialities = new Specialty[16];
+        // Set Model for ViewModel
+        OverviewViewModel _overviewModel = new OverviewViewModel();
 
-        public Specialty Specialty1
+        #region Triages
+
+        public int MaximumTriages => _overviewModel.MaximumTriages;
+
+        //private Triage _triage1;
+        //private Triage _triage2;
+        //private Triage _triage3;
+        //private Triage _triage4;
+        //private Triage _triage5;
+
+        public Triage Triage1 => _overviewModel.Triage1;
+
+        public Triage Triage2 => _overviewModel.Triage2;
+
+        public Triage Triage3 => _overviewModel.Triage3;
+
+        public Triage Triage4 => _overviewModel.Triage4;
+
+        public Triage Triage5 => _overviewModel.Triage5;
+
+        #endregion
+
+
+        #region Specialties
+
+        //private Specialty[] listOfSpecialities = new Specialty[16];
+        //private List<Specialty> specialties = new List<Specialty>();
+
+        public Specialty Specialty1 => _overviewModel.Specialty1;
+
+        public Specialty Specialty2 => _overviewModel.Specialty2;
+
+        public Specialty Specialty3 => _overviewModel.Specialty3;
+
+        public Specialty Specialty4 => _overviewModel.Specialty4;
+
+        public Specialty Specialty5 => _overviewModel.Specialty5;
+
+        public Specialty Specialty6 => _overviewModel.Specialty6;
+
+        public Specialty Specialty7 => _overviewModel.Specialty7;
+
+        public Specialty Specialty8 => _overviewModel.Specialty8;
+
+        public Specialty Specialty9 => _overviewModel.Specialty9;
+
+        public Specialty Specialty10 => _overviewModel.Specialty10;
+
+        public Specialty Specialty11 => _overviewModel.Specialty11;
+
+        public Specialty Specialty12 => _overviewModel.Specialty12;
+
+        public Specialty Specialty13 => _overviewModel.Specialty13;
+
+        public Specialty Specialty14 => _overviewModel.Specialty14;
+
+        public Specialty Specialty15 => _overviewModel.Specialty15;
+
+        public Specialty Specialty16 => _overviewModel.Specialty16;
+
+        #endregion
+
+
+        #region ETA
+
+        private ETA _eta;
+
+        public ETA Eta
         {
-            get
-            {
-                return listOfSpecialities[0];
-            }
+            get => _eta;
             set
             {
-                listOfSpecialities[0] = value;
-                OnPropertyChanged();
-                
+                _eta = value;
+                OnPropertyChanged("Eta");
             }
         }
 
-        public Specialty Specialty2
-        {
-            get
-            {
-                return listOfSpecialities[1];
-            }
-            set => listOfSpecialities[1] = value;
-        }
+        #endregion
 
-        private List<Specialty> specialties = new List<Specialty>();
 
-        private int counter;
-        private double barHeight;
-
-        private Triage _redTriage;
-        private Triage _orangeTriage;
-        private Triage _yellowTriage;
-        private Triage _greenTriage;
-        private Triage _blueTriage;
-
-        public Triage RedTriage
-        {
-            get => _redTriage;
-            set => _redTriage = value;
-        }
-
-        public Triage OrangeTriage
-        {
-            get => _orangeTriage;
-            set => _orangeTriage = value;
-        }
-
-        public Triage YellowTriage
-        {
-            get => _yellowTriage;
-            set => _yellowTriage = value;
-        }
-
-        public Triage GreenTriage
-        {
-            get => _greenTriage;
-            set => _greenTriage = value;
-        }
-
-        public Triage BlueTriage
-        {
-            get => _blueTriage;
-            set => _blueTriage = value;
-        }
-
+        #region Constructor
         public OverviewViewViewModel()
         {
-            barHeight = 200 / 10;
-            listOfSpecialities[0] = new Specialty
-            {
-                Name = "Orthopaedic",
-                Colour = "#4e7454",
-                Amount = 5,
-                ShowAs = Visibility.Collapsed
-            };
+            //specialties.Add(new Specialty
+            //{
+            //    Name = "Orthopaedic",
+            //    Colour = "#af3205",
+            //    Amount = 5,
+            //    ShowAs = Visibility.Visible
+            //});
+            //specialties.Add(new Specialty
+            //{
+            //    Name = "Medicinal",
+            //    Colour = "#9400D3",
+            //    Amount = 9,
+            //    ShowAs = Visibility.Visible
+            //});
+            //specialties.Add(new Specialty
+            //{
+            //    Name = "Thoracic surgery",
+            //    Colour = "#003865",
+            //    Amount = 4,
+            //    ShowAs = Visibility.Visible
+            //});
 
-            listOfSpecialities[1] = new Specialty
-            {
-                Name = "Medicinal",
-                Colour = "#9400D3",
-                Amount = 9,
-                ShowAs = Visibility.Visible
-            };
+            //var counter = 0;
+            //Array.Clear(listOfSpecialities, 0, listOfSpecialities.Length);
+            //specialties.Sort((x, y) => y.Amount.CompareTo(x.Amount));
+            //foreach (var specialty in specialties)
+            //{
+            //    if (specialty != null)
+            //    {
+            //        listOfSpecialities[counter] = specialty;
+            //        counter++;
+            //    }
+            //}
 
-            specialties.Add(new Specialty
-            {
-                Name = "Orthopaedic",
-                Colour = "#FFFFFF",
-                Amount = 5,
-                ShowAs = Visibility.Collapsed
-            });
-            specialties.Add(new Specialty
-            {
-                Name = "Medicinal",
-                Colour = "#9400D3",
-                Amount = 9,
-                ShowAs = Visibility.Visible
-            });
+            //_triage1 = new Triage
+            //{
+            //    Amount = 8,
+            //    Colour = "#f60e0e",
+            //    Name = "Red",
+            //    ShowAs = Visibility.Visible
+            //};
 
-            counter = 0;
-            Array.Clear(listOfSpecialities, 0, listOfSpecialities.Length);
-            specialties.Sort((x, y) => y.Amount.CompareTo(x.Amount));
-            foreach (var specialty in specialties)
-            {
-                if (specialty != null)
-                {
-                    listOfSpecialities[counter] = specialty;
-                    counter++;
-                }
-            }
+            //_triage2 = new Triage
+            //{
+            //    Amount = 0,
+            //    Colour = "#f28d0e",
+            //    Name = "Orange",
+            //    ShowAs = Visibility.Collapsed
+            //};
 
-            _redTriage = new Triage
-            {
-                Amount = 8,
-                Colour = "#f60e0e",
-                Name = "Red",
-                ShowAs = Visibility.Visible
-            };
+            //_triage3 = new Triage
+            //{
+            //    Amount = 5,
+            //    Colour = "#ffe913",
+            //    Name = "Yellow",
+            //    ShowAs = Visibility.Visible
+            //};
+            //_triage4 = new Triage
+            //{
+            //    Amount = 2,
+            //    Colour = "#0bdd2e",
+            //    Name = "Green",
+            //    ShowAs = Visibility.Visible
+            //};
+            //_triage5 = new Triage
+            //{
+            //    Amount = 0,
+            //    Colour = "#1e38ff",
+            //    Name = "Blue",
+            //    ShowAs = Visibility.Collapsed
+            //};
 
-            _orangeTriage = new Triage
-            {
-                Amount = 0,
-                Colour = "#f28d0e",
-                Name = "Orange",
-                ShowAs = Visibility.Collapsed
-            };
-
-            _yellowTriage = new Triage
-            {
-                Amount = 5,
-                Colour = "#ffe913",
-                Name = "Yellow",
-                ShowAs = Visibility.Visible
-            };
-            _greenTriage = new Triage
-            {
-                Amount = 2,
-                Colour = "#0bdd2e",
-                Name = "Green",
-                ShowAs = Visibility.Visible
-            };
-            _blueTriage = new Triage
-            {
-                Amount = 0,
-                Colour = "#1e38ff",
-                Name = "Blue",
-                ShowAs = Visibility.Collapsed
-            };
-
-            _redTriage.Height = _redTriage.Amount * barHeight;
-            _orangeTriage.Height = _orangeTriage.Amount * barHeight;
-            _yellowTriage.Height = _yellowTriage.Amount * barHeight;
-            _greenTriage.Height = _greenTriage.Amount * barHeight;
-            _blueTriage.Height = _blueTriage.Amount * barHeight;
-
+            //_eta = new ETA
+            //{
+            //    AbsoluteTime = "10:42",
+            //    RelativeTime = "(-08:00)"
+            //};
         }
+
+        #endregion
     }
 }

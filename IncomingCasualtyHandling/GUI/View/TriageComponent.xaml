@@ -9,59 +9,88 @@
              Background="White">
 
     <Grid>
+        <Grid.Resources>
+            <Style x:Key="LabelRow" TargetType="{x:Type RowDefinition}">
+                <Setter Property="Height" Value="50px"/>
+            </Style>
+        </Grid.Resources>
+
         <Grid.RowDefinitions>
             <RowDefinition Height="50px"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
 
         <Grid Grid.Row="0">
-            <Label Name="TriageHeaderLabel" VerticalAlignment="Center" HorizontalAlignment="Center">TRIAGE</Label>
+            <Label Name="TriageHeaderText" VerticalAlignment="Center" HorizontalAlignment="Center">TRIAGE</Label>
         </Grid>
 
         <Grid Grid.Row="1">
             <UniformGrid Rows="1" Margin="10,10,10,10" VerticalAlignment="Stretch">
-                <StackPanel x:Name="RedTriageStackPanel"  VerticalAlignment="Bottom" Margin="10,20,10,20" Visibility="{Binding RedTriage.ShowAs}">
-                    <StackPanel.InputBindings>
-                        <MouseBinding MouseAction="LeftClick" Command="{Binding RelativeSource={RelativeSource AncestorType=Window}, Path=DataContext.ChangeViewCommand}"></MouseBinding>
-                    </StackPanel.InputBindings>
-                    <Button Name="RedTriageButton" Style="{StaticResource RoundedButtonAsBar}" Background="{Binding RedTriage.Colour}" Height="{Binding RedTriage.Height}" Command="{Binding RelativeSource={RelativeSource AncestorType=Window}, Path=DataContext.ChangeViewCommand}"></Button>
-                    <Label Name="RedTriageLabel" HorizontalAlignment="Center" VerticalAlignment="Bottom" Content="{Binding RedTriage.Amount}"></Label>
-                </StackPanel>
+                <Grid Name="Triage1Panel" Visibility="{Binding Triage1.ShowAs}">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="1*"/>
+                        <RowDefinition Style="{StaticResource LabelRow}"/>
+                    </Grid.RowDefinitions>
 
-                <StackPanel Name="OrangeTriageStackPanel" VerticalAlignment="Bottom" Margin="10,20,10,20" Visibility="{Binding OrangeTriage.ShowAs}">
-                    <StackPanel.InputBindings>
+                    <Grid.InputBindings>
                         <MouseBinding MouseAction="LeftClick" Command="{Binding RelativeSource={RelativeSource AncestorType=Window}, Path=DataContext.ChangeViewCommand}"></MouseBinding>
-                    </StackPanel.InputBindings>
-                    <Button Name="OrangeTriageButton" Style="{StaticResource RoundedButtonAsBar}" Background="{Binding OrangeTriage.Colour}" Height="{Binding OrangeTriage.Height}" Command="{Binding RelativeSource={RelativeSource AncestorType=Window}, Path=DataContext.ChangeViewCommand}"></Button>
-                    <Label Name="OrangeTriageLabel" HorizontalAlignment="Center" VerticalAlignment="Bottom" Content="{Binding OrangeTriage.Amount}"></Label>
-                </StackPanel>
+                    </Grid.InputBindings>
 
-                <StackPanel Name="YellowTriageStackPanel" VerticalAlignment="Bottom" Margin="10,20,10,20"  Visibility="{Binding YellowTriage.ShowAs}">
-                    <StackPanel.InputBindings>
-                        <MouseBinding MouseAction="LeftClick" Command="{Binding RelativeSource={RelativeSource AncestorType=Window}, Path=DataContext.ChangeViewCommand}"></MouseBinding>
-                    </StackPanel.InputBindings>
-                    <Button Name="YellowTriageButton" Style="{StaticResource RoundedButtonAsBar}" Background="{Binding YellowTriage.Colour}" Height="{Binding YellowTriage.Height}" Command="{Binding RelativeSource={RelativeSource AncestorType=Window}, Path=DataContext.ChangeViewCommand}"></Button>
-                    <Label Name="YellowTriageLabel" HorizontalAlignment="Center" VerticalAlignment="Bottom" Content="{Binding YellowTriage.Amount}"></Label>
-                </StackPanel>
+                    <ProgressBar Grid.Row="0" Name="Triage1Bar" Foreground="{Binding Triage1.Colour}" Height="Auto" Maximum="{Binding MaximumTriages}" Value="{Binding Triage1.Amount}" Orientation="Vertical"></ProgressBar>
+                    <Label Grid.Row="1" Name="Triage1Amount" HorizontalAlignment="Center" VerticalAlignment="Bottom" Content="{Binding Triage1.Amount}"></Label>
+                </Grid>
+                <Grid Name="Triage2Panel" Visibility="{Binding Triage2.ShowAs}">
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition Style="{StaticResource LabelRow}"/>
+                    </Grid.RowDefinitions>
 
-                <StackPanel Name="GreenTriageStackPanel" VerticalAlignment="Bottom" Margin="10,20,10,20" Visibility="{Binding GreenTriage.ShowAs}">
-                    <StackPanel.InputBindings>
+                    <Grid.InputBindings>
                         <MouseBinding MouseAction="LeftClick" Command="{Binding RelativeSource={RelativeSource AncestorType=Window}, Path=DataContext.ChangeViewCommand}"></MouseBinding>
-                    </StackPanel.InputBindings>
-                    <Button Name="GreenTriageButton" Style="{StaticResource RoundedButtonAsBar}" Background="{Binding GreenTriage.Colour}" Height="{Binding GreenTriage.Height}" Command="{Binding RelativeSource={RelativeSource AncestorType=Window}, Path=DataContext.ChangeViewCommand}"></Button>
-                    <Label Name="GreenTriageLabel" HorizontalAlignment="Center" VerticalAlignment="Bottom" Content="{Binding GreenTriage.Amount}"></Label>
-                </StackPanel>
+                    </Grid.InputBindings>
+                    <ProgressBar Grid.Row="0" Name="Triage2Bar" Foreground="{Binding Triage2.Colour}" Height="Auto" Maximum="{Binding MaximumTriages}" Value="{Binding Triage2.Amount}" Orientation="Vertical"></ProgressBar>
+                    <Label Grid.Row="1" Name="Triage2Amount" HorizontalAlignment="Center" VerticalAlignment="Bottom" Content="{Binding Triage2.Amount}"></Label>
+                </Grid>
+                <Grid Name="Triage3Panel" Visibility="{Binding Triage3.ShowAs}">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="1*"/>
+                        <RowDefinition Style="{StaticResource LabelRow}"/>
+                    </Grid.RowDefinitions>
 
-                <StackPanel Name="BlueTriageStackPanel" VerticalAlignment="Bottom" Margin="10,20,10,20" Visibility="{Binding BlueTriage.ShowAs}">
-                    <StackPanel.InputBindings>
+                    <Grid.InputBindings>
                         <MouseBinding MouseAction="LeftClick" Command="{Binding RelativeSource={RelativeSource AncestorType=Window}, Path=DataContext.ChangeViewCommand}"></MouseBinding>
-                    </StackPanel.InputBindings>
-                    <Button Name="BlueTriageButton" Style="{StaticResource RoundedButtonAsBar}" Background="{Binding BlueTriage.Colour}" Height="{Binding BlueTriage.Height}" Command="{Binding RelativeSource={RelativeSource AncestorType=Window}, Path=DataContext.ChangeViewCommand}"></Button>
-                    <Label Name="BlueTriageLabel" HorizontalAlignment="Center" VerticalAlignment="Bottom" Content="{Binding BlueTriage.Amount}"></Label>
-                </StackPanel>
+                    </Grid.InputBindings>
+                    <ProgressBar Grid.Row="0" Name="Triage3Bar" Foreground="{Binding Triage3.Colour}" Height="Auto" Maximum="{Binding MaximumTriages}" Value="{Binding Triage3.Amount}" Orientation="Vertical"></ProgressBar>
+                    <Label Grid.Row="1" Name="Triage3Amount" HorizontalAlignment="Center" VerticalAlignment="Bottom" Content="{Binding Triage3.Amount}"></Label>
+                </Grid>
+                <Grid Name="Triage4Panel" Visibility="{Binding Triage4.ShowAs}">
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition Style="{StaticResource LabelRow}"/>
+                    </Grid.RowDefinitions>
+
+                    <Grid.InputBindings>
+                        <MouseBinding MouseAction="LeftClick" Command="{Binding RelativeSource={RelativeSource AncestorType=Window}, Path=DataContext.ChangeViewCommand}"></MouseBinding>
+                    </Grid.InputBindings>
+
+                    <ProgressBar Grid.Row="0" Name="Triage4Bar" Foreground="{Binding Triage4.Colour}" Height="Auto" Maximum="{Binding MaximumTriages}" Value="{Binding Triage4.Amount}" Orientation="Vertical"></ProgressBar>
+                    <Label Grid.Row="1" Name="Triage4Amount" HorizontalAlignment="Center" VerticalAlignment="Bottom" Content="{Binding Triage4.Amount}"></Label>
+                </Grid>
+                <Grid Name="Triage5Panel" Visibility="{Binding Triage5.ShowAs}">
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition Style="{StaticResource LabelRow}"/>
+                    </Grid.RowDefinitions>
+
+                    <Grid.InputBindings>
+                        <MouseBinding MouseAction="LeftClick" Command="{Binding RelativeSource={RelativeSource AncestorType=Window}, Path=DataContext.ChangeViewCommand}"></MouseBinding>
+                    </Grid.InputBindings>
+
+                    <ProgressBar Grid.Row="0" Name="Triage5Bar" Foreground="{Binding Triage5.Colour}" Height="Auto" Maximum="{Binding MaximumTriages}" Value="{Binding Triage5.Amount}" Orientation="Vertical"></ProgressBar>
+                    <Label Grid.Row="1" Name="Triage5Amount" HorizontalAlignment="Center" VerticalAlignment="Bottom" Content="{Binding Triage5.Amount}"></Label>
+                </Grid>
             </UniformGrid>
         </Grid>
-
 
     </Grid>
 </UserControl>
