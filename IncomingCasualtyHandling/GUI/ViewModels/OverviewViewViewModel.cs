@@ -9,6 +9,7 @@ namespace IncomingCasualtyHandling.GUI.ViewModels
 {
     public class OverviewViewViewModel : WorkspaceViewModel
     {
+
         // Set Model for ViewModel
         OverviewViewModel _overviewModel;
 
@@ -83,6 +84,11 @@ namespace IncomingCasualtyHandling.GUI.ViewModels
 
 
         #region Constructor
+
+        public OverviewViewViewModel()
+        {
+
+        }
         public OverviewViewViewModel(OverviewViewModel overviewViewModel)
         {
             _overviewModel = overviewViewModel;

@@ -37,6 +37,8 @@ public class DetailViewViewModel : WorkspaceViewModel
 
         public string Text => "TestText";
         private DetailViewModel _detailViewModel;
+        public  DetailViewViewModel()
+        { }
 
         public DetailViewViewModel(DetailViewModel detailViewModel)
         {

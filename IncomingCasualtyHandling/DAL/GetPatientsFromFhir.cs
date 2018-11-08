@@ -34,6 +34,7 @@ namespace IncomingCasualtyHandling.DAL
             sParameters.Add("active", "true");
 
             myThread = new Thread(AsyncGetAllPatients);
+            myThread.IsBackground = true;
         }
 
         public void GetAllPatients()
@@ -57,7 +58,7 @@ namespace IncomingCasualtyHandling.DAL
                     PatientModel op = serialisePatient.ReturnPatient(testpatient);
                     listOfPatients.Add(op);
                 }
-                firstBundle = client.Continue(lastBundle, PageDirection.Next);
+                firstBundle = client.Continue(firstBundle, PageDirection.Next);
             }
             Notify(listOfPatients);
             
@@ -67,9 +68,10 @@ namespace IncomingCasualtyHandling.DAL
 
         private void AsyncGetAllPatients()
         {
-            Thread.Sleep(10000);
+            
+            Thread.Sleep(228000);
             var newBundle = client.SearchAsync<Patient>(sParameters).Result;
-            if (newBundle.IsExactly(lastBundle))
+            if (newBundle.Link.IsExactly(lastBundle.Link))
             {
                 Debug.WriteLine("Same bundle returned");
             }
@@ -88,7 +90,9 @@ namespace IncomingCasualtyHandling.DAL
                     newBundle = client.Continue(newBundle, PageDirection.Next);
                 }
                 Notify(listOfPatients);
+                
             }
+            AsyncGetAllPatients();
         }
     }
 }
