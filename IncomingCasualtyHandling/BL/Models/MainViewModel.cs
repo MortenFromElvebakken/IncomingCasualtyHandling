@@ -4,12 +4,14 @@ using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using IncomingCasualtyHandling.DAL;
 
 namespace IncomingCasualtyHandling.BL.Models
 {
     public class MainViewModel : ObservableObject
     {
 
+        
         public MainViewModel()
         {
             //DateTime d;
@@ -25,8 +27,8 @@ namespace IncomingCasualtyHandling.BL.Models
             //_timer.Interval = new TimeSpan(0, 0, 1);
             _timer.Interval = TimeSpan.FromSeconds(1);
             _timer.Start();
+            
         }
-
         // Timer made with inspiration from:
         // https://stackoverflow.com/a/5410783
 

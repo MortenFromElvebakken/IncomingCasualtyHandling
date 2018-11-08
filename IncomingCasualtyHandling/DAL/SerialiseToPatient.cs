@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Hl7.Fhir.Model;
 using Hl7.Fhir.Serialization;
-using IncomingCasualtyHandling.BL.Models;
+using IncomingCasualtyHandling.BL.Object_classes;
 
 
 namespace IncomingCasualtyHandling.DAL

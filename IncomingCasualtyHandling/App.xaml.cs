@@ -5,6 +5,11 @@ using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
+using IncomingCasualtyHandling.BL;
+using IncomingCasualtyHandling.BL.Models;
+using IncomingCasualtyHandling.DAL;
+using IncomingCasualtyHandling.GUI.View;
+using IncomingCasualtyHandling.GUI.ViewModels;
 
 namespace IncomingCasualtyHandling
 {
@@ -13,5 +18,43 @@ namespace IncomingCasualtyHandling
     /// </summary>
     public partial class App : Application
     {
+        protected override void OnStartup(StartupEventArgs e)
+        {
+            base.OnStartup(e);
+            //MVVM.WorldsSmallest view = new MVVM.WorldsSmallest();
+            //MVVM.WorldsSmallestViewModel viewmodel = new MVVM.WorldsSmallestViewModel();
+            //MVVM.WorldsSmallestModel model = new MVVM.WorldsSmallestModel();
+            //view.DataContext = viewmodel;
+            //view.Show();
+
+            //Opret detail
+            DetailViewModel _detailViewModel = new DetailViewModel();
+            DetailViewViewModel _detailViewViewModel = new DetailViewViewModel(_detailViewModel);
+
+            OverviewViewModel _overviewViewModel = new OverviewViewModel();
+            OverviewViewViewModel _overviewViewViewModel = new OverviewViewViewModel(_overviewViewModel);
+
+            MainViewModel _mainViewModel = new MainViewModel();
+            MainViewViewModel _mainViewViewModel = new MainViewViewModel(_mainViewModel, _overviewViewViewModel,_detailViewViewModel);
+            MainView _mainView = new MainView();
+            _mainView.DataContext = _mainViewViewModel;
+
+            //Opret logic
+            //Dette bliver til vores "Main", der initializer alt der skal initializes
+
+            //Data layer Initialize
+            var lcs = new LoadConfigurationSettingsFromXMLDocument();
+            var fhirCommands = new GetPatientsFromFhir(lcs);
+
+            //Business layer initialize, attach sortpatients as an observer for the pattern that sends the first full
+            //list of patients up to be sorted. 
+            var sortETA = new SortETA(_overviewViewModel,_detailViewModel);
+            var sortSpecialty = new SortSpecialty(lcs, _overviewViewModel, _detailViewModel);
+            var sortTriage = new SortTriage(lcs, _overviewViewModel, _detailViewModel);
+            PatientHandlingLogic patientHandlingLogic = new PatientHandlingLogic(sortETA, sortSpecialty, sortTriage);
+            fhirCommands.Attach(patientHandlingLogic);
+            fhirCommands.GetAllPatients();
+            _mainView.Show();
+        }
     }
 }

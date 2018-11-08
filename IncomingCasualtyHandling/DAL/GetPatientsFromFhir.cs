@@ -7,7 +7,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Hl7.Fhir.Model;
 using Hl7.Fhir.Rest;
-using IncomingCasualtyHandling.BL.Models;
+using IncomingCasualtyHandling.BL.Object_classes;
 using Task = Hl7.Fhir.Model.Task;
 
 namespace IncomingCasualtyHandling.DAL
@@ -45,18 +45,19 @@ namespace IncomingCasualtyHandling.DAL
             
             List<PatientModel> listOfPatients = new List<PatientModel>();
 
-            lastBundle = client.Search<Patient>(sParameters);
+            var firstBundle = client.Search<Patient>(sParameters);
             //Result er en bundle med "pages" i, hvor hver page loades med 10 patienter i. Hvis der er flere end 10 læses de 10 første og
             //går til næste side
-            while (lastBundle != null)
+            lastBundle = firstBundle;
+            while (firstBundle != null)
             {
-                foreach (var x in lastBundle.Entry)
+                foreach (var x in firstBundle.Entry)
                 {
                     var testpatient = (Patient)x.Resource;
                     PatientModel op = serialisePatient.ReturnPatient(testpatient);
                     listOfPatients.Add(op);
                 }
-                lastBundle = client.Continue(lastBundle, PageDirection.Next);
+                firstBundle = client.Continue(lastBundle, PageDirection.Next);
             }
             Notify(listOfPatients);
             
@@ -66,7 +67,7 @@ namespace IncomingCasualtyHandling.DAL
 
         private void AsyncGetAllPatients()
         {
-            Thread.Sleep(400);
+            Thread.Sleep(10000);
             var newBundle = client.SearchAsync<Patient>(sParameters).Result;
             if (newBundle.IsExactly(lastBundle))
             {
@@ -74,16 +75,17 @@ namespace IncomingCasualtyHandling.DAL
             }
             else
             {
+                lastBundle = newBundle;
                 List<PatientModel> listOfPatients = new List<PatientModel>();
-                while (lastBundle != null)
+                while (newBundle != null)
                 {
-                    foreach (var x in lastBundle.Entry)
+                    foreach (var x in newBundle.Entry)
                     {
                         var testpatient = (Patient)x.Resource;
                         PatientModel op = serialisePatient.ReturnPatient(testpatient);
                         listOfPatients.Add(op);
                     }
-                    lastBundle = client.Continue(lastBundle, PageDirection.Next);
+                    newBundle = client.Continue(newBundle, PageDirection.Next);
                 }
                 Notify(listOfPatients);
             }

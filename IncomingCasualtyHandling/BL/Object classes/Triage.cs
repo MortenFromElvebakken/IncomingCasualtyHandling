@@ -1,6 +1,6 @@
 ﻿using System.Windows;
 
-namespace IncomingCasualtyHandling.BL.Models
+namespace IncomingCasualtyHandling.BL.Object_classes
 {
     public class Triage
     {

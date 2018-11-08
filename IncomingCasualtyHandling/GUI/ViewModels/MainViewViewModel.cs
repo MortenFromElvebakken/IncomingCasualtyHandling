@@ -5,8 +5,8 @@ using System.Globalization;
 using System.Windows.Input;
 using IncomingCasualtyHandling.BL;
 using IncomingCasualtyHandling.BL.Models;
+using IncomingCasualtyHandling.BL.Object_classes;
 using IncomingCasualtyHandling.DAL;
-using OurPatient = IncomingCasualtyHandling.BL.Models.OurPatient;
 
 namespace IncomingCasualtyHandling.GUI.ViewModels
 {
@@ -14,38 +14,35 @@ namespace IncomingCasualtyHandling.GUI.ViewModels
     internal class MainViewViewModel : ObservableObject
     {
         private string _test;
-        private List<OurPatient> _listOfPatients;
+        private List<PatientModel> _listOfPatients;
+
+        OverviewViewModel _overviewModel;
 
         // Objects for the two subviews
-        OverviewViewViewModel _overviewViewViewModel = new OverviewViewViewModel();
-        DetailViewViewModel _detailViewViewModel = new DetailViewViewModel();
+        OverviewViewViewModel _overviewViewViewModel; 
+        DetailViewViewModel _detailViewViewModel; 
 
         // Model for ViewModel
-        private MainViewModel _mainModel = new MainViewModel();
+        private MainViewModel _mainModel;
 
         public MainViewViewModel()
         {
+
+        }
+
+        public MainViewViewModel(MainViewModel mainModel, OverviewViewViewModel overviewViewViewModel, DetailViewViewModel detailViewViewModel)
+        {
+            
+            _mainModel = mainModel;
+            _overviewViewViewModel = overviewViewViewModel;
+            _detailViewViewModel = detailViewViewModel;
+            
             _mainModel.PropertyChanged += MainModelOnPropertyChanged;
-            // Udkommenteret under View-Viewmodel test
-            //Initialize();
 
             //Setup the current workspace aka the view to be shown
             CurrentWorkspace = _overviewViewViewModel;
             ChangeViewCommand = new RelayCommand(ChangeView);
-
-            ////DateTime d;
-            ////d = DateTime.Now;
-            ////string day = d.Day.ToString().PadLeft(2, '0');
-            ////string month = d.ToString("MMM", _culture);
-            ////string year = d.Year.ToString();
-            ////string hour = d.Hour.ToString().PadLeft(2, '0');
-            ////string minute = d.Minute.ToString().PadLeft(2, '0');
-
-            ////CurrentDateTime = day + ". " + month + ". " + year + "\t" + hour + ":" + minute;
-            //_timer.Tick += new EventHandler(Timer_Click);
-            ////_timer.Interval = new TimeSpan(0, 0, 1);
-            //_timer.Interval = TimeSpan.FromSeconds(1);
-            //_timer.Start();
+            
         }
 
         private void MainModelOnPropertyChanged(object sender, PropertyChangedEventArgs e)
@@ -54,20 +51,7 @@ namespace IncomingCasualtyHandling.GUI.ViewModels
             OnPropertyChanged(e.PropertyName);
         }
 
-        private void Initialize()
-        {
-            //Data layer Initialize
-            LoadConfigurationSettings lcs = new LoadConfigurationSettings();
-            GetPatientsFromFhir fhirCommands = new GetPatientsFromFhir(lcs);
-
-
-            TestProperty = "test";
-            SortPatients ctrlBL = new SortPatients();
-            //_listOfPatients = ctrlBL.recievePatients();
-
-
-            //Dette bliver til vores "Main", der initializer alt der skal initializes
-        }
+        
 
         // Property for databinding in MainView
         // This property decides the current view/viewmodel
@@ -143,7 +127,7 @@ namespace IncomingCasualtyHandling.GUI.ViewModels
                 _test = value;
             }
         }
-        public List<OurPatient> listOfPatients
+        public List<PatientModel> ListOfPatients
         {
             get { return _listOfPatients; }
             set

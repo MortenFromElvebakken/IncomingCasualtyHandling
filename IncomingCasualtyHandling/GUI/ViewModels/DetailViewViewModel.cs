@@ -36,10 +36,11 @@ public class DetailViewViewModel : WorkspaceViewModel
         public string TabTitle => "TabTitleText";
 
         public string Text => "TestText";
+        private DetailViewModel _detailViewModel;
 
-
-        public DetailViewViewModel()
+        public DetailViewViewModel(DetailViewModel detailViewModel)
         {
+            _detailViewModel = detailViewModel;
             ObservableCollection<Patient> _patientList = new ObservableCollection<Patient>();
             Patient patient1 = new Patient
             {

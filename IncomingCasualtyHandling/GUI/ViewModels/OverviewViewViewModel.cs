@@ -1,14 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Windows;
 using IncomingCasualtyHandling.BL.Models;
+using IncomingCasualtyHandling.BL.Object_classes;
 
 namespace IncomingCasualtyHandling.GUI.ViewModels
 {
     public class OverviewViewViewModel : WorkspaceViewModel
     {
         // Set Model for ViewModel
-        OverviewViewModel _overviewModel = new OverviewViewModel();
+        OverviewViewModel _overviewModel;
 
         #region Triages
 
@@ -75,24 +77,16 @@ namespace IncomingCasualtyHandling.GUI.ViewModels
 
         #region ETA
 
-        private ETA _eta;
-
-        public ETA Eta
-        {
-            get => _eta;
-            set
-            {
-                _eta = value;
-                OnPropertyChanged("Eta");
-            }
-        }
+        public ETA Eta => _overviewModel.Eta;
 
         #endregion
 
 
         #region Constructor
-        public OverviewViewViewModel()
+        public OverviewViewViewModel(OverviewViewModel overviewViewModel)
         {
+            _overviewModel = overviewViewModel;
+            _overviewModel.PropertyChanged += OverviewModelOnPropertyChanged;
             //specialties.Add(new Specialty
             //{
             //    Name = "Orthopaedic",
@@ -170,6 +164,11 @@ namespace IncomingCasualtyHandling.GUI.ViewModels
             //    AbsoluteTime = "10:42",
             //    RelativeTime = "(-08:00)"
             //};
+        }
+
+        private void OverviewModelOnPropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            OnPropertyChanged(e.PropertyName);
         }
 
         #endregion

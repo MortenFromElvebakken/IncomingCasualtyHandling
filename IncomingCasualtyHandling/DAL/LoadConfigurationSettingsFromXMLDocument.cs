@@ -7,7 +7,8 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Xml;
 using Hl7.Fhir.ElementModel;
-using IncomingCasualtyHandling.BL.Models;
+
+using IncomingCasualtyHandling.BL.Object_classes;
 
 namespace IncomingCasualtyHandling.DAL
 {
@@ -85,8 +86,9 @@ namespace IncomingCasualtyHandling.DAL
             {
                 var _specialty = new Specialty();
                 _specialty.Name = c.FirstChild.InnerText;
-                //_specialty.Colour = c.LastChild.InnerText; //Not yet implemented since colour isnt known on the specialties
+                _specialty.Colour = "#af3205";//c.LastChild.InnerText; //Not yet implemented since colour isnt known on the specialties
                 _specialty.Amount = 0;
+                _specialty.ShowAs = Visibility.Collapsed;
 
                 _specialtiesList.Add(_specialty);
             }
