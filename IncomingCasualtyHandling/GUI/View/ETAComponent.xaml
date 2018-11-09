@@ -19,8 +19,8 @@
 
         <Grid Grid.Row="1">
             <UniformGrid Name="EtaGrid" Columns="1" Margin="10,0,10,10" VerticalAlignment="Stretch" >
-                <Label Name="EtaAbsoluteTimeText" VerticalAlignment="Center" HorizontalAlignment="Center" Style="{StaticResource AbsoluteLabel}" Foreground="Black" Content="{Binding Eta.AbsoluteTime}"></Label>
-                <Label Name="EtaRelativeTimeText" VerticalAlignment="Center" HorizontalAlignment="Center" Style="{StaticResource RelativeLabel}" Foreground="DarkGray" Content="{Binding Eta.RelativeTime}"></Label>
+                <Label Name="EtaAbsoluteTimeText" VerticalAlignment="Center" HorizontalAlignment="Center" Style="{StaticResource AbsoluteLabel}" Content="{Binding Eta.AbsoluteTime}"></Label>
+                <Label Name="EtaRelativeTimeText" VerticalAlignment="Center" HorizontalAlignment="Center" Style="{StaticResource RelativeLabel}" Content="{Binding Eta.RelativeTime}"></Label>
             </UniformGrid>
         </Grid>
 

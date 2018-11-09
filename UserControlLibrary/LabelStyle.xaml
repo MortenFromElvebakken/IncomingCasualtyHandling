@@ -2,13 +2,18 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:local="clr-namespace:UserControlLibrary">
 
+    <!-- Style a label to be black with big font-->
     <Style x:Key="AbsoluteLabel">
         <Setter Property="Label.FontSize" Value="48"/>
         <Setter Property="Label.FontFamily" Value="Segoe UI"/>
+        <Setter Property="Label.Foreground" Value="Black"/>
     </Style>
+
+    <!-- Style a label to be gray with medium size font-->
     <Style x:Key="RelativeLabel">
         <Setter Property="Label.FontSize" Value="36"/>
         <Setter Property="Label.FontFamily" Value="Calibri"/>
+        <Setter Property="Label.Foreground" Value="DarkGray"/>
     </Style>
 
 </ResourceDictionary>
