@@ -1,9 +1,10 @@
 ﻿using IncomingCasualtyHandling.BL;
+using NSubstitute;
 using NUnit.Framework;
 
 namespace IncomingCasualtyHandling.Test.Unit.BL.Test.Unit
 {
-    //Metode_Scenarie_Resultat
+    
     // Arrange - Act - Assert
 
     [TestFixture]
@@ -11,22 +12,51 @@ namespace IncomingCasualtyHandling.Test.Unit.BL.Test.Unit
     {
         #region Arrange
 
-        private PatientHandlingLogic uut;
-        private SortETA 
+        private PatientHandlingLogic _uut;
         //private ISortETA sortEta;
-        
+        private SortETA _sortEta;
+        //private ISortSpecialty sortSpecialty;
+        private SortSpecialty _sortSpecialty;
+        //private ISortTriage sortTriage;
+        private SortTriage _sortTriage;
+
 
         [SetUp]
         public void Setup()
         {
-            uut = new PatientHandlingLogicTest();
+            //sortEta = Substitute.For<ISortETA>();
+            _sortEta = Substitute.For<SortETA>();
+            //sortSpecialty = Substitute.For<ISortSpecialty>();
+            _sortSpecialty = Substitute.For<SortSpecialty>();
+            //sortTriage = Substitute.For<ISortTriage>();
+            _sortTriage = Substitute.For<SortTriage>();
+            _uut = new PatientHandlingLogic(_sortEta, _sortSpecialty, _sortTriage);
+        }
+
+        #endregion
+
+        #region Act and Assert
+        // Metode_Scenarie_Resultat
+
+        // Test a list with patients
+        [Test]
+        public void Update_ListWithPatients_CallSortMethods()
+        {
+
+        }
+
+        // Test an empty list
+        [Test]
+        public void Update_ListWithNoPatients_NoCallToSortMethods()
+        {
+
         }
 
         #endregion
 
 
-        [Test]
-        public void
+
+
 
 
     }
