@@ -10,7 +10,7 @@ using IncomingCasualtyHandling.DAL;
 
 namespace IncomingCasualtyHandling.BL
 {
-    class SortTriage
+    public class SortTriage
     {
         public LoadConfigurationSettingsFromXMLDocument LoadXMLSettings;
         public List<Triage> TriageList;

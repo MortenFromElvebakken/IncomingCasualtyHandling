@@ -8,7 +8,7 @@ using IncomingCasualtyHandling.BL.Object_classes;
 
 namespace IncomingCasualtyHandling.BL
 {
-    class SortETA
+    public class SortETA
     {
         private OverviewViewModel _overviewViewModel;
         private DetailViewModel _detailViewModel;

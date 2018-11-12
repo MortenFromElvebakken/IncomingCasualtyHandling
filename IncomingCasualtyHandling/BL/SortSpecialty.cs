@@ -10,7 +10,7 @@ using IncomingCasualtyHandling.DAL;
 
 namespace IncomingCasualtyHandling.BL
 {
-    class SortSpecialty
+    public class SortSpecialty
     {
         private LoadConfigurationSettingsFromXMLDocument LoadXMLSettings;
         private readonly List<Specialty> specialtiesList;
