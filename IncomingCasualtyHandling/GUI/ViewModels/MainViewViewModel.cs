@@ -86,12 +86,7 @@ namespace IncomingCasualtyHandling.GUI.ViewModels
 
         }
 
-        //// Timer made with inspiration from:
-        //// https://stackoverflow.com/a/5410783
-
-        //readonly System.Windows.Threading.DispatcherTimer _timer = new System.Windows.Threading.DispatcherTimer();
-
-        // Property for binding 
+        // Property for binding for TopComponent Timer
         public string CurrentDateTime
         {
             get
@@ -99,23 +94,6 @@ namespace IncomingCasualtyHandling.GUI.ViewModels
                 return _mainModel.CurrentDateTime;
             }
         }
-
-        //private readonly CultureInfo _culture = CultureInfo.CurrentCulture;
-
-        //private void Timer_Click(object sender, EventArgs e)
-        //{
-        //    DateTime d;
-
-        //    d = DateTime.Now;
-        //    string day = d.Day.ToString().PadLeft(2, '0');
-        //    string month = d.ToString("MMM", _culture);
-        //    string year = d.Year.ToString();
-        //    string hour = d.Hour.ToString().PadLeft(2, '0');
-        //    string minute = d.Minute.ToString().PadLeft(2, '0');
-
-        //    CurrentDateTime = day + ". " + month + ". " + year + "\t" + hour + ":" + minute;
-        //    OnPropertyChanged("CurrentDateTime");
-        //}
 
 
         public string TestProperty

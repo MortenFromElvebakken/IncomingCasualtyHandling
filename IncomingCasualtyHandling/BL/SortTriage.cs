@@ -58,6 +58,7 @@ namespace IncomingCasualtyHandling.BL
             }
 
             _overviewViewModel.ListOfTriages = TriageList;
+            _detailViewModel.ListOfTriages = TriageList;
 
             ////Lige nu initialiseres 5 lister med triage - gør dette ud fra triage list hvis muligt, hvor der oprettes
             ////De lister der findes i triagelisten fra configurations fil
