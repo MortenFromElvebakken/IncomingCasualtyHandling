@@ -10,7 +10,7 @@ using IncomingCasualtyHandling.DAL.Interface;
 
 namespace IncomingCasualtyHandling.BL
 {
-     class PatientHandlingLogic : IObserver
+     public class PatientHandlingLogic : IObserver
      {
         private List<PatientModel> listOfPatients;
          private SortETA sortEta;
