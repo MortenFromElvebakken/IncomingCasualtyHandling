@@ -81,6 +81,7 @@
     <Compile Include="BL\SortETA.cs" />
     <Compile Include="BL\SortSpecialty.cs" />
     <Compile Include="BL\SortTriage.cs" />
+    <Compile Include="BL\Timer.cs" />
     <Compile Include="DAL\LoadConfigurationSettingsFromXMLDocument.cs" />
     <Compile Include="GUI\ViewModels\DetailViewViewModel.cs" />
     <Compile Include="GUI\ViewModels\MainViewViewModel.cs" />

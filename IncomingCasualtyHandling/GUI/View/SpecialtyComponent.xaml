@@ -28,7 +28,7 @@
         <Grid Grid.Row="1">
             <UniformGrid Name="SpecialtyGrid" Columns="1" Margin="10,0,10,10" VerticalAlignment="Stretch">
 
-                <Grid Name="Specialty1Panel" VerticalAlignment="Bottom" Margin="10,2.5,10,2.5" Visibility="{Binding Specialty1.ShowAs}">
+                <Grid Name="Specialty1Panel" Margin="10,2.5,10,2.5" Visibility="{Binding Specialty1.ShowAs}" MaxHeight="50px" VerticalAlignment="Top">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Style="{StaticResource ColourColumn}"/>
                         <ColumnDefinition Width="1*"/>
@@ -42,7 +42,7 @@
                     <Label Grid.Column="2" Name="Specialty1Amount" Content="{Binding Specialty1.Amount}" VerticalAlignment="Top" HorizontalAlignment="Right"></Label>
                 </Grid>
 
-                <Grid Name="Specialty2Panel" VerticalAlignment="Bottom" Margin="10,2.5,10,2.5" Visibility="{Binding Specialty2.ShowAs}">
+                <Grid Name="Specialty2Panel" Margin="10,2.5,10,2.5" Visibility="{Binding Specialty2.ShowAs}" MaxHeight="50px" VerticalAlignment="Top">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Style="{StaticResource ColourColumn}"/>
                         <ColumnDefinition Width="1*"/>
@@ -56,7 +56,7 @@
                     <Label Grid.Column="2" Name="Specialty2Amount" Content="{Binding Specialty2.Amount}" VerticalAlignment="Center" HorizontalAlignment="Right"></Label>
                 </Grid>
 
-                <Grid Name="Specialty3Panel" VerticalAlignment="Bottom" Margin="10,2.5,10,2.5" Visibility="{Binding Specialty3.ShowAs}">
+                <Grid Name="Specialty3Panel" Margin="10,2.5,10,2.5" Visibility="{Binding Specialty3.ShowAs}" MaxHeight="50px" VerticalAlignment="Top">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Style="{StaticResource ColourColumn}"/>
                         <ColumnDefinition Width="1*"/>
@@ -70,7 +70,7 @@
                     <Label Grid.Column="2" Name="Specialty3Amount" Content="{Binding Specialty3.Amount}" VerticalAlignment="Center" HorizontalAlignment="Right"></Label>
                 </Grid>
 
-                <Grid Name="Specialty4Panel" VerticalAlignment="Bottom" Margin="10,2.5,10,2.5" Visibility="{Binding Specialty4.ShowAs}">
+                <Grid Name="Specialty4Panel" Margin="10,2.5,10,2.5" Visibility="{Binding Specialty4.ShowAs}" MaxHeight="50px" VerticalAlignment="Top">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Style="{StaticResource ColourColumn}"/>
                         <ColumnDefinition Width="1*"/>
@@ -84,7 +84,7 @@
                     <Label Grid.Column="2" Name="Specialty4Amount" Content="{Binding Specialty4.Amount}" VerticalAlignment="Center" HorizontalAlignment="Right"></Label>
                 </Grid>
 
-                <Grid Name="Specialty5Panel" VerticalAlignment="Bottom" Margin="10,2.5,10,2.5" Visibility="{Binding Specialty5.ShowAs}">
+                <Grid Name="Specialty5Panel" Margin="10,2.5,10,2.5" Visibility="{Binding Specialty5.ShowAs}" MaxHeight="50px" VerticalAlignment="Top">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Style="{StaticResource ColourColumn}"/>
                         <ColumnDefinition Width="1*"/>
@@ -98,7 +98,7 @@
                     <Label Grid.Column="2" Name="Specialty5Amount" Content="{Binding Specialty5.Amount}" VerticalAlignment="Center" HorizontalAlignment="Right"></Label>
                 </Grid>
 
-                <Grid Name="Specialty6Panel" VerticalAlignment="Bottom" Margin="10,2.5,10,2.5" Visibility="{Binding Specialty6.ShowAs}">
+                <Grid Name="Specialty6Panel" Margin="10,2.5,10,2.5" Visibility="{Binding Specialty6.ShowAs}" MaxHeight="50px" VerticalAlignment="Top">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Style="{StaticResource ColourColumn}"/>
                         <ColumnDefinition Width="1*"/>
@@ -112,7 +112,7 @@
                     <Label Grid.Column="2" Name="Specialty6Amount" Content="{Binding Specialty6.Amount}" VerticalAlignment="Center" HorizontalAlignment="Right"></Label>
                 </Grid>
 
-                <Grid Name="Specialty7Panel" VerticalAlignment="Bottom" Margin="10,2.5,10,2.5" Visibility="{Binding Specialty7.ShowAs}">
+                <Grid Name="Specialty7Panel" Margin="10,2.5,10,2.5" Visibility="{Binding Specialty7.ShowAs}" MaxHeight="50px" VerticalAlignment="Top">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Style="{StaticResource ColourColumn}"/>
                         <ColumnDefinition Width="1*"/>
@@ -126,7 +126,7 @@
                     <Label Grid.Column="2" Name="Specialty7Amount" Content="{Binding Specialty7.Amount}" VerticalAlignment="Center" HorizontalAlignment="Right"></Label>
                 </Grid>
 
-                <Grid Name="Specialty8Panel" VerticalAlignment="Bottom" Margin="10,2.5,10,2.5" Visibility="{Binding Specialty8.ShowAs}">
+                <Grid Name="Specialty8Panel" Margin="10,2.5,10,2.5" Visibility="{Binding Specialty8.ShowAs}" MaxHeight="50px" VerticalAlignment="Top">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Style="{StaticResource ColourColumn}"/>
                         <ColumnDefinition Width="1*"/>
@@ -140,7 +140,7 @@
                     <Label Grid.Column="2" Name="Specialty8Amount" Content="{Binding Specialty8.Amount}" VerticalAlignment="Center" HorizontalAlignment="Right"></Label>
                 </Grid>
 
-                <Grid Name="Specialty9Panel" VerticalAlignment="Bottom" Margin="10,2.5,10,2.5" Visibility="{Binding Specialty9.ShowAs}">
+                <Grid Name="Specialty9Panel" Margin="10,2.5,10,2.5" Visibility="{Binding Specialty9.ShowAs}" MaxHeight="50px" VerticalAlignment="Top">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Style="{StaticResource ColourColumn}"/>
                         <ColumnDefinition Width="1*"/>
@@ -154,7 +154,7 @@
                     <Label Grid.Column="2" Name="Specialty9Amount" Content="{Binding Specialty9.Amount}" VerticalAlignment="Center" HorizontalAlignment="Right"></Label>
                 </Grid>
 
-                <Grid Name="Specialty10Panel" VerticalAlignment="Bottom" Margin="10,2.5,10,2.5" Visibility="{Binding Specialty10.ShowAs}">
+                <Grid Name="Specialty10Panel" Margin="10,2.5,10,2.5" Visibility="{Binding Specialty10.ShowAs}" MaxHeight="50px" VerticalAlignment="Top">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Style="{StaticResource ColourColumn}"/>
                         <ColumnDefinition Width="1*"/>
@@ -168,7 +168,7 @@
                     <Label Grid.Column="2" Name="Specialty10Amount" Content="{Binding Specialty10.Amount}" VerticalAlignment="Center" HorizontalAlignment="Right"></Label>
                 </Grid>
 
-                <Grid Name="Specialty11Panel" VerticalAlignment="Bottom" Margin="10,2.5,10,2.5" Visibility="{Binding Specialty11.ShowAs}">
+                <Grid Name="Specialty11Panel" Margin="10,2.5,10,2.5" Visibility="{Binding Specialty11.ShowAs}" MaxHeight="50px" VerticalAlignment="Top">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Style="{StaticResource ColourColumn}"/>
                         <ColumnDefinition Width="1*"/>
@@ -182,7 +182,7 @@
                     <Label Grid.Column="2" Name="Specialty11Amount" Content="{Binding Specialty11.Amount}" VerticalAlignment="Center" HorizontalAlignment="Right"></Label>
                 </Grid>
 
-                <Grid Name="Specialty12Panel" VerticalAlignment="Bottom" Margin="10,2.5,10,2.5" Visibility="{Binding Specialty12.ShowAs}">
+                <Grid Name="Specialty12Panel" Margin="10,2.5,10,2.5" Visibility="{Binding Specialty12.ShowAs}" MaxHeight="50px" VerticalAlignment="Top">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Style="{StaticResource ColourColumn}"/>
                         <ColumnDefinition Width="1*"/>
@@ -196,7 +196,7 @@
                     <Label Grid.Column="2" Name="Specialty12Amount" Content="{Binding Specialty12.Amount}" VerticalAlignment="Center" HorizontalAlignment="Right"></Label>
                 </Grid>
 
-                <Grid Name="Specialty13Panel" VerticalAlignment="Bottom" Margin="10,2.5,10,2.5" Visibility="{Binding Specialty13.ShowAs}">
+                <Grid Name="Specialty13Panel" Margin="10,2.5,10,2.5" Visibility="{Binding Specialty13.ShowAs}" MaxHeight="50px" VerticalAlignment="Top">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Style="{StaticResource ColourColumn}"/>
                         <ColumnDefinition Width="1*"/>
@@ -210,7 +210,7 @@
                     <Label Grid.Column="2" Name="Specialty13Amount" Content="{Binding Specialty13.Amount}" VerticalAlignment="Center" HorizontalAlignment="Right"></Label>
                 </Grid>
 
-                <Grid Name="Specialty14Panel" VerticalAlignment="Bottom" Margin="10,2.5,10,2.5" Visibility="{Binding Specialty14.ShowAs}">
+                <Grid Name="Specialty14Panel" Margin="10,2.5,10,2.5" Visibility="{Binding Specialty14.ShowAs}" MaxHeight="50px" VerticalAlignment="Top">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Style="{StaticResource ColourColumn}"/>
                         <ColumnDefinition Width="1*"/>
@@ -224,7 +224,7 @@
                     <Label Grid.Column="2" Name="Specialty14Amount" Content="{Binding Specialty14.Amount}" VerticalAlignment="Center" HorizontalAlignment="Right"></Label>
                 </Grid>
 
-                <Grid Name="Specialty15Panel" VerticalAlignment="Bottom" Margin="10,2.5,10,2.5" Visibility="{Binding Specialty15.ShowAs}">
+                <Grid Name="Specialty15Panel" Margin="10,2.5,10,2.5" Visibility="{Binding Specialty15.ShowAs}" MaxHeight="50px" VerticalAlignment="Top">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Style="{StaticResource ColourColumn}"/>
                         <ColumnDefinition Width="1*"/>
@@ -238,7 +238,7 @@
                     <Label Grid.Column="2" Name="Specialty15Amount" Content="{Binding Specialty15.Amount}" VerticalAlignment="Center" HorizontalAlignment="Right"></Label>
                 </Grid>
 
-                <Grid Name="Specialty16Panel" VerticalAlignment="Bottom" Margin="10,2.5,10,2.5" Visibility="{Binding Specialty16.ShowAs}">
+                <Grid Name="Specialty16Panel" Margin="10,2.5,10,2.5" Visibility="{Binding Specialty16.ShowAs}" MaxHeight="50px" VerticalAlignment="Top">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Style="{StaticResource ColourColumn}"/>
                         <ColumnDefinition Width="1*"/>
@@ -258,7 +258,7 @@
             <!-- Old grid with stackpanel -->
             <!--<UniformGrid Name="SpecialtyGrid" Columns="1" Margin="10,0,10,10" VerticalAlignment="Stretch">
 
-                <StackPanel Name="Specialty1StackPanel"  Orientation="Horizontal" VerticalAlignment="Bottom" Margin="10,2.5,10,2.5" Visibility="{Binding Specialty1.ShowAs}">
+                <StackPanel Name="Specialty1StackPanel"  Orientation="Horizontal" Margin="10,2.5,10,2.5" Visibility="{Binding Specialty1.ShowAs}" MaxHeight="50px" VerticalAlignment="Top">
                     <StackPanel.InputBindings>
                         <MouseBinding MouseAction="LeftClick"  Command="{Binding RelativeSource={RelativeSource AncestorType=Window}, Path=DataContext.ChangeViewCommand}"></MouseBinding>
                     </StackPanel.InputBindings>
@@ -267,77 +267,77 @@
                     <Label Name="Specialty1Count" Width="50" Content="{Binding Specialty1.Amount}" VerticalAlignment="Center" HorizontalAlignment="Right"></Label>
                 </StackPanel>
                 
-                <StackPanel Name="Specialty2StackPanel" Orientation="Horizontal" VerticalAlignment="Bottom" Margin="10,2.5,10,2.5" Visibility="{Binding Specialty2.ShowAs}">
+                <StackPanel Name="Specialty2StackPanel" Orientation="Horizontal" Margin="10,2.5,10,2.5" Visibility="{Binding Specialty2.ShowAs}" MaxHeight="50px" VerticalAlignment="Top">
                     <Button Name="Specialty2Button" Style="{StaticResource SquaredRoundedButton}" Background="{Binding Specialty2.Colour}"></Button>
                     <Label Name="Specialty2Name" Content="{Binding Specialty2.Name}" VerticalAlignment="Center" HorizontalAlignment="Left"></Label>
                     <Label Name="Specialty2Count" Width="50" Content="{Binding Specialty2.Amount}" VerticalAlignment="Center" HorizontalAlignment="Right"></Label>
                 </StackPanel>
-                <StackPanel Name="Specialty3StackPanel" Orientation="Horizontal" VerticalAlignment="Bottom" Margin="10,2.5,10,2.5">
+                <StackPanel Name="Specialty3StackPanel" Orientation="Horizontal" Margin="10,2.5,10,2.5">
                     <Button Name="Specialty3Button" Style="{StaticResource SquaredRoundedButton}" Background="{Binding Specialty1.Colour}"></Button>
                     <Label Name="Specialty3Name" Content="{Binding Specialty1.Name}" VerticalAlignment="Center" HorizontalAlignment="Left"></Label>
                     <Label Name="Specialty3Count" Width="50" Content="{Binding Specialty1.Amount}" VerticalAlignment="Center" HorizontalAlignment="Right"></Label>
                 </StackPanel>
-                <StackPanel Name="Specialty4StackPanel" Orientation="Horizontal" VerticalAlignment="Bottom" Margin="10,2.5,10,2.5">
+                <StackPanel Name="Specialty4StackPanel" Orientation="Horizontal" Margin="10,2.5,10,2.5">
                     <Button Name="Specialty4Button" Style="{StaticResource SquaredRoundedButton}" Background="{Binding Specialty1.Colour}"></Button>
                     <Label Name="Specialty4Name" Content="{Binding Specialty1.Name}" VerticalAlignment="Center" HorizontalAlignment="Left"></Label>
                     <Label Name="Specialty4Count" Width="50" Content="{Binding Specialty1.Amount}" VerticalAlignment="Center" HorizontalAlignment="Right"></Label>
                 </StackPanel>
-                <StackPanel Name="Specialty5StackPanel" Orientation="Horizontal" VerticalAlignment="Bottom" Margin="10,2.5,10,2.5">
+                <StackPanel Name="Specialty5StackPanel" Orientation="Horizontal" Margin="10,2.5,10,2.5">
                     <Button Name="Specialty5Button" Style="{StaticResource SquaredRoundedButton}" Background="{Binding Specialty1.Colour}"></Button>
                     <Label Name="Specialty5Name" Content="{Binding Specialty1.Name}" VerticalAlignment="Center" HorizontalAlignment="Left"></Label>
                     <Label Name="Specialty5Count" Width="50" Content="{Binding Specialty1.Amount}" VerticalAlignment="Center" HorizontalAlignment="Right"></Label>
                 </StackPanel>
-                <StackPanel Name="Specialty6StackPanel" Orientation="Horizontal" VerticalAlignment="Bottom" Margin="10,2.5,10,2.5">
+                <StackPanel Name="Specialty6StackPanel" Orientation="Horizontal" Margin="10,2.5,10,2.5">
                     <Button Name="Specialty6Button" Style="{StaticResource SquaredRoundedButton}" Background="{Binding Specialty1.Colour}"></Button>
                     <Label Name="Specialty6Name" Content="{Binding Specialty1.Name}" VerticalAlignment="Center" HorizontalAlignment="Left"></Label>
                     <Label Name="Specialty6Count" Width="50" Content="{Binding Specialty1.Amount}" VerticalAlignment="Center" HorizontalAlignment="Right"></Label>
                 </StackPanel>
-                <StackPanel Name="Specialty7StackPanel" Orientation="Horizontal" VerticalAlignment="Bottom" Margin="10,2.5,10,2.5">
+                <StackPanel Name="Specialty7StackPanel" Orientation="Horizontal" Margin="10,2.5,10,2.5">
                     <Button Name="Specialty7Button" Style="{StaticResource SquaredRoundedButton}" Background="{Binding Specialty1.Colour}"></Button>
                     <Label Name="Specialty7Name" Content="{Binding Specialty1.Name}" VerticalAlignment="Center" HorizontalAlignment="Left"></Label>
                     <Label Name="Specialty7Count" Width="50" Content="{Binding Specialty1.Amount}" VerticalAlignment="Center" HorizontalAlignment="Right"></Label>
                 </StackPanel>
-                <StackPanel Name="Specialty8StackPanel" Orientation="Horizontal" VerticalAlignment="Bottom" Margin="10,2.5,10,2.5">
+                <StackPanel Name="Specialty8StackPanel" Orientation="Horizontal" Margin="10,2.5,10,2.5">
                     <Button Name="Specialty8Button" Style="{StaticResource SquaredRoundedButton}" Background="{Binding Specialty1.Colour}"></Button>
                     <Label Name="Specialty8Name" Content="{Binding Specialty1.Name}" VerticalAlignment="Center" HorizontalAlignment="Left"></Label>
                     <Label Name="Specialty8Count" Width="50" Content="{Binding Specialty1.Amount}" VerticalAlignment="Center" HorizontalAlignment="Right"></Label>
                 </StackPanel>
-                <StackPanel Name="Specialty9StackPanel" Orientation="Horizontal" VerticalAlignment="Bottom" Margin="10,2.5,10,2.5">
+                <StackPanel Name="Specialty9StackPanel" Orientation="Horizontal" Margin="10,2.5,10,2.5">
                     <Button Name="Specialty9Button" Style="{StaticResource SquaredRoundedButton}" Background="{Binding Specialty1.Colour}"></Button>
                     <Label Name="Specialty9Name" Content="{Binding Specialty1.Name}" VerticalAlignment="Center" HorizontalAlignment="Left"></Label>
                     <Label Name="Specialty9Count" Width="50" Content="{Binding Specialty1.Amount}" VerticalAlignment="Center" HorizontalAlignment="Right"></Label>
                 </StackPanel>
-                <StackPanel Name="Specialty10StackPanel" Orientation="Horizontal" VerticalAlignment="Bottom" Margin="10,2.5,10,2.5">
+                <StackPanel Name="Specialty10StackPanel" Orientation="Horizontal" Margin="10,2.5,10,2.5">
                     <Button Name="Specialty10Button" Style="{StaticResource SquaredRoundedButton}" Background="{Binding Specialty1.Colour}"></Button>
                     <Label Name="Specialty10Name" Content="{Binding Specialty1.Name}" VerticalAlignment="Center" HorizontalAlignment="Left"></Label>
                     <Label Name="Specialty10Count" Width="50" Content="{Binding Specialty1.Amount}" VerticalAlignment="Center" HorizontalAlignment="Right"></Label>
                 </StackPanel>
-                <StackPanel Name="Specialty11StackPanel" Orientation="Horizontal" VerticalAlignment="Bottom" Margin="10,2.5,10,2.5">
+                <StackPanel Name="Specialty11StackPanel" Orientation="Horizontal" Margin="10,2.5,10,2.5">
                     <Button Name="Specialty11Button" Style="{StaticResource SquaredRoundedButton}" Background="{Binding Specialty1.Colour}"></Button>
                     <Label Name="Specialty11Name" Content="{Binding Specialty1.Name}" VerticalAlignment="Center" HorizontalAlignment="Left"></Label>
                     <Label Name="Specialty11Count" Width="50" Content="{Binding Specialty1.Amount}" VerticalAlignment="Center" HorizontalAlignment="Right"></Label>
                 </StackPanel>
-                <StackPanel Name="Specialty12StackPanel" Orientation="Horizontal" VerticalAlignment="Bottom" Margin="10,2.5,10,2.5">
+                <StackPanel Name="Specialty12StackPanel" Orientation="Horizontal" Margin="10,2.5,10,2.5">
                     <Button Name="Specialty12Button" Style="{StaticResource SquaredRoundedButton}" Background="{Binding Specialty1.Colour}"></Button>
                     <Label Name="Specialty12Name" Content="{Binding Specialty1.Name}" VerticalAlignment="Center" HorizontalAlignment="Left"></Label>
                     <Label Name="Specialty12Count" Width="50" Content="{Binding Specialty1.Amount}" VerticalAlignment="Center" HorizontalAlignment="Right"></Label>
                 </StackPanel>
-                <StackPanel Name="Specialty13StackPanel" Orientation="Horizontal" VerticalAlignment="Bottom" Margin="10,2.5,10,2.5">
+                <StackPanel Name="Specialty13StackPanel" Orientation="Horizontal" Margin="10,2.5,10,2.5">
                     <Button Name="Specialty13Button" Style="{StaticResource SquaredRoundedButton}" Background="{Binding Specialty1.Colour}"></Button>
                     <Label Name="Specialty13Name" Content="{Binding Specialty1.Name}" VerticalAlignment="Center" HorizontalAlignment="Left"></Label>
                     <Label Name="Specialty13Count" Width="50" Content="{Binding Specialty1.Amount}" VerticalAlignment="Center" HorizontalAlignment="Right"></Label>
                 </StackPanel>
-                <StackPanel Name="Specialty14StackPanel" Orientation="Horizontal" VerticalAlignment="Bottom" Margin="10,2.5,10,2.5">
+                <StackPanel Name="Specialty14StackPanel" Orientation="Horizontal" Margin="10,2.5,10,2.5">
                     <Button Name="Specialty14Button" Style="{StaticResource SquaredRoundedButton}" Background="{Binding Specialty1.Colour}"></Button>
                     <Label Name="Specialty14Name" Content="{Binding Specialty1.Name}" VerticalAlignment="Center" HorizontalAlignment="Left"></Label>
                     <Label Name="Specialty14Count" Width="50" Content="{Binding Specialty1.Amount}" VerticalAlignment="Center" HorizontalAlignment="Right"></Label>
                 </StackPanel>
-                <StackPanel Name="Specialty15StackPanel" Orientation="Horizontal" VerticalAlignment="Bottom" Margin="10,2.5,10,2.5">
+                <StackPanel Name="Specialty15StackPanel" Orientation="Horizontal" Margin="10,2.5,10,2.5">
                     <Button Name="Specialty15Button" Style="{StaticResource SquaredRoundedButton}" Background="{Binding Specialty1.Colour}"></Button>
                     <Label Name="Specialty15Name" Content="{Binding Specialty1.Name}" VerticalAlignment="Center" HorizontalAlignment="Left"></Label>
                     <Label Name="Specialty15Count" Width="50" Content="{Binding Specialty1.Amount}" VerticalAlignment="Center" HorizontalAlignment="Right"></Label>
                 </StackPanel>
-                <StackPanel Name="Specialty16StackPanel" Orientation="Horizontal" VerticalAlignment="Bottom" Margin="10,2.5,10,2.5">
+                <StackPanel Name="Specialty16StackPanel" Orientation="Horizontal" Margin="10,2.5,10,2.5">
                     <Button Name="Specialty16Button" Style="{StaticResource SquaredRoundedButton}" Background="{Binding Specialty1.Colour}"></Button>
                     <Label Name="Specialty16Name" Content="{Binding Specialty1.Name}" VerticalAlignment="Center" HorizontalAlignment="Left"></Label>
                     <Label Name="Specialty16Count" Width="50" Content="{Binding Specialty1.Amount}" VerticalAlignment="Center" HorizontalAlignment="Right"></Label>

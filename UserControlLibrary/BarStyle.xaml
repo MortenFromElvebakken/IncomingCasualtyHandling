@@ -2,15 +2,22 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:local="clr-namespace:UserControlLibrary">
 
+    <!-- Style a progressbar to be rounded-->
     <Style TargetType="ProgressBar">
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate>
                     <Grid>
-
+                        
+                        <!-- The part that the filled out part (Indicator) can be in
+                             Set to ActualHeight to match the progressbar's settings-->
                         <Rectangle Name="PART_Track" Width="{TemplateBinding ActualHeight}"></Rectangle>
+                        <!-- The part that is filled out -->
                         <Rectangle Name="PART_Indicator"></Rectangle>
 
+                        <!-- Create a border, which gives a rounding on the Indicator
+                             Couple the colour (background) to match the progressbar's settings
+                             Set the height to match the Indicator: in that way, the rounding is applied on the indicator-->
                         <Border 
                             CornerRadius="15"
                             BorderThickness="1"
@@ -28,11 +35,14 @@
         </Setter>
     </Style>
 
-
+    <!-- Style a button to be rounded -->
     <Style TargetType="Button" x:Key="SquaredRoundedButton">
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate>
+                    <!-- Create a border
+                         CornerRadius determines the rounding
+                         Make the border match the background-->
                     <Border BorderBrush="Transparent"
                             CornerRadius="5"
                             Background="{TemplateBinding Background}"></Border>
@@ -40,6 +50,7 @@
             </Setter.Value>
         </Setter>
         <Style.Triggers>
+            <!-- In order to implement click reaction on the button again-->
             <Trigger Property="ClickMode" Value="Release">
 
             </Trigger>
