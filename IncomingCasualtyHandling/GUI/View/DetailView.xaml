@@ -24,13 +24,13 @@
                 <TabControl.ContentTemplate>
                     <DataTemplate>
                         <ListView ItemsSource="{Binding Data}">
-                            <ListView.View>
+                            <!--<ListView.View>
                                 <GridView>
                                     <GridViewColumn Header="Name" DisplayMemberBinding="{Binding Name}"/>
                                     <GridViewColumn Header="Age" DisplayMemberBinding="{Binding Age}"/>
                                 </GridView>
 
-                            </ListView.View>
+                            </ListView.View>-->
                         </ListView>
                     </DataTemplate>
                 </TabControl.ContentTemplate>

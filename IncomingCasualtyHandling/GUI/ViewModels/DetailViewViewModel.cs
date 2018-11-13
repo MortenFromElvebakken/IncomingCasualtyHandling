@@ -19,7 +19,7 @@ namespace IncomingCasualtyHandling.GUI.ViewModels
     {
         public string TabTitle { get; set; }
 
-        public ObservableCollection<PatientModel> Data { get; set; } = new ObservableCollection<PatientModel>();
+        public List<PatientModel> Data { get; set; } = new List<PatientModel>();
 
     }
 
@@ -73,7 +73,7 @@ namespace IncomingCasualtyHandling.GUI.ViewModels
                 TabElement tabElement = new TabElement
                 {
                     TabTitle = ListOfTriages[0].Name,
-                    Data = _triage1Patients
+                    Data = _detailViewModel.Triage1Patients
                 };
                 return tabElement;
             }
@@ -99,12 +99,13 @@ namespace IncomingCasualtyHandling.GUI.ViewModels
         {
             _detailViewModel = detailViewModel;
             _detailViewModel.PropertyChanged += DetailViewModelOnPropertyChanged;
-            _tabElement1 = new TabElement();
+            _tabElement1 = new TabElement
+            {
+                TabTitle = ListOfTriages[0].Name,
+                Data = _detailViewModel.Triage1Patients
+            };
             _tabs.Add(_tabElement1);
-            //{
-            //    TabTitle = _listOfTriages[0].Name,
-            //    Data = _triage1Patients
-            //};
+           
 
             //ObservableCollection<Patient> _patientList = new ObservableCollection<Patient>();
             //Patient patient1 = new Patient

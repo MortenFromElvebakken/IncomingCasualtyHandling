@@ -30,24 +30,20 @@ namespace IncomingCasualtyHandling
             //view.Show();
 
 
-            //Opret detail
-            DetailViewModel _detailViewModel = new DetailViewModel();
-            DetailViewViewModel _detailViewViewModel = new DetailViewViewModel(_detailViewModel);
-
-            OverviewViewModel _overviewViewModel = new OverviewViewModel();
-            OverviewViewViewModel _overviewViewViewModel = new OverviewViewViewModel(_overviewViewModel);
-
-            MainViewModel _mainViewModel = new MainViewModel();
-            MainViewViewModel _mainViewViewModel = new MainViewViewModel(_mainViewModel, _overviewViewViewModel,_detailViewViewModel);
-            MainView _mainView = new MainView();
-            _mainView.DataContext = _mainViewViewModel;
-
+            // Create DAL
             //Data layer Initialize
             var lcs = new LoadConfigurationSettingsFromXMLDocument();
             var fhirCommands = new GetPatientsFromFhir(lcs);
 
-            //Business layer initialize, attach sortpatients as an observer for the pattern that sends the first full
-            //list of patients up to be sorted. 
+            // Create BLL
+            // First Models
+            // Then Logics
+            DetailViewModel _detailViewModel = new DetailViewModel();
+            OverviewViewModel _overviewViewModel = new OverviewViewModel();
+            MainViewModel _mainViewModel = new MainViewModel();
+
+            
+
             var timer = new Timer(_mainViewModel, _overviewViewModel);
             var sortETA = new SortETA(_overviewViewModel,_detailViewModel, timer);
             var sortSpecialty = new SortSpecialty(lcs, _overviewViewModel, _detailViewModel);
@@ -55,6 +51,14 @@ namespace IncomingCasualtyHandling
             PatientHandlingLogic patientHandlingLogic = new PatientHandlingLogic(sortETA, sortSpecialty, sortTriage);
             fhirCommands.Attach(patientHandlingLogic);
             fhirCommands.GetAllPatients();
+
+            DetailViewViewModel _detailViewViewModel = new DetailViewViewModel(_detailViewModel);
+            OverviewViewViewModel _overviewViewViewModel = new OverviewViewViewModel(_overviewViewModel);
+            MainViewViewModel _mainViewViewModel = new MainViewViewModel(_mainViewModel, _overviewViewViewModel, _detailViewViewModel);
+
+            // Create GUI
+            MainView _mainView = new MainView();
+            _mainView.DataContext = _mainViewViewModel;
             _mainView.Show();
         }
     }

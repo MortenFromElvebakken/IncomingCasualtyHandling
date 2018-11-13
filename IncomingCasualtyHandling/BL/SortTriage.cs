@@ -26,8 +26,7 @@ namespace IncomingCasualtyHandling.BL
 
         public void SortForTriage(List<PatientModel> listOfPatients)
         {
-
-            
+            List<List<PatientModel>> _TempList = new List<List<PatientModel>>();
             var results = listOfPatients.GroupBy(p => p.Triage);
             foreach (var triageResultList in results)
             {
@@ -42,8 +41,8 @@ namespace IncomingCasualtyHandling.BL
                         
                         //model.triagelist[counter] <--- skal lægge dennne liste (triageResultList) ind på den plads der 
                         //passer med den triage dette foreach loop er kommet til.
-
-
+                        _TempList.Add(triageResultList.ToList());
+                       
                         break;
                     }
                     else
@@ -51,14 +50,15 @@ namespace IncomingCasualtyHandling.BL
                         //Logic for unknown triage? maybe
                     }
 
-                    counter++;
+                    
                 }
+                counter++;
 
-                
             }
 
             _overviewViewModel.ListOfTriages = TriageList;
             _detailViewModel.ListOfTriages = TriageList;
+            _detailViewModel.ListOfTriagePatientLists = _TempList;
 
             ////Lige nu initialiseres 5 lister med triage - gør dette ud fra triage list hvis muligt, hvor der oprettes
             ////De lister der findes i triagelisten fra configurations fil
