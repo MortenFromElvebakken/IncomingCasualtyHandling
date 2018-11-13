@@ -17,12 +17,6 @@ namespace IncomingCasualtyHandling.GUI.ViewModels
 
         public int MaximumTriages => _overviewModel.MaximumTriages;
 
-        //private Triage _triage1;
-        //private Triage _triage2;
-        //private Triage _triage3;
-        //private Triage _triage4;
-        //private Triage _triage5;
-
         public Triage Triage1 => _overviewModel.Triage1;
 
         public Triage Triage2 => _overviewModel.Triage2;
