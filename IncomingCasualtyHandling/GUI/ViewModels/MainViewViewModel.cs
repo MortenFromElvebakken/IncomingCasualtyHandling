@@ -42,8 +42,10 @@ namespace IncomingCasualtyHandling.GUI.ViewModels
             //Setup the current workspace aka the view to be shown
             CurrentWorkspace = _overviewViewViewModel;
             ChangeViewCommand = new RelayCommand(ChangeView);
-            
+            ChangeViewCommandWithProperty = new RelayCommand<object>(ChangeViewWithParameter);
         }
+
+        
 
         private void MainModelOnPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
@@ -68,6 +70,26 @@ namespace IncomingCasualtyHandling.GUI.ViewModels
                 }
             }
 
+        }
+
+        //Test for new command with command-binding to change view depending on property specified in command
+        public ICommand ChangeViewCommandWithProperty { get; set; }
+        private void ChangeViewWithParameter(object x)
+        {
+
+            //string[] parameters = x.ToString().Split(' ');
+            //Nu har vi splittet strengen fra parametret, ind i den første ie. "Triage" og den anden "1"
+            //_detailViewViewModel.SelectedIndex = parameters[1];
+            _detailViewViewModel.StringFromParameter = x.ToString();
+            CurrentWorkspace = _detailViewViewModel;
+            
+
+
+            //Denne metode skal kaldes med property på, alt afhængig af hvilken komponent der trykkes på
+
+
+            //Lav index på tabs, så den kan starte på den rigtige tab også.
+            //Bind selected index på tabcontrol til denne værdi
         }
 
         // Command for command-binding to change view

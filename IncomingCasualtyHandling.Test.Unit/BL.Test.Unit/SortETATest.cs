@@ -28,7 +28,7 @@ namespace IncomingCasualtyHandling.Test.Unit.BL.Test.Unit
         {
             _overviewViewModel = Substitute.For<OverviewViewModel>();
             _detailViewModel = Substitute.For<DetailViewModel>();
-            _uut = new SortETA(_overviewViewModel, _detailViewModel);
+            //_uut = new SortETA(_overviewViewModel, _detailViewModel);
         }
 
         #endregion

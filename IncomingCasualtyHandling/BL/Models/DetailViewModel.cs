@@ -3,12 +3,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Controls;
 using IncomingCasualtyHandling.BL.Object_classes;
 
 namespace IncomingCasualtyHandling.BL.Models
 {
     public class DetailViewModel : ObservableObject
     {
+
+        #region Triages
         private List<Triage> _listOfTriages;
         public List<Triage> ListOfTriages
         {
@@ -68,6 +71,271 @@ namespace IncomingCasualtyHandling.BL.Models
             get => ListOfTriagePatientLists[4];
             set => ListOfTriagePatientLists[4] = value;
         }
+
+        #endregion
+
+        #region specialties
+
+        private List<Specialty> _listOfSpecialties;
+        public List<Specialty> ListOfSpecialties
+        {
+            get => _listOfSpecialties;
+            set
+            {
+                _listOfSpecialties = value;
+                OnPropertyChanged("ListOfSpecialties");
+
+            }
+        }
+
+        private List<List<PatientModel>> _listOfSpecialtiesPatientLists;
+        public List<List<PatientModel>> ListOfSpecialtiesPatientLists
+        {
+            get => _listOfSpecialtiesPatientLists;
+            set
+            {
+                _listOfSpecialtiesPatientLists = value;
+                int counter = 1;
+                foreach (var patientList in _listOfSpecialtiesPatientLists)
+                {
+                    string propertyName = "Specialty" + counter + "Patients"; 
+                    //Hvis listerne i denne liste er ordnet efter hvor mange der kommer, hvad så hvis der ændres på nummer 2, så den nu har 5
+                    //og derfor rykkes et andet sted hen, er det så hele rækkefølgen der opdateres?
+                    OnPropertyChanged(propertyName);
+                    counter++;
+                }
+            }
+        }
+
+        #region specialtiesInList
+        public List<PatientModel> Specialty1Patients
+        {
+            get => ListOfSpecialtiesPatientLists[0];
+            set => ListOfSpecialtiesPatientLists[0] = value;
+        }
+        public List<PatientModel> Specialty2Patients
+        {
+            get => ListOfSpecialtiesPatientLists[1];
+            set => ListOfSpecialtiesPatientLists[1] = value;
+        }
+        public List<PatientModel> Specialty3Patients
+        {
+            get => ListOfSpecialtiesPatientLists[2];
+            set => ListOfSpecialtiesPatientLists[2] = value;
+        }
+        public List<PatientModel> Specialty4Patients
+        {
+            get => ListOfSpecialtiesPatientLists[3];
+            set => ListOfSpecialtiesPatientLists[3] = value;
+        }
+        public List<PatientModel> Specialty5Patients
+        {
+            get => ListOfSpecialtiesPatientLists[4];
+            set => ListOfSpecialtiesPatientLists[4] = value;
+        }
+        public List<PatientModel> Specialty6Patients
+        {
+            get => ListOfSpecialtiesPatientLists[5];
+            set => ListOfSpecialtiesPatientLists[5] = value;
+        }
+        public List<PatientModel> Specialty7Patients
+        {
+            get => ListOfSpecialtiesPatientLists[6];
+            set => ListOfSpecialtiesPatientLists[6] = value;
+        }
+        public List<PatientModel> Specialty8Patients
+        {
+            get => ListOfSpecialtiesPatientLists[7];
+            set => ListOfSpecialtiesPatientLists[7] = value;
+        }
+        public List<PatientModel> Specialty9Patients
+        {
+            get => ListOfSpecialtiesPatientLists[8];
+            set => ListOfSpecialtiesPatientLists[8] = value;
+        }
+        public List<PatientModel> Specialty10Patients
+        {
+            get => ListOfSpecialtiesPatientLists[9];
+            set => ListOfSpecialtiesPatientLists[9] = value;
+        }
+        public List<PatientModel> Specialty11Patients
+        {
+            get => ListOfSpecialtiesPatientLists[10];
+            set => ListOfSpecialtiesPatientLists[10] = value;
+        }
+        public List<PatientModel> Specialty12Patients
+        {
+            get => ListOfSpecialtiesPatientLists[11];
+            set => ListOfSpecialtiesPatientLists[11] = value;
+        }
+        public List<PatientModel> Specialty13Patients
+        {
+            get => ListOfSpecialtiesPatientLists[12];
+            set => ListOfSpecialtiesPatientLists[12] = value;
+        }
+        public List<PatientModel> Specialty14Patients
+        {
+            get => ListOfSpecialtiesPatientLists[13];
+            set => ListOfSpecialtiesPatientLists[13] = value;
+        }
+        public List<PatientModel> Specialty15Patients
+        {
+            get => ListOfSpecialtiesPatientLists[14];
+            set => ListOfSpecialtiesPatientLists[14] = value;
+        }
+        public List<PatientModel> Specialty16Patients
+        {
+            get => ListOfSpecialtiesPatientLists[15];
+            set => ListOfSpecialtiesPatientLists[15] = value;
+        }
+
+
+        #endregion
+
+
+        #endregion
+
+        #region Eta
+
+        private List<PatientModel> _ETAPatients;
+        public List<PatientModel> ETAPatients
+        {
+            get => _ETAPatients;
+            set
+            {
+                _ETAPatients = value;
+            }
+        }
+
+        #endregion
+
+        #region tabItems
+
+        public int SelectedTabIndex { get; set; }
+        private string SelectedOverview { get; set; }
+        public string testForStringFromClickOnModel = "";
+        
+
+        private List<Tabs> _tabsList = new List<Tabs>();
+        public List<Tabs> ListOfTabs
+        {
+            get
+            {
+
+                List<Tabs> _tempTabList = new List<Tabs>();
+
+                //finder parametre der skal bruges
+                string[] parameters = testForStringFromClickOnModel.ToString().Split(' ');
+                SelectedOverview = parameters[0].ToString();
+                SelectedTabIndex = Convert.ToInt16(parameters[1]);
+
+                if (SelectedOverview == "Triage")
+                {
+                    int counter = 0;
+                    foreach (var triage in ListOfTriages)
+                    {
+                        if (triage.Amount != 0)
+                        {
+                            var _tab = new TabElement()
+                            {
+                                Name = triage.Name,
+                                Data = ListOfTriagePatientLists[counter]
+
+                            };
+                            _tempTabList.Add(_tab);
+                        }
+
+                        counter++;
+                    }
+                    return _tempTabList;
+                }
+                if (SelectedOverview == "Specialty")
+                {
+                    int counter = 0;
+                    foreach (var specialty in ListOfSpecialties)
+                    {
+                        if (specialty.Amount != 0)
+                        {
+                            var _tab = new TabElement()
+                            {
+                                Name = specialty.Name,
+                                Data = ListOfSpecialtiesPatientLists[counter]
+
+                            };
+                            _tempTabList.Add(_tab);
+                        }
+
+                        counter++;
+                    }
+                    return _tempTabList;
+                }
+                else
+                {
+                    var _tab = new TabElement()
+                    {
+                        Name = "ETA",
+                        Data = ETAPatients
+
+                    };
+                    _tempTabList.Add(_tab);
+                    return _tempTabList;
+                }
+
+            }
+            set
+            {
+                _tabsList = value;
+                OnPropertyChanged("TabsList");
+
+            }
+        }
+        
+        private HomeTab _hometab = new HomeTab();
+
+        private HomeTab HomeTabTest
+        {
+            get
+            {
+                HomeTab homeTab = new HomeTab
+                {
+                    IconPath = "GUI/Icons/HomeIcon.png",
+                    Name = "Home"
+                };
+                return homeTab;
+            }
+            set => _hometab = value;
+        }
+
+        //List<>
+        //List<Tabs> _tabs = new List<Tabs>();
+        
+
+        #endregion
+
+        //Tilføj logic til at lave tabs på viewet. Viewet kommer til at kende en tab collection,
+        //Hvor den for hver tab kigger på data i denne tab og navnet på tab.
+        //Navnet på tab er enten lig "ListOfTriages[0].Name" eller "ListOfSpecialties[0].Name"
+        //Data er ligeledes _detailViewModel.Triage1Patients eller "_detailViewModel.Specialty1Patients
+        //Hvilken tab der sættes som start tab i modellen, skal specificeres ved at "SelectedIndex" sættes
+        //Alt afhængig af hvad der trykkes på. Sender parameter med i command, der skal sætte selectedIndex
+        //Property
+
+        //Der skal tilføjes 
+    }
+    public abstract class Tabs
+    {
+        public string Name { get; set; }
+
+    }
+
+    public class HomeTab : Tabs
+    {
+        public string IconPath { get; set; }
+    }
+    public class TabElement : Tabs
+    {
+
+        public List<PatientModel> Data { get; set; } = new List<PatientModel>();
 
     }
 }

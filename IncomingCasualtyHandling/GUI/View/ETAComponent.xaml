@@ -18,7 +18,11 @@
         </Grid>
 
         <Grid Grid.Row="1">
+            <Grid.InputBindings>
+                <MouseBinding MouseAction="LeftClick"  Command="{Binding RelativeSource={RelativeSource AncestorType=Window}, Path=DataContext.ChangeViewCommandWithProperty}" CommandParameter="ETA 0"></MouseBinding>
+            </Grid.InputBindings>
             <UniformGrid Name="EtaGrid" Columns="1" Margin="10,0,10,10" VerticalAlignment="Stretch" >
+                
                 <Label Name="EtaAbsoluteTimeText" VerticalAlignment="Center" HorizontalAlignment="Center" Style="{StaticResource AbsoluteLabel}" Content="{Binding Eta.AbsoluteTime}"></Label>
                 <Label Name="EtaRelativeTimeText" VerticalAlignment="Center" HorizontalAlignment="Center" Style="{StaticResource RelativeLabel}" Content="{Binding Eta.RelativeTime}"></Label>
             </UniformGrid>

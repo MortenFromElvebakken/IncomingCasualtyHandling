@@ -29,7 +29,7 @@ namespace IncomingCasualtyHandling.BL
             var results = listOfPatients.GroupBy(p => p.Specialty).ToList();
             //results.Sort((a,b)=>b.Count() -a.Count());
             //var SortedSpecialtyList = new List<Specialty>();
-            
+            var _tempListe = new List<List<PatientModel>>();
             foreach (var specialtyResultList in results)
             {
                 int counter = 0;
@@ -42,9 +42,7 @@ namespace IncomingCasualtyHandling.BL
                         specialty.Amount = specialtyResultList.Count();
                         specialty.ShowAs = Visibility.Visible;
                         specialtiesList[counter] = specialty;
-                        //SortedSpecialtyList.Add(specialty);
-                        //model.specialtylist[counter] <--- skal lægge dennne liste (specialtyResultList) ind på den plads der 
-                        //passer med den triage dette foreach loop er kommet til.
+                        _tempListe.Add(specialtyResultList.ToList());
 
                         break;
                     }
@@ -63,6 +61,8 @@ namespace IncomingCasualtyHandling.BL
             //specialtiesList.RemoveAll(p => p.Amount == 0);
             specialtiesList.Sort((a,b)=>b.Amount -a.Amount);
             _overviewViewModel.ListOfSpecialities = specialtiesList;
+            _detailViewModel.ListOfSpecialties = specialtiesList;
+            _detailViewModel.ListOfSpecialtiesPatientLists = _tempListe;
         }
     }
 }

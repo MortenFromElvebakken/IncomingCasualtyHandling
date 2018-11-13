@@ -46,7 +46,6 @@ namespace IncomingCasualtyHandling.BL.Models
             set => ListOfTriages[2] = value;
         }
 
-
         public Triage Triage4
         {
             get => ListOfTriages[3];

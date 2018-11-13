@@ -33,7 +33,7 @@
                     </Grid.RowDefinitions>
 
                     <Grid.InputBindings>
-                        <MouseBinding MouseAction="LeftClick" Command="{Binding RelativeSource={RelativeSource AncestorType=Window}, Path=DataContext.ChangeViewCommand}"></MouseBinding>
+                        <MouseBinding MouseAction="LeftClick" Command="{Binding RelativeSource={RelativeSource AncestorType=Window}, Path=DataContext.ChangeViewCommandWithProperty}" CommandParameter="Triage 0"></MouseBinding>
                     </Grid.InputBindings>
 
                     <ProgressBar Grid.Row="0" Name="Triage1Bar" Foreground="{Binding Triage1.Colour}" Height="Auto" Maximum="{Binding MaximumTriages}" Value="{Binding Triage1.Amount}" Orientation="Vertical"></ProgressBar>
@@ -46,7 +46,7 @@
                     </Grid.RowDefinitions>
 
                     <Grid.InputBindings>
-                        <MouseBinding MouseAction="LeftClick" Command="{Binding RelativeSource={RelativeSource AncestorType=Window}, Path=DataContext.ChangeViewCommand}"></MouseBinding>
+                        <MouseBinding MouseAction="LeftClick" Command="{Binding RelativeSource={RelativeSource AncestorType=Window}, Path=DataContext.ChangeViewCommandWithProperty}" CommandParameter="Triage 1"></MouseBinding>
                     </Grid.InputBindings>
                     <ProgressBar Grid.Row="0" Name="Triage2Bar" Foreground="{Binding Triage2.Colour}" Height="Auto" Maximum="{Binding MaximumTriages}" Value="{Binding Triage2.Amount}" Orientation="Vertical"></ProgressBar>
                     <Label Grid.Row="1" Name="Triage2Amount" HorizontalAlignment="Center" VerticalAlignment="Bottom" Content="{Binding Triage2.Amount}"></Label>
@@ -58,7 +58,7 @@
                     </Grid.RowDefinitions>
 
                     <Grid.InputBindings>
-                        <MouseBinding MouseAction="LeftClick" Command="{Binding RelativeSource={RelativeSource AncestorType=Window}, Path=DataContext.ChangeViewCommand}"></MouseBinding>
+                        <MouseBinding MouseAction="LeftClick" Command="{Binding RelativeSource={RelativeSource AncestorType=Window}, Path=DataContext.ChangeViewCommandWithProperty}" CommandParameter="Triage 2"></MouseBinding>
                     </Grid.InputBindings>
                     <ProgressBar Grid.Row="0" Name="Triage3Bar" Foreground="{Binding Triage3.Colour}" Height="Auto" Maximum="{Binding MaximumTriages}" Value="{Binding Triage3.Amount}" Orientation="Vertical"></ProgressBar>
                     <Label Grid.Row="1" Name="Triage3Amount" HorizontalAlignment="Center" VerticalAlignment="Bottom" Content="{Binding Triage3.Amount}"></Label>
@@ -70,7 +70,7 @@
                     </Grid.RowDefinitions>
 
                     <Grid.InputBindings>
-                        <MouseBinding MouseAction="LeftClick" Command="{Binding RelativeSource={RelativeSource AncestorType=Window}, Path=DataContext.ChangeViewCommand}"></MouseBinding>
+                        <MouseBinding MouseAction="LeftClick" Command="{Binding RelativeSource={RelativeSource AncestorType=Window}, Path=DataContext.ChangeViewCommandWithProperty}" CommandParameter="Triage 3"></MouseBinding>
                     </Grid.InputBindings>
 
                     <ProgressBar Grid.Row="0" Name="Triage4Bar" Foreground="{Binding Triage4.Colour}" Height="Auto" Maximum="{Binding MaximumTriages}" Value="{Binding Triage4.Amount}" Orientation="Vertical"></ProgressBar>
@@ -83,7 +83,7 @@
                     </Grid.RowDefinitions>
 
                     <Grid.InputBindings>
-                        <MouseBinding MouseAction="LeftClick" Command="{Binding RelativeSource={RelativeSource AncestorType=Window}, Path=DataContext.ChangeViewCommand}"></MouseBinding>
+                        <MouseBinding MouseAction="LeftClick" Command="{Binding RelativeSource={RelativeSource AncestorType=Window}, Path=DataContext.ChangeViewCommandWithProperty}" CommandParameter="Triage 4"></MouseBinding>
                     </Grid.InputBindings>
 
                     <ProgressBar Grid.Row="0" Name="Triage5Bar" Foreground="{Binding Triage5.Colour}" Height="Auto" Maximum="{Binding MaximumTriages}" Value="{Binding Triage5.Amount}" Orientation="Vertical"></ProgressBar>
