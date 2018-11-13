@@ -77,6 +77,8 @@ namespace IncomingCasualtyHandling.DAL
             }
             else
             {
+                //Lave en foreach rundt om det her, der løber alle patienter igennem i hvert entry's side og tjekker om ens, vil virke til at
+                //tjekke om alt er ens
                 lastBundle = newBundle;
                 List<PatientModel> listOfPatients = new List<PatientModel>();
                 while (newBundle != null)

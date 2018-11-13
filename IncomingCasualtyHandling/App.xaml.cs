@@ -53,6 +53,8 @@ namespace IncomingCasualtyHandling
             var sortTriage = new SortTriage(lcs, _overviewViewModel, _detailViewModel);
             PatientHandlingLogic patientHandlingLogic = new PatientHandlingLogic(sortETA, sortSpecialty, sortTriage);
             fhirCommands.Attach(patientHandlingLogic);
+            TestSubScriptionClass test = new TestSubScriptionClass();
+            //test.SetupSubscription();
             fhirCommands.GetAllPatients();
             _mainView.Show();
         }

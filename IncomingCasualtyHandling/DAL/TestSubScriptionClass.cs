@@ -22,8 +22,7 @@ namespace IncomingCasualtyHandling.DAL
         public TestSubScriptionClass()
         {
             //ws = new WebSocketSharp.WebSocket(fhirURL);
-
-            //setupSubscription(); // er gjordt, subscription id vi fik tilbage er 4952
+            // er gjordt, subscription id vi fik tilbage er 4952
             //setupWebsocket();
         }
         public void SetupSubscription()
@@ -31,17 +30,19 @@ namespace IncomingCasualtyHandling.DAL
             testSubscription = new Hl7.Fhir.Model.Subscription();
             testSubClient = new Hl7.Fhir.Rest.FhirClient("http://localhost:8080/hapi-fhir-jpaserver-example/baseDstu3");
             Hl7.Fhir.Model.Subscription.ChannelComponent testChannel = new Subscription.ChannelComponent();
-            testChannel.Type = Hl7.Fhir.Model.Subscription.SubscriptionChannelType.Websocket;
+            testChannel.Type = Hl7.Fhir.Model.Subscription.SubscriptionChannelType.RestHook;
 
             testSubscription.Channel = testChannel;
             Hl7.Fhir.Model.Subscription.SubscriptionStatus testStatus = new Subscription.SubscriptionStatus();
             testStatus = Subscription.SubscriptionStatus.Requested;
 
             testSubscription.Status = testStatus;
-            //testSubscription.Channel.Endpoint = "http://localhost:8080/hapi-fhir-jpaserver-example/baseDstu3";
+            testSubscription.Channel.Endpoint = "https://mysignalrserverfhir.service.signalr.net";
+            testSubscription.Channel.Header = new[] { "Authorization: Bearer 9YygHWslPbBo4xjOeor5Ii6ZGvVdCf0RebS65e3/TUk=" };
             //testSubscription.Channel.Payload = "application/xml";
             testSubscription.Criteria = "patient?active=true";
             testSubClient.Create<Subscription>(testSubscription);
+            
             
         }
         //private WebSocket ws;
