@@ -47,6 +47,7 @@ namespace IncomingCasualtyHandling.DAL
             List<PatientModel> listOfPatients = new List<PatientModel>();
 
             var firstBundle = client.Search<Patient>(sParameters);
+            
             //Result er en bundle med "pages" i, hvor hver page loades med 10 patienter i. Hvis der er flere end 10 læses de 10 første og
             //går til næste side
             lastBundle = firstBundle;

@@ -34,7 +34,6 @@
   <Style x:Key="RowColourAlternate" TargetType="ListViewItem">
       <Style.Triggers>
           <Trigger Property="ItemsControl.AlternationIndex" Value="0">
-              <Setter Property="Margin" Value="0,2,0,2"></Setter>
               <Setter Property="Background" Value="White"></Setter>
           </Trigger>
           <Trigger Property="ItemsControl.AlternationIndex"  Value="1">
@@ -44,7 +43,56 @@
 
     </Style>
 
+    <DataTemplate x:Key="CellTemplateForListviewName">
+        <DockPanel Margin="-5,-3,-5,0">
+            <Border BorderBrush="#556375" VerticalAlignment="Bottom" HorizontalAlignment="Right" BorderThickness="0,0,1,1">
+                <TextBlock Foreground="DarkBlue" HorizontalAlignment="Center" Text="{Binding Name}" Width="90" FontSize="14" Height="25"/>
+            </Border>
+        </DockPanel>
+    </DataTemplate>
+    <DataTemplate x:Key="CellTemplateForListviewCPR">
+        <DockPanel Margin="-2,-3,-5,0">
+            <Border BorderBrush="#556375" VerticalAlignment="Bottom" HorizontalAlignment="Right" BorderThickness="0,0,1,1">
+                <TextBlock Foreground="DarkBlue" HorizontalAlignment="Center" Text="{Binding CPR}" Width="90" FontSize="14" Height="25"/>
+            </Border>
+        </DockPanel>
+    </DataTemplate>
 
+    <DataTemplate x:Key="CellTemplateForListviewAge">
+        <DockPanel Margin="-2,-3,-5,0">
+            <Border BorderBrush="#556375" VerticalAlignment="Bottom" HorizontalAlignment="Right" BorderThickness="0,0,1,1">
+                <TextBlock Foreground="DarkBlue" HorizontalAlignment="Center" Text="{Binding Age}" Width="90" FontSize="14" Height="25"/>
+            </Border>
+        </DockPanel>
+    </DataTemplate>
+    <DataTemplate x:Key="CellTemplateForListviewGender">
+        <DockPanel Margin="-2,-3,-5,0">
+            <Border BorderBrush="#556375" VerticalAlignment="Bottom" HorizontalAlignment="Right" BorderThickness="0,0,1,1">
+                <TextBlock Foreground="DarkBlue" HorizontalAlignment="Center" Text="{Binding Gender}" Width="90" FontSize="14" Height="25"/>
+            </Border>
+        </DockPanel>
+    </DataTemplate>
+    <DataTemplate x:Key="CellTemplateForListviewSpecialty">
+        <DockPanel Margin="-2,-3,-5,0">
+            <Border BorderBrush="#556375" VerticalAlignment="Bottom" HorizontalAlignment="Right" BorderThickness="0,0,1,1">
+                <TextBlock Foreground="DarkBlue" HorizontalAlignment="Center" Text="{Binding Specialty}" Width="150" FontSize="14" Height="25"/>
+            </Border>
+        </DockPanel>
+    </DataTemplate>
+    <DataTemplate x:Key="CellTemplateForListviewTriage">
+        <DockPanel Margin="-2,-3,-5,0">
+            <Border BorderBrush="#556375" VerticalAlignment="Bottom" HorizontalAlignment="Right" BorderThickness="0,0,1,1">
+                <TextBlock Foreground="DarkBlue" HorizontalAlignment="Center" Text="{Binding Triage}" Width="110" FontSize="14" Height="25"/>
+            </Border>
+        </DockPanel>
+    </DataTemplate>
+    <DataTemplate x:Key="CellTemplateForListviewETA">
+        <DockPanel Margin="-2,-3,-5,0">
+            <Border BorderBrush="#556375" VerticalAlignment="Bottom" HorizontalAlignment="Right" BorderThickness="0,0,1,1">
+                <TextBlock Foreground="DarkBlue" HorizontalAlignment="Center" Text="{Binding ETA}" Width="130" FontSize="14" Height="25"/>
+            </Border>
+        </DockPanel>
+    </DataTemplate>
 
   
 </ResourceDictionary>

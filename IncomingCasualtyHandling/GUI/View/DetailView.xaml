@@ -41,7 +41,6 @@
             <TabControl  ItemsSource="{Binding Tabs}" SelectedIndex="{Binding SelectedIndex}">
                 <TabControl.Resources>
                     <Style BasedOn="{StaticResource ChosenTab}" TargetType="TabItem"></Style>
-                    
                 </TabControl.Resources>
                 <TabControl.ItemTemplate>
                     <DataTemplate>
@@ -50,20 +49,19 @@
                         <TextBlock Text="{Binding Name}" Margin="0,2" FontSize="20" LineHeight="20" />
                     </DataTemplate>
                 </TabControl.ItemTemplate>
-
                 <TabControl.ContentTemplate>
                     <DataTemplate>
                         <ListView ItemsSource="{Binding Data}" ItemContainerStyle="{StaticResource RowColourAlternate}" AlternationCount="2">
                             <ListView.View>
 
                                 <GridView>
-                                    
-                                    <GridViewColumn Width="100" Header="Name" DisplayMemberBinding="{Binding Name}"/>
-                                    <GridViewColumn Width="10" Header="CPR" DisplayMemberBinding="{Binding CPR}"/>
-                                    <GridViewColumn Width="10" Header="Age" DisplayMemberBinding="{Binding Age}"/>
-                                    <GridViewColumn Width="80" Header="Gender" DisplayMemberBinding="{Binding Gender}"/>
-                                    <GridViewColumn Header="Specialty" DisplayMemberBinding="{Binding Specialty}"/>
-                                    <GridViewColumn Header="Triage" DisplayMemberBinding="{Binding Triage}"/>
+                                    <GridViewColumn Header="Name" CellTemplate="{StaticResource CellTemplateForListviewName}"/>
+                                    <GridViewColumn Header="CPR" CellTemplate="{StaticResource CellTemplateForListviewCPR}"/>
+                                    <GridViewColumn Header="Age" CellTemplate="{StaticResource CellTemplateForListviewAge}"/>
+                                    <GridViewColumn Header="Gender" CellTemplate="{StaticResource CellTemplateForListviewGender}"/>
+                                    <GridViewColumn Header="Triage" CellTemplate="{StaticResource CellTemplateForListviewTriage}"/>
+                                    <GridViewColumn Header="Specialty" CellTemplate="{StaticResource CellTemplateForListviewSpecialty}"/>
+                                    <GridViewColumn Header="ETA" CellTemplate="{StaticResource CellTemplateForListviewETA}"/>
                                     <!--<GridViewColumn Header="ToHospital" DisplayMemberBinding="{Binding ToHospital}"/>
                                     <GridViewColumn Header="Note" DisplayMemberBinding="{Binding Age}"/>
                                     <GridViewColumn Header="AmbulanceNumber" DisplayMemberBinding="{Binding Age}"/>-->
