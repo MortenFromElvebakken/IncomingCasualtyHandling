@@ -53,6 +53,12 @@ namespace IncomingCasualtyHandling.GUI.ViewModels
 
         //This property is specified, based on which usercontrol is pressed in the mainview.
         //This means that it is now possible to create tabs based on this
+        private string _iconPath;
+        public string IconPath
+        {
+            get => _detailViewModel.iconPath;
+            set => _iconPath = value;
+        }
 
         private int _selectedIndex;
         public int SelectedIndex

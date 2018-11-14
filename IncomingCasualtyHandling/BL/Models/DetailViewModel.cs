@@ -212,7 +212,7 @@ namespace IncomingCasualtyHandling.BL.Models
         #region tabItems
 
         public int SelectedTabIndex { get; set; }
-        private string SelectedOverview { get; set; }
+        public string SelectedOverview { get; set; }
         public string testForStringFromClickOnModel = "";
         
 
@@ -228,7 +228,7 @@ namespace IncomingCasualtyHandling.BL.Models
                 string[] parameters = testForStringFromClickOnModel.ToString().Split(' ');
                 SelectedOverview = parameters[0].ToString();
                 SelectedTabIndex = Convert.ToInt16(parameters[1]);
-
+                
                 if (SelectedOverview == "Triage")
                 {
                     int counter = 0;
@@ -239,12 +239,12 @@ namespace IncomingCasualtyHandling.BL.Models
                             var _tab = new TabElement()
                             {
                                 Name = triage.Name,
-                                Data = ListOfTriagePatientLists[counter]
-
+                                Data = ListOfTriagePatientLists.Find(item => item[0].Triage == triage.Name)
                             };
+                            
                             _tempTabList.Add(_tab);
                         }
-
+                        
                         counter++;
                     }
                     return _tempTabList;
@@ -259,7 +259,7 @@ namespace IncomingCasualtyHandling.BL.Models
                             var _tab = new TabElement()
                             {
                                 Name = specialty.Name,
-                                Data = ListOfSpecialtiesPatientLists[counter]
+                                Data = ListOfSpecialtiesPatientLists.Find(item => item[0].Specialty == specialty.Name)
 
                             };
                             _tempTabList.Add(_tab);
@@ -290,21 +290,8 @@ namespace IncomingCasualtyHandling.BL.Models
             }
         }
         
-        private HomeTab _hometab = new HomeTab();
-
-        private HomeTab HomeTabTest
-        {
-            get
-            {
-                HomeTab homeTab = new HomeTab
-                {
-                    IconPath = "GUI/Icons/HomeIcon.png",
-                    Name = "Home"
-                };
-                return homeTab;
-            }
-            set => _hometab = value;
-        }
+        public string iconPath = "/GUI/Icons/HomeIcon.png";
+        
 
         //List<>
         //List<Tabs> _tabs = new List<Tabs>();
