@@ -204,6 +204,7 @@ namespace IncomingCasualtyHandling.BL.Models
             set
             {
                 _ETAPatients = value;
+                OnPropertyChanged("ETAPatients");
             }
         }
 
@@ -211,18 +212,48 @@ namespace IncomingCasualtyHandling.BL.Models
 
         #region tabItems
 
-        public int SelectedTabIndex { get; set; }
+        private int _selectedTabIndex;
+        public int SelectedTabIndex
+        {
+            get => _selectedTabIndex;
+            set
+            {
+                _selectedTabIndex = value;
+                OnPropertyChanged("PatientsInList");
+            }
+        }
         public string SelectedOverview { get; set; }
         public string testForStringFromClickOnModel = "";
-        
 
-        private List<Tabs> _tabsList = new List<Tabs>();
-        public List<Tabs> ListOfTabs
+        private string _patientsInList;
+        public string PatientsInList
+        {
+            get
+            {
+                if(_tabsList[SelectedTabIndex].Data.Count <= 1)
+                {
+                    return String.Format(_tabsList[SelectedTabIndex].Data.Count + " patient");
+                }
+                else
+                {
+                    return String.Format(_tabsList[SelectedTabIndex].Data.Count + " patients");
+                }
+                
+            }
+            set
+            {
+                _patientsInList = value;
+                OnPropertyChanged("PatientsInList");
+            }
+        }
+
+        private List<TabControl> _tabsList = new List<TabControl>();
+        public List<TabControl> ListOfTabs
         {
             get
             {
 
-                List<Tabs> _tempTabList = new List<Tabs>();
+                List<TabControl> _tempTabList = new List<TabControl>();
 
                 //finder parametre der skal bruges
                 string[] parameters = testForStringFromClickOnModel.ToString().Split(' ');
@@ -236,7 +267,7 @@ namespace IncomingCasualtyHandling.BL.Models
                     {
                         if (triage.Amount != 0)
                         {
-                            var _tab = new TabElement()
+                            var _tab = new TabControl()
                             {
                                 Name = triage.Name,
                                 Data = ListOfTriagePatientLists.Find(item => item[0].Triage == triage.Name)
@@ -247,7 +278,9 @@ namespace IncomingCasualtyHandling.BL.Models
                         
                         counter++;
                     }
-                    return _tempTabList;
+
+                    _tabsList = _tempTabList;
+                    return _tabsList;
                 }
                 if (SelectedOverview == "Specialty")
                 {
@@ -256,7 +289,7 @@ namespace IncomingCasualtyHandling.BL.Models
                     {
                         if (specialty.Amount != 0)
                         {
-                            var _tab = new TabElement()
+                            var _tab = new TabControl()
                             {
                                 Name = specialty.Name,
                                 Data = ListOfSpecialtiesPatientLists.Find(item => item[0].Specialty == specialty.Name)
@@ -267,18 +300,20 @@ namespace IncomingCasualtyHandling.BL.Models
 
                         counter++;
                     }
-                    return _tempTabList;
+                    _tabsList = _tempTabList;
+                    return _tabsList;
                 }
                 else
                 {
-                    var _tab = new TabElement()
+                    var _tab = new TabControl()
                     {
                         Name = "ETA",
                         Data = ETAPatients
 
                     };
                     _tempTabList.Add(_tab);
-                    return _tempTabList;
+                    _tabsList = _tempTabList;
+                    return _tabsList;
                 }
 
             }
@@ -294,7 +329,7 @@ namespace IncomingCasualtyHandling.BL.Models
         
 
         //List<>
-        //List<Tabs> _tabs = new List<Tabs>();
+        //List<TabControl> _tabs = new List<TabControl>();
         
 
         #endregion
@@ -309,20 +344,11 @@ namespace IncomingCasualtyHandling.BL.Models
 
         //Der skal tilføjes 
     }
-    public abstract class Tabs
+    public class TabControl
     {
         public string Name { get; set; }
+        public List<PatientModel> Data { get; set; }
 
     }
-
-    public class HomeTab : Tabs
-    {
-        public string IconPath { get; set; }
-    }
-    public class TabElement : Tabs
-    {
-
-        public List<PatientModel> Data { get; set; } = new List<PatientModel>();
-
-    }
+    
 }

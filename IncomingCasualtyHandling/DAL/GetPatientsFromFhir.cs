@@ -67,6 +67,13 @@ namespace IncomingCasualtyHandling.DAL
             myThread.Start();
         }
 
+        private void UpdatePatients(List<PatientModel> _patientList)
+        {
+            if(OnUpdatedPatients == null) return;
+            PatientEventArgs args = new PatientEventArgs(_patientList);
+            OnUpdatedPatients(this, args);
+        }
+
         private void AsyncGetAllPatients()
         {
             
@@ -96,6 +103,22 @@ namespace IncomingCasualtyHandling.DAL
                 
             }
             AsyncGetAllPatients();
+        }
+
+        public delegate void PatientUpdateHandler(object sender, PatientEventArgs e);
+
+        public event PatientUpdateHandler OnUpdatedPatients;
+
+        //Raise et event i stedet for notify, dette even kobler de enkelte klasser der sorterer sig på
+        //Dette gør det nemmere at teste
+    }
+    public class PatientEventArgs : EventArgs
+    {
+        public List<PatientModel> NewPatientList { get; set; }
+
+        public PatientEventArgs(List<PatientModel> _newPatientList)
+        {
+            NewPatientList = _newPatientList;
         }
     }
 }

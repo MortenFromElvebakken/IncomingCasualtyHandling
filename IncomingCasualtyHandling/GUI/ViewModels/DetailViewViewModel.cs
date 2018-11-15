@@ -6,76 +6,57 @@ using System.Windows.Controls;
 using Hl7.Fhir.Model;
 using IncomingCasualtyHandling.BL.Models;
 using IncomingCasualtyHandling.BL.Object_classes;
+using TabControl = IncomingCasualtyHandling.BL.Models.TabControl;
 
 namespace IncomingCasualtyHandling.GUI.ViewModels
 {
     public class DetailViewViewModel : WorkspaceViewModel
     {
-        List<Triage> _listOfTriages = new List<Triage>();
+        //List<Triage> _listOfTriages = new List<Triage>();
 
-        private List<Triage> ListOfTriages
-        {
-            get => _detailViewModel.ListOfTriages;
-            set
-            {
-                _listOfTriages = value;
-                OnPropertyChanged();
-            }
-        }
-
-        //List<Specialty> _listOfSpecialty = new List<Specialty>();
-
-        //private ObservableCollection<PatientModel> _triage1Patients = new ObservableCollection<PatientModel>();
-        //private ObservableCollection<Patient> _triage2Patients = new ObservableCollection<Patient>();
-        //private ObservableCollection<Patient> _triage3Patients = new ObservableCollection<Patient>();
-        //private ObservableCollection<Patient> _triage4Patients = new ObservableCollection<Patient>();
-        //private ObservableCollection<Patient> _triage5Patients = new ObservableCollection<Patient>();
-
-        //private ObservableCollection<Patient> _specialty1Patients = new ObservableCollection<Patient>();
-        //private ObservableCollection<Patient> _specialty2Patients = new ObservableCollection<Patient>();
-        //private ObservableCollection<Patient> _specialty3Patients = new ObservableCollection<Patient>();
-        //private ObservableCollection<Patient> _specialty4Patients = new ObservableCollection<Patient>();
-        //private ObservableCollection<Patient> _specialty5Patients = new ObservableCollection<Patient>();
-        //private ObservableCollection<Patient> _specialty6Patients = new ObservableCollection<Patient>();
-        //private ObservableCollection<Patient> _specialty7Patients = new ObservableCollection<Patient>();
-        //private ObservableCollection<Patient> _specialty8Patients = new ObservableCollection<Patient>();
-        //private ObservableCollection<Patient> _specialty9Patients = new ObservableCollection<Patient>();
-        //private ObservableCollection<Patient> _specialty10Patients = new ObservableCollection<Patient>();
-        //private ObservableCollection<Patient> _specialty11Patients = new ObservableCollection<Patient>();
-        //private ObservableCollection<Patient> _specialty12Patients = new ObservableCollection<Patient>();
-        //private ObservableCollection<Patient> _specialty13Patients = new ObservableCollection<Patient>();
-        //private ObservableCollection<Patient> _specialty14Patients = new ObservableCollection<Patient>();
-        //private ObservableCollection<Patient> _specialty15Patients = new ObservableCollection<Patient>();
-        //private ObservableCollection<Patient> _specialty16Patients = new ObservableCollection<Patient>();
-
-        //private ObservableCollection<Patient> _etaPatients = new ObservableCollection<Patient>();
+        //private List<Triage> ListOfTriages
+        //{
+        //    get => _detailViewModel.ListOfTriages;
+        //    set => _listOfTriages = value;
+        //}
 
 
-        //This property is specified, based on which usercontrol is pressed in the mainview.
-        //This means that it is now possible to create tabs based on this
-        private string _iconPath;
+        //Opret  properties til brug af overviewcomponent
+
+        //antal af triagerede i hver gruppe
+        //Antal speciale i øverste speciale
+        //Næste ETA
+        
+        //for homeicon
         public string IconPath
         {
             get => _detailViewModel.iconPath;
-            set => _iconPath = value;
         }
-
-        private int _selectedIndex;
+        //To specify which tab is opened, and which is currently open
         public int SelectedIndex
         {
             get => _detailViewModel.SelectedTabIndex;
-            set => _selectedIndex = value;
-        }
+            set => _detailViewModel.SelectedTabIndex = value;
 
+        }
+        //To get which button is pressed from the overviewview, in order to open correct tab
         public string StringFromParameter
         {
             get => _detailViewModel.testForStringFromClickOnModel;
             set => _detailViewModel.testForStringFromClickOnModel = value;
         }
 
-        private List<Tabs> _tabs;
 
-        public List<Tabs> Tabs
+        //to set the counter of patients in bottom right corner
+        public string PatientsInList
+        {
+            get => _detailViewModel.PatientsInList;
+            set => _detailViewModel.PatientsInList = value; // På dem vi aldrig bruger en setter på, skal der så overhovedet laves en?
+            //Herunder hvis der kommer en patient mere i den liste man sidder på, hvordan opdateres patientsinlist så?
+        }
+
+        //List of tabs in window, set upon pressing something in overview view
+        public List<TabControl> Tabs
         {
             get => _detailViewModel.ListOfTabs;
             set => _detailViewModel.ListOfTabs = value;

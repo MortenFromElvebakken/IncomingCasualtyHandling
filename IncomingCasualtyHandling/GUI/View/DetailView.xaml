@@ -72,6 +72,11 @@
                     </DataTemplate>
                 </TabControl.ContentTemplate>
             </TabControl>
+            <Grid ZIndex="99">
+                <Border BorderBrush="Black" BorderThickness="1,1,1,1" Width="80" CornerRadius="10,10,10,10" Margin="0,0,5,5" Background="#7D8FA6" Padding="3,3,3,3" VerticalAlignment="Bottom" HorizontalAlignment="Right">
+                    <TextBlock Text="{Binding PatientsInList}" FontSize="14" Width="80" TextAlignment="Center" Foreground="White" Background="#7D8FA6"></TextBlock>
+                </Border>
+            </Grid>
         </Grid>
     </Grid>
 </UserControl>
