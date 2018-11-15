@@ -11,26 +11,26 @@ using IncomingCasualtyHandling.DAL;
 namespace IncomingCasualtyHandling.GUI.ViewModels
 {
     // the class is an ObservableObject in order to be able to call OnPropertyChanged on properties
-    internal class MainViewViewModel : ObservableObject
+    internal class MainView_ViewModel : ObservableObject
     {
         private string _test;
         private List<PatientModel> _listOfPatients;
 
-        OverviewViewModel _overviewModel;
+        OverviewView_Model _overviewModel;
 
         // Objects for the two subviews
-        OverviewViewViewModel _overviewViewViewModel; 
-        DetailViewViewModel _detailViewViewModel; 
+        OverviewView_ViewModel _overviewViewViewModel; 
+        DetailView_ViewModel _detailViewViewModel; 
 
         // Model for ViewModel
-        private MainViewModel _mainModel;
+        private MainView_Model _mainModel;
 
-        public MainViewViewModel()
+        public MainView_ViewModel()
         {
 
         }
 
-        public MainViewViewModel(MainViewModel mainModel, OverviewViewViewModel overviewViewViewModel, DetailViewViewModel detailViewViewModel)
+        public MainView_ViewModel(MainView_Model mainModel, OverviewView_ViewModel overviewViewViewModel, DetailView_ViewModel detailViewViewModel)
         {
             
             _mainModel = mainModel;
@@ -57,8 +57,8 @@ namespace IncomingCasualtyHandling.GUI.ViewModels
 
         // Property for databinding in MainView
         // This property decides the current view/viewmodel
-        private WorkspaceViewModel _currentWorkspace;
-        public WorkspaceViewModel CurrentWorkspace
+        private Workspace_ViewModel _currentWorkspace;
+        public Workspace_ViewModel CurrentWorkspace
         {
             get => _currentWorkspace;
             set

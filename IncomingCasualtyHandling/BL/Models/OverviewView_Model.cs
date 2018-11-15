@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace IncomingCasualtyHandling.BL.Models
 {
-    public class OverviewViewModel : ObservableObject
+    public class OverviewView_Model : ObservableObject
     {
         #region Triages
 
@@ -200,7 +200,7 @@ namespace IncomingCasualtyHandling.BL.Models
 
         #region Constructor
 
-        public OverviewViewModel()
+        public OverviewView_Model()
         {
            // specialties.Add(new Specialty
            // {

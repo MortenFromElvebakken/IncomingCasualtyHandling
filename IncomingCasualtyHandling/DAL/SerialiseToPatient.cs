@@ -7,11 +7,12 @@ using System.Threading.Tasks;
 using Hl7.Fhir.Model;
 using Hl7.Fhir.Serialization;
 using IncomingCasualtyHandling.BL.Object_classes;
+using IncomingCasualtyHandling.DAL.Interface;
 
 
 namespace IncomingCasualtyHandling.DAL
 {
-    internal class SerialiseToPatient
+    internal class SerialiseToPatient : ISerializeToPatient
     {
         public SerialiseToPatient()
         {

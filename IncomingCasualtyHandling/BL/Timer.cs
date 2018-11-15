@@ -5,16 +5,17 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Threading;
+using IncomingCasualtyHandling.BL.Interfaces;
 using IncomingCasualtyHandling.BL.Models;
 using IncomingCasualtyHandling.BL.Object_classes;
 
 namespace IncomingCasualtyHandling.BL
 {
-    public class Timer
+    public class Timer:ITimer
     {
 
-        private MainViewModel _mainViewModel;
-        private OverviewViewModel _overviewViewModel;
+        private MainView_Model _mainViewModel;
+        private OverviewView_Model _overviewViewModel;
 
         // Timer made with inspiration from:
         // https://stackoverflow.com/a/5410783
@@ -23,7 +24,7 @@ namespace IncomingCasualtyHandling.BL
         readonly DispatcherTimer _etaTimer = new DispatcherTimer();
 
 
-        public Timer(MainViewModel mainViewModel, OverviewViewModel overviewViewModel)
+        public Timer(MainView_Model mainViewModel, OverviewView_Model overviewViewModel)
         {
             // Set Models
             _mainViewModel = mainViewModel;
@@ -38,7 +39,7 @@ namespace IncomingCasualtyHandling.BL
         // Set the culture to be the systems culture:
         private readonly CultureInfo _culture = CultureInfo.CurrentCulture;
 
-        // Timer-event that keeps track of current time and updates MainViewModel
+        // Timer-event that keeps track of current time and updates MainView_Model
         private void CurrentDateTime_TimerTick(object sender, EventArgs e)
         {
             DateTime d;
@@ -133,7 +134,7 @@ namespace IncomingCasualtyHandling.BL
 
         }
 
-        // Timer-event that keeps track of relative time until ETA and updates OverviewViewModel
+        // Timer-event that keeps track of relative time until ETA and updates OverviewView_Model
         private void ETATime_TimerTick(object sender, EventArgs e, DateTime nextEta)
         {
             _timeSpan = new TimeSpan(DateTime.Now.Ticks - nextEta.Ticks);

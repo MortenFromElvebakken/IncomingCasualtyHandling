@@ -10,7 +10,7 @@ using TabControl = IncomingCasualtyHandling.BL.Models.TabControl;
 
 namespace IncomingCasualtyHandling.GUI.ViewModels
 {
-    public class DetailViewViewModel : WorkspaceViewModel
+    public class DetailView_ViewModel : Workspace_ViewModel
     {
         //List<Triage> _listOfTriages = new List<Triage>();
 
@@ -63,11 +63,11 @@ namespace IncomingCasualtyHandling.GUI.ViewModels
         }
 
 
-        private DetailViewModel _detailViewModel;
-        public DetailViewViewModel()
+        private DetailView_Model _detailViewModel;
+        public DetailView_ViewModel()
         { }
 
-        public DetailViewViewModel(DetailViewModel detailViewModel)
+        public DetailView_ViewModel(DetailView_Model detailViewModel)
         {
             _detailViewModel = detailViewModel;
             _detailViewModel.PropertyChanged += DetailViewModelOnPropertyChanged;

@@ -6,8 +6,10 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
 using IncomingCasualtyHandling.BL;
+using IncomingCasualtyHandling.BL.Interfaces;
 using IncomingCasualtyHandling.BL.Models;
 using IncomingCasualtyHandling.DAL;
+using IncomingCasualtyHandling.DAL.Interface;
 using IncomingCasualtyHandling.GUI.View;
 using IncomingCasualtyHandling.GUI.ViewModels;
 
@@ -32,31 +34,35 @@ namespace IncomingCasualtyHandling
 
             // Create DAL
             //Data layer Initialize
-            var lcs = new LoadConfigurationSettingsFromXMLDocument();
-            var fhirCommands = new GetPatientsFromFhir(lcs);
+            ILoadConfigurationSettings lcs = new LoadConfigurationSettingsFromXMLDocument();
+            ISerializeToPatient isp = new SerialiseToPatient();
+            var fhirCommands = new GetPatientsFromFhir(lcs,isp);
 
             // Create BLL
             // First Models
             // Then Logics
-            DetailViewModel _detailViewModel = new DetailViewModel();
-            OverviewViewModel _overviewViewModel = new OverviewViewModel();
-            MainViewModel _mainViewModel = new MainViewModel();
+            DetailView_Model _detailViewModel = new DetailView_Model();
+            OverviewView_Model _overviewViewModel = new OverviewView_Model();
+            MainView_Model _mainViewModel = new MainView_Model();
 
-            
 
-            var timer = new Timer(_mainViewModel, _overviewViewModel);
-            var sortETA = new SortETA(_overviewViewModel,_detailViewModel, timer);
-            var sortSpecialty = new SortSpecialty(lcs, _overviewViewModel, _detailViewModel);
-            var sortTriage = new SortTriage(lcs, _overviewViewModel, _detailViewModel);
-            PatientHandlingLogic patientHandlingLogic = new PatientHandlingLogic(sortETA, sortSpecialty, sortTriage);
-            fhirCommands.Attach(patientHandlingLogic);
-            TestSubScriptionClass test = new TestSubScriptionClass();
-            //test.SetupSubscription();
+            IGetPatientsFromFHIR IGetPatientsFromFhir = fhirCommands;
+            ITimer timer = new Timer(_mainViewModel, _overviewViewModel);
+            var sortETA = new SortETA(_overviewViewModel,_detailViewModel, timer, IGetPatientsFromFhir);
+            var sortSpecialty = new SortSpecialty(lcs, _overviewViewModel, _detailViewModel, IGetPatientsFromFhir);
+            var sortTriage = new SortTriage(lcs, _overviewViewModel, _detailViewModel, IGetPatientsFromFhir);
             fhirCommands.GetAllPatients();
 
-            DetailViewViewModel _detailViewViewModel = new DetailViewViewModel(_detailViewModel);
-            OverviewViewViewModel _overviewViewViewModel = new OverviewViewViewModel(_overviewViewModel);
-            MainViewViewModel _mainViewViewModel = new MainViewViewModel(_mainViewModel, _overviewViewViewModel, _detailViewViewModel);
+
+            //PatientHandlingLogic patientHandlingLogic = new PatientHandlingLogic(sortETA, sortSpecialty, sortTriage);
+            //fhirCommands.Attach(patientHandlingLogic);
+            //TestSubScriptionClass test = new TestSubScriptionClass();
+            //test.SetupSubscription();
+            //fhirCommands.GetAllPatients();
+
+            DetailView_ViewModel _detailViewViewModel = new DetailView_ViewModel(_detailViewModel);
+            OverviewView_ViewModel _overviewViewViewModel = new OverviewView_ViewModel(_overviewViewModel);
+            MainView_ViewModel _mainViewViewModel = new MainView_ViewModel(_mainViewModel, _overviewViewViewModel, _detailViewViewModel);
 
             // Create GUI
             MainView _mainView = new MainView();

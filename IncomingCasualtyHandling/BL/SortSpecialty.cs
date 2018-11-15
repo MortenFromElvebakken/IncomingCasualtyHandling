@@ -7,17 +7,19 @@ using System.Windows;
 using IncomingCasualtyHandling.BL.Models;
 using IncomingCasualtyHandling.BL.Object_classes;
 using IncomingCasualtyHandling.DAL;
+using IncomingCasualtyHandling.DAL.Interface;
 
 namespace IncomingCasualtyHandling.BL
 {
     public class SortSpecialty
     {
-        private LoadConfigurationSettingsFromXMLDocument LoadXMLSettings;
+        private ILoadConfigurationSettings LoadXMLSettings;
         private readonly List<Specialty> specialtiesList;
-        private OverviewViewModel _overviewViewModel;
-        private DetailViewModel _detailViewModel;
-        public SortSpecialty(LoadConfigurationSettingsFromXMLDocument _loadXMLSettings,OverviewViewModel overviewViewModel,DetailViewModel detailViewModel)
+        private OverviewView_Model _overviewViewModel;
+        private DetailView_Model _detailViewModel;
+        public SortSpecialty(ILoadConfigurationSettings _loadXMLSettings,OverviewView_Model overviewViewModel,DetailView_Model detailViewModel, IGetPatientsFromFHIR RecievePatientsFromFhir)
         {
+            RecievePatientsFromFhir.PatientDataReady += SortForSpecialty;
             LoadXMLSettings = _loadXMLSettings;
             specialtiesList = new List<Specialty>(LoadXMLSettings.SpecialtiesList);  //kopi af liste fra xml
             _overviewViewModel = overviewViewModel;

@@ -16,11 +16,11 @@
             </ResourceDictionary.MergedDictionaries>
 
 
-            <DataTemplate DataType="{x:Type viewmodel:OverviewViewViewModel}">
+            <DataTemplate DataType="{x:Type viewmodel:OverviewView_ViewModel}">
                 <view:OverviewView/>
             </DataTemplate>
 
-            <DataTemplate DataType="{x:Type viewmodel:DetailViewViewModel}">
+            <DataTemplate DataType="{x:Type viewmodel:DetailView_ViewModel}">
                 <view:DetailView/>
             </DataTemplate>
         </ResourceDictionary>

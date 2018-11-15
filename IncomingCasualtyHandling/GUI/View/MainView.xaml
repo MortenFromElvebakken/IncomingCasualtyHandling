@@ -12,7 +12,7 @@
         WindowStartupLocation="Manual" Top="0" Left="0">
 
     <Window.DataContext>
-        <viewModels:MainViewViewModel/>
+        <viewModels:MainView_ViewModel/>
     </Window.DataContext>
 
     <Grid>

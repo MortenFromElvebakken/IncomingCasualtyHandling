@@ -8,7 +8,7 @@ using IncomingCasualtyHandling.BL.Object_classes;
 
 namespace IncomingCasualtyHandling.BL.Models
 {
-    public class DetailViewModel : ObservableObject
+    public class DetailView_Model : ObservableObject
     {
 
         #region Triages

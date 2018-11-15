@@ -7,11 +7,11 @@ using IncomingCasualtyHandling.BL.Object_classes;
 
 namespace IncomingCasualtyHandling.GUI.ViewModels
 {
-    public class OverviewViewViewModel : WorkspaceViewModel
+    public class OverviewView_ViewModel : Workspace_ViewModel
     {
 
         // Set Model for ViewModel
-        OverviewViewModel _overviewModel;
+        OverviewView_Model _overviewModel;
 
         #region Triages
 
@@ -79,11 +79,11 @@ namespace IncomingCasualtyHandling.GUI.ViewModels
 
         #region Constructor
 
-        public OverviewViewViewModel()
+        public OverviewView_ViewModel()
         {
 
         }
-        public OverviewViewViewModel(OverviewViewModel overviewViewModel)
+        public OverviewView_ViewModel(OverviewView_Model overviewViewModel)
         {
             _overviewModel = overviewViewModel;
             _overviewModel.PropertyChanged += OverviewModelOnPropertyChanged;

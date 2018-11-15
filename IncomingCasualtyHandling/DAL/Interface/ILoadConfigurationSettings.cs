@@ -7,8 +7,11 @@ using IncomingCasualtyHandling.BL.Object_classes;
 
 namespace IncomingCasualtyHandling.DAL.Interface
 {
-    public interface IObserver
+    public interface ILoadConfigurationSettings
     {
-        void Update(List<PatientModel> s); // Indsæt at den notify'er med en liste af aircrafts
+        string ServerName { get;}
+        string HospitalShortName { get;}
+        List<Specialty> SpecialtiesList { get; }
+        List<Triage> TriageList { get; }
     }
 }

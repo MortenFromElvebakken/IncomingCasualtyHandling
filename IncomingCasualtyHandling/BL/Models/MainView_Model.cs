@@ -8,11 +8,11 @@ using IncomingCasualtyHandling.DAL;
 
 namespace IncomingCasualtyHandling.BL.Models
 {
-    public class MainViewModel : ObservableObject
+    public class MainView_Model : ObservableObject
     {
 
         
-        public MainViewModel()
+        public MainView_Model()
         {
             //DateTime d;
             //d = DateTime.Now;

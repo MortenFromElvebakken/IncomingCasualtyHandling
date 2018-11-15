@@ -19,15 +19,15 @@ namespace IncomingCasualtyHandling.Test.Unit.BL.Test.Unit
         //private ISortETA _uut;
         private SortETA _uut;
         //private IOverviewViewModel _overviewViewModel;
-        private OverviewViewModel _overviewViewModel;
+        private OverviewView_Model _overviewViewModel;
         //private IDetailViewModel _detailViewModel;
-        private DetailViewModel _detailViewModel;
+        private DetailView_Model _detailViewModel;
 
         [SetUp]
         public void Setup()
         {
-            _overviewViewModel = Substitute.For<OverviewViewModel>();
-            _detailViewModel = Substitute.For<DetailViewModel>();
+            _overviewViewModel = Substitute.For<OverviewView_Model>();
+            _detailViewModel = Substitute.For<DetailView_Model>();
             //_uut = new SortETA(_overviewViewModel, _detailViewModel);
         }
 

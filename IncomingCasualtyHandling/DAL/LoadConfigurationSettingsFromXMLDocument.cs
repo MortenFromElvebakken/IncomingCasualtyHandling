@@ -9,10 +9,11 @@ using System.Xml;
 using Hl7.Fhir.ElementModel;
 
 using IncomingCasualtyHandling.BL.Object_classes;
+using IncomingCasualtyHandling.DAL.Interface;
 
 namespace IncomingCasualtyHandling.DAL
 {
-    public class LoadConfigurationSettingsFromXMLDocument
+    public class LoadConfigurationSettingsFromXMLDocument: ILoadConfigurationSettings
     {
         private readonly string xmlserver;
         private string _server;
@@ -21,8 +22,8 @@ namespace IncomingCasualtyHandling.DAL
 
         public List<Triage> TriageList { get; set; }
         public List<Specialty> SpecialtiesList { get; set; }
-        public string ServerName { get; set; }
-        public string HospitalShortName { get; set; }
+        public string ServerName { get; private set; }
+        public string HospitalShortName { get; private set; }
 
         public LoadConfigurationSettingsFromXMLDocument()
         {
