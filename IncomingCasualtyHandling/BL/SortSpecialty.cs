@@ -61,9 +61,11 @@ namespace IncomingCasualtyHandling.BL
                 
             }
             //specialtiesList.RemoveAll(p => p.Amount == 0);
-            specialtiesList.Sort((a,b)=>b.Amount -a.Amount);
-            _overviewViewModel.ListOfSpecialities = specialtiesList;
-            _detailViewModel.ListOfSpecialties = specialtiesList;
+            //specialtiesList.Sort((a,b)=>b.Amount -a.Amount);
+            var FinalList = specialtiesList.OrderByDescending(a => a.Amount).ThenBy(a => a.Name).ToList();
+            //specialtiesList.GroupBy(a => a.Amount).OrderBy(a => a.Name);
+            _overviewViewModel.ListOfSpecialities = FinalList;
+            _detailViewModel.ListOfSpecialties = FinalList;
             _detailViewModel.ListOfSpecialtiesPatientLists = _tempListe;
         }
     }

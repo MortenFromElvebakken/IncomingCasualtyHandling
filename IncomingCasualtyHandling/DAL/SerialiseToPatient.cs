@@ -24,10 +24,10 @@ namespace IncomingCasualtyHandling.DAL
             PatientModel newPatientModel = new PatientModel();
 
             // Uses ?? Operand to determine if lefthandside of argument is null, in that case use right hand side.
-             newPatientModel.PatientId = newEntry.Identifier[0].Value ?? "*E_CPR";
+            newPatientModel.PatientId = newEntry.Identifier[0].Value ?? "*E_CPR";
             newPatientModel.Name = newEntry.Name[0].Text ?? "John Doe";
             newPatientModel.Gender = newEntry.Gender ?? AdministrativeGender.Unknown;
-
+            //newPatientModel.CPR
 
             //Logic i forhold til extensions her og lav logic der ser om felter er lig null?
             //_newPatient.ToHospital = Convert.ToString(newEntry.Extension[0].Value);

@@ -34,14 +34,7 @@ namespace IncomingCasualtyHandling.BL
         {
             List<PatientModel> SortedETAList = listOfPatients.OrderBy(o => o.ETA).ToList();
             FindNearestETA(SortedETAList);
-            //ETA nextEta = new ETA
-            //{
-            //    AbsoluteTime = SortedETAList[0].ETA.ToShortTimeString(),
-            //    RelativeTime = SortedETAList[0].ETA.ToShortTimeString()
-
-            //};
-            //_overviewViewModel.Eta = nextEta;
-            ////Læg listen af sorterede eta patienter over i model
+            _detailViewModel.ETAPatients = SortedETAList;
 
         }
 
