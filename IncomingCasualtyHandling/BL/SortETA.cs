@@ -14,17 +14,19 @@ namespace IncomingCasualtyHandling.BL
     public class SortETA
     {
         private OverviewView_Model _overviewViewModel;
-        private DetailView_Model _detailViewModel;
+        private DetailView_Model _detailView_Model;
+        private MainView_Model _mainView_Model;
         private ITimer _timer;
 
 
         // Constructor
-        public SortETA(OverviewView_Model overviewViewModel, DetailView_Model detailViewModel, ITimer timer, IGetPatientsFromFHIR RecievePatientsFromFhir)
+        public SortETA(OverviewView_Model overviewView_Model, DetailView_Model detailView_Model, MainView_Model mainView_Model, ITimer timer, IGetPatientsFromFHIR RecievePatientsFromFhir)
         {
             
             RecievePatientsFromFhir.PatientDataReady += SortForETA;
-            _overviewViewModel = overviewViewModel;
-            _detailViewModel = detailViewModel;
+            _overviewViewModel = overviewView_Model;
+            _detailView_Model = detailView_Model;
+            _mainView_Model = mainView_Model;
             _timer = timer;
         }
 
@@ -34,7 +36,7 @@ namespace IncomingCasualtyHandling.BL
         {
             List<PatientModel> SortedETAList = listOfPatients.OrderBy(o => o.ETA).ToList();
             FindNearestETA(SortedETAList);
-            _detailViewModel.ETAPatients = SortedETAList;
+            _detailView_Model.ETAPatients = SortedETAList;
 
         }
 

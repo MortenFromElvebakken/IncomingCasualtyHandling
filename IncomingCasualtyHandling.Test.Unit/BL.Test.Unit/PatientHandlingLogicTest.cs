@@ -11,8 +11,7 @@ namespace IncomingCasualtyHandling.Test.Unit.BL.Test.Unit
     public class PatientHandlingLogicTest
     {
         #region Arrange
-
-        private PatientHandlingLogic _uut;
+        
         //private ISortETA sortEta;
         private SortETA _sortEta;
         //private ISortSpecialty sortSpecialty;
@@ -30,7 +29,6 @@ namespace IncomingCasualtyHandling.Test.Unit.BL.Test.Unit
             _sortSpecialty = Substitute.For<SortSpecialty>();
             //sortTriage = Substitute.For<ISortTriage>();
             _sortTriage = Substitute.For<SortTriage>();
-            _uut = new PatientHandlingLogic(_sortEta, _sortSpecialty, _sortTriage);
         }
 
         #endregion

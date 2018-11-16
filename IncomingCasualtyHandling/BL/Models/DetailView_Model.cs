@@ -228,18 +228,7 @@ namespace IncomingCasualtyHandling.BL.Models
         private string _patientsInList;
         public string PatientsInList
         {
-            get
-            {
-                if(_tabsList[SelectedTabIndex].Data.Count <= 1)
-                {
-                    return String.Format(_tabsList[SelectedTabIndex].Data.Count + " patient");
-                }
-                else
-                {
-                    return String.Format(_tabsList[SelectedTabIndex].Data.Count + " patients");
-                }
-                
-            }
+            get => String.Format(_tabsList[SelectedTabIndex].Data.Count + " patient(s)");
             set
             {
                 _patientsInList = value;

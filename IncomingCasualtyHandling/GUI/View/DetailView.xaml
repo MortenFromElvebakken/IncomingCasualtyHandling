@@ -27,6 +27,9 @@
                     </xctk:IconButton.Icon>
                 </xctk:IconButton>
             </Grid>
+            <Grid Grid.Column="1">
+                <local:GuidingOverviewComponent></local:GuidingOverviewComponent>
+            </Grid>
         </Grid>
 
         <!--<Grid Grid.Row="0" RowSpan="2" ZIndex="1">-->
@@ -38,7 +41,7 @@
                     </TabItem.Header>
                 </TabItem>
             </TabControl>-->
-            <TabControl  ItemsSource="{Binding Tabs}" SelectedIndex="{Binding SelectedIndex}">
+            <TabControl ItemsSource="{Binding Tabs}" SelectedIndex="{Binding SelectedIndex}">
                 <TabControl.Resources>
                     <Style BasedOn="{StaticResource ChosenTab}" TargetType="TabItem"></Style>
                 </TabControl.Resources>
@@ -53,7 +56,6 @@
                     <DataTemplate>
                         <ListView ItemsSource="{Binding Data}" ItemContainerStyle="{StaticResource RowColourAlternate}" AlternationCount="2">
                             <ListView.View>
-
                                 <GridView>
                                     <GridViewColumn Header="Name" CellTemplate="{StaticResource CellTemplateForListviewName}"/>
                                     <GridViewColumn Header="CPR" CellTemplate="{StaticResource CellTemplateForListviewCPR}"/>
@@ -66,15 +68,14 @@
                                     <GridViewColumn Header="Note" DisplayMemberBinding="{Binding Age}"/>
                                     <GridViewColumn Header="AmbulanceNumber" DisplayMemberBinding="{Binding Age}"/>-->
                                 </GridView>
-
                             </ListView.View>
                         </ListView>
                     </DataTemplate>
                 </TabControl.ContentTemplate>
             </TabControl>
             <Grid ZIndex="99">
-                <Border BorderBrush="Black" BorderThickness="1,1,1,1" Width="80" CornerRadius="10,10,10,10" Margin="0,0,5,5" Background="#7D8FA6" Padding="3,3,3,3" VerticalAlignment="Bottom" HorizontalAlignment="Right">
-                    <TextBlock Text="{Binding PatientsInList}" FontSize="14" Width="80" TextAlignment="Center" Foreground="White" Background="#7D8FA6"></TextBlock>
+                <Border BorderBrush="Black" BorderThickness="1.5,1.5,1.5,1.5" Width="100" CornerRadius="10,10,10,10" Margin="0,0,5,5" Background="#7D8FA6" Padding="3,3,3,3" VerticalAlignment="Bottom" HorizontalAlignment="Right">
+                    <TextBlock Text="{Binding PatientsInList}" FontSize="14" Width="80" VerticalAlignment="Center" TextAlignment="Right" HorizontalAlignment="Center" Foreground="White" Background="#7D8FA6"></TextBlock>
                 </Border>
             </Grid>
         </Grid>

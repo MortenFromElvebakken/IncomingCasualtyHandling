@@ -157,6 +157,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="GUI\View\GuidingOverviewComponent.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BL\Object classes\PatientModel.cs" />
@@ -171,6 +175,9 @@
     </Compile>
     <Compile Include="GUI\View\TriageComponent.xaml.cs">
       <DependentUpon>TriageComponent.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\View\GuidingOverviewComponent.xaml.cs">
+      <DependentUpon>GuidingOverviewComponent.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\Annotations.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">

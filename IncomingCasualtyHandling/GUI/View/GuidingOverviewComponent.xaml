@@ -1,0 +1,61 @@
+﻿<UserControl x:Class="IncomingCasualtyHandling.GUI.View.GuidingOverviewComponent"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:IncomingCasualtyHandling.GUI.View"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+        <Grid Grid.Column="0">
+            <UniformGrid Rows="1" VerticalAlignment="Stretch">
+                <Grid Name="Triage1Panel" Visibility="{Binding Triage1.ShowAs}" MaxWidth="100px">
+
+                    <Grid.InputBindings>
+                        <MouseBinding MouseAction="LeftClick" Command="{Binding RelativeSource={RelativeSource AncestorType=Window}, Path=DataContext.ChangeViewCommandWithProperty}" CommandParameter="Triage 0"></MouseBinding>
+                    </Grid.InputBindings>
+                    <Border CornerRadius="50" Background="{Binding RelativeSource={RelativeSource AncestorType=Window}, Path=DataContext.Triage1.Colour}" BorderBrush="Black" BorderThickness="1" Padding="2">
+                        <TextBlock Text="{Binding RelativeSource={RelativeSource AncestorType=Window}, Path=DataContext.Triage1.Amount}" VerticalAlignment="Center" FontSize="20" HorizontalAlignment="Center"></TextBlock>
+                    </Border>
+
+                </Grid>
+                <Grid Name="Triage2Panel" Visibility="{Binding Triage2.ShowAs}" MaxWidth="100px">
+
+                    <Grid.InputBindings>
+                        <MouseBinding MouseAction="LeftClick" Command="{Binding RelativeSource={RelativeSource AncestorType=Window}, Path=DataContext.ChangeViewCommandWithProperty}" CommandParameter="Triage 1"></MouseBinding>
+                    </Grid.InputBindings>
+                </Grid>
+                <Grid Name="Triage3Panel" Visibility="{Binding Triage3.ShowAs}" MaxWidth="100px">
+
+                    <Grid.InputBindings>
+                        <MouseBinding MouseAction="LeftClick" Command="{Binding RelativeSource={RelativeSource AncestorType=Window}, Path=DataContext.ChangeViewCommandWithProperty}" CommandParameter="Triage 2"></MouseBinding>
+                    </Grid.InputBindings>
+                </Grid>
+                <Grid Name="Triage4Panel" Visibility="{Binding Triage4.ShowAs}" MaxWidth="100px">
+                    <Grid.InputBindings>
+                        <MouseBinding MouseAction="LeftClick" Command="{Binding RelativeSource={RelativeSource AncestorType=Window}, Path=DataContext.ChangeViewCommandWithProperty}" CommandParameter="Triage 3"></MouseBinding>
+                    </Grid.InputBindings>
+
+                </Grid>
+                <Grid Name="Triage5Panel" Visibility="{Binding Triage5.ShowAs}" MaxWidth="100px">
+
+                    <Grid.InputBindings>
+                        <MouseBinding MouseAction="LeftClick" Command="{Binding RelativeSource={RelativeSource AncestorType=Window}, Path=DataContext.ChangeViewCommandWithProperty}" CommandParameter="Triage 4"></MouseBinding>
+                    </Grid.InputBindings>
+
+                </Grid>
+            </UniformGrid>
+        </Grid>
+        <Grid Grid.Column="1">
+
+        </Grid>
+        <Grid Grid.Column="2">
+
+        </Grid>
+    </Grid>
+</UserControl>

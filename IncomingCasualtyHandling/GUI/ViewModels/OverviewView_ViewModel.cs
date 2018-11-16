@@ -15,17 +15,7 @@ namespace IncomingCasualtyHandling.GUI.ViewModels
 
         #region Triages
 
-        public int MaximumTriages => _overviewModel.MaximumTriages;
-
-        public Triage Triage1 => _overviewModel.Triage1;
-
-        public Triage Triage2 => _overviewModel.Triage2;
-
-        public Triage Triage3 => _overviewModel.Triage3;
-
-        public Triage Triage4 => _overviewModel.Triage4;
-
-        public Triage Triage5 => _overviewModel.Triage5;
+        public int MaximumTriagePatients => _overviewModel.MaximumTriagePatients;
 
         #endregion
 
@@ -87,83 +77,7 @@ namespace IncomingCasualtyHandling.GUI.ViewModels
         {
             _overviewModel = overviewViewModel;
             _overviewModel.PropertyChanged += OverviewModelOnPropertyChanged;
-            //specialties.Add(new Specialty
-            //{
-            //    Name = "Orthopaedic",
-            //    Colour = "#af3205",
-            //    Amount = 5,
-            //    ShowAs = Visibility.Visible
-            //});
-            //specialties.Add(new Specialty
-            //{
-            //    Name = "Medicinal",
-            //    Colour = "#9400D3",
-            //    Amount = 9,
-            //    ShowAs = Visibility.Visible
-            //});
-            //specialties.Add(new Specialty
-            //{
-            //    Name = "Thoracic surgery",
-            //    Colour = "#003865",
-            //    Amount = 4,
-            //    ShowAs = Visibility.Visible
-            //});
-
-            //var counter = 0;
-            //Array.Clear(listOfSpecialities, 0, listOfSpecialities.Length);
-            //specialties.Sort((x, y) => y.Amount.CompareTo(x.Amount));
-            //foreach (var specialty in specialties)
-            //{
-            //    if (specialty != null)
-            //    {
-            //        listOfSpecialities[counter] = specialty;
-            //        counter++;
-            //    }
-            //}
-
-            //_triage1 = new Triage
-            //{
-            //    Amount = 8,
-            //    Colour = "#f60e0e",
-            //    Name = "Red",
-            //    ShowAs = Visibility.Visible
-            //};
-
-            //_triage2 = new Triage
-            //{
-            //    Amount = 0,
-            //    Colour = "#f28d0e",
-            //    Name = "Orange",
-            //    ShowAs = Visibility.Collapsed
-            //};
-
-            //_triage3 = new Triage
-            //{
-            //    Amount = 5,
-            //    Colour = "#ffe913",
-            //    Name = "Yellow",
-            //    ShowAs = Visibility.Visible
-            //};
-            //_triage4 = new Triage
-            //{
-            //    Amount = 2,
-            //    Colour = "#0bdd2e",
-            //    Name = "Green",
-            //    ShowAs = Visibility.Visible
-            //};
-            //_triage5 = new Triage
-            //{
-            //    Amount = 0,
-            //    Colour = "#1e38ff",
-            //    Name = "Blue",
-            //    ShowAs = Visibility.Collapsed
-            //};
-
-            //_eta = new ETA
-            //{
-            //    AbsoluteTime = "10:42",
-            //    RelativeTime = "(-08:00)"
-            //};
+            
         }
 
         private void OverviewModelOnPropertyChanged(object sender, PropertyChangedEventArgs e)

@@ -15,22 +15,23 @@ namespace IncomingCasualtyHandling.BL
     {
         private ILoadConfigurationSettings LoadXMLSettings;
         private readonly List<Specialty> specialtiesList;
-        private OverviewView_Model _overviewViewModel;
-        private DetailView_Model _detailViewModel;
-        public SortSpecialty(ILoadConfigurationSettings _loadXMLSettings,OverviewView_Model overviewViewModel,DetailView_Model detailViewModel, IGetPatientsFromFHIR RecievePatientsFromFhir)
+        private OverviewView_Model _overviewView_Model;
+        private DetailView_Model _detailView_Model;
+        private MainView_Model _mainView_Model;
+        public SortSpecialty(ILoadConfigurationSettings _loadXMLSettings,OverviewView_Model overviewView_Model,DetailView_Model detailView_Model, MainView_Model mainview_Model, IGetPatientsFromFHIR RecievePatientsFromFhir)
         {
             RecievePatientsFromFhir.PatientDataReady += SortForSpecialty;
             LoadXMLSettings = _loadXMLSettings;
             specialtiesList = new List<Specialty>(LoadXMLSettings.SpecialtiesList);  //kopi af liste fra xml
-            _overviewViewModel = overviewViewModel;
-            _detailViewModel = detailViewModel;
+            _overviewView_Model = overviewView_Model;
+            _detailView_Model = detailView_Model;
+            _mainView_Model = mainview_Model;
         }
         public void SortForSpecialty(List<PatientModel> listOfPatients)
         {
-            
+            //Group by specialty, all the results
             var results = listOfPatients.GroupBy(p => p.Specialty).ToList();
-            //results.Sort((a,b)=>b.Count() -a.Count());
-            //var SortedSpecialtyList = new List<Specialty>();
+
             var _tempListe = new List<List<PatientModel>>();
             foreach (var specialtyResultList in results)
             {
@@ -44,7 +45,9 @@ namespace IncomingCasualtyHandling.BL
                         specialty.Amount = specialtyResultList.Count();
                         specialty.ShowAs = Visibility.Visible;
                         specialtiesList[counter] = specialty;
-                        _tempListe.Add(specialtyResultList.ToList());
+                        var testList = specialtyResultList.ToList();
+                        testList.Sort((a, b) => a.ETA.CompareTo(b.ETA));
+                        _tempListe.Add(testList);
 
                         break;
                     }
@@ -64,9 +67,10 @@ namespace IncomingCasualtyHandling.BL
             //specialtiesList.Sort((a,b)=>b.Amount -a.Amount);
             var FinalList = specialtiesList.OrderByDescending(a => a.Amount).ThenBy(a => a.Name).ToList();
             //specialtiesList.GroupBy(a => a.Amount).OrderBy(a => a.Name);
-            _overviewViewModel.ListOfSpecialities = FinalList;
-            _detailViewModel.ListOfSpecialties = FinalList;
-            _detailViewModel.ListOfSpecialtiesPatientLists = _tempListe;
+            _overviewView_Model.ListOfSpecialities = FinalList;
+            _mainView_Model.Specialty1 = FinalList[0]; // Sætter specialty 1 i mainmodel så overviewcomponent kan se den med flest
+            _detailView_Model.ListOfSpecialties = FinalList;
+            _detailView_Model.ListOfSpecialtiesPatientLists = _tempListe;
         }
     }
 }

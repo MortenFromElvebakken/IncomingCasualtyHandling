@@ -10,7 +10,7 @@
                 <ControlTemplate TargetType="{x:Type TabItem}">
                     <Border x:Name="Border" BorderBrush="Black" BorderThickness="1,1,1,0"
                             Padding="25,5,25,5" Margin="0,0,5,0" CornerRadius="5,5,0,0" >
-                        <ContentPresenter x:Name="ContentSite" ContentSource="Header"></ContentPresenter>
+                        <ContentPresenter x:Name="ContentSite" ContentSource="Header" HorizontalAlignment="Center"></ContentPresenter>
                     </Border>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsSelected" Value="True">

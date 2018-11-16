@@ -48,9 +48,9 @@ namespace IncomingCasualtyHandling
 
             IGetPatientsFromFHIR IGetPatientsFromFhir = fhirCommands;
             ITimer timer = new Timer(_mainViewModel, _overviewViewModel);
-            var sortETA = new SortETA(_overviewViewModel,_detailViewModel, timer, IGetPatientsFromFhir);
-            var sortSpecialty = new SortSpecialty(lcs, _overviewViewModel, _detailViewModel, IGetPatientsFromFhir);
-            var sortTriage = new SortTriage(lcs, _overviewViewModel, _detailViewModel, IGetPatientsFromFhir);
+            var sortETA = new SortETA(_overviewViewModel,_detailViewModel, _mainViewModel, timer, IGetPatientsFromFhir);
+            var sortSpecialty = new SortSpecialty(lcs, _overviewViewModel, _detailViewModel, _mainViewModel, IGetPatientsFromFhir);
+            var sortTriage = new SortTriage(lcs, _overviewViewModel, _detailViewModel, _mainViewModel, IGetPatientsFromFhir);
             fhirCommands.GetAllPatients();
 
 

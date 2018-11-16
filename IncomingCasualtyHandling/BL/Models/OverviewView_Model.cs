@@ -7,56 +7,10 @@ namespace IncomingCasualtyHandling.BL.Models
     {
         #region Triages
 
-        private int _maximumTriages = 10;
-        public int MaximumTriages => _maximumTriages;
+        private int _maximumTriagePatients = 10;
+        public int MaximumTriagePatients => _maximumTriagePatients;
         
-        private List<Triage> _listOfTriages;
-        public List<Triage> ListOfTriages
-        {
-            get => _listOfTriages;
-            set
-            {
-                _listOfTriages = value;
-                int counter = 1;
-                foreach (var triage in _listOfTriages)
-                {
-                    string propertyName = "Triage" + counter;
-                    OnPropertyChanged(propertyName);
-                    counter++;
-                }
-
-            }
-        }
-
-        public Triage Triage1
-        {
-            get => ListOfTriages[0];
-            set => ListOfTriages[0] = value;
-        }
-
-        public Triage Triage2
-        {
-            get => ListOfTriages[1];
-            set => ListOfTriages[1] = value;
-        }
-
-        public Triage Triage3
-        {
-            get => ListOfTriages[2];
-            set => ListOfTriages[2] = value;
-        }
-
-        public Triage Triage4
-        {
-            get => ListOfTriages[3];
-            set => ListOfTriages[3] = value;
-        }
-
-        public Triage Triage5
-        {
-            get => ListOfTriages[4];
-            set => ListOfTriages[4] = value;
-        }
+        
 
         #endregion
 

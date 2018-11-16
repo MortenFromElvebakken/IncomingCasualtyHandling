@@ -15,15 +15,17 @@ namespace IncomingCasualtyHandling.BL
     {
         public ILoadConfigurationSettings LoadXMLSettings;
         public List<Triage> TriageList;
-        private OverviewView_Model _overviewViewModel;
-        private DetailView_Model _detailViewModel;
-        public SortTriage(ILoadConfigurationSettings _loadXMLSettings, OverviewView_Model overviewViewModel, DetailView_Model detailViewModel, IGetPatientsFromFHIR RecievePatientsFromFhir)
+        private OverviewView_Model _overviewView_Model;
+        private DetailView_Model _detailView_Model;
+        private MainView_Model _mainView_Model;
+        public SortTriage(ILoadConfigurationSettings _loadXMLSettings, OverviewView_Model overviewView_Model, DetailView_Model detailView_Model, MainView_Model mainView_Model, IGetPatientsFromFHIR RecievePatientsFromFhir)
         {
             RecievePatientsFromFhir.PatientDataReady += SortForTriage;
             LoadXMLSettings = _loadXMLSettings;
             TriageList = new List<Triage>(LoadXMLSettings.TriageList);  //Gøres for at tage en kopi af den liste der er hentet
-            _overviewViewModel = overviewViewModel;
-            _detailViewModel = detailViewModel;
+            _overviewView_Model = overviewView_Model;
+            _detailView_Model = detailView_Model;
+            _mainView_Model = mainView_Model;
         }
 
         public void SortForTriage(List<PatientModel> listOfPatients)
@@ -40,10 +42,9 @@ namespace IncomingCasualtyHandling.BL
                     {
                         triage.Amount = triageResultList.Count();
                         triage.ShowAs = Visibility.Visible;
-                        
-                        //model.triagelist[counter] <--- skal lægge dennne liste (triageResultList) ind på den plads der 
-                        //passer med den triage dette foreach loop er kommet til.
-                        _TempList.Add(triageResultList.ToList());
+                        var testList = triageResultList.ToList();
+                        testList.Sort((a, b) => a.ETA.CompareTo(b.ETA));
+                        _TempList.Add(testList);
                        
                         break;
                     }
@@ -58,9 +59,9 @@ namespace IncomingCasualtyHandling.BL
 
             }
 
-            _overviewViewModel.ListOfTriages = TriageList;
-            _detailViewModel.ListOfTriages = TriageList;
-            _detailViewModel.ListOfTriagePatientLists = _TempList;
+            _mainView_Model.ListOfTriages = TriageList;
+            _detailView_Model.ListOfTriages = TriageList;
+            _detailView_Model.ListOfTriagePatientLists = _TempList;
             
         }
     }

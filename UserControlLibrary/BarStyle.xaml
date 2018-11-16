@@ -49,12 +49,12 @@
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
-        <Style.Triggers>
-            <!-- In order to implement click reaction on the button again-->
+        <!--<Style.Triggers>
+            --><!-- In order to implement click reaction on the button again--><!--
             <Trigger Property="ClickMode" Value="Release">
 
             </Trigger>
-        </Style.Triggers>
+        </Style.Triggers>-->
     </Style>
 
 </ResourceDictionary>

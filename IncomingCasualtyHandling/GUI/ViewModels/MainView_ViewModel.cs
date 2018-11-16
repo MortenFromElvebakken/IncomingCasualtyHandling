@@ -136,5 +136,17 @@ namespace IncomingCasualtyHandling.GUI.ViewModels
                 _listOfPatients = value;
             }
         }
+
+        public Triage Triage1 => _mainModel.Triage1;
+
+        public Triage Triage2 => _mainModel.Triage2;
+
+        public Triage Triage3 => _mainModel.Triage3;
+
+        public Triage Triage4 => _mainModel.Triage4;
+
+        public Triage Triage5 => _mainModel.Triage5;
+
+        public Specialty Specialty1 => _mainModel.Specialty1;
     }
 }
