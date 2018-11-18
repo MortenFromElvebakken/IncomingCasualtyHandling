@@ -68,9 +68,18 @@ namespace IncomingCasualtyHandling.BL
                 if (patient.ETA > DateTime.Now)
                 {
                     CompareETATimeToCurrentTime(patient.ETA);
-                    break;
+                    return;
                 }
             }
+
+            // If the compiler gets to here, there are no next coming ETAs
+            _nextEta = new ETA
+            {
+                AbsoluteTime = "--:--",
+                RelativeTime = ""
+            };
+            _overviewViewModel.Eta = _nextEta;
+
         }
 
         // Relative time calculations done with inspiration from:
@@ -94,7 +103,7 @@ namespace IncomingCasualtyHandling.BL
 
         // Compares the parameter time with the current time
         // Returns the relative time in minutes
-        public void CompareETATimeToCurrentTime(DateTime nextEta)
+        private void CompareETATimeToCurrentTime(DateTime nextEta)
         {
             _dateTimeEta = nextEta;
             _prefix = "+";
@@ -125,32 +134,51 @@ namespace IncomingCasualtyHandling.BL
             if (timeSpan.CompareTo(TimeSpan.Zero) < 0)
             {
                 _prefix = "-";
-                _positiveTimeSpan = _timeSpan.Negate();
+                _positiveTimeSpan = timeSpan.Negate();
             }
+            // Add a minute to get the right minute count, as seconds aren't shown. E.g. 41 minutes and 20 seconds becomes 42 minutes.
+            _positiveTimeSpan = _positiveTimeSpan.Add(new TimeSpan(0, 1, 0));
 
-            // Time less than a minute:
-            if (timeDifference < 1 * MinuteInSeconds)
-            {
-                //Set relative time to show no missing minutes
-                _relativeTime = _positiveTimeSpan.Minutes.ToString().PadLeft(2, '0') + ":" + _positiveTimeSpan.Seconds.ToString().PadLeft(2, '0');
-            }
+            //// Time less than a minute:
+            //if (timeDifference < 1 * MinuteInSeconds)
+            //{
+            //    //Set relative time to show no missing minutes
+            //    _relativeTime = _positiveTimeSpan.Minutes.ToString().PadLeft(2, '0') + ":" + _positiveTimeSpan.Seconds.ToString().PadLeft(2, '0');
+            //}
             // Time less than 99 hours but more than a minute:
-            if (timeDifference < 99 * HourInMinutes && _timeDifference > 1 * MinuteInSeconds)
+            if (timeDifference < 999 * MinuteInSeconds && _timeDifference > 0)
             {
-                _relativeTime = _positiveTimeSpan.Minutes.ToString().PadLeft(2, '0') + ":" + _positiveTimeSpan.Seconds.ToString().PadLeft(2, '0');
+                _relativeTime = _positiveTimeSpan.Minutes.ToString().PadLeft(2, '0');
             }
 
-            if (timeDifference > 99 * HourInMinutes)
+            if (timeDifference > 999* MinuteInSeconds)
             {
                 _prefix = ">";
-                _relativeTime = "99:59";
+                _relativeTime = "999";
             }
 
-            _nextEta = new ETA
+            // Check if minutes contains more than 2 characters
+            // If it does, the prefix should be right next to the first number
+            // If not, a space is placed between the prefix and the number
+            if (_positiveTimeSpan.TotalMinutes > 99)
             {
-                AbsoluteTime = _dateTimeEta.ToShortTimeString(),
-                RelativeTime = "(" + _prefix + _relativeTime + ")"
-            };
+                _nextEta = new ETA
+                {
+                    AbsoluteTime = _dateTimeEta.ToShortTimeString(),
+                    RelativeTime = "(" + _prefix + _relativeTime + "minutes)"
+                };
+            }
+            else
+            {
+                _nextEta = new ETA
+                {
+                    AbsoluteTime = _dateTimeEta.ToShortTimeString(),
+                    RelativeTime = "(" + _prefix + " " + _relativeTime + "minutes)"
+                };
+            }
+
+
+            
 
             _overviewViewModel.Eta = _nextEta;
 
