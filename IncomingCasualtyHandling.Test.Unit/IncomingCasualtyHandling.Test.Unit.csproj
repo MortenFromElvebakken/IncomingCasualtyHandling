@@ -59,6 +59,7 @@
   <ItemGroup>
     <Compile Include="BL.Test.Unit\SortSpecialtyTest.cs" />
     <Compile Include="BL.Test.Unit\SortETATest.cs" />
+    <Compile Include="DAL.Test.Unit\SerialiseToPatientTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -72,7 +73,6 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="DAL.Test.Unit\" />
     <Folder Include="GUI.Test.Unit\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

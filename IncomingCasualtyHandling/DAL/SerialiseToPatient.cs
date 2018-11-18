@@ -12,7 +12,7 @@ using IncomingCasualtyHandling.DAL.Interface;
 
 namespace IncomingCasualtyHandling.DAL
 {
-    internal class SerialiseToPatient : ISerializeToPatient
+    public class SerialiseToPatient : ISerializeToPatient
     {
         public SerialiseToPatient()
         {
