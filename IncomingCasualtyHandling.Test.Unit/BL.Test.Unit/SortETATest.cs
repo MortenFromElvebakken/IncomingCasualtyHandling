@@ -21,7 +21,7 @@ namespace IncomingCasualtyHandling.Test.Unit.BL.Test.Unit
         #region Arrange
 
         private ISortETA _uut;
-        //private SortETA _uut;
+
         //private IOverviewView_Model _overviewViewModel;
         private OverviewView_Model _overviewViewModel;
         //private IDetailView_Model _detailViewModel;
@@ -128,6 +128,8 @@ namespace IncomingCasualtyHandling.Test.Unit.BL.Test.Unit
 
             Assert.That(_detailViewModel.ETAPatients, Is.EqualTo(_sortedListOfPatients));
         }
+
+        // TEST WITH A PATIENT WITHOUT ETA
 
         #endregion
 

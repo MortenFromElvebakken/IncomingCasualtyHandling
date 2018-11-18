@@ -24,7 +24,7 @@ namespace IncomingCasualtyHandling.BL
         {
             RecievePatientsFromFhir.PatientDataReady += SortForSpecialty;
             LoadXMLSettings = _loadXMLSettings;
-            specialtiesList = new List<Specialty>(LoadXMLSettings.SpecialtiesList);  //kopi af liste fra xml
+            specialtiesList = new List<Specialty>(LoadXMLSettings.SpecialtiesList);  //Copy of list from xml
             _overviewView_Model = overviewView_Model;
             _detailView_Model = detailView_Model;
             _mainView_Model = mainview_Model;
