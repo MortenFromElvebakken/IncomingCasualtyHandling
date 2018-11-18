@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using IncomingCasualtyHandling.BL.Interfaces;
 using IncomingCasualtyHandling.BL.Models;
 using IncomingCasualtyHandling.BL.Object_classes;
 using IncomingCasualtyHandling.DAL;
@@ -11,13 +12,14 @@ using IncomingCasualtyHandling.DAL.Interface;
 
 namespace IncomingCasualtyHandling.BL
 {
-    public class SortSpecialty
+    public class SortSpecialty : ISortSpecialty
     {
         private ILoadConfigurationSettings LoadXMLSettings;
         private readonly List<Specialty> specialtiesList;
         private OverviewView_Model _overviewView_Model;
         private DetailView_Model _detailView_Model;
         private MainView_Model _mainView_Model;
+
         public SortSpecialty(ILoadConfigurationSettings _loadXMLSettings,OverviewView_Model overviewView_Model,DetailView_Model detailView_Model, MainView_Model mainview_Model, IGetPatientsFromFHIR RecievePatientsFromFhir)
         {
             RecievePatientsFromFhir.PatientDataReady += SortForSpecialty;
