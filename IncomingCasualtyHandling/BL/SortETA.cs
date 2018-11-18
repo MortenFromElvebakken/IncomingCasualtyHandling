@@ -35,8 +35,11 @@ namespace IncomingCasualtyHandling.BL
         public void SortForETA(List<PatientModel> listOfPatients)
         {
             List<PatientModel> SortedETAList = listOfPatients.OrderBy(o => o.ETA).ToList();
-            FindNearestETA(SortedETAList);
+           // Udkommenteret, da der forsøges andet FindNearestETA(SortedETAList);
             _detailView_Model.ETAPatients = SortedETAList;
+
+            // When the ETA's are sorted, they are send to the Timer-class to work on relative time
+            _timer.FindRelativeTime(SortedETAList);
 
         }
 
