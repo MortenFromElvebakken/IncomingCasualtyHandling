@@ -57,7 +57,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BL.Test.Unit\PatientHandlingLogicTest.cs" />
+    <Compile Include="BL.Test.Unit\SortSpecialtyTest.cs" />
     <Compile Include="BL.Test.Unit\SortETATest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
