@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Windows;
+using IncomingCasualtyHandling.BL.Interfaces;
 using IncomingCasualtyHandling.BL.Models;
 using IncomingCasualtyHandling.BL.Object_classes;
 
@@ -10,8 +11,7 @@ namespace IncomingCasualtyHandling.GUI.ViewModels
     public class OverviewView_ViewModel : Workspace_ViewModel
     {
 
-        // Set Model for ViewModel
-        OverviewView_Model _overviewModel;
+        
 
         #region Triages
 
@@ -68,12 +68,14 @@ namespace IncomingCasualtyHandling.GUI.ViewModels
 
 
         #region Constructor
+        // Set Model for ViewModel
+        IOverviewView_Model _overviewModel;
 
         public OverviewView_ViewModel()
         {
 
         }
-        public OverviewView_ViewModel(OverviewView_Model overviewViewModel)
+        public OverviewView_ViewModel(IOverviewView_Model overviewViewModel)
         {
             _overviewModel = overviewViewModel;
             _overviewModel.PropertyChanged += OverviewModelOnPropertyChanged;

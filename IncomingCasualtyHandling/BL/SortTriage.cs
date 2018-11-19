@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using IncomingCasualtyHandling.BL.Interfaces;
 using IncomingCasualtyHandling.BL.Models;
 using IncomingCasualtyHandling.BL.Object_classes;
 using IncomingCasualtyHandling.DAL;
@@ -15,10 +16,10 @@ namespace IncomingCasualtyHandling.BL
     {
         public ILoadConfigurationSettings LoadXMLSettings;
         public List<Triage> TriageList;
-        private OverviewView_Model _overviewView_Model;
-        private DetailView_Model _detailView_Model;
-        private MainView_Model _mainView_Model;
-        public SortTriage(ILoadConfigurationSettings _loadXMLSettings, OverviewView_Model overviewView_Model, DetailView_Model detailView_Model, MainView_Model mainView_Model, IGetPatientsFromFHIR RecievePatientsFromFhir)
+        private IOverviewView_Model _overviewView_Model;
+        private IDetailView_Model _detailView_Model;
+        private IMainView_Model _mainView_Model;
+        public SortTriage(ILoadConfigurationSettings _loadXMLSettings, IOverviewView_Model overviewView_Model, IDetailView_Model detailView_Model, IMainView_Model mainView_Model, IGetPatientsFromFHIR RecievePatientsFromFhir)
         {
             RecievePatientsFromFhir.PatientDataReady += SortForTriage;
             LoadXMLSettings = _loadXMLSettings;

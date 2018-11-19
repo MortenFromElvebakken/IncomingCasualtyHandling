@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Globalization;
 using System.Windows.Input;
 using IncomingCasualtyHandling.BL;
+using IncomingCasualtyHandling.BL.Interfaces;
 using IncomingCasualtyHandling.BL.Models;
 using IncomingCasualtyHandling.BL.Object_classes;
 using IncomingCasualtyHandling.DAL;
@@ -16,21 +17,21 @@ namespace IncomingCasualtyHandling.GUI.ViewModels
         private string _test;
         private List<PatientModel> _listOfPatients;
 
-        OverviewView_Model _overviewModel;
+        IOverviewView_Model _overviewModel;
 
         // Objects for the two subviews
         OverviewView_ViewModel _overviewViewViewModel; 
         DetailView_ViewModel _detailViewViewModel; 
 
         // Model for ViewModel
-        private MainView_Model _mainModel;
+        private IMainView_Model _mainModel;
 
         public MainView_ViewModel()
         {
 
         }
 
-        public MainView_ViewModel(MainView_Model mainModel, OverviewView_ViewModel overviewViewViewModel, DetailView_ViewModel detailViewViewModel)
+        public MainView_ViewModel(IMainView_Model mainModel, OverviewView_ViewModel overviewViewViewModel, DetailView_ViewModel detailViewViewModel)
         {
             
             _mainModel = mainModel;
@@ -77,19 +78,17 @@ namespace IncomingCasualtyHandling.GUI.ViewModels
         private void ChangeViewWithParameter(object x)
         {
 
-            //string[] parameters = x.ToString().Split(' ');
-            //Nu har vi splittet strengen fra parametret, ind i den første ie. "Triage" og den anden "1"
-            //_detailViewViewModel.SelectedIndex = parameters[1];
-            _detailViewViewModel.StringFromParameter = x.ToString();
-            CurrentWorkspace = _detailViewViewModel;
-            
-
-
-            //Denne metode skal kaldes med property på, alt afhængig af hvilken komponent der trykkes på
-
-
-            //Lav index på tabs, så den kan starte på den rigtige tab også.
-            //Bind selected index på tabcontrol til denne værdi
+            if(CurrentWorkspace == _overviewViewViewModel)
+            {
+                _detailViewViewModel.StringFromParameter = x.ToString();
+                CurrentWorkspace = _detailViewViewModel;
+            }
+            else
+            {
+                //En eller anden logic, der gør at den reloader tabs
+                _detailViewViewModel.StringFromParameter = x.ToString();
+                OnPropertyChanged("ListOfTabs");
+            }
         }
 
         // Command for command-binding to change view
@@ -148,5 +147,7 @@ namespace IncomingCasualtyHandling.GUI.ViewModels
         public Triage Triage5 => _mainModel.Triage5;
 
         public Specialty Specialty1 => _mainModel.Specialty1;
+
+        public ETA Eta => _mainModel.Eta;
     }
 }

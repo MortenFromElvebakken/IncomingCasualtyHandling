@@ -13,14 +13,19 @@ namespace IncomingCasualtyHandling.BL.Models
     public class MainView_Model : ObservableObject, IMainView_Model
     {
 
-
+        
         public MainView_Model()
         {
-
+            _timer.Tick += new EventHandler(Timer_Click);
+            _timer.Interval = TimeSpan.FromSeconds(1);
+            _timer.Start();
+            
         }
 
-        
-        #region Time objects
+        // Timer made with inspiration from:
+        // https://stackoverflow.com/a/5410783
+
+        readonly System.Windows.Threading.DispatcherTimer _timer = new System.Windows.Threading.DispatcherTimer();
 
         private string _currentDateTime;
         // Property for binding 
@@ -37,9 +42,6 @@ namespace IncomingCasualtyHandling.BL.Models
             }
         }
 
-        #endregion
-
-        #region Triage objects
         private List<Triage> _listOfTriages;
         public List<Triage> ListOfTriages
         {
@@ -87,11 +89,27 @@ namespace IncomingCasualtyHandling.BL.Models
             get => ListOfTriages[4];
             set => ListOfTriages[4] = value;
         }
-        #endregion
 
-        #region Specialty objects
+        public ETA Eta { get; set; }
         public Specialty Specialty1 { get; set; }
-        #endregion
+
+
+        private readonly CultureInfo _culture = CultureInfo.CurrentCulture;
+
+        private void Timer_Click(object sender, EventArgs e)
+        {
+            DateTime d;
+
+            d = DateTime.Now;
+            string day = d.Day.ToString().PadLeft(2, '0');
+            string month = d.ToString("MMM", _culture);
+            string year = d.Year.ToString();
+            string hour = d.Hour.ToString().PadLeft(2, '0');
+            string minute = d.Minute.ToString().PadLeft(2, '0');
+
+            CurrentDateTime = day + ". " + month + ". " + year + "\t" + hour + ":" + minute;
+            //OnPropertyChanged("CurrentDateTime");
+        }
 
     }
 }

@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Windows.Controls;
 using Hl7.Fhir.Model;
+using IncomingCasualtyHandling.BL.Interfaces;
 using IncomingCasualtyHandling.BL.Models;
 using IncomingCasualtyHandling.BL.Object_classes;
 using TabControl = IncomingCasualtyHandling.BL.Models.TabControl;
@@ -30,7 +31,7 @@ namespace IncomingCasualtyHandling.GUI.ViewModels
         //for homeicon
         public string IconPath
         {
-            get => _detailViewModel.iconPath;
+            get => _detailViewModel.IconPath;
         }
         //To specify which tab is opened, and which is currently open
         public int SelectedIndex
@@ -42,8 +43,8 @@ namespace IncomingCasualtyHandling.GUI.ViewModels
         //To get which button is pressed from the overviewview, in order to open correct tab
         public string StringFromParameter
         {
-            get => _detailViewModel.testForStringFromClickOnModel;
-            set => _detailViewModel.testForStringFromClickOnModel = value;
+            get => _detailViewModel.StringFromChangeViewCommandParameter;
+            set => _detailViewModel.StringFromChangeViewCommandParameter = value;
         }
 
 
@@ -63,11 +64,11 @@ namespace IncomingCasualtyHandling.GUI.ViewModels
         }
 
 
-        private DetailView_Model _detailViewModel;
+        private IDetailView_Model _detailViewModel;
         public DetailView_ViewModel()
         { }
 
-        public DetailView_ViewModel(DetailView_Model detailViewModel)
+        public DetailView_ViewModel(IDetailView_Model detailViewModel)
         {
             _detailViewModel = detailViewModel;
             _detailViewModel.PropertyChanged += DetailViewModelOnPropertyChanged;

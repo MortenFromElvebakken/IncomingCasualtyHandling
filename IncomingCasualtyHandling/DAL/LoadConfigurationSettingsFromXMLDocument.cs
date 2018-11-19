@@ -15,7 +15,8 @@ namespace IncomingCasualtyHandling.DAL
 {
     public class LoadConfigurationSettingsFromXMLDocument: ILoadConfigurationSettings
     {
-        private readonly string xmlserver;
+        public string XmlServerName { get; set; }
+
         private string _server;
         private string _hospital;
         private XmlDocument configFile;
@@ -24,20 +25,27 @@ namespace IncomingCasualtyHandling.DAL
         public List<Specialty> SpecialtiesList { get; set; }
         public string ServerName { get; private set; }
         public string HospitalShortName { get; private set; }
+        
 
         public LoadConfigurationSettingsFromXMLDocument()
         {
-            xmlserver = "http://localhost:8080/Conf.Fapi/Configuration.xml"; //Muligt at sætte denne ved opstart af program?
+            XmlServerName = "http://localhost:8080/Conf.Fapi/Configuration.xml"; //Muligt at sætte denne ved opstart af program?
             configFile = new XmlDocument();
-            try
-            {
-                configFile.Load(xmlserver);
-            }
-            catch (System.IO.FileNotFoundException)
-            {
-                //Fejlmeddelelse
-                Debug.WriteLine("Configuration file could not be found on server");
-            }
+            configFile.Load(XmlServerName);
+
+
+            GetHospitalShortName();
+            GetServerName();
+            CreateTriageList();
+            CreateSpecialtyList();
+
+        }
+        public LoadConfigurationSettingsFromXMLDocument(string _newXmlServerName)
+        {
+            XmlServerName = _newXmlServerName; //Muligt at sætte denne ved opstart af program?
+            configFile = new XmlDocument();
+
+            configFile.Load(XmlServerName);
 
 
             GetHospitalShortName();
