@@ -94,7 +94,6 @@
     <Compile Include="BL\Interfaces\IMainView_Model.cs" />
     <Compile Include="BL\Interfaces\IOverviewView_Model.cs" />
     <Compile Include="BL\Interfaces\ISortETA.cs" />
-    <Compile Include="BL\Interfaces\ISortingListOnETA.cs" />
     <Compile Include="BL\Interfaces\ISortTriage.cs" />
     <Compile Include="BL\Interfaces\ISortSpecialty.cs" />
     <Compile Include="BL\Interfaces\ITimer.cs" />
@@ -106,7 +105,6 @@
     <Compile Include="BL\Object classes\PatientListEventArgs.cs" />
     <Compile Include="BL\ObservableObject.cs" />
     <Compile Include="BL\SortETA.cs" />
-    <Compile Include="BL\SortingListOnETA.cs" />
     <Compile Include="BL\SortSpecialty.cs" />
     <Compile Include="BL\SortTriage.cs" />
     <Compile Include="BL\Timer.cs" />

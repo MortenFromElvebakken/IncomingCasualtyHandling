@@ -102,7 +102,7 @@ namespace IncomingCasualtyHandling.Test.Unit.BL.Test.Unit
             Assert.That(_detailViewModel.ETAPatients, Is.EqualTo(_sortedListOfPatients));
         }
 
-        // Test a list with patients 2 patients with same ETA
+        // Test a list with 2 patients with same ETA
         // Check that they are sorted alphabetically as second sorting
         [Test]
         public void SortForETA_ListWithEqualETAs_SecondlySortedAlphabetically()

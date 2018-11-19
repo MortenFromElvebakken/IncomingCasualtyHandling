@@ -75,7 +75,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BL.Test.Unit\SortingListOnETATest.cs" />
     <Compile Include="BL.Test.Unit\SortSpecialtyTest.cs" />
     <Compile Include="BL.Test.Unit\SortETATest.cs" />
     <Compile Include="BL.Test.Unit\SortTriageTest.cs" />
