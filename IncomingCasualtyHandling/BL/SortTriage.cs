@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Media;
 using IncomingCasualtyHandling.BL.Interfaces;
 using IncomingCasualtyHandling.BL.Models;
 using IncomingCasualtyHandling.BL.Object_classes;
@@ -59,16 +60,21 @@ namespace IncomingCasualtyHandling.BL
                 // If the triage is not in the list, it is unknown to the system and put in the unknown triage list
                 if (!knownTriage)
                 {
-                    // Find the unknownSpecialty and update it's properties
-                    var unknownTriage = TriageList.Find(n => n.Name == "TriageUnknown");
+                    // Create a unknown triage
+                    string triageName = "TriageUnknown";
+                    Triage unknownTriage = new Triage();
+                    unknownTriage.Name = triageName;
+                    unknownTriage.Colour = "#cecece";
                     unknownTriage.Amount = unknownTriage.Amount + triageResultList.Count();
                     unknownTriage.ShowAs = Visibility.Visible;
 
                     // Set the triage of the patients to "Unknown" in the system
                     foreach (var unknownTriagePatient in triageResultList)
                     {
-                        unknownTriagePatient.Triage = "TriageUnknown";
+                        unknownTriagePatient.Triage = triageName;
                     }
+
+                    TriageList.Add(unknownTriage);
 
                     // Add the patients to the list
                     _listWithUnknownTriage.AddRange(triageResultList.ToList());
