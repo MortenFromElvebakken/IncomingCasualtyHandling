@@ -155,7 +155,7 @@ namespace IncomingCasualtyHandling.Test.Unit.BL.Test.Unit
 
         // Test a list with patients with specialties unknown to system
         [Test]
-        public void SortForSpecialty_ListWith2UnknownSpecialties_AddSortedListWith3ListsToModel()
+        public void SortForSpecialty_ListWith2UnknownSpecialties_AddSortedListWith2ListsToModel()
         {
             _patient3 = new PatientModel
             {

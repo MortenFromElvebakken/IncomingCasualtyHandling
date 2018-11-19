@@ -54,18 +54,12 @@ namespace IncomingCasualtyHandling.BL
                         knownSpecialty = true;
                         break;
                     }
-                    else
-                    {
-                        //tjek hvorfor det er redundant?
-                        //specialtiesList[13].Amount = specialtiesList[13].Amount + specialtyResultList.Count();
-                        //specialty.ShowAs = Visibility.Visible;
-                        //Logic that handles an unknown specialty, and adds them to the unknown specialty
-                    }
+                   
                     counter++;
 
                 }
 
-                // If the specialty is not in the list, it is unknown to the system and but in the unknown specialty list
+                // If the specialty is not in the list, it is unknown to the system and put in the unknown specialty list
                 if (!knownSpecialty)
                 {
                     // Find the unknownSpecialty and update it's properties

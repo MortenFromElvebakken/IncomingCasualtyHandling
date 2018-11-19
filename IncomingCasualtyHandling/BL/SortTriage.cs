@@ -12,18 +12,18 @@ using IncomingCasualtyHandling.DAL.Interface;
 
 namespace IncomingCasualtyHandling.BL
 {
-    public class SortTriage
+    public class SortTriage : ISortTriage
     {
         public ILoadConfigurationSettings LoadXMLSettings;
         public List<Triage> TriageList;
         private IOverviewView_Model _overviewView_Model;
         private IDetailView_Model _detailView_Model;
         private IMainView_Model _mainView_Model;
-        public SortTriage(ILoadConfigurationSettings _loadXMLSettings, IOverviewView_Model overviewView_Model, IDetailView_Model detailView_Model, IMainView_Model mainView_Model, IGetPatientsFromFHIR RecievePatientsFromFhir)
+        public SortTriage(ILoadConfigurationSettings _loadXMLSettings, IOverviewView_Model overviewView_Model, IDetailView_Model detailView_Model, IMainView_Model mainView_Model, IGetPatientsFromFHIR ReceivePatientsFromFhir)
         {
-            RecievePatientsFromFhir.PatientDataReady += SortForTriage;
+            ReceivePatientsFromFhir.PatientDataReady += SortForTriage;
             LoadXMLSettings = _loadXMLSettings;
-            TriageList = new List<Triage>(LoadXMLSettings.TriageList);  //Gøres for at tage en kopi af den liste der er hentet
+            TriageList = new List<Triage>(LoadXMLSettings.TriageList);  //To get a copy of the list loaded from XML-file
             _overviewView_Model = overviewView_Model;
             _detailView_Model = detailView_Model;
             _mainView_Model = mainView_Model;
@@ -32,10 +32,13 @@ namespace IncomingCasualtyHandling.BL
         public void SortForTriage(List<PatientModel> listOfPatients)
         {
             List<List<PatientModel>> _TempList = new List<List<PatientModel>>();
+            List<PatientModel> _listWithUnknownTriage = new List<PatientModel>();
             var results = listOfPatients.GroupBy(p => p.Triage);
             foreach (var triageResultList in results)
             {
                 int counter = 0;
+                // Bolean for whether the triage is known
+                bool knownTriage = false;
                 foreach (var triage in TriageList)
                 {
                     //int counter = 0;
@@ -46,24 +49,42 @@ namespace IncomingCasualtyHandling.BL
                         var testList = triageResultList.ToList();
                         testList.Sort((a, b) => a.ETA.CompareTo(b.ETA));
                         _TempList.Add(testList);
-                       
+                        knownTriage = true;
                         break;
                     }
-                    else
+
+                    counter++;
+                }
+
+                // If the triage is not in the list, it is unknown to the system and put in the unknown triage list
+                if (!knownTriage)
+                {
+                    // Find the unknownSpecialty and update it's properties
+                    var unknownTriage = TriageList.Find(n => n.Name == "TriageUnknown");
+                    unknownTriage.Amount = unknownTriage.Amount + triageResultList.Count();
+                    unknownTriage.ShowAs = Visibility.Visible;
+
+                    // Set the triage of the patients to "Unknown" in the system
+                    foreach (var unknownTriagePatient in triageResultList)
                     {
-                        //Logic for unknown triage? maybe
+                        unknownTriagePatient.Triage = "TriageUnknown";
                     }
 
-                    
-                }
-                counter++;
+                    // Add the patients to the list
+                    _listWithUnknownTriage.AddRange(triageResultList.ToList());
 
+                }
             }
+
+            // Sort the list with patients with unknown triage
+            _listWithUnknownTriage.Sort((a, b) => a.ETA.CompareTo(b.ETA));
+            // Add the unknown list to the list with lists of patients
+            _TempList.Add(_listWithUnknownTriage);
 
             _mainView_Model.ListOfTriages = TriageList;
             _detailView_Model.ListOfTriages = TriageList;
             _detailView_Model.ListOfTriagePatientLists = _TempList;
-            
+
         }
     }
 }
