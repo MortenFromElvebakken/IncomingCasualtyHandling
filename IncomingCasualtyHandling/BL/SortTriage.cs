@@ -32,6 +32,8 @@ namespace IncomingCasualtyHandling.BL
             Triage unknownTriage = new Triage();
             unknownTriage.Name = unknownTriageName;
             unknownTriage.Colour = "#cecece";
+            unknownTriage.Amount = 0;
+            unknownTriage.ShowAs = Visibility.Collapsed;
             TriageList.Add(unknownTriage);
 
             _overviewView_Model = overviewView_Model;
