@@ -19,9 +19,10 @@ namespace IncomingCasualtyHandling.BL
         private IOverviewView_Model _overviewView_Model;
         private IDetailView_Model _detailView_Model;
         private IMainView_Model _mainView_Model;
-        public SortSpecialty(ILoadConfigurationSettings _loadXMLSettings,IOverviewView_Model overviewView_Model,IDetailView_Model detailView_Model, IMainView_Model mainview_Model, IGetPatientsFromFHIR RecievePatientsFromFhir)
+
+        public SortSpecialty(ILoadConfigurationSettings _loadXMLSettings,IOverviewView_Model overviewView_Model,IDetailView_Model detailView_Model, IMainView_Model mainview_Model, ISortETA sortEta)
         {
-            RecievePatientsFromFhir.PatientDataReady += SortForSpecialty;
+            sortEta.SortedListReady += SortForSpecialty;
             LoadXMLSettings = _loadXMLSettings;
             specialtiesList = new List<Specialty>(LoadXMLSettings.SpecialtiesList);  //Copy of list from xml
             _overviewView_Model = overviewView_Model;

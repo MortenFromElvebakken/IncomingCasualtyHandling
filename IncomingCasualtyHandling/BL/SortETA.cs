@@ -40,29 +40,7 @@ namespace IncomingCasualtyHandling.BL
         {
             //List<PatientModel> SortedETAList = listOfPatients.OrderBy(o => o.ETA).ThenBy(n => n.Name).ToList();
 
-            _range = 0;
-            listOfPatients = listOfPatients.OrderBy(p => p.ETA).ThenBy(p => p.Name).ToList();
-            foreach (var patient in listOfPatients)
-            {
-                // IF the patient's ETA matches DateTime.MinValue it means, that no ETA is set
-                if (patient.ETA == DateTime.MinValue)
-                {
-                    // Save the patient in the no-ETA list and save the index
-                    _patientsWithoutEta.Add(patient);
-                    _range = ++_range;
-                }
-            }
-
-            // When all patients have been checked, move the patients without ETAs to the end of the list
-            // by adding them and removing their old placements
-            // IF there are any patients without ETA
-            if (_patientsWithoutEta.Count != 0)
-            {
-
-                listOfPatients.AddRange(_patientsWithoutEta);
-                listOfPatients.RemoveRange(0, _range);
-            }
-
+            SortListOnEta(listOfPatients);
 
             OnSortedListReady(listOfPatients);
 
@@ -81,5 +59,34 @@ namespace IncomingCasualtyHandling.BL
 
         public delegate void PatientUpdateHandler(List<PatientModel> sortedPatients);
         public event PatientUpdateHandler SortedListReady;
+
+        public List<PatientModel> SortListOnEta(List<PatientModel> listToSort)
+        {
+            _range = 0;
+            listToSort = listToSort.OrderBy(p => p.ETA).ThenBy(p => p.Name).ToList();
+            foreach (var patient in listToSort)
+            {
+                // IF the patient's ETA matches DateTime.MinValue it means, that no ETA is set
+                if (patient.ETA == DateTime.MinValue)
+                {
+                    // Save the patient in the no-ETA list and save the index
+                    _patientsWithoutEta.Add(patient);
+                    _range = ++_range;
+                }
+            }
+
+            // When all patients have been checked, move the patients without ETAs to the end of the list
+            // by adding them and removing their old placements
+            // IF there are any patients without ETA
+            if (_patientsWithoutEta.Count != 0)
+            {
+
+                listToSort.AddRange(_patientsWithoutEta);
+                listToSort.RemoveRange(0, _range);
+            }
+
+            return listToSort;
+
+        }
     }
 }
