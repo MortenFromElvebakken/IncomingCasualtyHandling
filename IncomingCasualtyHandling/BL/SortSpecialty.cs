@@ -17,10 +17,10 @@ namespace IncomingCasualtyHandling.BL
         private ILoadConfigurationSettings LoadXMLSettings;
         private readonly List<Specialty> specialtiesList;
         private OverviewView_Model _overviewView_Model;
-        private DetailView_Model _detailView_Model;
+        private IDetailView_Model _detailView_Model;
         private MainView_Model _mainView_Model;
 
-        public SortSpecialty(ILoadConfigurationSettings _loadXMLSettings,OverviewView_Model overviewView_Model,DetailView_Model detailView_Model, MainView_Model mainview_Model, IGetPatientsFromFHIR RecievePatientsFromFhir)
+        public SortSpecialty(ILoadConfigurationSettings _loadXMLSettings,OverviewView_Model overviewView_Model, IDetailView_Model detailView_Model, MainView_Model mainview_Model, IGetPatientsFromFHIR RecievePatientsFromFhir)
         {
             RecievePatientsFromFhir.PatientDataReady += SortForSpecialty;
             LoadXMLSettings = _loadXMLSettings;
@@ -35,26 +35,29 @@ namespace IncomingCasualtyHandling.BL
             var results = listOfPatients.GroupBy(p => p.Specialty).ToList();
 
             var _tempListe = new List<List<PatientModel>>();
+            var _listWithUnknownSpecialty = new List<PatientModel>();
             foreach (var specialtyResultList in results)
             {
                 int counter = 0;
+                bool knownSpecialty = false;
                 foreach (var specialty in specialtiesList)
                 {
                       
                     if (specialtyResultList.Key == specialty.Name)
                     {
-                        
                         specialty.Amount = specialtyResultList.Count();
                         specialty.ShowAs = Visibility.Visible;
                         specialtiesList[counter] = specialty;
                         var testList = specialtyResultList.ToList();
-                        testList.Sort((a, b) => a.ETA.CompareTo(b.ETA));
+                        //testList.Sort((a, b) => a.ETA.CompareTo(b.ETA));
+                        testList = testList.OrderBy(p => p.ETA).ThenBy(p => p.Name).ToList();
                         _tempListe.Add(testList);
-
+                        knownSpecialty = true;
                         break;
                     }
                     else
-                    { //tjek hvorfor det er redundant?
+                    {
+                        //tjek hvorfor det er redundant?
                         //specialtiesList[13].Amount = specialtiesList[13].Amount + specialtyResultList.Count();
                         //specialty.ShowAs = Visibility.Visible;
                         //Logic that handles an unknown specialty, and adds them to the unknown specialty
@@ -63,8 +66,32 @@ namespace IncomingCasualtyHandling.BL
 
                 }
 
-                
+                // If the specialty is not in the list, it is unknown to the system and but in the unknown specialty list
+                if (!knownSpecialty)
+                {
+                    // Find the unknownSpecialty and update it's properties
+                    var unknownSpecialty = specialtiesList.Find(n => n.Name == "Unknown");
+                    unknownSpecialty.Amount = unknownSpecialty.Amount + specialtyResultList.Count();
+                    unknownSpecialty.ShowAs = Visibility.Visible;
+
+                    // Set the specialty of the patients to "Unknown" in the system
+                    foreach (var unknownSpecialtyPatient in specialtyResultList)
+                    {
+                        unknownSpecialtyPatient.Specialty = "Unknown";
+                    }
+
+                    // Add the patients to the list
+                    _listWithUnknownSpecialty.AddRange(specialtyResultList.ToList());
+                    
+                }
+
             }
+
+            // Sort the list with patients with unknown specialty
+            _listWithUnknownSpecialty.Sort((a,b)=> a.ETA.CompareTo(b.ETA));
+            // Add the unknown list to the list with lists of patients
+            _tempListe.Add(_listWithUnknownSpecialty);
+
             //specialtiesList.RemoveAll(p => p.Amount == 0);
             //specialtiesList.Sort((a,b)=>b.Amount -a.Amount);
             var FinalList = specialtiesList.OrderByDescending(a => a.Amount).ThenBy(a => a.Name).ToList();
