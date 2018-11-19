@@ -107,7 +107,7 @@ namespace IncomingCasualtyHandling.Test.Unit.BL.Test.Unit
         #region Act and Assert
         // Metode_Scenarie_Resultat
 
-        // Test an empty list; no specialties
+        // Test an empty list; no amounts in specialties
         [Test]
         public void SortForSpecialty_ListWithoutPatients_NoAmountInSpecialties()
         {
@@ -221,6 +221,27 @@ namespace IncomingCasualtyHandling.Test.Unit.BL.Test.Unit
             _uut.SortForSpecialty(_listOfPatients);
 
             Assert.That(_detailViewModel.ListOfSpecialtiesPatientLists.Find(s => s[0].Specialty == _listOfPatients[0].Specialty), Is.EqualTo(_sortedListOfPatients));
+        }
+
+        // Test that specialty with most patients is set in MainView Model
+        [Test]
+        public void SortForSpecialty_MostNeurologyPatients_Specialty1IsNeurology()
+        {
+            _patient3 = new PatientModel
+            {
+                PatientId = "3",
+                Name = "Patient Three",
+                Age = "30",
+                Gender = AdministrativeGender.Female,
+                Triage = "TriageYellow",
+                Specialty = "",
+                ToHospital = "AUH",
+                ETA = new DateTime(2018, 11, 18, 21, 30, 00)
+            };
+            _listOfPatients.Add(_patient3);
+            _uut.SortForSpecialty(_listOfPatients);
+            // Unknown specialties are added last to the List of Specialties
+            Assert.That(_detailViewModel.ListOfSpecialtiesPatientLists.Last().Exists(p => p.Name == "Patient Three"), Is.True);
         }
 
         #endregion
