@@ -4,11 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Controls;
+using IncomingCasualtyHandling.BL.Interfaces;
 using IncomingCasualtyHandling.BL.Object_classes;
 
 namespace IncomingCasualtyHandling.BL.Models
 {
-    public class DetailView_Model : ObservableObject
+    public class DetailView_Model : ObservableObject, IDetailView_Model
     {
 
         #region Triages

@@ -90,6 +90,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="BL\Interfaces\IDetailView_Model.cs" />
     <Compile Include="BL\Interfaces\ISortETA.cs" />
     <Compile Include="BL\Interfaces\ISortSpecialty.cs" />
     <Compile Include="BL\Interfaces\ITimer.cs" />

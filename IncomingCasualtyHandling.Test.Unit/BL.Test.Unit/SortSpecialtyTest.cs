@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using Hl7.Fhir.Model;
 using IncomingCasualtyHandling.BL;
 using IncomingCasualtyHandling.BL.Interfaces;
@@ -24,8 +25,8 @@ namespace IncomingCasualtyHandling.Test.Unit.BL.Test.Unit
         private ILoadConfigurationSettings _loadConfigSettings;
         //private IOverviewView_Model _overviewViewModel;
         private OverviewView_Model _overviewViewModel;
-        //private IDetailView_Model _detailViewModel;
-        private DetailView_Model _detailViewModel;
+        private IDetailView_Model _detailViewModel;
+        //private DetailView_Model _detailViewModel;
         //private IMainView_Model _mainViewModel;
         private MainView_Model _mainViewModel;
 
@@ -41,7 +42,7 @@ namespace IncomingCasualtyHandling.Test.Unit.BL.Test.Unit
         {
             _loadConfigSettings = Substitute.For<ILoadConfigurationSettings>();
             _overviewViewModel = Substitute.For<OverviewView_Model>();
-            _detailViewModel = Substitute.For<DetailView_Model>();
+            _detailViewModel = Substitute.For<IDetailView_Model>();
             _mainViewModel = Substitute.For<MainView_Model>();
             _getPatientsFromFHIR = Substitute.For<IGetPatientsFromFHIR>();
 
@@ -79,7 +80,7 @@ namespace IncomingCasualtyHandling.Test.Unit.BL.Test.Unit
                 Age = "10",
                 Gender = AdministrativeGender.Male,
                 Triage = "TriageRed",
-                Specialty = "Medicinal",
+                Specialty = "Neurology",
                 ToHospital = "AUH",
                 ETA = new DateTime(2018, 11, 18, 22, 30, 00)
             };
@@ -108,11 +109,11 @@ namespace IncomingCasualtyHandling.Test.Unit.BL.Test.Unit
 
         // Test an empty list; no specialties
         [Test]
-        public void SortForSpecialty_ListWithoutPatients_NoSpecialtiesSendToModel()
+        public void SortForSpecialty_ListWithoutPatients_NoAmountInSpecialties()
         {
             _listOfPatients.Clear();
             _uut.SortForSpecialty(_listOfPatients);
-            Assert.That(_detailViewModel.ListOfSpecialties, Is.Empty);
+            Assert.That(_detailViewModel.ListOfSpecialties[0].Amount, Is.EqualTo(0));
         }
 
         // Test an empty list; no specialty patients
@@ -124,20 +125,17 @@ namespace IncomingCasualtyHandling.Test.Unit.BL.Test.Unit
             Assert.That(_detailViewModel.ListOfSpecialtiesPatientLists, Is.Empty);
         }
 
-        // Test a list with patients
+        // Test a list with 2 patients with different specialties
         [Test]
-        public void SortForSpecialty_ListWithPatients_AddSortedListToModel()
+        public void SortForSpecialty_ListWith2DifferentSpecialties_AddSortedListWith2ListsToModel()
         {
-            _sortedListOfPatients.Add(_patient1);
-            _sortedListOfPatients.Add(_patient2);
             _uut.SortForSpecialty(_listOfPatients);
-            Assert.That(_detailViewModel.ListOfSpecialtiesPatientLists, Is.EqualTo(_sortedListOfPatients));
+            Assert.That(_detailViewModel.ListOfSpecialtiesPatientLists.Count, Is.EqualTo(2));
         }
 
-        // Test a list with patients 2 patients with same ETA
-        // Check that they are sorted alphabetically as second sorting
+        // Test a list with 3 patients with different specialties
         [Test]
-        public void SortForSpecialty_ListWithEqualETAs_SecondlySortedAlphabetically()
+        public void SortForSpecialty_ListWith3DifferentSpecialties_AddSortedListWith3ListsToModel()
         {
             _patient3 = new PatientModel
             {
@@ -146,19 +144,83 @@ namespace IncomingCasualtyHandling.Test.Unit.BL.Test.Unit
                 Age = "30",
                 Gender = AdministrativeGender.Female,
                 Triage = "TriageYellow",
-                Specialty = "Psychology",
+                Specialty = _listOfSpecialties[1].Name,
                 ToHospital = "AUH",
                 ETA = new DateTime(2018, 11, 18, 21, 30, 00)
             };
             _listOfPatients.Add(_patient3);
+            _uut.SortForSpecialty(_listOfPatients);
+            Assert.That(_detailViewModel.ListOfSpecialtiesPatientLists.Count, Is.EqualTo(3));
+        }
+
+        // Test a list with patients with specialties unknown to system
+        [Test]
+        public void SortForSpecialty_ListWith2UnknownSpecialties_AddSortedListWith3ListsToModel()
+        {
+            _patient3 = new PatientModel
+            {
+                PatientId = "3",
+                Name = "Patient Three",
+                Age = "30",
+                Gender = AdministrativeGender.Female,
+                Triage = "TriageYellow",
+                Specialty = "Test specialty",
+                ToHospital = "AUH",
+                ETA = new DateTime(2018, 11, 18, 21, 30, 00)
+            };
+            _listOfPatients.Add(_patient3);
+            _uut.SortForSpecialty(_listOfPatients);
+            // Unknown specialties are added last to the List of Specialties
+            Assert.That(_detailViewModel.ListOfSpecialtiesPatientLists.Last().Count, Is.EqualTo(2));
+        }
+
+        // Test a list with patient without specialty
+        [Test]
+        public void SortForSpecialty_ListWithPatientWithoutSpecialty_PatientEndsInUnknownSpecialtyList()
+        {
+            _patient3 = new PatientModel
+            {
+                PatientId = "3",
+                Name = "Patient Three",
+                Age = "30",
+                Gender = AdministrativeGender.Female,
+                Triage = "TriageYellow",
+                Specialty = "",
+                ToHospital = "AUH",
+                ETA = new DateTime(2018, 11, 18, 21, 30, 00)
+            };
+            _listOfPatients.Add(_patient3);
+            _uut.SortForSpecialty(_listOfPatients);
+            // Unknown specialties are added last to the List of Specialties
+            Assert.That(_detailViewModel.ListOfSpecialtiesPatientLists.Last().Exists(p => p.Name == "Patient Three"), Is.True);
+        }
+
+        // Test a list with patients 2 patients with same Specialty and ETA
+        // Check that they are sorted alphabetically as second sorting
+        [Test]
+        public void SortForSpecialty_ListWithEqualSpecialties_SecondlySortedAlphabetically()
+        {
+            _patient3 = new PatientModel
+            {
+                PatientId = "3",
+                Name = "Alma",
+                Age = "30",
+                Gender = AdministrativeGender.Female,
+                Triage = "TriageYellow",
+                Specialty = _listOfPatients[0].Specialty,
+                ToHospital = "AUH",
+                ETA = _listOfPatients[0].ETA
+            };
+            _listOfPatients.Add(_patient3);
+
+            // Create the test sorted list that the detail view models list should match
+            _sortedListOfPatients.Add(_patient3); // "Alma" comes first in the alphabet
+            _sortedListOfPatients.Add(_patient1); // compared to "Patient One"
+
 
             _uut.SortForSpecialty(_listOfPatients);
 
-            _sortedListOfPatients.Add(_patient3);
-            _sortedListOfPatients.Add(_patient2);
-            _sortedListOfPatients.Add(_patient1);
-
-            Assert.That(_detailViewModel.ETAPatients, Is.EqualTo(_sortedListOfPatients));
+            Assert.That(_detailViewModel.ListOfSpecialtiesPatientLists.Find(s => s[0].Specialty == _listOfPatients[0].Specialty), Is.EqualTo(_sortedListOfPatients));
         }
 
         #endregion
