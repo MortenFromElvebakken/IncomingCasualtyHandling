@@ -93,6 +93,8 @@
     <Compile Include="BL\Interfaces\IOverviewView_Model.cs" />
     <Compile Include="BL\Interfaces\IMainView_Model.cs" />
     <Compile Include="BL\Interfaces\IDetailView_Model.cs" />
+    <Compile Include="BL\Interfaces\IMainView_Model.cs" />
+    <Compile Include="BL\Interfaces\IOverviewView_Model.cs" />
     <Compile Include="BL\Interfaces\ISortETA.cs" />
     <Compile Include="BL\Interfaces\ISortSpecialty.cs" />
     <Compile Include="BL\Interfaces\ITimer.cs" />
