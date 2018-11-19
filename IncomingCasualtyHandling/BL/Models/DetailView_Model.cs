@@ -77,6 +77,12 @@ namespace IncomingCasualtyHandling.BL.Models
             set => ListOfTriagePatientLists[4] = value;
         }
 
+        public List<PatientModel> Triage6Patients
+        {
+            get => ListOfTriagePatientLists[5];
+            set => ListOfTriagePatientLists[5] = value;
+        }
+
         #endregion
 
         #region specialties
