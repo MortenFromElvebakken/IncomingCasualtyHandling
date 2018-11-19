@@ -16,13 +16,13 @@ namespace IncomingCasualtyHandling.BL
     {
         private ILoadConfigurationSettings LoadXMLSettings;
         private readonly List<Specialty> specialtiesList;
-        private OverviewView_Model _overviewView_Model;
+        private IOverviewView_Model _overviewView_Model;
         private IDetailView_Model _detailView_Model;
-        private MainView_Model _mainView_Model;
+        private IMainView_Model _mainView_Model;
 
-        public SortSpecialty(ILoadConfigurationSettings _loadXMLSettings,OverviewView_Model overviewView_Model, IDetailView_Model detailView_Model, MainView_Model mainview_Model, IGetPatientsFromFHIR RecievePatientsFromFhir)
+        public SortSpecialty(ILoadConfigurationSettings _loadXMLSettings, IOverviewView_Model overviewView_Model, IDetailView_Model detailView_Model, IMainView_Model mainview_Model, IGetPatientsFromFHIR ReceivePatientsFromFhir)
         {
-            RecievePatientsFromFhir.PatientDataReady += SortForSpecialty;
+            ReceivePatientsFromFhir.PatientDataReady += SortForSpecialty;
             LoadXMLSettings = _loadXMLSettings;
             specialtiesList = new List<Specialty>(LoadXMLSettings.SpecialtiesList);  //Copy of list from xml
             _overviewView_Model = overviewView_Model;
