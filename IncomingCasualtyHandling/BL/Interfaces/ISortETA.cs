@@ -7,10 +7,8 @@ using IncomingCasualtyHandling.BL.Object_classes;
 
 namespace IncomingCasualtyHandling.BL.Interfaces
 {
-    public interface ITimer
+    public interface ISortETA
     {
-        void FindRelativeTime(List<PatientModel> sortedEtas);
-        //void CompareETATimeToCurrentTime(DateTime nextEta);
-
+        void SortForETA(List<PatientModel> listOfPatients);
     }
 }

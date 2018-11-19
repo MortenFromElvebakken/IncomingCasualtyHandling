@@ -11,7 +11,7 @@ using IncomingCasualtyHandling.DAL.Interface;
 
 namespace IncomingCasualtyHandling.BL
 {
-    public class SortETA
+    public class SortETA : ISortETA
     {
         private IOverviewView_Model _overviewViewModel;
         private IDetailView_Model _detailView_Model;
@@ -34,27 +34,11 @@ namespace IncomingCasualtyHandling.BL
         // Adds a sorted patientList to DetailView_Model
         public void SortForETA(List<PatientModel> listOfPatients)
         {
-            List<PatientModel> SortedETAList = listOfPatients.OrderBy(o => o.ETA).ToList();
-            FindNearestETA(SortedETAList);
+            List<PatientModel> SortedETAList = listOfPatients.OrderBy(o => o.ETA).ThenBy(n => n.Name).ToList();
             _detailView_Model.ETAPatients = SortedETAList;
 
-        }
-
-        public void FindNearestETA(List<PatientModel> sortedPatients)
-        {
-            foreach (var patient in sortedPatients)
-            {
-                
-                if (patient.ETA > DateTime.Now)
-                {
-                    _timer.CompareETATimeToCurrentTime(patient.ETA);
-                    break;
-                }
-            }
-
-            _timer.CompareETATimeToCurrentTime(sortedPatients.Last().ETA);
-
-            
+            // When the ETA's are sorted, they are send to the Timer-class to work on relative time
+            _timer.FindRelativeTime(SortedETAList);
 
         }
     }

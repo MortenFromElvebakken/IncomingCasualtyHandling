@@ -11,7 +11,7 @@ using IncomingCasualtyHandling.BL.Object_classes;
 
 namespace IncomingCasualtyHandling.BL
 {
-    public class Timer:ITimer
+    public class Timer : ITimer
     {
 
         private IMainView_Model _mainViewModel;
@@ -54,16 +54,46 @@ namespace IncomingCasualtyHandling.BL
             _mainViewModel.CurrentDateTime = day + ". " + month + ". " + year + "\t" + hour + ":" + minute;
         }
 
+        // List to contain ETAs
+        private List<PatientModel> _listOfEtas;
+        
+        // Method to find the next coming ETA
+        public void FindRelativeTime(List<PatientModel> sortedEtas)
+        {
+            _listOfEtas = sortedEtas;
+            // Check the ETAs to see, if they are in the future
+            foreach (var patient in _listOfEtas)
+            {
+
+                if (patient.ETA > DateTime.Now)
+                {
+                    CompareETATimeToCurrentTime(patient.ETA);
+                    return;
+                }
+            }
+
+            // If the compiler gets to here, there are no next coming ETAs
+            _nextEta = new ETA
+            {
+                AbsoluteTime = "--:--",
+                RelativeTime = ""
+            };
+            _overviewViewModel.Eta = _nextEta;
+
+        }
+
         // Relative time calculations done with inspiration from:
         // https://stackoverflow.com/a/1248 and
         // https://stackoverflow.com/a/628203
 
-        // Constant for relative time method
+        // Constants for relative time method
         private const int Second = 1;
         private const int MinuteInSeconds = 60 * Second;
         private const int HourInMinutes = 60 * MinuteInSeconds;
 
+        // Prefix for relative time
         private string _prefix;
+
         private string _relativeTime;
         private TimeSpan _timeSpan;
         private TimeSpan _positiveTimeSpan;
@@ -73,16 +103,17 @@ namespace IncomingCasualtyHandling.BL
 
         // Compares the parameter time with the current time
         // Returns the relative time in minutes
-        public void CompareETATimeToCurrentTime(DateTime nextEta)
+        private void CompareETATimeToCurrentTime(DateTime nextEta)
         {
             _dateTimeEta = nextEta;
             _prefix = "+";
             _relativeTime = "NN:NN";
 
+            // Find the timespan between now and the ETA
             _timeSpan = new TimeSpan(DateTime.Now.Ticks - nextEta.Ticks);
             _timeDifference = Math.Abs(_timeSpan.TotalSeconds);
 
-            FindRelativeTime(_timeDifference, _timeSpan);
+            CalculateRelativeTime(_timeDifference, _timeSpan);
 
             // Prepare ETA timer and start it
             _etaTimer.Tick += (sender, e) =>
@@ -95,40 +126,59 @@ namespace IncomingCasualtyHandling.BL
         }
 
 
-        private void FindRelativeTime(double timeDifference, TimeSpan timeSpan)
+        private void CalculateRelativeTime(double timeDifference, TimeSpan timeSpan)
         {
-            // Check whether the timespan is negative
-            // If it is, make it positive and change the prefix to a minus
+            // Check whether the timespan is negative and create a positive timespan to use for minutes and seconds
+            // Change the prefix to a minus
             _positiveTimeSpan = timeSpan;
             if (timeSpan.CompareTo(TimeSpan.Zero) < 0)
             {
                 _prefix = "-";
-                _positiveTimeSpan = _timeSpan.Negate();
+                _positiveTimeSpan = timeSpan.Negate();
             }
+            // Add a minute to get the right minute count, as seconds aren't shown. E.g. 41 minutes and 20 seconds becomes 42 minutes.
+            _positiveTimeSpan = _positiveTimeSpan.Add(new TimeSpan(0, 1, 0));
 
-            // Time less than a minute:
-            if (_timeDifference < 1 * MinuteInSeconds)
-            {
-                //Set relative time to show no missing minutes
-                _relativeTime = _positiveTimeSpan.Minutes.ToString().PadLeft(2, '0') + ":" + _positiveTimeSpan.Seconds.ToString().PadLeft(2, '0');
-            }
+            //// Time less than a minute:
+            //if (timeDifference < 1 * MinuteInSeconds)
+            //{
+            //    //Set relative time to show no missing minutes
+            //    _relativeTime = _positiveTimeSpan.Minutes.ToString().PadLeft(2, '0') + ":" + _positiveTimeSpan.Seconds.ToString().PadLeft(2, '0');
+            //}
             // Time less than 99 hours but more than a minute:
-            if (_timeDifference < 99 * HourInMinutes && _timeDifference > 1 * MinuteInSeconds)
+            if (timeDifference < 999 * MinuteInSeconds && _timeDifference > 0)
             {
-                _relativeTime = _positiveTimeSpan.Minutes.ToString().PadLeft(2, '0') + ":" + _positiveTimeSpan.Seconds.ToString().PadLeft(2, '0');
+                _relativeTime = _positiveTimeSpan.Minutes.ToString().PadLeft(2, '0');
             }
 
-            if (_timeDifference > 99 * HourInMinutes)
+            if (timeDifference > 999* MinuteInSeconds)
             {
                 _prefix = ">";
-                _relativeTime = "99:59";
+                _relativeTime = "999";
             }
 
-            _nextEta = new ETA
+            // Check if minutes contains more than 2 characters
+            // If it does, the prefix should be right next to the first number
+            // If not, a space is placed between the prefix and the number
+            if (_positiveTimeSpan.TotalMinutes > 99)
             {
-                AbsoluteTime = _dateTimeEta.ToShortTimeString(),
-                RelativeTime = "(" + _prefix + _relativeTime + ")"
-            };
+                _nextEta = new ETA
+                {
+                    AbsoluteTime = _dateTimeEta.ToShortTimeString(),
+                    RelativeTime = "(" + _prefix + _relativeTime + "minutes)"
+                };
+            }
+            else
+            {
+                _nextEta = new ETA
+                {
+                    AbsoluteTime = _dateTimeEta.ToShortTimeString(),
+                    RelativeTime = "(" + _prefix + " " + _relativeTime + "minutes)"
+                };
+            }
+
+
+            
 
             _overviewViewModel.Eta = _nextEta;
             _mainViewModel.Eta = _nextEta;
@@ -138,17 +188,25 @@ namespace IncomingCasualtyHandling.BL
         // Timer-event that keeps track of relative time until ETA and updates OverviewView_Model
         private void ETATime_TimerTick(object sender, EventArgs e, DateTime nextEta)
         {
+            // Find the current timespan
             _timeSpan = new TimeSpan(DateTime.Now.Ticks - nextEta.Ticks);
+            // Remove a second
             _timeSpan = _timeSpan.Subtract(new TimeSpan(0, 0, 1));
+            // Find the time difference
             _timeDifference = Math.Abs(_timeSpan.TotalSeconds);
 
             // OBS - skal vi have denne if eller ej?
+            // Check if ETA is NOW, because then a new ETA should be found
             if (_timeSpan.TotalSeconds > -Second)
             {
+                // Stop the timer
                 DispatcherTimer timer = (DispatcherTimer)sender;
                 timer.Stop();
+                // Find the next ETA in the list
+                FindRelativeTime(_listOfEtas);
+                return;
             }
-            FindRelativeTime(_timeDifference, _timeSpan);
+            CalculateRelativeTime(_timeDifference, _timeSpan);
         }
     }
 }
