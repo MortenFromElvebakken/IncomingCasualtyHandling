@@ -163,7 +163,7 @@ namespace IncomingCasualtyHandling.Test.Unit.BL.Test.Unit
                 Age = "30",
                 Gender = AdministrativeGender.Female,
                 Triage = "TriageBlack",
-                Specialty = "Test specialty",
+                Specialty = "Medicinal",
                 ToHospital = "AUH",
                 ETA = new DateTime(2018, 11, 18, 21, 30, 00)
             };
@@ -173,6 +173,26 @@ namespace IncomingCasualtyHandling.Test.Unit.BL.Test.Unit
             Assert.That(_detailViewModel.ListOfTriagePatientLists.Last().Count, Is.EqualTo(1));
         }
 
+        // Test a list with patient without triage
+        [Test]
+        public void SortForSpecialty_ListWithPatientWithoutTriage_PatientEndsInUnknownTriageList()
+        {
+            _patient3 = new PatientModel
+            {
+                PatientId = "3",
+                Name = "Patient Three",
+                Age = "30",
+                Gender = AdministrativeGender.Female,
+                Triage = "",
+                Specialty = "",
+                ToHospital = "AUH",
+                ETA = new DateTime(2018, 11, 18, 21, 30, 00)
+            };
+            _listOfPatients.Add(_patient3);
+            _uut.SortForTriage(_listOfPatients);
+            // Unknown triages are added last to the List of triages
+            Assert.That(_detailViewModel.ListOfTriagePatientLists.Last().Exists(p => p.Name == "Patient Three"), Is.True);
+        }
 
         #endregion
 

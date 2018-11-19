@@ -20,11 +20,20 @@ namespace IncomingCasualtyHandling.BL
         private IOverviewView_Model _overviewView_Model;
         private IDetailView_Model _detailView_Model;
         private IMainView_Model _mainView_Model;
+
+        string unknownTriageName = "TriageUnknown";
+
         public SortTriage(ILoadConfigurationSettings _loadXMLSettings, IOverviewView_Model overviewView_Model, IDetailView_Model detailView_Model, IMainView_Model mainView_Model, IGetPatientsFromFHIR ReceivePatientsFromFhir)
         {
             ReceivePatientsFromFhir.PatientDataReady += SortForTriage;
             LoadXMLSettings = _loadXMLSettings;
             TriageList = new List<Triage>(LoadXMLSettings.TriageList);  //To get a copy of the list loaded from XML-file
+            // Create an unknown triage
+            Triage unknownTriage = new Triage();
+            unknownTriage.Name = unknownTriageName;
+            unknownTriage.Colour = "#cecece";
+            TriageList.Add(unknownTriage);
+
             _overviewView_Model = overviewView_Model;
             _detailView_Model = detailView_Model;
             _mainView_Model = mainView_Model;
@@ -60,21 +69,16 @@ namespace IncomingCasualtyHandling.BL
                 // If the triage is not in the list, it is unknown to the system and put in the unknown triage list
                 if (!knownTriage)
                 {
-                    // Create a unknown triage
-                    string triageName = "TriageUnknown";
-                    Triage unknownTriage = new Triage();
-                    unknownTriage.Name = triageName;
-                    unknownTriage.Colour = "#cecece";
+                    // Find the unknownTriage and update it's properties
+                    var unknownTriage = TriageList.Find(n => n.Name == unknownTriageName);
                     unknownTriage.Amount = unknownTriage.Amount + triageResultList.Count();
                     unknownTriage.ShowAs = Visibility.Visible;
 
                     // Set the triage of the patients to "Unknown" in the system
                     foreach (var unknownTriagePatient in triageResultList)
                     {
-                        unknownTriagePatient.Triage = triageName;
+                        unknownTriagePatient.Triage = unknownTriageName;
                     }
-
-                    TriageList.Add(unknownTriage);
 
                     // Add the patients to the list
                     _listWithUnknownTriage.AddRange(triageResultList.ToList());
