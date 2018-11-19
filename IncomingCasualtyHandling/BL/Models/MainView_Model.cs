@@ -81,6 +81,11 @@ namespace IncomingCasualtyHandling.BL.Models
             set => ListOfTriages[4] = value;
         }
 
+        public Triage Triage6
+        {
+            get => ListOfTriages[5];
+            set => ListOfTriages[5] = value;
+        }
 
         public ETA Eta { get; set; }
         public Specialty Specialty1 { get; set; }
