@@ -13,14 +13,14 @@ namespace IncomingCasualtyHandling.BL
 {
     public class SortETA : ISortETA
     {
-        private OverviewView_Model _overviewViewModel;
-        private DetailView_Model _detailView_Model;
-        private MainView_Model _mainView_Model;
+        private IOverviewView_Model _overviewViewModel;
+        private IDetailView_Model _detailView_Model;
+        private IMainView_Model _mainView_Model;
         private ITimer _timer;
 
 
         // Constructor
-        public SortETA(OverviewView_Model overviewView_Model, DetailView_Model detailView_Model, MainView_Model mainView_Model, ITimer timer, IGetPatientsFromFHIR RecievePatientsFromFhir)
+        public SortETA(IOverviewView_Model overviewView_Model, IDetailView_Model detailView_Model, IMainView_Model mainView_Model, ITimer timer, IGetPatientsFromFHIR RecievePatientsFromFhir)
         {
             
             RecievePatientsFromFhir.PatientDataReady += SortForETA;
