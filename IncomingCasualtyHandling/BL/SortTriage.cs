@@ -86,10 +86,13 @@ namespace IncomingCasualtyHandling.BL
                 }
             }
 
-            // Sort the list with patients with unknown triage
-            _listWithUnknownTriage.Sort((a, b) => a.ETA.CompareTo(b.ETA));
-            // Add the unknown list to the list with lists of patients
-            _TempList.Add(_listWithUnknownTriage);
+            // Sort the list with patients with unknown triage if any
+            if (_listWithUnknownTriage.Count != 0)
+            {
+                _listWithUnknownTriage.Sort((a, b) => a.ETA.CompareTo(b.ETA));
+                // Add the unknown list to the list with lists of patients
+                _TempList.Add(_listWithUnknownTriage);
+            }
 
             _mainView_Model.ListOfTriages = TriageList;
             _detailView_Model.ListOfTriages = TriageList;

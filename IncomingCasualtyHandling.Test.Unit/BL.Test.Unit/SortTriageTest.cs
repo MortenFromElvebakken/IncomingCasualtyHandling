@@ -126,7 +126,7 @@ namespace IncomingCasualtyHandling.Test.Unit.BL.Test.Unit
 
         // Test a list with 2 patients with different triages
         [Test]
-        public void SortForTriage_ListWith2DifferentSpecialties_AddSortedListWith2ListsToModel()
+        public void SortForTriage_ListWith2DifferentTriages_AddSortedListWith2ListsToModel()
         {
             _uut.SortForTriage(_listOfPatients);
             Assert.That(_detailViewModel.ListOfTriagePatientLists.Count, Is.EqualTo(2));
@@ -170,7 +170,7 @@ namespace IncomingCasualtyHandling.Test.Unit.BL.Test.Unit
             _listOfPatients.Add(_patient3);
             _uut.SortForTriage(_listOfPatients);
             // Unknown triages are added last to the List of triages
-            Assert.That(_detailViewModel.ListOfTriagePatientLists.Last().Count, Is.EqualTo(1));
+            Assert.That(_detailViewModel.ListOfTriagePatientLists.Last().Exists(p => p.Name == "Patient Three"), Is.True);
         }
 
         // Test a list with patient without triage

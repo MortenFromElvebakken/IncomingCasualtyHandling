@@ -80,10 +80,13 @@ namespace IncomingCasualtyHandling.BL
 
             }
 
-            // Sort the list with patients with unknown specialty
-            _listWithUnknownSpecialty.Sort((a,b)=> a.ETA.CompareTo(b.ETA));
-            // Add the unknown list to the list with lists of patients
-            _tempListe.Add(_listWithUnknownSpecialty);
+            // Sort the list with patients with unknown specialty if any
+            if (_listWithUnknownSpecialty.Count != 0)
+            {
+                _listWithUnknownSpecialty.Sort((a, b) => a.ETA.CompareTo(b.ETA));
+                // Add the unknown list to the list with lists of patients
+                _tempListe.Add(_listWithUnknownSpecialty);
+            }
 
             //specialtiesList.RemoveAll(p => p.Amount == 0);
             //specialtiesList.Sort((a,b)=>b.Amount -a.Amount);
