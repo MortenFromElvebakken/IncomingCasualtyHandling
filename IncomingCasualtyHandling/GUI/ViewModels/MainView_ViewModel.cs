@@ -146,6 +146,8 @@ namespace IncomingCasualtyHandling.GUI.ViewModels
 
         public Triage Triage5 => _mainModel.Triage5;
 
+        public Triage Triage6 => _mainModel.Triage6;
+
         public Specialty Specialty1 => _mainModel.Specialty1;
 
         public ETA Eta => _mainModel.Eta;
