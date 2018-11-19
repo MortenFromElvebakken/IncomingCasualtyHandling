@@ -18,6 +18,7 @@ namespace IncomingCasualtyHandling.BL.Interfaces
         Triage Triage3 { get; set; }
         Triage Triage4 { get; set; }
         Triage Triage5 { get; set; }
+        Triage Triage6 { get; set; }
         ETA Eta { get; set; }
         event PropertyChangedEventHandler PropertyChanged;
     }
