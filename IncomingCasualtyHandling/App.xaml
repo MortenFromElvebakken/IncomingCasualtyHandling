@@ -13,6 +13,7 @@
                 <ResourceDictionary Source="/UserControlLibrary;component/BarStyle.xaml"></ResourceDictionary>
                 <ResourceDictionary Source="/UserControlLibrary;component/LabelStyle.xaml"></ResourceDictionary>
                 <ResourceDictionary Source="/UserControlLibrary;component/TabControlStyles.xaml"></ResourceDictionary>
+                <ResourceDictionary Source="/UserControlLibrary;component/GridStyle.xaml"></ResourceDictionary>
             </ResourceDictionary.MergedDictionaries>
 
 

@@ -90,7 +90,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="BL\Interfaces\IDetailView_Model.cs" />
+    <Compile Include="BL\Interfaces\IMainView_Model.cs" />
+    <Compile Include="BL\Interfaces\IOverviewView_Model.cs" />
     <Compile Include="BL\Interfaces\ITimer.cs" />
+    <Compile Include="BL\Models\TabControl.cs" />
     <Compile Include="BL\Models\DetailView_Model.cs" />
     <Compile Include="BL\Models\MainView_Model.cs" />
     <Compile Include="BL\Models\OverviewView_Model.cs" />
@@ -161,6 +165,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="GUI\View\ConfigFileWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BL\Object classes\PatientModel.cs" />
@@ -178,6 +186,9 @@
     </Compile>
     <Compile Include="GUI\View\GuidingOverviewComponent.xaml.cs">
       <DependentUpon>GuidingOverviewComponent.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\View\ConfigFileWindow.xaml.cs">
+      <DependentUpon>ConfigFileWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\Annotations.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">

@@ -1,9 +1,10 @@
 ﻿using IncomingCasualtyHandling.BL.Object_classes;
 using System.Collections.Generic;
+using IncomingCasualtyHandling.BL.Interfaces;
 
 namespace IncomingCasualtyHandling.BL.Models
 {
-    public class OverviewView_Model : ObservableObject
+    public class OverviewView_Model : ObservableObject, IOverviewView_Model
     {
         #region Triages
 

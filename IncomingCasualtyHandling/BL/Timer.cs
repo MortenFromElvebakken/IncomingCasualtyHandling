@@ -14,8 +14,8 @@ namespace IncomingCasualtyHandling.BL
     public class Timer:ITimer
     {
 
-        private MainView_Model _mainViewModel;
-        private OverviewView_Model _overviewViewModel;
+        private IMainView_Model _mainViewModel;
+        private IOverviewView_Model _overviewViewModel;
 
         // Timer made with inspiration from:
         // https://stackoverflow.com/a/5410783
@@ -24,7 +24,7 @@ namespace IncomingCasualtyHandling.BL
         readonly DispatcherTimer _etaTimer = new DispatcherTimer();
 
 
-        public Timer(MainView_Model mainViewModel, OverviewView_Model overviewViewModel)
+        public Timer(IMainView_Model mainViewModel, IOverviewView_Model overviewViewModel)
         {
             // Set Models
             _mainViewModel = mainViewModel;
@@ -131,6 +131,7 @@ namespace IncomingCasualtyHandling.BL
             };
 
             _overviewViewModel.Eta = _nextEta;
+            _mainViewModel.Eta = _nextEta;
 
         }
 

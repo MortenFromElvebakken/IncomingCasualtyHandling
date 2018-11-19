@@ -19,6 +19,7 @@
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="40"/>
                 <ColumnDefinition/>
+                <ColumnDefinition/>
             </Grid.ColumnDefinitions>
             <Grid Grid.Column="0">
                 <xctk:IconButton Padding="5" Command="{Binding RelativeSource={RelativeSource AncestorType=Window}, Path=DataContext.ChangeViewCommand}" >
@@ -27,7 +28,7 @@
                     </xctk:IconButton.Icon>
                 </xctk:IconButton>
             </Grid>
-            <Grid Grid.Column="1">
+            <Grid Grid.Column="2">
                 <local:GuidingOverviewComponent></local:GuidingOverviewComponent>
             </Grid>
         </Grid>

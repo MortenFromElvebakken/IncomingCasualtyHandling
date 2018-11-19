@@ -4,12 +4,13 @@ using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using IncomingCasualtyHandling.BL.Interfaces;
 using IncomingCasualtyHandling.BL.Object_classes;
 using IncomingCasualtyHandling.DAL;
 
 namespace IncomingCasualtyHandling.BL.Models
 {
-    public class MainView_Model : ObservableObject
+    public class MainView_Model : ObservableObject, IMainView_Model
     {
 
         
@@ -97,6 +98,8 @@ namespace IncomingCasualtyHandling.BL.Models
             get => ListOfTriages[4];
             set => ListOfTriages[4] = value;
         }
+
+        public ETA Eta { get; set; }
         public Specialty Specialty1 { get; set; }
 
 
