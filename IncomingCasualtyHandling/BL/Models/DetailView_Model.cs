@@ -244,8 +244,11 @@ namespace IncomingCasualtyHandling.BL.Models
             get => _selectedTabIndex;
             set
             {
-                _selectedTabIndex = value;
-                OnPropertyChanged("PatientsInList");
+                if (value >= 0)
+                {
+                    _selectedTabIndex = value;
+                    OnPropertyChanged("PatientsInList");
+                }
             }
         }
 
@@ -260,6 +263,7 @@ namespace IncomingCasualtyHandling.BL.Models
             {
                 _stringFromCommandParameter = value;
                 OnPropertyChanged("StringFromChangeViewCommandParameter");
+                
             }
         }
 
@@ -346,12 +350,11 @@ namespace IncomingCasualtyHandling.BL.Models
                     _tabsList = _tempTabList;
                     return _tabsList;
                 }
-
             }
             set
             {
                 _tabsList = value;
-                OnPropertyChanged("TabsList");
+                OnPropertyChanged("Tabs");
 
             }
         }

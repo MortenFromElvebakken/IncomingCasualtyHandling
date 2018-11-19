@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Windows.Controls;
+using System.Windows.Input;
 using Hl7.Fhir.Model;
 using IncomingCasualtyHandling.BL.Interfaces;
 using IncomingCasualtyHandling.BL.Models;
@@ -72,6 +73,7 @@ namespace IncomingCasualtyHandling.GUI.ViewModels
         {
             _detailViewModel = detailViewModel;
             _detailViewModel.PropertyChanged += DetailViewModelOnPropertyChanged;
+            ChangeTabsCommand = new RelayCommand<object>(ChangeTabs);
             
            
         }
@@ -79,6 +81,15 @@ namespace IncomingCasualtyHandling.GUI.ViewModels
         private void DetailViewModelOnPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
             OnPropertyChanged(e.PropertyName);
+        }
+        public ICommand ChangeTabsCommand { get; set; }
+        private void ChangeTabs(object x)
+        {
+
+            StringFromParameter = x.ToString();
+            OnPropertyChanged("Tabs");
+            OnPropertyChanged("SelectedIndex");
+
         }
     }
 }

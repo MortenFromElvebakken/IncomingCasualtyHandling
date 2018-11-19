@@ -42,7 +42,7 @@
                     </TabItem.Header>
                 </TabItem>
             </TabControl>-->
-            <TabControl ItemsSource="{Binding Tabs}" SelectedIndex="{Binding SelectedIndex}">
+            <TabControl ItemsSource="{Binding Tabs}" SelectedIndex="{Binding SelectedIndex, Mode=OneWay}">
                 <TabControl.Resources>
                     <Style BasedOn="{StaticResource ChosenTab}" TargetType="TabItem"></Style>
                 </TabControl.Resources>

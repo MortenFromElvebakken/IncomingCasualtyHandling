@@ -87,7 +87,7 @@ namespace IncomingCasualtyHandling.GUI.ViewModels
             {
                 //En eller anden logic, der gør at den reloader tabs
                 _detailViewViewModel.StringFromParameter = x.ToString();
-                OnPropertyChanged("ListOfTabs");
+                var test = _detailViewViewModel.Tabs;
             }
         }
 
