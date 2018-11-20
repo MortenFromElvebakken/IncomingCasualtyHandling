@@ -38,6 +38,8 @@ namespace IncomingCasualtyHandling.DAL
             //Initialize seachparameters
             sParameters = new SearchParams();
             sParameters.Add("active", "true");
+            sParameters.Add("identifier", "AUH");
+            
 
             //Create thread that gets new data
             myThread = new Thread(AsyncGetAllPatients);
