@@ -41,12 +41,12 @@ namespace IncomingCasualtyHandling.DAL
                 newEntry.GetStringExtension("http://www.example.com/triagetest") ?? "Unknown";
             newPatientModel.Specialty =
                 newEntry.GetStringExtension("http://www.example.com/SpecialtyTest") ?? "Unknown";
-            //newPatientModel.ETA = 
-                //Convert.ToDateTime(newEntry.GetExtension("http://www.example.com/datetimeTest").Value.ToString());
+            newPatientModel.ETA = 
+                Convert.ToDateTime(newEntry.GetExtension("http://www.example.com/datetimeTest").Value.ToString());
 
-            DateTime eta = Convert.ToDateTime(newEntry.GetStringExtension("http://www.example.com/datetimeTest")?? DateTime.MinValue.ToString());
+            //DateTime eta = Convert.ToDateTime(newEntry.GetStringExtension("http://www.example.com/datetimeTest")?? DateTime.MinValue.ToString());
             // Hvad  kan vi gøre hvis der ingen ETA er?
-            newPatientModel.ETA = eta;
+            //newPatientModel.ETA = eta;
             
            
             return newPatientModel;
