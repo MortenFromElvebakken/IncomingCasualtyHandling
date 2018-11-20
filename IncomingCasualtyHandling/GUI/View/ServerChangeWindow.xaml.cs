@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using Hl7.Fhir.Rest;
 
 namespace IncomingCasualtyHandling.GUI.View
 {
@@ -25,7 +26,32 @@ namespace IncomingCasualtyHandling.GUI.View
         }
         private void btnOk_Click(object sender, RoutedEventArgs e)
         {
-            DialogResult = true;
+
+            //Check if given URL is valid? 
+            if (ServerName.Text != "")
+            {
+                //Lav fhirclient kald og se om den giver en valid endpoint, hvis ja, sæt dialogresult true
+                
+                try
+                {
+                    FhirClient testGivenEndpoint = new FhirClient(ServerName.Text);
+                    testGivenEndpoint.CapabilityStatement();
+                    DialogResult = true;
+                    
+                }
+                catch (Exception exception)
+                {
+                    MessageBox.Show(exception.Message + ". Try another endpoint");
+                    DialogResult = false;
+                }
+                
+            }
+            else
+            {
+                MessageBox.Show("Type in URL of endpoint before pressing OK");
+                DialogResult = false;
+            }
+            //DialogResult = true;
         }
     }
 }
