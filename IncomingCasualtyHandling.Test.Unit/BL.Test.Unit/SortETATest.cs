@@ -102,7 +102,7 @@ namespace IncomingCasualtyHandling.Test.Unit.BL.Test.Unit
             Assert.That(_detailViewModel.ETAPatients, Is.EqualTo(_sortedListOfPatients));
         }
 
-        // Test a list with patients 2 patients with same ETA
+        // Test a list with 2 patients with same ETA
         // Check that they are sorted alphabetically as second sorting
         [Test]
         public void SortForETA_ListWithEqualETAs_SecondlySortedAlphabetically()
@@ -129,7 +129,24 @@ namespace IncomingCasualtyHandling.Test.Unit.BL.Test.Unit
             Assert.That(_detailViewModel.ETAPatients, Is.EqualTo(_sortedListOfPatients));
         }
 
-        // TEST WITH A PATIENT WITHOUT ETA
+        // Test with a patient without ETA
+        [Test]
+        public void SortForETA_PatientWithoutETA_PlaceLastInList()
+        {
+            _patient3 = new PatientModel
+            {
+                PatientId = "3",
+                Name = "Patient Three",
+                Age = "30",
+                Gender = AdministrativeGender.Female,
+                Triage = "TriageYellow",
+                Specialty = "Psychology",
+                ToHospital = "AUH"
+            };
+            _listOfPatients.Add(_patient3);
+            _uut.SortForETA(_listOfPatients);
+            Assert.That(_detailViewModel.ETAPatients.Last().Name, Is.EqualTo(_patient3.Name));
+        }
 
         #endregion
 

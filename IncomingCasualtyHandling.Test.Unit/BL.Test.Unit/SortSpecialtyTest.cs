@@ -23,14 +23,11 @@ namespace IncomingCasualtyHandling.Test.Unit.BL.Test.Unit
         private ISortSpecialty _uut;
 
         private ILoadConfigurationSettings _loadConfigSettings;
-        //private IOverviewView_Model _overviewViewModel;
-        private OverviewView_Model _overviewViewModel;
+        private IOverviewView_Model _overviewViewModel;
         private IDetailView_Model _detailViewModel;
-        //private DetailView_Model _detailViewModel;
-        //private IMainView_Model _mainViewModel;
-        private MainView_Model _mainViewModel;
+        private IMainView_Model _mainViewModel;
 
-        private IGetPatientsFromFHIR _getPatientsFromFHIR;
+        private ISortETA _sortEta;
 
 
         private List<Specialty> _listOfSpecialties;
@@ -41,10 +38,10 @@ namespace IncomingCasualtyHandling.Test.Unit.BL.Test.Unit
         public void Setup()
         {
             _loadConfigSettings = Substitute.For<ILoadConfigurationSettings>();
-            _overviewViewModel = Substitute.For<OverviewView_Model>();
+            _overviewViewModel = Substitute.For<IOverviewView_Model>();
             _detailViewModel = Substitute.For<IDetailView_Model>();
-            _mainViewModel = Substitute.For<MainView_Model>();
-            _getPatientsFromFHIR = Substitute.For<IGetPatientsFromFHIR>();
+            _mainViewModel = Substitute.For<IMainView_Model>();
+            _sortEta = Substitute.For<ISortETA>();
 
             _listOfSpecialties = new List<Specialty>();
             _listOfSpecialties.Add(new Specialty{Name = "Diagnostic radiology"});
@@ -67,7 +64,7 @@ namespace IncomingCasualtyHandling.Test.Unit.BL.Test.Unit
 
             _loadConfigSettings.SpecialtiesList = _listOfSpecialties;
 
-            _uut = new SortSpecialty(_loadConfigSettings, _overviewViewModel, _detailViewModel, _mainViewModel, _getPatientsFromFHIR);
+            _uut = new SortSpecialty(_loadConfigSettings, _overviewViewModel, _detailViewModel, _mainViewModel, _sortEta);
 
             // Create a list with patients
             _listOfPatients = new List<PatientModel>();

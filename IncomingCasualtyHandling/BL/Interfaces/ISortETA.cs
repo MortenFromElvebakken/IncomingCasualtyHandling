@@ -10,5 +10,7 @@ namespace IncomingCasualtyHandling.BL.Interfaces
     public interface ISortETA
     {
         void SortForETA(List<PatientModel> listOfPatients);
+        event SortETA.PatientUpdateHandler SortedListReady;
+        List<PatientModel> SortListOnEta(List<PatientModel> listToSort);
     }
 }

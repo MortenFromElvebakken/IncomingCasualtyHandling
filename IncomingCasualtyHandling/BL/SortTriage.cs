@@ -21,11 +21,14 @@ namespace IncomingCasualtyHandling.BL
         private IDetailView_Model _detailView_Model;
         private IMainView_Model _mainView_Model;
 
+        private ISortETA _sortEta;
+
         string unknownTriageName = "TriageUnknown";
 
-        public SortTriage(ILoadConfigurationSettings _loadXMLSettings, IOverviewView_Model overviewView_Model, IDetailView_Model detailView_Model, IMainView_Model mainView_Model, IGetPatientsFromFHIR ReceivePatientsFromFhir)
+        public SortTriage(ILoadConfigurationSettings _loadXMLSettings, IOverviewView_Model overviewView_Model, IDetailView_Model detailView_Model, IMainView_Model mainView_Model, ISortETA sortEta)
         {
-            ReceivePatientsFromFhir.PatientDataReady += SortForTriage;
+            _sortEta = sortEta;
+            _sortEta.SortedListReady += SortForTriage;
             LoadXMLSettings = _loadXMLSettings;
             TriageList = new List<Triage>(LoadXMLSettings.TriageList);  //To get a copy of the list loaded from XML-file
             // Create an unknown triage
@@ -43,8 +46,9 @@ namespace IncomingCasualtyHandling.BL
 
         public void SortForTriage(List<PatientModel> listOfPatients)
         {
-            List<List<PatientModel>> _TempList = new List<List<PatientModel>>();
-            List<PatientModel> _listWithUnknownTriage = new List<PatientModel>();
+            // Create a list of lists of patients
+            List<List<PatientModel>> listOfPatientLists = new List<List<PatientModel>>();
+            List<PatientModel> listWithUnknownTriage = new List<PatientModel>();
             var results = listOfPatients.GroupBy(p => p.Triage);
             foreach (var triageResultList in results)
             {
@@ -53,14 +57,20 @@ namespace IncomingCasualtyHandling.BL
                 bool knownTriage = false;
                 foreach (var triage in TriageList)
                 {
-                    //int counter = 0;
+                    // Check the triage list with patients to the configuration file triages
+                    // If the triage matches:
                     if (triageResultList.Key == triage.Name)
                     {
+                        // Set the amount of patients
                         triage.Amount = triageResultList.Count();
+                        // Set visibility to visible, as there are patients with that triage
                         triage.ShowAs = Visibility.Visible;
-                        var testList = triageResultList.ToList();
-                        testList.Sort((a, b) => a.ETA.CompareTo(b.ETA));
-                        _TempList.Add(testList);
+                        // Create a list from the LINQ statement
+                        var patientList = triageResultList.ToList();
+                        //patientList.Sort((a, b) => a.ETA.CompareTo(b.ETA));
+                        // Add the list to the list of patient lists
+                        listOfPatientLists.Add(patientList);
+                        // As the triage matched the configuration file triage, the triage is known
                         knownTriage = true;
                         break;
                     }
@@ -83,22 +93,50 @@ namespace IncomingCasualtyHandling.BL
                     }
 
                     // Add the patients to the list
-                    _listWithUnknownTriage.AddRange(triageResultList.ToList());
+                    listWithUnknownTriage.AddRange(triageResultList.ToList());
 
                 }
             }
 
             // Sort the list with patients with unknown triage if any
-            if (_listWithUnknownTriage.Count != 0)
+            if (listWithUnknownTriage.Count != 0)
             {
-                _listWithUnknownTriage.Sort((a, b) => a.ETA.CompareTo(b.ETA));
+                // Nedenstående linje giver vel en cirkulær afhængighed? Kan i hvert fald ikke teste, da den jo er mocket ud
+                //listWithUnknownTriage = _sortEta.SortListOnEta(listWithUnknownTriage);
+
+                // Så for nu er det duplikering af kode:
+                listWithUnknownTriage = listWithUnknownTriage.OrderBy(p => p.ETA).ThenBy(p => p.Name).ToList();
+                var _patientsWithoutEta = new List<PatientModel>();
+                int _range = 0;
+                foreach (var patient in listWithUnknownTriage)
+                {
+                    // IF the patient's ETA matches DateTime.MinValue it means, that no ETA is set
+                    if (patient.ETA == DateTime.MinValue)
+                    {
+                        // Save the patient in the no-ETA list and save the index
+                        _patientsWithoutEta.Add(patient);
+                        _range = ++_range;
+                    }
+                }
+
+                // When all patients have been checked, move the patients without ETAs to the end of the list
+                // by adding them and removing their old placements
+                // IF there are any patients without ETA
+                if (_patientsWithoutEta.Count != 0)
+                {
+
+                    listWithUnknownTriage.AddRange(_patientsWithoutEta);
+                    listWithUnknownTriage.RemoveRange(0, _range);
+                }
+
+                //listWithUnknownTriage.Sort((a, b) => a.ETA.CompareTo(b.ETA));
                 // Add the unknown list to the list with lists of patients
-                _TempList.Add(_listWithUnknownTriage);
+                listOfPatientLists.Add(listWithUnknownTriage);
             }
 
             _mainView_Model.ListOfTriages = TriageList;
             _detailView_Model.ListOfTriages = TriageList;
-            _detailView_Model.ListOfTriagePatientLists = _TempList;
+            _detailView_Model.ListOfTriagePatientLists = listOfPatientLists;
 
         }
     }

@@ -23,14 +23,11 @@ namespace IncomingCasualtyHandling.Test.Unit.BL.Test.Unit
         private ISortTriage _uut;
 
         private ILoadConfigurationSettings _loadConfigSettings;
-        //private IOverviewView_Model _overviewViewModel;
-        private OverviewView_Model _overviewViewModel;
+        private IOverviewView_Model _overviewViewModel;
         private IDetailView_Model _detailViewModel;
-        //private DetailView_Model _detailViewModel;
-        //private IMainView_Model _mainViewModel;
-        private MainView_Model _mainViewModel;
+        private IMainView_Model _mainViewModel;
 
-        private IGetPatientsFromFHIR _getPatientsFromFHIR;
+        private ISortETA _sortEta;
 
 
         private List<Triage> _listOfTriages;
@@ -41,10 +38,10 @@ namespace IncomingCasualtyHandling.Test.Unit.BL.Test.Unit
         public void Setup()
         {
             _loadConfigSettings = Substitute.For<ILoadConfigurationSettings>();
-            _overviewViewModel = Substitute.For<OverviewView_Model>();
+            _overviewViewModel = Substitute.For<IOverviewView_Model>();
             _detailViewModel = Substitute.For<IDetailView_Model>();
-            _mainViewModel = Substitute.For<MainView_Model>();
-            _getPatientsFromFHIR = Substitute.For<IGetPatientsFromFHIR>();
+            _mainViewModel = Substitute.For<IMainView_Model>();
+            _sortEta = Substitute.For<ISortETA>();
 
             _listOfTriages = new List<Triage>();
             _listOfTriages.Add(new Triage { Name = "TriageRed" });
@@ -58,7 +55,7 @@ namespace IncomingCasualtyHandling.Test.Unit.BL.Test.Unit
             _loadConfigSettings.TriageList = _listOfTriages;
 
             _uut = new SortTriage(_loadConfigSettings, _overviewViewModel, _detailViewModel, _mainViewModel,
-                    _getPatientsFromFHIR);
+                    _sortEta);
 
             // Create a list with patients
             _listOfPatients = new List<PatientModel>();
@@ -192,6 +189,38 @@ namespace IncomingCasualtyHandling.Test.Unit.BL.Test.Unit
             _uut.SortForTriage(_listOfPatients);
             // Unknown triages are added last to the List of triages
             Assert.That(_detailViewModel.ListOfTriagePatientLists.Last().Exists(p => p.Name == "Patient Three"), Is.True);
+        }
+
+        // Test a list with patients without triages and one without ETA too
+        [Test]
+        public void SortForSpecialty_ListWithPatientWithoutTriageAndEta_PatientEndsLastInUnknownTriageList()
+        {
+            _patient3 = new PatientModel
+            {
+                PatientId = "3",
+                Name = "Patient Three",
+                Age = "30",
+                Gender = AdministrativeGender.Female,
+                Triage = "",
+                Specialty = "",
+                ToHospital = "AUH",
+            };
+            _patient4 = new PatientModel
+            {
+                PatientId = "4",
+                Name = "Patient Four",
+                Age = "30",
+                Gender = AdministrativeGender.Female,
+                Triage = "",
+                Specialty = "",
+                ToHospital = "AUH",
+                ETA = new DateTime(2018, 11, 18, 21, 30, 00)
+            };
+            _listOfPatients.Add(_patient3);
+            _listOfPatients.Add(_patient4);
+            _uut.SortForTriage(_listOfPatients);
+            // Unknown triages are added last to the List of triages
+            Assert.That(_detailViewModel.ListOfTriagePatientLists.Last().IndexOf(_patient3), Is.EqualTo(_detailViewModel.ListOfTriagePatientLists.Last().Count-1));
         }
 
         #endregion
