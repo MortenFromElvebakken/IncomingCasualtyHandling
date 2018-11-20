@@ -114,5 +114,10 @@ namespace IncomingCasualtyHandling.DAL
             }
             AsyncGetAllPatients();
         }
+
+        public void setFhirClientURL(string s)
+        {
+            client = new FhirClient(s);
+        }
     }
 }

@@ -79,10 +79,11 @@ namespace IncomingCasualtyHandling
             // Then Logics
             IDetailView_Model _detailViewModel = new DetailView_Model();
             IOverviewView_Model _overviewViewModel = new OverviewView_Model();
-            IMainView_Model _mainViewModel = new MainView_Model();
+            //IMainView_Model _mainViewModel = new MainView_Model();
 
 
             IGetPatientsFromFHIR IGetPatientsFromFhir = fhirCommands;
+            IMainView_Model _mainViewModel = new MainView_Model(IGetPatientsFromFhir);
             ITimer timer = new Timer(_mainViewModel, _overviewViewModel);
             //var sortETA = new SortETA(_overviewViewModel,_detailViewModel, _mainViewModel, timer, IGetPatientsFromFhir);
             //var sortSpecialty = new SortSpecialty(lcs, _overviewViewModel, _detailViewModel, _mainViewModel, IGetPatientsFromFhir);

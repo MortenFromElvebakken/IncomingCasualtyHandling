@@ -7,15 +7,16 @@ using System.Threading.Tasks;
 using IncomingCasualtyHandling.BL.Interfaces;
 using IncomingCasualtyHandling.BL.Object_classes;
 using IncomingCasualtyHandling.DAL;
+using IncomingCasualtyHandling.DAL.Interface;
 
 namespace IncomingCasualtyHandling.BL.Models
 {
     public class MainView_Model : ObservableObject, IMainView_Model
     {
-
-        
-        public MainView_Model()
+        private IGetPatientsFromFHIR iGetPatientsFromFhir;
+        public MainView_Model(IGetPatientsFromFHIR _IGetPatientsFromFHIR)
         {
+            iGetPatientsFromFhir = _IGetPatientsFromFHIR;
         }
 
         private string _currentDateTime;
@@ -99,7 +100,7 @@ namespace IncomingCasualtyHandling.BL.Models
             set
             {
                 _serverName = value;
-
+                iGetPatientsFromFhir.setFhirClientURL(_serverName);
             }
         }
 
