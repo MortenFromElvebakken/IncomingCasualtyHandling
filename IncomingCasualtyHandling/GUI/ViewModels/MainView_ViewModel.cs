@@ -8,6 +8,7 @@ using IncomingCasualtyHandling.BL.Interfaces;
 using IncomingCasualtyHandling.BL.Models;
 using IncomingCasualtyHandling.BL.Object_classes;
 using IncomingCasualtyHandling.DAL;
+using IncomingCasualtyHandling.GUI.View;
 
 namespace IncomingCasualtyHandling.GUI.ViewModels
 {
@@ -44,6 +45,7 @@ namespace IncomingCasualtyHandling.GUI.ViewModels
             CurrentWorkspace = _overviewViewViewModel;
             ChangeViewCommand = new RelayCommand(ChangeView);
             ChangeViewCommandWithProperty = new RelayCommand<object>(ChangeViewWithParameter);
+            ChangeServerName = new RelayCommand(ChangeServer);
         }
 
         
@@ -80,6 +82,7 @@ namespace IncomingCasualtyHandling.GUI.ViewModels
 
             if(CurrentWorkspace == _overviewViewViewModel)
             {
+                
                 _detailViewViewModel.StringFromParameter = x.ToString();
                 CurrentWorkspace = _detailViewViewModel;
             }
@@ -87,9 +90,25 @@ namespace IncomingCasualtyHandling.GUI.ViewModels
             {
                 //En eller anden logic, der gør at den reloader tabs
                 _detailViewViewModel.StringFromParameter = x.ToString();
-                var test = _detailViewViewModel.Tabs;
+                //var test = _detailViewViewModel.Tabs;
             }
         }
+        public ICommand ChangeServerName { get; set; }
+
+        public void ChangeServer()
+        {
+            ServerChangeWindow serverChangeWindow = new ServerChangeWindow();
+            if (serverChangeWindow.ShowDialog() ==true)
+            {
+                
+                //Sæt servernavn i mainmodel, lav en metode i set på denne property, der sætter servernavn
+                //i dal, og hvis denne er sat, skal fhirclient.endpoint være lig denne, og getallpatients kaldes
+                //igen
+                //serverChangeWindow.ServerName
+                //Set servername in 
+            }
+        }
+
 
         // Command for command-binding to change view
         public ICommand ChangeViewCommand { get; set; }

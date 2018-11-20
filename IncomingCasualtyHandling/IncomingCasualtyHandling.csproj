@@ -172,6 +172,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="GUI\View\ServerChangeWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BL\Object classes\PatientModel.cs" />
@@ -192,6 +196,9 @@
     </Compile>
     <Compile Include="GUI\View\ConfigFileWindow.xaml.cs">
       <DependentUpon>ConfigFileWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\View\ServerChangeWindow.xaml.cs">
+      <DependentUpon>ServerChangeWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\Annotations.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">

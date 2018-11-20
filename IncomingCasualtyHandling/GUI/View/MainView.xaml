@@ -14,13 +14,13 @@
     <Window.DataContext>
         <viewModels:MainView_ViewModel/>
     </Window.DataContext>
+    <Window.InputBindings>
+        <MouseBinding Gesture="Alt+LeftClick" Command="{Binding ChangeServerName}">
+        </MouseBinding>
+    </Window.InputBindings>
 
     <Grid>
-        <Grid.InputBindings>
-
-            <KeyBinding Modifiers="Alt">
-            </KeyBinding>
-        </Grid.InputBindings>
+        
         <Grid.RowDefinitions>
             <RowDefinition Height="0.05*"/>
             <RowDefinition/>

@@ -91,7 +91,17 @@ namespace IncomingCasualtyHandling.BL.Models
         public Specialty Specialty1 { get; set; }
 
 
-        private readonly CultureInfo _culture = CultureInfo.CurrentCulture;
+        //private readonly CultureInfo _culture = CultureInfo.CurrentCulture;
+        private string _serverName;
+        public string ServerName
+        {
+            get => _serverName;
+            set
+            {
+                _serverName = value;
+
+            }
+        }
 
 
     }

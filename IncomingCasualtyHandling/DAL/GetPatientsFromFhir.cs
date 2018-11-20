@@ -34,7 +34,7 @@ namespace IncomingCasualtyHandling.DAL
             client = new FhirClient(fhirServerURL);
             serialisePatient = _isp;
 
-
+            
             //Initialize seachparameters
             sParameters = new SearchParams();
             sParameters.Add("active", "true");
