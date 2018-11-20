@@ -37,7 +37,7 @@ namespace IncomingCasualtyHandling.GUI.View
                     FhirClient testGivenEndpoint = new FhirClient(ServerName.Text);
                     testGivenEndpoint.CapabilityStatement();
                     DialogResult = true;
-                    
+                        
                 }
                 catch (Exception exception)
                 {

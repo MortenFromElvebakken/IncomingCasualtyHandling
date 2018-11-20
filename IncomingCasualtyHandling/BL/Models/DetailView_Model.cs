@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Controls;
 using IncomingCasualtyHandling.BL.Interfaces;
 using IncomingCasualtyHandling.BL.Object_classes;
@@ -309,9 +310,20 @@ namespace IncomingCasualtyHandling.BL.Models
                             var _tab = new TabControl()
                             {
                                 Name = triage.Name,
-                                Data = ListOfTriagePatientLists.Find(item => item[0].Triage == triage.Name)
+                                Data = ListOfTriagePatientLists.Find(item => item[0].Triage == triage.Name),
+                                isVisible = Visibility.Visible
+
                             };
 
+                            _tempTabList.Add(_tab);
+                        }
+                        else
+                        {
+                            var _tab = new TabControl()
+                            {
+                                Name = triage.Name,
+                                isVisible = Visibility.Collapsed
+                            };
                             _tempTabList.Add(_tab);
                         }
 
@@ -332,7 +344,8 @@ namespace IncomingCasualtyHandling.BL.Models
                             var _tab = new TabControl()
                             {
                                 Name = specialty.Name,
-                                Data = ListOfSpecialtiesPatientLists.Find(item => item[0].Specialty == specialty.Name)
+                                Data = ListOfSpecialtiesPatientLists.Find(item => item[0].Specialty == specialty.Name),
+                                isVisible = Visibility.Visible
 
                             };
                             _tempTabList.Add(_tab);
@@ -349,7 +362,8 @@ namespace IncomingCasualtyHandling.BL.Models
                     var _tab = new TabControl()
                     {
                         Name = "ETA",
-                        Data = ETAPatients
+                        Data = ETAPatients,
+                        isVisible = Visibility.Visible
 
                     };
                     _tempTabList.Add(_tab);
@@ -361,6 +375,7 @@ namespace IncomingCasualtyHandling.BL.Models
             {
                 _tabsList = value;
                 OnPropertyChanged("Tabs");
+                
 
             }
         }

@@ -85,6 +85,9 @@ namespace IncomingCasualtyHandling.GUI.ViewModels
         public ICommand ChangeTabsCommand { get; set; }
         private void ChangeTabs(object x)
         {
+            //Logic that handles if an overview component is pressed 
+            //Needs to handle if there is 0 patients in the list
+            //Needs to handle if triage 3 is pressed but nothing is in tab 2 and 1, so that tab 3 is now tab1
 
             StringFromParameter = x.ToString();
             OnPropertyChanged("Tabs");

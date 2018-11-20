@@ -50,6 +50,8 @@ namespace IncomingCasualtyHandling.BL
             List<List<PatientModel>> listOfPatientLists = new List<List<PatientModel>>();
             List<PatientModel> listWithUnknownTriage = new List<PatientModel>();
             var results = listOfPatients.GroupBy(p => p.Triage);
+            TriageList[5].Amount = 0;
+            
             foreach (var triageResultList in results)
             {
                 int counter = 0;

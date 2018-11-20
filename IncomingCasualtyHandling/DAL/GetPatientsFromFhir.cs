@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Windows;
 using Hl7.Fhir.Model;
 using Hl7.Fhir.Rest;
 using IncomingCasualtyHandling.BL.Object_classes;
@@ -31,6 +32,9 @@ namespace IncomingCasualtyHandling.DAL
             hospitalShortName = _loadConfigSettingsFromXmlDocument.HospitalShortName;
 
             //Initialize a client to call fhirserver
+            //Hvordan testes internet connection???...
+            //Måske set server op til at kigge på en anden fhir server, fjern internet, men lad localhost
+            //på config fil. Så burde man kunne teste hvor den breaker henne
             client = new FhirClient(fhirServerURL);
             serialisePatient = _isp;
 
@@ -54,7 +58,17 @@ namespace IncomingCasualtyHandling.DAL
             //http://docs.simplifier.net/fhirnetapi/client/search.html
             
             List<PatientModel> listOfPatients = new List<PatientModel>();
-            var firstBundle = client.Search<Patient>(sParameters);
+            var firstBundle = default(Bundle);
+            try
+            {
+                firstBundle = client.Search<Patient>(sParameters);
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message + "Something went wrong in the connection to the server");
+                throw;
+            }
+            
             
             //Result er en bundle med "pages" i, hvor hver page loades med 10(lige nu) patienter i. Hvis der er flere end 10 læses de 10 første og
             //går til næste side
@@ -92,7 +106,17 @@ namespace IncomingCasualtyHandling.DAL
         {
             
             Thread.Sleep(20000);
-            var newBundle = client.SearchAsync<Patient>(sParameters).Result;
+            var newBundle = default(Bundle);
+            try
+            {
+                newBundle = client.SearchAsync<Patient>(sParameters).Result;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+            //Denne if er jeg usikker på om vi skal have
             if (newBundle.Link.IsExactly(lastBundle.Link))
             {
                 Debug.WriteLine("Same bundle returned");
