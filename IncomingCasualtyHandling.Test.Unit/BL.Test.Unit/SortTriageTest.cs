@@ -10,6 +10,7 @@ using IncomingCasualtyHandling.BL.Object_classes;
 using IncomingCasualtyHandling.DAL.Interface;
 using Hl7.Fhir.Model;
 using NSubstitute;
+using NSubstitute.ClearExtensions;
 using NUnit.Framework;
 
 namespace IncomingCasualtyHandling.Test.Unit.BL.Test.Unit
@@ -33,6 +34,7 @@ namespace IncomingCasualtyHandling.Test.Unit.BL.Test.Unit
         private List<Triage> _listOfTriages;
         private List<PatientModel> _listOfPatients, _sortedListOfPatients;
         private PatientModel _patient1, _patient2, _patient3, _patient4, _patient5;
+        string unknownTriageName = "TriageUnknown";
 
         [SetUp]
         public void Setup()
@@ -49,7 +51,6 @@ namespace IncomingCasualtyHandling.Test.Unit.BL.Test.Unit
             _listOfTriages.Add(new Triage { Name = "TriageYellow" });
             _listOfTriages.Add(new Triage { Name = "TriageGreen" });
             _listOfTriages.Add(new Triage { Name = "TriageBlue" });
-            _listOfTriages.Add(new Triage { Name = "TriageUnknown" });
 
 
             _loadConfigSettings.TriageList = _listOfTriages;
@@ -165,6 +166,21 @@ namespace IncomingCasualtyHandling.Test.Unit.BL.Test.Unit
                 ETA = new DateTime(2018, 11, 18, 21, 30, 00)
             };
             _listOfPatients.Add(_patient3);
+
+            PatientModel patient3Wut = new PatientModel
+            {
+                PatientId = "3",
+                Name = "Patient Three",
+                Age = "30",
+                Gender = AdministrativeGender.Female,
+                Triage = unknownTriageName,
+                Specialty = "",
+                ToHospital = "AUH",
+                ETA = new DateTime(2018, 11, 18, 21, 30, 00)
+            };
+            _sortedListOfPatients.Add(patient3Wut);
+            _sortEta.SortListOnEta(_listOfPatients).ReturnsForAnyArgs(_sortedListOfPatients);
+
             _uut.SortForTriage(_listOfPatients);
             // Unknown triages are added last to the List of triages
             Assert.That(_detailViewModel.ListOfTriagePatientLists.Last().Exists(p => p.Name == "Patient Three"), Is.True);
@@ -186,6 +202,21 @@ namespace IncomingCasualtyHandling.Test.Unit.BL.Test.Unit
                 ETA = new DateTime(2018, 11, 18, 21, 30, 00)
             };
             _listOfPatients.Add(_patient3);
+
+            PatientModel patient3Wut = new PatientModel
+            {
+                PatientId = "3",
+                Name = "Patient Three",
+                Age = "30",
+                Gender = AdministrativeGender.Female,
+                Triage = unknownTriageName,
+                Specialty = "",
+                ToHospital = "AUH",
+                ETA = new DateTime(2018, 11, 18, 21, 30, 00)
+            };
+            _sortedListOfPatients.Add(patient3Wut);
+            _sortEta.SortListOnEta(_listOfPatients).ReturnsForAnyArgs(_sortedListOfPatients);
+
             _uut.SortForTriage(_listOfPatients);
             // Unknown triages are added last to the List of triages
             Assert.That(_detailViewModel.ListOfTriagePatientLists.Last().Exists(p => p.Name == "Patient Three"), Is.True);
@@ -195,13 +226,14 @@ namespace IncomingCasualtyHandling.Test.Unit.BL.Test.Unit
         [Test]
         public void SortForSpecialty_ListWithPatientWithoutTriageAndEta_PatientEndsLastInUnknownTriageList()
         {
+            _patient1.Triage = _listOfTriages[3].Name;
             _patient3 = new PatientModel
             {
                 PatientId = "3",
                 Name = "Patient Three",
                 Age = "30",
                 Gender = AdministrativeGender.Female,
-                Triage = "",
+                Triage = unknownTriageName,
                 Specialty = "",
                 ToHospital = "AUH",
             };
@@ -218,9 +250,41 @@ namespace IncomingCasualtyHandling.Test.Unit.BL.Test.Unit
             };
             _listOfPatients.Add(_patient3);
             _listOfPatients.Add(_patient4);
+
+            List<PatientModel> unknownTriagePatients = new List<PatientModel>();
+            
+            PatientModel patient3UnknownTriage = new PatientModel
+            {
+                PatientId = "3",
+                Name = "Patient Three",
+                Age = "30",
+                Gender = AdministrativeGender.Female,
+                Triage = unknownTriageName,
+                Specialty = "",
+                ToHospital = "AUH",
+            };
+            PatientModel patient4UnknownTriage = new PatientModel
+            {
+                PatientId = "4",
+                Name = "Patient Four",
+                Age = "30",
+                Gender = AdministrativeGender.Female,
+                Triage = unknownTriageName,
+                Specialty = "",
+                ToHospital = "AUH",
+                ETA = new DateTime(2018, 11, 18, 21, 30, 00)
+            };
+            unknownTriagePatients.Add(patient3UnknownTriage);
+            unknownTriagePatients.Add(patient4UnknownTriage);
+
+            _sortedListOfPatients.Add(patient4UnknownTriage);
+            _sortedListOfPatients.Add(patient3UnknownTriage);
+
+            _sortEta.SortListOnEta(unknownTriagePatients).ReturnsForAnyArgs(_sortedListOfPatients);
+
             _uut.SortForTriage(_listOfPatients);
             // Unknown triages are added last to the List of triages
-            Assert.That(_detailViewModel.ListOfTriagePatientLists.Last().IndexOf(_patient3), Is.EqualTo(_detailViewModel.ListOfTriagePatientLists.Last().Count-1));
+            Assert.That(_detailViewModel.ListOfTriagePatientLists.Last().IndexOf(patient3UnknownTriage), Is.EqualTo(_detailViewModel.ListOfTriagePatientLists.Last().Count-1));
         }
 
         #endregion

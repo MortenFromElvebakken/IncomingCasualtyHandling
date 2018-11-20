@@ -40,7 +40,7 @@ namespace IncomingCasualtyHandling.BL
         {
             //List<PatientModel> SortedETAList = listOfPatients.OrderBy(o => o.ETA).ThenBy(n => n.Name).ToList();
 
-            SortListOnEta(listOfPatients);
+            listOfPatients = SortListOnEta(listOfPatients);
 
             OnSortedListReady(listOfPatients);
 

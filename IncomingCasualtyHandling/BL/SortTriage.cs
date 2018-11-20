@@ -98,40 +98,36 @@ namespace IncomingCasualtyHandling.BL
                 }
             }
 
-            // Sort the list with patients with unknown triage if any
+            // Check whether there are any patients with a triage unknown to the system
             if (listWithUnknownTriage.Count != 0)
             {
-                // Nedenstående linje giver vel en cirkulær afhængighed? Kan i hvert fald ikke teste, da den jo er mocket ud
-                //listWithUnknownTriage = _sortEta.SortListOnEta(listWithUnknownTriage);
-
-                // Så for nu er det duplikering af kode:
-                listWithUnknownTriage = listWithUnknownTriage.OrderBy(p => p.ETA).ThenBy(p => p.Name).ToList();
-                var _patientsWithoutEta = new List<PatientModel>();
-                int _range = 0;
-                foreach (var patient in listWithUnknownTriage)
+                // Add the patients to the Unknown-triage patient list
+                // Check whether the list already exists
+                if (listOfPatientLists.Exists(l => l.Exists(p => p.Triage == unknownTriageName)))
                 {
-                    // IF the patient's ETA matches DateTime.MinValue it means, that no ETA is set
-                    if (patient.ETA == DateTime.MinValue)
-                    {
-                        // Save the patient in the no-ETA list and save the index
-                        _patientsWithoutEta.Add(patient);
-                        _range = ++_range;
-                    }
-                }
+                    var tempUnknownPatientList =
+                        listOfPatientLists.Find(l => l.Exists(p => p.Triage == unknownTriageName));
+                    var index = listOfPatientLists.FindIndex(l => l.Exists(p => p.Triage == unknownTriageName));
 
-                // When all patients have been checked, move the patients without ETAs to the end of the list
-                // by adding them and removing their old placements
-                // IF there are any patients without ETA
-                if (_patientsWithoutEta.Count != 0)
+                    // Add the unknown triage patients
+                    tempUnknownPatientList.AddRange(listWithUnknownTriage);
+                    // Sort the patients on ETA again
+                    tempUnknownPatientList = _sortEta.SortListOnEta(tempUnknownPatientList);
+
+                    listOfPatientLists[index] = tempUnknownPatientList;
+
+                }
+                else // If the list doesn't already exist, add it
                 {
-
-                    listWithUnknownTriage.AddRange(_patientsWithoutEta);
-                    listWithUnknownTriage.RemoveRange(0, _range);
+                    listWithUnknownTriage = _sortEta.SortListOnEta(listWithUnknownTriage);
+                    listOfPatientLists.Add(listWithUnknownTriage);
                 }
+                
+                // _sortEta.SortListOnEta(listOfPatientLists.Last());
 
-                //listWithUnknownTriage.Sort((a, b) => a.ETA.CompareTo(b.ETA));
-                // Add the unknown list to the list with lists of patients
-                listOfPatientLists.Add(listWithUnknownTriage);
+                
+                //// Add the unknown list to the list with lists of patients
+                //listOfPatientLists.Last().AddRange(listWithUnknownTriage);
             }
 
             _mainView_Model.ListOfTriages = TriageList;

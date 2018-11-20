@@ -22,13 +22,10 @@ namespace IncomingCasualtyHandling.Test.Unit.BL.Test.Unit
 
         private ISortETA _uut;
 
-        //private IOverviewView_Model _overviewViewModel;
-        private OverviewView_Model _overviewViewModel;
-        //private IDetailView_Model _detailViewModel;
-        private DetailView_Model _detailViewModel;
-        //private IMainView_Model _mainViewModel;
-        private MainView_Model _mainViewModel;
-        
+        private IOverviewView_Model _overviewViewModel;
+        private IDetailView_Model _detailViewModel;
+        private IMainView_Model _mainViewModel;
+
         private ITimer _timer;
         private IGetPatientsFromFHIR _getPatientsFromFHIR;
 
@@ -38,9 +35,9 @@ namespace IncomingCasualtyHandling.Test.Unit.BL.Test.Unit
         [SetUp]
         public void Setup()
         {
-            _overviewViewModel = Substitute.For<OverviewView_Model>();
-            _detailViewModel = Substitute.For<DetailView_Model>();
-            _mainViewModel = Substitute.For<MainView_Model>();
+            _overviewViewModel = Substitute.For<IOverviewView_Model>();
+            _detailViewModel = Substitute.For<IDetailView_Model>();
+            _mainViewModel = Substitute.For<IMainView_Model>();
             _timer = Substitute.For<ITimer>();
             _getPatientsFromFHIR = Substitute.For<IGetPatientsFromFHIR>();
             _uut = new SortETA(_overviewViewModel, _detailViewModel, _mainViewModel, _timer, _getPatientsFromFHIR);
@@ -144,6 +141,36 @@ namespace IncomingCasualtyHandling.Test.Unit.BL.Test.Unit
                 ToHospital = "AUH"
             };
             _listOfPatients.Add(_patient3);
+            _uut.SortForETA(_listOfPatients);
+            Assert.That(_detailViewModel.ETAPatients.Last().Name, Is.EqualTo(_patient3.Name));
+        }
+
+        // Test with patients without ETA
+        [Test]
+        public void SortForETA_PatientsWithoutETA_PlaceAlphabeticallyLastInList()
+        {
+            _patient3 = new PatientModel
+            {
+                PatientId = "3",
+                Name = "Patient Three",
+                Age = "30",
+                Gender = AdministrativeGender.Female,
+                Triage = "TriageYellow",
+                Specialty = "Psychology",
+                ToHospital = "AUH"
+            };
+            _patient4 = new PatientModel
+            {
+                PatientId = "3",
+                Name = "Alma",
+                Age = "30",
+                Gender = AdministrativeGender.Female,
+                Triage = "TriageYellow",
+                Specialty = "Psychology",
+                ToHospital = "AUH"
+            };
+            _listOfPatients.Add(_patient3);
+            _listOfPatients.Add(_patient4);
             _uut.SortForETA(_listOfPatients);
             Assert.That(_detailViewModel.ETAPatients.Last().Name, Is.EqualTo(_patient3.Name));
         }
