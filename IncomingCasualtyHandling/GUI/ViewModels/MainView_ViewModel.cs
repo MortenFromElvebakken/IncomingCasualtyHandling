@@ -100,6 +100,10 @@ namespace IncomingCasualtyHandling.GUI.ViewModels
             ServerChangeWindow serverChangeWindow = new ServerChangeWindow();
             if (serverChangeWindow.ShowDialog() ==true)
             {
+                if (serverChangeWindow.ServerName.Text != "")
+                {
+                    _mainModel.ServerName = serverChangeWindow.ServerName.Text;
+                }
                 
                 //Sæt servernavn i mainmodel, lav en metode i set på denne property, der sætter servernavn
                 //i dal, og hvis denne er sat, skal fhirclient.endpoint være lig denne, og getallpatients kaldes

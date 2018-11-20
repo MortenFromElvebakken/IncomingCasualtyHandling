@@ -69,8 +69,11 @@ namespace IncomingCasualtyHandling.DAL
             }
             //Notify(listOfPatients);
             UpdatePatients(listOfPatients);
+            if (!myThread.IsAlive)
+            {
+                myThread.Start();
+            }
             
-            myThread.Start();
         }
 
         //eventlogic, creates Event with list of patients, and invokes it. 
@@ -118,6 +121,7 @@ namespace IncomingCasualtyHandling.DAL
         public void setFhirClientURL(string s)
         {
             client = new FhirClient(s);
+            GetAllPatients();
         }
     }
 }

@@ -100,6 +100,8 @@ namespace IncomingCasualtyHandling.BL.Models
             set
             {
                 _serverName = value;
+                //Check if servername is correct - må vi gøre det i codebehind i vinduet,
+                //Og derfor kun gå ud af det(og godtage det, hvis det virker)
                 iGetPatientsFromFhir.setFhirClientURL(_serverName);
             }
         }
