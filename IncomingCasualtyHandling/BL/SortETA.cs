@@ -62,6 +62,7 @@ namespace IncomingCasualtyHandling.BL
 
         public List<PatientModel> SortListOnEta(List<PatientModel> listToSort)
         {
+            _patientsWithoutEta.Clear();
             _range = 0;
             listToSort = listToSort.OrderBy(p => p.ETA).ThenBy(p => p.Name).ToList();
             foreach (var patient in listToSort)
