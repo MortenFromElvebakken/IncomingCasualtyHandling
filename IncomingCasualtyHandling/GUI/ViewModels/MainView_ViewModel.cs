@@ -56,8 +56,6 @@ namespace IncomingCasualtyHandling.GUI.ViewModels
             OnPropertyChanged(e.PropertyName);
         }
 
-        
-
         // Property for databinding in MainView
         // This property decides the current view/viewmodel
         private Workspace_ViewModel _currentWorkspace;

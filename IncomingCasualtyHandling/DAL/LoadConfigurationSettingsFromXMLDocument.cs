@@ -29,7 +29,7 @@ namespace IncomingCasualtyHandling.DAL
 
         public LoadConfigurationSettingsFromXMLDocument()
         {
-            XmlServerName = "http://localhost:8080/Conf.Fapi/Configuration.xml"; //Muligt at sætte denne ved opstart af program?
+            XmlServerName = "http://localhost:8080/Conf.Fapi/Configuration.xml";
             configFile = new XmlDocument();
             configFile.Load(XmlServerName);
 
@@ -42,9 +42,8 @@ namespace IncomingCasualtyHandling.DAL
         }
         public LoadConfigurationSettingsFromXMLDocument(string _newXmlServerName)
         {
-            XmlServerName = _newXmlServerName; //Muligt at sætte denne ved opstart af program?
+            XmlServerName = _newXmlServerName; 
             configFile = new XmlDocument();
-
             configFile.Load(XmlServerName);
 
 
@@ -57,7 +56,7 @@ namespace IncomingCasualtyHandling.DAL
 
         private void GetServerName()
         {
-            _server = configFile.LastChild.ChildNodes[0].InnerText; //Ikke pænt, lav noget med indexering og den leder efter navn
+            _server = configFile.LastChild.ChildNodes[0].InnerText; 
             ServerName = _server;
         }
         private void GetHospitalShortName()
@@ -77,9 +76,7 @@ namespace IncomingCasualtyHandling.DAL
                 _triage.Name = c.FirstChild.InnerText;
                 _triage.Colour = c.LastChild.InnerText;
                 _triage.Amount = 0;
-                //_triage.Height = 200;
                 _triage.ShowAs = Visibility.Collapsed;
-
                 _triageList.Add(_triage);
             }
 

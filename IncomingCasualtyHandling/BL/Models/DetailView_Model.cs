@@ -89,7 +89,6 @@ namespace IncomingCasualtyHandling.BL.Models
         #region specialties
 
         private List<Specialty> _listOfSpecialties;
-
         public List<Specialty> ListOfSpecialties
         {
             get => _listOfSpecialties;
@@ -102,7 +101,6 @@ namespace IncomingCasualtyHandling.BL.Models
         }
 
         private List<List<PatientModel>> _listOfSpecialtiesPatientLists;
-
         public List<List<PatientModel>> ListOfSpecialtiesPatientLists
         {
             get => _listOfSpecialtiesPatientLists;
@@ -220,16 +218,12 @@ namespace IncomingCasualtyHandling.BL.Models
             get => ListOfSpecialtiesPatientLists[15];
             set => ListOfSpecialtiesPatientLists[15] = value;
         }
-
         
-
-
         #endregion
 
         #region Eta
 
         private List<PatientModel> _ETAPatients;
-
         public List<PatientModel> ETAPatients
         {
             get => _ETAPatients;
@@ -245,36 +239,30 @@ namespace IncomingCasualtyHandling.BL.Models
         #region tabItems
 
         private int _selectedTabIndex;
-
         public int SelectedTabIndex
         {
             get => _selectedTabIndex;
             set
             {
                     _selectedTabIndex = value;
-                OnPropertyChanged("SelectedIndex");
-                    //OnPropertyChanged("PatientsInList");
-
+                    OnPropertyChanged("SelectedIndex");
             }
         }
 
         public string SelectedOverview { get; set; }
 
         private string _stringFromCommandParameter = "";
-
         public string StringFromChangeViewCommandParameter
         {
-            get { return _stringFromCommandParameter; }
+            get => _stringFromCommandParameter;
             set
             {
                 _stringFromCommandParameter = value;
                 OnPropertyChanged("StringFromChangeViewCommandParameter");
-                
             }
         }
 
         private string _patientsInList;
-
         public string PatientsInList
         {
             get => String.Format(_tabsList[SelectedTabIndex].Data.Count + " patient(s)");
@@ -286,97 +274,87 @@ namespace IncomingCasualtyHandling.BL.Models
         }
 
         private List<TabControl> _tabsList = new List<TabControl>();
-
         public List<TabControl> ListOfTabs
         {
             get
             {
-
                 List<TabControl> _tempTabList = new List<TabControl>();
-
-                //finder parametre der skal bruges
-                string[] parameters = StringFromChangeViewCommandParameter.ToString().Split(' ');
-                SelectedOverview = parameters[0].ToString();
+                
+                //The parameters sent from the change view/tab command is split, so it can be used to
+                //determine which tabs are to be made. 
+                string[] parameters = StringFromChangeViewCommandParameter.Split(' ');
+                SelectedOverview = parameters[0];
                 SelectedTabIndex = Convert.ToInt16(parameters[1]);
 
-                if (SelectedOverview == "Triage")
+                switch (SelectedOverview)
                 {
-                    int counter = 0;
-                    foreach (var triage in ListOfTriages)
-                        //test if unknown is in
+                    case "Triage":
                     {
-                        if (triage.Amount != 0)
+                        int counter = 0;
+                        foreach (var triage in ListOfTriages)
                         {
-                            var _tab = new TabControl()
+                            if (triage.Amount != 0)
                             {
-                                Name = triage.Name,
-                                Data = ListOfTriagePatientLists.Find(item => item[0].Triage == triage.Name),
-                                isVisible = Visibility.Visible
-
-                            };
-
-                            _tempTabList.Add(_tab);
-                        }
-                        else
-                        {
-                            var _tab = new TabControl()
+                                var _tab = new TabControl()
+                                {
+                                    Name = triage.Name,
+                                    Data = ListOfTriagePatientLists.Find(item => item[0].Triage == triage.Name),
+                                    isVisible = Visibility.Visible
+                                };
+                                _tempTabList.Add(_tab);
+                            }
+                            else
                             {
-                                Name = triage.Name,
-                                isVisible = Visibility.Collapsed
-                            };
-                            _tempTabList.Add(_tab);
+                                var _tab = new TabControl()
+                                {
+                                    Name = triage.Name,
+                                    isVisible = Visibility.Collapsed
+                                };
+                                _tempTabList.Add(_tab);
+                            }
+                            counter++;
                         }
-
-                        counter++;
+                        _tabsList = _tempTabList;
+                        return _tabsList;
                     }
-
-                    _tabsList = _tempTabList;
-                    return _tabsList;
-                }
-
-                if (SelectedOverview == "Specialty")
-                {
-                    int counter = 0;
-                    foreach (var specialty in ListOfSpecialties)
+                    case "Specialty":
                     {
-                        if (specialty.Amount != 0)
+                        int counter = 0;
+                        foreach (var specialty in ListOfSpecialties)
                         {
-                            var _tab = new TabControl()
+                            if (specialty.Amount != 0)
                             {
-                                Name = specialty.Name,
-                                Data = ListOfSpecialtiesPatientLists.Find(item => item[0].Specialty == specialty.Name),
-                                isVisible = Visibility.Visible
-
-                            };
-                            _tempTabList.Add(_tab);
+                                var _tab = new TabControl()
+                                {
+                                    Name = specialty.Name,
+                                    Data = ListOfSpecialtiesPatientLists.Find(item => item[0].Specialty == specialty.Name),
+                                    isVisible = Visibility.Visible
+                                };
+                                _tempTabList.Add(_tab);
+                            }
+                            counter++;
                         }
-
-                        counter++;
+                        _tabsList = _tempTabList;
+                        return _tabsList;
                     }
-
-                    _tabsList = _tempTabList;
-                    return _tabsList;
-                }
-                else
-                {
-                    var _tab = new TabControl()
+                    default:
                     {
-                        Name = "ETA",
-                        Data = ETAPatients,
-                        isVisible = Visibility.Visible
-
-                    };
-                    _tempTabList.Add(_tab);
-                    _tabsList = _tempTabList;
-                    return _tabsList;
+                        var _tab = new TabControl()
+                        {
+                            Name = "ETA",
+                            Data = ETAPatients,
+                            isVisible = Visibility.Visible
+                        };
+                        _tempTabList.Add(_tab);
+                        _tabsList = _tempTabList;
+                        return _tabsList;
+                    }
                 }
             }
             set
             {
                 _tabsList = value;
                 OnPropertyChanged("Tabs");
-                
-
             }
         }
 
@@ -389,7 +367,6 @@ namespace IncomingCasualtyHandling.BL.Models
             {
                 if (_tabsList[tryTabIndex].isVisible == Visibility.Visible)
                 {
-                    
                     SelectedTabIndex = tryTabIndex;
                 }
             }
@@ -411,7 +388,6 @@ namespace IncomingCasualtyHandling.BL.Models
                     OnPropertyChanged("Tabs");
                     OnPropertyChanged("SelectedIndex");
                     OnPropertyChanged("PatientsInList");
-                    //+ lave tabs igen
                 }
             }
             

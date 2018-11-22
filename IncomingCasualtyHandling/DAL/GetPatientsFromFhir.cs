@@ -22,7 +22,6 @@ namespace IncomingCasualtyHandling.DAL
         private ISerializeToPatient serialisePatient;
         private ILoadConfigurationSettings _loadConfigSettingsFromXmlDocument;
         private SearchParams sParameters;
-        private Bundle lastBundle;
         private static Thread myThread;
         private DateTime dateOfLastSearch;
 
@@ -71,10 +70,7 @@ namespace IncomingCasualtyHandling.DAL
                 throw;
             }
 
-
-            //Result er en bundle med "pages" i, hvor hver page loades med 10(lige nu) patienter i. Hvis der er flere end 10 læses de 10 første og
-            //går til næste side
-            lastBundle = firstBundle;
+            //in a bundle, the entries are divided into pages. This while loop ensures every entry is added
             while (firstBundle != null)
             {
                 foreach (var x in firstBundle.Entry)
@@ -85,7 +81,6 @@ namespace IncomingCasualtyHandling.DAL
                 }
                 firstBundle = client.Continue(firstBundle, PageDirection.Next);
             }
-            //Notify(listOfPatients);
             UpdatePatients(listOfPatients);
             if (!myThread.IsAlive)
             {
@@ -130,7 +125,6 @@ namespace IncomingCasualtyHandling.DAL
                         PatientModel op = serialisePatient.ReturnPatient(testpatient);
                         listOfPatients.Add(op);
                     }
-
                     newBundle = client.Continue(newBundle, PageDirection.Next);
                 }
 

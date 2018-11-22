@@ -10,10 +10,7 @@ namespace IncomingCasualtyHandling.GUI.ViewModels
 {
     public class OverviewView_ViewModel : Workspace_ViewModel
     {
-
-        
-
-        #region Triages
+    #region Triages
 
         public int MaximumTriagePatients => _overviewModel.MaximumTriagePatients;
 

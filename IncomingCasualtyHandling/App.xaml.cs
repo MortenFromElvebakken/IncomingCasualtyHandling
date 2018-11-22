@@ -51,11 +51,6 @@ namespace IncomingCasualtyHandling
                         {
                             //new constructor that takes the newly specified Configuration file location
                             lcs = new LoadConfigurationSettingsFromXMLDocument(configFileWindow.ServerTextBoxName.Text);
-                            ////test.Close();
-                            
-                            
-                            //configFileWindow.shouldIClose = true;
-                            //configFileWindow.Close();
                             Application.Current.ShutdownMode = ShutdownMode.OnMainWindowClose;
                         }
                         catch (Exception exception)
