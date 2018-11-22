@@ -1,28 +1,19 @@
-﻿using System;
-using System.IO;
-using System.Net.Mime;
-using System.Reflection;
+﻿using System.IO;
 using Microsoft.VisualStudio.TestTools.UITesting;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Microsoft.VisualStudio.TestTools.UITest.Input;
-using Microsoft.VisualStudio.TestTools.UITest.Extension;
-using Microsoft.VisualStudio.TestTools.UITesting.HtmlControls;
-using Microsoft.VisualStudio.TestTools.UITesting.DirectUIControls;
-using Microsoft.VisualStudio.TestTools.UITesting.WindowsRuntimeControls;
-using Keyboard = Microsoft.VisualStudio.TestTools.UITesting.Keyboard;
 
 
-namespace ICHCodedUITest
+namespace ICHCodedUITest_Normal
 {
     /// <summary>
     /// Summary description for CodedUITest1
     /// </summary>
-    [CodedUITest(CodedUITestType.WindowsStore)]
-    public class CodedUITestView
+    [CodedUITest]
+    public class CodedUITest1
     {
         private string _path;
 
-        public CodedUITestView()
+        public CodedUITest1()
         {
             var parent = Directory.GetParent(Directory.GetCurrentDirectory()).Parent;
             if (parent != null)
@@ -39,13 +30,12 @@ namespace ICHCodedUITest
                     _path = startDirectory + "\\IncomingCasualtyHandling\\bin\\Debug\\IncomingCasualtyHandling.exe";
                 }
             }
-
         }
 
         [TestMethod]
         public void CodedUITestMethod1()
         {
-            
+
             // To generate code for this test, select "Generate Code for Coded UI Test" from the shortcut menu and select one of the menu items.
         }
 
