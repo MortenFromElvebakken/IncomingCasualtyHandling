@@ -88,9 +88,11 @@ namespace IncomingCasualtyHandling.GUI.ViewModels
             }
             else
             {
-                //En eller anden logic, der gør at den reloader tabs
+                //Værdi der finder ud af om det er "lovligt" at kalde en change på string,
+                //Altså hvis der ingen patienter er i listen - så skal det ikke være muligt at trykke på
+                //ie orange. 
                 _detailViewViewModel.StringFromParameter = x.ToString();
-                //var test = _detailViewViewModel.Tabs;
+                //+ en eller anden validering på tab itemnummer til selected index
             }
         }
         public ICommand ChangeServerName { get; set; }

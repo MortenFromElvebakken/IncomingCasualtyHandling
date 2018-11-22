@@ -22,5 +22,6 @@ namespace IncomingCasualtyHandling.BL.Interfaces
         string StringFromChangeViewCommandParameter { get; set; }
         string PatientsInList { get; set; }
         event PropertyChangedEventHandler PropertyChanged;
+        void ChangeTabsAllowed(string s);
     }
 }

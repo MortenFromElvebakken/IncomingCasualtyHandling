@@ -43,16 +43,20 @@
                 </TabItem>
             </TabControl>-->
             <TabControl ItemsSource="{Binding Tabs}" SelectedIndex="{Binding SelectedIndex, Mode=OneWay}">
-                <TabControl.Resources>
-                    <Style BasedOn="{StaticResource ChosenTab}" TargetType="TabItem"></Style>
-                </TabControl.Resources>
+                
                 <TabControl.ItemTemplate>
+
                     <DataTemplate>
                         <!--<TabItem Style="{StaticResource ChosenTab}" Header="{Binding Name}"></TabItem>-->
-
+                        
                         <TextBlock Text="{Binding Name}" Margin="0,2" FontSize="20" LineHeight="20" />
                     </DataTemplate>
                 </TabControl.ItemTemplate>
+                <TabControl.ItemContainerStyle>
+                    <Style TargetType="TabItem" BasedOn="{StaticResource ChosenTab}">
+                        <Setter Property="Visibility" Value="{Binding isVisible}"></Setter>
+                    </Style>
+                </TabControl.ItemContainerStyle>
                 <TabControl.ContentTemplate>
                     <DataTemplate>
                         <ListView ItemsSource="{Binding Data}" ItemContainerStyle="{StaticResource RowColourAlternate}" AlternationCount="2">
