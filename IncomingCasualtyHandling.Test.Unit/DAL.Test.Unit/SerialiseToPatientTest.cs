@@ -20,42 +20,39 @@ namespace IncomingCasualtyHandling.Test.Unit.DAL.Test.Unit
 
         private ISerializeToPatient _uut;
 
-        private Patient _patient1;
-        private PatientModel _patientModel1;
+        public Patient Patient1;
+
+        string triage = "TriageRed";
+        string specialty = "Emergency medicine";
+        DateTime eta = new DateTime(2018, 11, 22, 12, 00, 00, DateTimeKind.Local);
+        string cpr = "201120001518";
+        string givenName = "Test";
+        string familyName = "Testson";
+        string wholeName;
+        private AdministrativeGender gender = AdministrativeGender.Unknown;
+        private string toHospital = "To hospital went wrong";
 
         [SetUp]
         public void Setup()
         {
             _uut = new SerialiseToPatient();
 
-            _patient1 = new Patient()
-            {
-                Identifier = new System.Collections.Generic.List<Identifier>(),
-                Name = new System.Collections.Generic.List<HumanName>(),
-                Gender = new AdministrativeGender?(AdministrativeGender.Unknown),
-                Extension = new List<Extension>()
-            };
+            wholeName = givenName + " " + familyName;
 
-            _patient1.Identifier.Add(new Identifier("CPR", "201120001518"));
-            HumanName patientName = new HumanName()
-            {
-                Family = "Testson",
-                Text = "Test Testson"
-            };
-            _patient1.Name.Add(patientName);
-            
-            //Extension etaextension = new Extension("http://www.example.com/datetimeTest", DateTime.MinValue);
-            _patient1.Extension.Add();
+            Patient1 = new Patient();
+            Patient1.Identifier.Add(new Identifier("CPR", cpr));
+            var name = new HumanName();
+            name.WithGiven(givenName);
+            name.AndFamily(familyName);
+            name.Text = givenName + " " + familyName;
+            Patient1.Name.Add(name);
 
-            _patientModel1 = new PatientModel()
-            {
-                ETA = DateTime.MinValue,
-                Name = "Test Testson",
-                Triage = "Unknown",
-                Specialty = "Unknown",
-                Gender = AdministrativeGender.Unknown,
-                ToHospital = "To hospital went wrong"
-            };
+            Patient1.Gender = gender;
+
+            Patient1.Extension = new List<Extension>();
+            Patient1.Extension.Add(new Extension("http://www.example.com/triagetest", new FhirString(triage)));
+            Patient1.Extension.Add(new Extension("http://www.example.com/SpecialtyTest", new FhirString(specialty)));
+            Patient1.Extension.Add(new Extension("http://www.example.com/datetimeTest", new FhirDateTime(eta)));
 
         }
 
@@ -64,12 +61,61 @@ namespace IncomingCasualtyHandling.Test.Unit.DAL.Test.Unit
 
         #region Act and Assert
         // Method_Scenario_Result
-       
+
+        //Correct serialisation of ETA
         [Test]
-        public void ReturnPatient_ReceivedCompletePatient_CreatesPatient()
+        public void ReturnPatient_ReceivedCompletePatient_CreatesPatientEta()
         {
-            PatientModel patient = _uut.ReturnPatient(_patient1);
-            Assert.That(patient, Is.EqualTo(_patientModel1));
+            PatientModel patient = _uut.ReturnPatient(Patient1);
+            Assert.That(patient.ETA, Is.EqualTo(eta));
+        }
+
+        //Correct serialisation of Gender
+        [Test]
+        public void ReturnPatient_ReceivedCompletePatient_CreatesPatientGender()
+        {
+            PatientModel patient = _uut.ReturnPatient(Patient1);
+            Assert.That(patient.Gender, Is.EqualTo(gender));
+        }
+
+        //Correct serialisation of Name
+        [Test]
+        public void ReturnPatient_ReceivedCompletePatient_CreatesPatientName()
+        {
+            PatientModel patient = _uut.ReturnPatient(Patient1);
+            Assert.That(patient.Name, Is.EqualTo(wholeName));
+        }
+
+        // Correct serialisation of CPR
+        [Test]
+        public void ReturnPatient_ReceivedCompletePatient_CreatesPatientId()
+        {
+            PatientModel patient = _uut.ReturnPatient(Patient1);
+            Assert.That(patient.PatientId, Is.EqualTo(cpr));
+        }
+
+        //Correct serialisation of Specialty
+        [Test]
+        public void ReturnPatient_ReceivedCompletePatient_CreatesPatientSpecialty()
+        {
+            PatientModel patient = _uut.ReturnPatient(Patient1);
+            Assert.That(patient.Specialty, Is.EqualTo(specialty));
+        }
+
+        //Correct serialisation of Triage
+        [Test]
+        public void ReturnPatient_ReceivedCompletePatient_CreatesPatientTriage()
+        {
+            PatientModel patient = _uut.ReturnPatient(Patient1);
+            Assert.That(patient.Triage, Is.EqualTo(triage));
+        }
+
+        //Correct serialisation of ToHospital
+        [Test]
+        public void ReturnPatient_ReceivedPatientWithoutToHospital_CreatesPatientToHospitalCorrect()
+        {
+            PatientModel patient = _uut.ReturnPatient(Patient1);
+            Assert.That(patient.ToHospital, Is.EqualTo(toHospital));
         }
 
         #endregion
