@@ -251,11 +251,10 @@ namespace IncomingCasualtyHandling.BL.Models
             get => _selectedTabIndex;
             set
             {
-                if (value >= 0)
-                {
                     _selectedTabIndex = value;
-                    OnPropertyChanged("PatientsInList");
-                }
+                OnPropertyChanged("SelectedIndex");
+                    //OnPropertyChanged("PatientsInList");
+
             }
         }
 
@@ -304,6 +303,7 @@ namespace IncomingCasualtyHandling.BL.Models
                 {
                     int counter = 0;
                     foreach (var triage in ListOfTriages)
+                        //test if unknown is in
                     {
                         if (triage.Amount != 0)
                         {
@@ -378,6 +378,44 @@ namespace IncomingCasualtyHandling.BL.Models
                 
 
             }
+        }
+
+        public void ChangeTabsAllowed(string s)
+        {
+            string[] parameters = s.Split(' ');
+            var tryChangeTabs = parameters[0];
+            var tryTabIndex = Convert.ToInt16(parameters[1]);
+            if (tryChangeTabs == SelectedOverview)
+            {
+                if (_tabsList[tryTabIndex].isVisible == Visibility.Visible)
+                {
+                    
+                    SelectedTabIndex = tryTabIndex;
+                }
+            }
+            else
+            {
+                if (tryChangeTabs == "Triage")
+                {
+                    //ListOfTriages[tryTabIndex] != null || 
+                    if (ListOfTriages[tryTabIndex].Amount != 0)
+                    {
+                        StringFromChangeViewCommandParameter = s;
+                        OnPropertyChanged("Tabs");
+                        OnPropertyChanged("SelectedIndex");
+                        OnPropertyChanged("PatientsInList");
+                    }
+                }
+                else
+                {
+                    StringFromChangeViewCommandParameter = s;
+                    OnPropertyChanged("Tabs");
+                    OnPropertyChanged("SelectedIndex");
+                    OnPropertyChanged("PatientsInList");
+                    //+ lave tabs igen
+                }
+            }
+            
         }
         #endregion
     }

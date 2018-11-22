@@ -88,10 +88,13 @@ namespace IncomingCasualtyHandling.GUI.ViewModels
             //Logic that handles if an overview component is pressed 
             //Needs to handle if there is 0 patients in the list
             //Needs to handle if triage 3 is pressed but nothing is in tab 2 and 1, so that tab 3 is now tab1
+            //Currently handles pressing on elements that are filled. 
+            _detailViewModel.ChangeTabsAllowed(x.ToString());
+            //StringFromParameter = x.ToString();
 
-            StringFromParameter = x.ToString();
-            OnPropertyChanged("Tabs");
-            OnPropertyChanged("SelectedIndex");
+            //Lav propertychanged på tabs og selected KUN hvis den må
+            //OnPropertyChanged("Tabs");
+            //OnPropertyChanged("SelectedIndex");
 
         }
     }
