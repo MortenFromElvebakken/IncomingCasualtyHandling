@@ -14,7 +14,7 @@ using Task = Hl7.Fhir.Model.Task;
 
 namespace IncomingCasualtyHandling.DAL
 {
-    public class GetPatientsFromFhir:IGetPatientsFromFHIR
+    public class GetPatientsFromFhir : IGetPatientsFromFHIR
     {
         private readonly string fhirServerURL;
         private readonly string hospitalShortName; //Til search params
@@ -24,6 +24,7 @@ namespace IncomingCasualtyHandling.DAL
         private SearchParams sParameters;
         private Bundle lastBundle;
         private static Thread myThread;
+        private DateTime dateOfLastSearch;
 
         public GetPatientsFromFhir(ILoadConfigurationSettings _lcs, ISerializeToPatient _isp)
         {
@@ -38,12 +39,12 @@ namespace IncomingCasualtyHandling.DAL
             client = new FhirClient(fhirServerURL);
             serialisePatient = _isp;
 
-            
+
             //Initialize seachparameters
             sParameters = new SearchParams();
             sParameters.Add("active", "true");
             sParameters.Add("identifier", "AUH");
-            
+
 
             //Create thread that gets new data
             myThread = new Thread(AsyncGetAllPatients);
@@ -52,24 +53,25 @@ namespace IncomingCasualtyHandling.DAL
 
         public void GetAllPatients()
         {
-            
+
             //Her er parametrene lagt ind, så det er disse en query er bygget på. De er meget case sensitive
-            
+
             //http://docs.simplifier.net/fhirnetapi/client/search.html
-            
+
             List<PatientModel> listOfPatients = new List<PatientModel>();
             var firstBundle = default(Bundle);
             try
             {
                 firstBundle = client.Search<Patient>(sParameters);
+                dateOfLastSearch = DateTime.Now;
             }
             catch (Exception e)
             {
                 MessageBox.Show(e.Message + "Something went wrong in the connection to the server");
                 throw;
             }
-            
-            
+
+
             //Result er en bundle med "pages" i, hvor hver page loades med 10(lige nu) patienter i. Hvis der er flere end 10 læses de 10 første og
             //går til næste side
             lastBundle = firstBundle;
@@ -89,7 +91,7 @@ namespace IncomingCasualtyHandling.DAL
             {
                 myThread.Start();
             }
-            
+
         }
 
         //eventlogic, creates Event with list of patients, and invokes it. 
@@ -104,28 +106,21 @@ namespace IncomingCasualtyHandling.DAL
 
         private void AsyncGetAllPatients()
         {
-            
-            Thread.Sleep(20000);
-            var newBundle = default(Bundle);
+            var anyChangedResources = default(Bundle);
+            Thread.Sleep(10000);
             try
             {
-                newBundle = client.SearchAsync<Patient>(sParameters).Result;
+                anyChangedResources = client.WholeSystemHistory(dateOfLastSearch, 10);
+                dateOfLastSearch = DateTime.Now;
             }
             catch (Exception e)
             {
-                Console.WriteLine(e);
-                throw;
+                MessageBox.Show(e.Message + "Something went wrong in the connection to the server");
             }
-            //Denne if er jeg usikker på om vi skal have
-            if (newBundle.Link.IsExactly(lastBundle.Link))
+
+            if (anyChangedResources != null && anyChangedResources.Entry.Count != 0)
             {
-                Debug.WriteLine("Same bundle returned");
-            }
-            else
-            {
-                //Lave en foreach rundt om det her, der løber alle patienter igennem i hvert entry's side og tjekker om ens, vil virke til at
-                //tjekke om alt er ens??
-                lastBundle = newBundle;
+                var newBundle = client.SearchAsync<Patient>(sParameters).Result;
                 List<PatientModel> listOfPatients = new List<PatientModel>();
                 while (newBundle != null)
                 {
@@ -135,9 +130,10 @@ namespace IncomingCasualtyHandling.DAL
                         PatientModel op = serialisePatient.ReturnPatient(testpatient);
                         listOfPatients.Add(op);
                     }
+
                     newBundle = client.Continue(newBundle, PageDirection.Next);
                 }
-                //Notify(listOfPatients);
+
                 UpdatePatients(listOfPatients);
 
             }

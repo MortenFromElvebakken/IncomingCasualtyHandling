@@ -397,7 +397,6 @@ namespace IncomingCasualtyHandling.BL.Models
             {
                 if (tryChangeTabs == "Triage")
                 {
-                    //ListOfTriages[tryTabIndex] != null || 
                     if (ListOfTriages[tryTabIndex].Amount != 0)
                     {
                         StringFromChangeViewCommandParameter = s;
