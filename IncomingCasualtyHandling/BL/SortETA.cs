@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -74,6 +75,7 @@ namespace IncomingCasualtyHandling.BL
                     _patientsWithoutEta.Add(patient);
                     _range = ++_range;
                 }
+                
             }
 
             // When all patients have been checked, move the patients without ETAs to the end of the list

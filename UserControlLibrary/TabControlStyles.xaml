@@ -89,7 +89,7 @@
     <DataTemplate x:Key="CellTemplateForListviewETA">
         <DockPanel Margin="-2,-3,-5,0">
             <Border BorderBrush="#556375" VerticalAlignment="Bottom" HorizontalAlignment="Right" BorderThickness="0,0,1,1">
-                <TextBlock Foreground="DarkBlue" HorizontalAlignment="Center" Text="{Binding ETA}" Width="130" FontSize="14" Height="25"/>
+                <TextBlock Foreground="DarkBlue" HorizontalAlignment="Center" Text="{Binding ETA, StringFormat='HH:mm dd/MM/yyyy'}" Width="130" FontSize="14" Height="25"/>
             </Border>
         </DockPanel>
     </DataTemplate>
