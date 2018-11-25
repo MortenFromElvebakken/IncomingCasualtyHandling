@@ -111,7 +111,7 @@
             </Border>
         </DockPanel>
     </DataTemplate>
-    <DataTemplate x:Key="CellTemplateForListviewFromDestination">
+       <DataTemplate x:Key="CellTemplateForListviewFromDestination">
         <DockPanel Margin="-2,-3,-5,0">
             <Border CornerRadius="0,0,5,0" BorderBrush="#8292a5" VerticalAlignment="Bottom" HorizontalAlignment="Right" BorderThickness="0,0,1,1">
                 <TextBlock Foreground="DarkBlue" HorizontalAlignment="Center" Text="{Binding FromDestination, StringFormat='HH:mm dd/MM/yyyy'}" Width="130" FontSize="14" Height="25"/>
@@ -125,6 +125,8 @@
             </Border>
         </DockPanel>
     </DataTemplate>
+
+   <!-- SKAL DISSE VÆRE HER?? -->
     <SolidColorBrush x:Key="TabItem.Selected.Background" Color="#FFFFFF"/>
     <SolidColorBrush x:Key="TabItem.Selected.Border" Color="#ACACAC"/>
     
