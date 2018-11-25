@@ -79,12 +79,12 @@ namespace IncomingCasualtyHandling.GUI.ViewModels
         {
             if(CurrentWorkspace == _overviewViewViewModel)
             {
-                _detailViewViewModel.StringFromParameter = x.ToString();
+                _detailViewViewModel.ChangeTabs(x);
                 CurrentWorkspace = _detailViewViewModel;
             }
             else
             {
-                _detailViewViewModel.StringFromParameter = x.ToString();
+                _detailViewViewModel.ChangeTabs(x);
             }
         }
         public ICommand ChangeServerName { get; set; }
@@ -113,6 +113,7 @@ namespace IncomingCasualtyHandling.GUI.ViewModels
             if (CurrentWorkspace == _overviewViewViewModel)
             {
                 CurrentWorkspace = _detailViewViewModel;
+                
             }
             else
             {

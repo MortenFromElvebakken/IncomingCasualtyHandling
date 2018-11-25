@@ -332,6 +332,15 @@ namespace IncomingCasualtyHandling.BL.Models
                                 };
                                 _tempTabList.Add(_tab);
                             }
+                            else
+                            {
+                                var _tab = new TabControl()
+                                {
+                                    Name = specialty.Name,
+                                    isVisible = Visibility.Collapsed
+                                };
+                                _tempTabList.Add(_tab);
+                            }
                             counter++;
                         }
                         // Sort the list alphabetically
@@ -366,9 +375,16 @@ namespace IncomingCasualtyHandling.BL.Models
             var tryTabIndex = Convert.ToInt16(parameters[1]);
             if (tryChangeTabs == SelectedOverview)
             {
-                if (_tabsList[tryTabIndex].isVisible == Visibility.Visible)
+                if (tryChangeTabs == "Specialty")
                 {
-                    SelectedTabIndex = tryTabIndex;
+                    
+                }
+                else
+                {
+                    if (_tabsList[tryTabIndex].isVisible == Visibility.Visible)
+                    {
+                        SelectedTabIndex = tryTabIndex;
+                    }
                 }
             }
             else
@@ -382,6 +398,19 @@ namespace IncomingCasualtyHandling.BL.Models
                         OnPropertyChanged("SelectedIndex");
                         OnPropertyChanged("PatientsInList");
                     }
+                }
+                else if (tryChangeTabs == "Specialty")
+                {
+                    //Tabs laver 16 sorterede tabs der enten er visible eller ej.
+                    //Denne skal hvis man trykker på speciale1, ramme den tab med størst ammount
+                    var chosenSpecialtyName = ListOfSpecialties[tryTabIndex].Name;
+                    var sortedSpecialtiesList = new List<Specialty>();
+                    sortedSpecialtiesList = ListOfSpecialties.OrderBy(a => a.Name).ToList();
+                    var newIndex = sortedSpecialtiesList.FindIndex(x => x.Name == chosenSpecialtyName);
+                    StringFromChangeViewCommandParameter = string.Format("Specialty " + newIndex);
+                    OnPropertyChanged("Tabs");
+                    OnPropertyChanged("SelectedIndex");
+                    OnPropertyChanged("PatientsInList");
                 }
                 else
                 {
