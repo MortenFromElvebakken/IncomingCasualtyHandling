@@ -31,28 +31,46 @@
 
   <!-- https://stackoverflow.com/questions/1399102/how-can-i-give-alternating-row-background-color-and-alternating-column-backgroun#1399119-->
   <!--Style the rows of a listview to have alternating colours  Sæt borderbrush og thickness på for at underline hver linje-->
-  <Style x:Key="RowColourAlternate" TargetType="ListViewItem">
-      <Style.Triggers>
-          <Trigger Property="ItemsControl.AlternationIndex" Value="0">
-              <Setter Property="Background" Value="White"></Setter>
-          </Trigger>
-          <Trigger Property="ItemsControl.AlternationIndex"  Value="1">
-              <Setter Property="Background" Value="LightGray"></Setter>
-          </Trigger>
-      </Style.Triggers>
-
+    <Style x:Key="RowColourAlternate" TargetType="ListViewItem">
+        <!--Added for changing highlight on rows
+            With inspiration from: https://stackoverflow.com/a/40136149-->
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type ListViewItem}">
+                    <Grid Background="{TemplateBinding Background}">
+                        <Border Name="Selection" Visibility="Collapsed" />
+                        <!-- This is used when GridView is put inside the ListView -->
+                        <GridViewRowPresenter Grid.RowSpan="2"
+                                              Margin="{TemplateBinding Padding}"
+                                              HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                              VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                              SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
+                                              />
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <!---->
+        <Style.Triggers>
+            <Trigger Property="ItemsControl.AlternationIndex" Value="0">
+                <Setter Property="Background" Value="White"></Setter>
+            </Trigger>
+            <Trigger Property="ItemsControl.AlternationIndex"  Value="1">
+                <Setter Property="Background" Value="LightGray"></Setter>
+            </Trigger>
+        </Style.Triggers>
     </Style>
 
     <DataTemplate x:Key="CellTemplateForListviewName">
         <DockPanel Margin="-5,-3,-5,0">
-            <Border BorderBrush="#556375" VerticalAlignment="Bottom" HorizontalAlignment="Right" BorderThickness="0,0,1,1">
+            <Border CornerRadius="0,0,5,0" BorderBrush="#8292a5" VerticalAlignment="Bottom" HorizontalAlignment="Right" BorderThickness="0,0,1,1">
                 <TextBlock Foreground="DarkBlue" HorizontalAlignment="Center" Text="{Binding Name}" Width="90" FontSize="14" Height="25"/>
             </Border>
         </DockPanel>
     </DataTemplate>
     <DataTemplate x:Key="CellTemplateForListviewCPR">
         <DockPanel Margin="-2,-3,-5,0">
-            <Border BorderBrush="#556375" VerticalAlignment="Bottom" HorizontalAlignment="Right" BorderThickness="0,0,1,1">
+            <Border CornerRadius="0,0,5,0" BorderBrush="#8292a5" VerticalAlignment="Bottom" HorizontalAlignment="Right" BorderThickness="0,0,1,1">
                 <TextBlock Foreground="DarkBlue" HorizontalAlignment="Center" Text="{Binding PatientId}" Width="90" FontSize="14" Height="25"/>
             </Border>
         </DockPanel>
@@ -60,36 +78,36 @@
 
     <DataTemplate x:Key="CellTemplateForListviewAge">
         <DockPanel Margin="-2,-3,-5,0">
-            <Border BorderBrush="#556375" VerticalAlignment="Bottom" HorizontalAlignment="Right" BorderThickness="0,0,1,1">
+            <Border CornerRadius="0,0,5,0" BorderBrush="#8292a5" VerticalAlignment="Bottom" HorizontalAlignment="Right" BorderThickness="0,0,1,1">
                 <TextBlock Foreground="DarkBlue" HorizontalAlignment="Center" Text="{Binding Age}" Width="90" FontSize="14" Height="25"/>
             </Border>
         </DockPanel>
     </DataTemplate>
     <DataTemplate x:Key="CellTemplateForListviewGender">
         <DockPanel Margin="-2,-3,-5,0">
-            <Border BorderBrush="#556375" VerticalAlignment="Bottom" HorizontalAlignment="Right" BorderThickness="0,0,1,1">
+            <Border CornerRadius="0,0,5,0" BorderBrush="#8292a5" VerticalAlignment="Bottom" HorizontalAlignment="Right" BorderThickness="0,0,1,1">
                 <TextBlock Foreground="DarkBlue" HorizontalAlignment="Center" Text="{Binding Gender}" Width="90" FontSize="14" Height="25"/>
             </Border>
         </DockPanel>
     </DataTemplate>
     <DataTemplate x:Key="CellTemplateForListviewSpecialty">
         <DockPanel Margin="-2,-3,-5,0">
-            <Border BorderBrush="#556375" VerticalAlignment="Bottom" HorizontalAlignment="Right" BorderThickness="0,0,1,1">
+            <Border CornerRadius="0,0,5,0" BorderBrush="#8292a5" VerticalAlignment="Bottom" HorizontalAlignment="Right" BorderThickness="0,0,1,1">
                 <TextBlock Foreground="DarkBlue" HorizontalAlignment="Center" Text="{Binding Specialty}" Width="150" FontSize="14" Height="25"/>
             </Border>
         </DockPanel>
     </DataTemplate>
     <DataTemplate x:Key="CellTemplateForListviewTriage">
         <DockPanel Margin="-2,-3,-5,0">
-            <Border BorderBrush="#556375" VerticalAlignment="Bottom" HorizontalAlignment="Right" BorderThickness="0,0,1,1">
+            <Border CornerRadius="0,0,5,0" BorderBrush="#8292a5" VerticalAlignment="Bottom" HorizontalAlignment="Right" BorderThickness="0,0,1,1">
                 <TextBlock Foreground="DarkBlue" HorizontalAlignment="Center" Text="{Binding Triage}" Width="110" FontSize="14" Height="25"/>
             </Border>
         </DockPanel>
     </DataTemplate>
     <DataTemplate x:Key="CellTemplateForListviewETA">
         <DockPanel Margin="-2,-3,-5,0">
-            <Border BorderBrush="#556375" VerticalAlignment="Bottom" HorizontalAlignment="Right" BorderThickness="0,0,1,1">
-                <TextBlock Foreground="DarkBlue" HorizontalAlignment="Center" Text="{Binding ETA}" Width="130" FontSize="14" Height="25"/>
+            <Border CornerRadius="0,0,5,0" BorderBrush="#8292a5" VerticalAlignment="Bottom" HorizontalAlignment="Right" BorderThickness="0,0,1,1">
+                <TextBlock Foreground="DarkBlue" HorizontalAlignment="Center" Text="{Binding ETA, StringFormat='HH:mm dd/MM/yyyy'}" Width="130" FontSize="14" Height="25"/>
             </Border>
         </DockPanel>
     </DataTemplate>

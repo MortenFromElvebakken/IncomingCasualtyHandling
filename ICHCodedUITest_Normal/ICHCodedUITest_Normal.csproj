@@ -6,11 +6,11 @@
     <ProductVersion>
     </ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{8C08D12C-D14B-4768-B30D-EFF55D1A7558}</ProjectGuid>
+    <ProjectGuid>{98DD0635-8BE7-42C1-8E72-FE764CD376B8}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>ICHCodedUITest</RootNamespace>
-    <AssemblyName>ICHCodedUITest</AssemblyName>
+    <RootNamespace>ICHCodedUITest_Normal</RootNamespace>
+    <AssemblyName>ICHCodedUITest_Normal</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>

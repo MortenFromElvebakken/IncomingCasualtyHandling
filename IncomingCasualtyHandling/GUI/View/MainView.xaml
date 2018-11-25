@@ -7,11 +7,18 @@
         xmlns:viewModels="clr-namespace:IncomingCasualtyHandling.GUI.ViewModels"
         xmlns:view="clr-namespace:IncomingCasualtyHandling.GUI.View"
         mc:Ignorable="d"
-        Title="MainWindow" Width="1366" Height="768" Background="#252E37" BorderBrush="Black"
+        Title="MainWindow" 
+        Height="{x:Static SystemParameters.PrimaryScreenHeight}" 
+        Width="{x:Static SystemParameters.PrimaryScreenWidth}" 
+        Background="#252E37" BorderBrush="Black"
         WindowStyle="None" AllowsTransparency="True"
         WindowStartupLocation="Manual" Top="0" Left="0">
 
-    
+    <!--Width="1366" Height="768"-->
+
+    <Window.DataContext>
+        <viewModels:MainView_ViewModel/>
+    </Window.DataContext>
     <Window.InputBindings>
         <MouseBinding Gesture="Alt+LeftClick" Command="{Binding ChangeServerName}">
         </MouseBinding>

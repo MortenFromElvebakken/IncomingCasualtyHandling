@@ -24,5 +24,17 @@ namespace IncomingCasualtyHandling.GUI.View
         {
             InitializeComponent();
         }
+
+        private void ButtonBase_OnClick(object sender, RoutedEventArgs e)
+        {
+            var headerClicked = e.OriginalSource;
+            System.Windows.Controls.GridViewColumnHeader clickedHeader = (GridViewColumnHeader)e.OriginalSource;
+            var headerName = clickedHeader.Column.Header;
+
+            //headerClicked.Content;
+            //var columnBinding = headerClicked.Column.DisplayMemberBinding;
+            //var sortBy = columnBinding?.Path.Path ?? headerClicked.Column.Header;
+            MessageBox.Show("You clicked" + e.OriginalSource.ToString());
+        }
     }
 }

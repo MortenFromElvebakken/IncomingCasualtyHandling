@@ -5,6 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:IncomingCasualtyHandling.GUI.View"
              xmlns:viewModels="clr-namespace:IncomingCasualtyHandling.GUI.ViewModels"
+             xmlns:util="clr-namespace:IncomingCasualtyHandling.GUI"
              xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
              xmlns:xcdg="http://schemas.xceed.com/wpf/xaml/datagrid"
              mc:Ignorable="d" 
@@ -59,7 +60,7 @@
                 </TabControl.ItemContainerStyle>
                 <TabControl.ContentTemplate>
                     <DataTemplate>
-                        <ListView ItemsSource="{Binding Data}" ItemContainerStyle="{StaticResource RowColourAlternate}" AlternationCount="2">
+                        <ListView ItemsSource="{Binding Data}" ItemContainerStyle="{StaticResource RowColourAlternate}" AlternationCount="2" IsSynchronizedWithCurrentItem="True">
                             <ListView.View>
                                 <GridView>
                                     <GridViewColumn Header="Name" CellTemplate="{StaticResource CellTemplateForListviewName}"/>

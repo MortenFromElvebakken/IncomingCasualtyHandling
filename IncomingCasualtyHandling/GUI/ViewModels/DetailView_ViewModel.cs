@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using Hl7.Fhir.Model;
@@ -74,6 +75,7 @@ namespace IncomingCasualtyHandling.GUI.ViewModels
             _detailViewModel = detailViewModel;
             _detailViewModel.PropertyChanged += DetailViewModelOnPropertyChanged;
             ChangeTabsCommand = new RelayCommand<object>(ChangeTabs);
+            GridViewColumnHeaderClickedHandlerCommand = new RelayCommand(GridViewColumnHeaderClickedHandler);
             
            
         }
@@ -96,6 +98,14 @@ namespace IncomingCasualtyHandling.GUI.ViewModels
             //OnPropertyChanged("Tabs");
             //OnPropertyChanged("SelectedIndex");
 
+        }
+
+        public ICommand GridViewColumnHeaderClickedHandlerCommand { get; set; }
+
+        private void GridViewColumnHeaderClickedHandler()
+        {
+            MessageBox.Show("You clicked");
+                
         }
     }
 }
