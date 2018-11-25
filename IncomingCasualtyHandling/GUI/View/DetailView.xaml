@@ -8,8 +8,11 @@
              xmlns:util="clr-namespace:IncomingCasualtyHandling.GUI"
              xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
              xmlns:xcdg="http://schemas.xceed.com/wpf/xaml/datagrid"
+             xmlns:cmd="clr-namespace:GalaSoft.MvvmLight.Command;assembly=GalaSoft.MvvmLight.Platform"
+             xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
+    
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="40"/>
@@ -61,9 +64,23 @@
                 <TabControl.ContentTemplate>
                     <DataTemplate>
                         <ListView ItemsSource="{Binding Data}" ItemContainerStyle="{StaticResource RowColourAlternate}" AlternationCount="2" IsSynchronizedWithCurrentItem="True">
+                            <i:Interaction.Triggers>
+                                <i:EventTrigger EventName="Click">
+                                    <cmd:EventToCommand Command="{Binding Mode=OneWay, Path=GridViewColumnHeaderClickedHandlerCommand}"
+                                                        PassEventArgsToCommand="True" />
+                                </i:EventTrigger>
+                            </i:Interaction.Triggers>
                             <ListView.View>
                                 <GridView>
-                                    <GridViewColumn Header="Name" CellTemplate="{StaticResource CellTemplateForListviewName}"/>
+                                    <GridViewColumn CellTemplate="{StaticResource CellTemplateForListviewName}">
+                                        <GridViewColumnHeader Content="Name">
+                                            <i:Interaction.Triggers>
+                                                <i:EventTrigger EventName="Click">
+                                                    <cmd:EventToCommand Command="{Binding GridViewColumnHeaderClickedHandlerCommand}" CommandParameter="Hej"/>
+                                                </i:EventTrigger>
+                                            </i:Interaction.Triggers>
+                                        </GridViewColumnHeader>
+                                    </GridViewColumn>
                                     <GridViewColumn Header="CPR" CellTemplate="{StaticResource CellTemplateForListviewCPR}"/>
                                     <GridViewColumn Header="Age" CellTemplate="{StaticResource CellTemplateForListviewAge}"/>
                                     <GridViewColumn Header="Gender" CellTemplate="{StaticResource CellTemplateForListviewGender}"/>

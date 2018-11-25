@@ -75,7 +75,7 @@ namespace IncomingCasualtyHandling.GUI.ViewModels
             _detailViewModel = detailViewModel;
             _detailViewModel.PropertyChanged += DetailViewModelOnPropertyChanged;
             ChangeTabsCommand = new RelayCommand<object>(ChangeTabs);
-            GridViewColumnHeaderClickedHandlerCommand = new RelayCommand(GridViewColumnHeaderClickedHandler);
+            GridViewColumnHeaderClickedHandlerCommand = new RelayCommand<object>(GridViewColumnHeaderClickedHandler);
             
            
         }
@@ -102,7 +102,7 @@ namespace IncomingCasualtyHandling.GUI.ViewModels
 
         public ICommand GridViewColumnHeaderClickedHandlerCommand { get; set; }
 
-        private void GridViewColumnHeaderClickedHandler()
+        private void GridViewColumnHeaderClickedHandler(object p)
         {
             MessageBox.Show("You clicked");
                 
