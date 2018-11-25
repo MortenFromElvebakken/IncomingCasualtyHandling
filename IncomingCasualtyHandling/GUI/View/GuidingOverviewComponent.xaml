@@ -103,7 +103,7 @@
                             <MouseBinding MouseAction="LeftClick"  Command="{Binding ChangeTabsCommand}" CommandParameter="Specialty 0"></MouseBinding>
                     </Grid.InputBindings>
                     
-                    <Button Grid.Column="0" Name="Specialty1Colour" Style="{StaticResource SquaredRoundedButton}" Background="{Binding RelativeSource={RelativeSource AncestorType=Window}, Path=DataContext.Specialty1.Colour}" ></Button>
+                    <Button Grid.Column="0" Name="Specialty1Colour" IsEnabled="False" Style="{StaticResource SquaredRoundedButton}" Background="{Binding RelativeSource={RelativeSource AncestorType=Window}, Path=DataContext.Specialty1.Colour}" ></Button>
                     <Label Grid.Column="1" Name="Specialty1Name" Content="{Binding RelativeSource={RelativeSource AncestorType=Window}, Path=DataContext.Specialty1.Name}" VerticalAlignment="Center" HorizontalAlignment="Left"></Label>
                     <Label Grid.Column="2" Name="Specialty1Amount" Content="{Binding RelativeSource={RelativeSource AncestorType=Window}, Path=DataContext.Specialty1.Amount}" VerticalAlignment="Center" HorizontalAlignment="Left"></Label>
                 </Grid>
