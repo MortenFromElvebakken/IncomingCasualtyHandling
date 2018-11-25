@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Globalization;
+using System.Windows;
 using System.Windows.Input;
 using IncomingCasualtyHandling.BL;
 using IncomingCasualtyHandling.BL.Interfaces;
@@ -70,31 +71,24 @@ namespace IncomingCasualtyHandling.GUI.ViewModels
                     OnPropertyChanged();
                 }
             }
-
         }
 
         //Test for new command with command-binding to change view depending on property specified in command
         public ICommand ChangeViewCommandWithProperty { get; set; }
         private void ChangeViewWithParameter(object x)
         {
-
             if(CurrentWorkspace == _overviewViewViewModel)
             {
-                
-                _detailViewViewModel.StringFromParameter = x.ToString();
+                _detailViewViewModel.ChangeTabs(x);
                 CurrentWorkspace = _detailViewViewModel;
             }
             else
             {
-                //Værdi der finder ud af om det er "lovligt" at kalde en change på string,
-                //Altså hvis der ingen patienter er i listen - så skal det ikke være muligt at trykke på
-                //ie orange. 
-                _detailViewViewModel.StringFromParameter = x.ToString();
-                //+ en eller anden validering på tab itemnummer til selected index
+                _detailViewViewModel.ChangeTabs(x);
             }
         }
         public ICommand ChangeServerName { get; set; }
-
+        //Changes servername if valid server input, and sets view to overview
         public void ChangeServer()
         {
             ServerChangeWindow serverChangeWindow = new ServerChangeWindow();
@@ -103,16 +97,13 @@ namespace IncomingCasualtyHandling.GUI.ViewModels
                 if (serverChangeWindow.ServerName.Text != "")
                 {
                     _mainModel.ServerName = serverChangeWindow.ServerName.Text;
+                    if (CurrentWorkspace != _detailViewViewModel)
+                    {
+                        CurrentWorkspace = _overviewViewViewModel;
+                    }
                 }
-                
-                //Sæt servernavn i mainmodel, lav en metode i set på denne property, der sætter servernavn
-                //i dal, og hvis denne er sat, skal fhirclient.endpoint være lig denne, og getallpatients kaldes
-                //igen
-                //serverChangeWindow.ServerName
-                //Set servername in 
             }
         }
-
 
         // Command for command-binding to change view
         public ICommand ChangeViewCommand { get; set; }
@@ -122,6 +113,7 @@ namespace IncomingCasualtyHandling.GUI.ViewModels
             if (CurrentWorkspace == _overviewViewViewModel)
             {
                 CurrentWorkspace = _detailViewViewModel;
+                
             }
             else
             {
@@ -139,16 +131,10 @@ namespace IncomingCasualtyHandling.GUI.ViewModels
             }
         }
 
+        public Visibility ConnectionToInternet => _mainModel.ConnectionToInternet;
 
-        public string TestProperty
-        {
-            get { return _test; }
-            set
-            {
-                if (value == _test) return;
-                _test = value;
-            }
-        }
+        public string NoConnectionString => _mainModel.NoConnectionString;
+
         public List<PatientModel> ListOfPatients
         {
             get { return _listOfPatients; }

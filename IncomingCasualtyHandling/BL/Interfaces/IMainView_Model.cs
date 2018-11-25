@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using IncomingCasualtyHandling.BL.Object_classes;
 
 namespace IncomingCasualtyHandling.BL.Interfaces
@@ -21,6 +22,8 @@ namespace IncomingCasualtyHandling.BL.Interfaces
         Triage Triage6 { get; set; }
         ETA Eta { get; set; }
         string ServerName { get; set; }
+        Visibility ConnectionToInternet { get; set; }
+        string NoConnectionString { get;}
         event PropertyChangedEventHandler PropertyChanged;
     }
 }

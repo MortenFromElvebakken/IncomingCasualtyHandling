@@ -24,35 +24,66 @@ namespace IncomingCasualtyHandling.DAL
             PatientModel newPatientModel = new PatientModel();
 
             // Uses ?? Operand to determine if lefthandside of argument is null, in that case use right hand side.
-            newPatientModel.PatientId = newEntry.Identifier[0].Value ?? "*E_CPR";
+            
             newPatientModel.Name = newEntry.Name[0].Text ?? "John Doe";
             newPatientModel.Gender = newEntry.Gender ?? AdministrativeGender.Unknown;
-            //newPatientModel.CPR
+            try
+            {
+                newPatientModel.CPR = newEntry.Identifier[0].Value;
+            }
+            catch (Exception e)
+            {
+                newPatientModel.CPR = "*E_CPR";
+            }
+            
+            try
+            {
+                newPatientModel.ToHospital = newEntry.Identifier[1].Value;
 
-            //Logic i forhold til extensions her og lav logic der ser om felter er lig null?
-            //_newPatient.ToHospital = Convert.ToString(newEntry.Extension[0].Value);
-            //_newPatient.Triage = Convert.ToString(newEntry.Extension[1].Value);
-            //_newPatient.Specialty = Convert.ToString(newEntry.Extension[2].Value);
-            //_newPatient.ETA = Convert.ToDateTime(newEntry.Extension[3].Value.ToString());
+            }
+            catch (Exception e)
+            {
+                newPatientModel.ToHospital = "Unknown";
+            }
 
-            newPatientModel.ToHospital =
-                newEntry.GetStringExtension("http://www.example.com/hospitalTest") ?? "To hospital went wrong";
+            try
+            {
+                newPatientModel.FromDestination = newEntry.Identifier[2].Value;
+            }
+            catch (Exception e)
+            {
+                newPatientModel.FromDestination = "Unknown";
+            }
+            
+
             newPatientModel.Triage =
                 newEntry.GetStringExtension("http://www.example.com/triagetest") ?? "Unknown";
             newPatientModel.Specialty =
                 newEntry.GetStringExtension("http://www.example.com/SpecialtyTest") ?? "Unknown";
-            newPatientModel.ETA = 
-                Convert.ToDateTime(newEntry.GetExtension("http://www.example.com/datetimeTest").Value.ToString());
+            newPatientModel.ETA = Convert.ToDateTime(newEntry.GetExtension("http://www.example.com/datetimeTest").Value.ToString());
+
+            newPatientModel.Age = CalculateAge(Convert.ToDateTime(newEntry.BirthDate));
+            newPatientModel.LastUpdated = newEntry.Meta.LastUpdated.Value;
 
             //DateTime eta = Convert.ToDateTime(newEntry.GetStringExtension("http://www.example.com/datetimeTest")?? DateTime.MinValue.ToString());
             // Hvad  kan vi gøre hvis der ingen ETA er?
             //newPatientModel.ETA = eta;
-            
-           
             return newPatientModel;
             
         }
 
+        public string CalculateAge(DateTime t)
+        {
+            //https://stackoverflow.com/questions/9/how-do-i-calculate-someones-age-in-c
+            t = t.Date;
+            var today = DateTime.Now.Date;
+            var age = today.Year - t.Year;
+            if (t.AddYears(age)<today)
+            {
+                age--;
+            }
+            return age.ToString();
+        }
         //Todo with clinical impression ressource on fhir
         public void SetMedicinalNote()
         {

@@ -30,18 +30,12 @@ namespace IncomingCasualtyHandling.BL
             _sortEta = sortEta;
             _sortEta.SortedListReady += SortForTriage;
             LoadXMLSettings = _loadXMLSettings;
-            TriageList = new List<Triage>(LoadXMLSettings.TriageList);  //To get a copy of the list loaded from XML-file
-            // Create an unknown triage
-            Triage unknownTriage = new Triage();
-            unknownTriage.Name = unknownTriageName;
-            unknownTriage.Colour = "#cecece";
-            unknownTriage.Amount = 0;
-            unknownTriage.ShowAs = Visibility.Collapsed;
-            TriageList.Add(unknownTriage);
+            
 
             _overviewView_Model = overviewView_Model;
             _detailView_Model = detailView_Model;
             _mainView_Model = mainView_Model;
+
         }
 
         public void SortForTriage(List<PatientModel> listOfPatients)
@@ -50,11 +44,18 @@ namespace IncomingCasualtyHandling.BL
             List<List<PatientModel>> listOfPatientLists = new List<List<PatientModel>>();
             List<PatientModel> listWithUnknownTriage = new List<PatientModel>();
             var results = listOfPatients.GroupBy(p => p.Triage);
-            TriageList[5].Amount = 0;
+            TriageList = new List<Triage>(LoadXMLSettings.ReturnTriageList());
+            //TriageList = new List<Triage>(LoadXMLSettings.TriageList);  //To get a copy of the list loaded from XML-file
+            // Create an unknown triage
+            Triage unknownTriage1 = new Triage();
+            unknownTriage1.Name = unknownTriageName;
+            unknownTriage1.Colour = "#cecece";
+            unknownTriage1.Amount = 0;
+            unknownTriage1.ShowAs = Visibility.Collapsed;
+            TriageList.Add(unknownTriage1);
             
             foreach (var triageResultList in results)
             {
-                int counter = 0;
                 // Bolean for whether the triage is known
                 bool knownTriage = false;
                 foreach (var triage in TriageList)
@@ -69,7 +70,7 @@ namespace IncomingCasualtyHandling.BL
                         triage.ShowAs = Visibility.Visible;
                         // Create a list from the LINQ statement
                         var patientList = triageResultList.ToList();
-                        //patientList.Sort((a, b) => a.ETA.CompareTo(b.ETA));
+
                         // Add the list to the list of patient lists
                         listOfPatientLists.Add(patientList);
                         // As the triage matched the configuration file triage, the triage is known
@@ -77,7 +78,6 @@ namespace IncomingCasualtyHandling.BL
                         break;
                     }
 
-                    counter++;
                 }
 
                 // If the triage is not in the list, it is unknown to the system and put in the unknown triage list
@@ -125,11 +125,7 @@ namespace IncomingCasualtyHandling.BL
                     listOfPatientLists.Add(listWithUnknownTriage);
                 }
                 
-                // _sortEta.SortListOnEta(listOfPatientLists.Last());
-
-                
-                //// Add the unknown list to the list with lists of patients
-                //listOfPatientLists.Last().AddRange(listWithUnknownTriage);
+               
             }
 
             _mainView_Model.ListOfTriages = TriageList;

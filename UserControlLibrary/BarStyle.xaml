@@ -49,6 +49,9 @@
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
+        <Setter Property="Margin" Value="2,0,2,0"></Setter>
+        <Setter Property="Width" Value="10px"></Setter>
+        <Setter Property="Height" Value="25px"></Setter>
         <!--<Style.Triggers>
             --><!-- In order to implement click reaction on the button again--><!--
             <Trigger Property="ClickMode" Value="Release">
