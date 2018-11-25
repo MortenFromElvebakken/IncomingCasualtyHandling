@@ -334,7 +334,8 @@ namespace IncomingCasualtyHandling.BL.Models
                             }
                             counter++;
                         }
-                        _tabsList = _tempTabList;
+                        // Sort the list alphabetically
+                        _tabsList = _tempTabList.OrderBy(t => t.Name).ToList();
                         return _tabsList;
                     }
                     default:
