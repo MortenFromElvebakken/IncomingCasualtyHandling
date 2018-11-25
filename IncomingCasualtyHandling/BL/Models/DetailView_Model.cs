@@ -377,7 +377,11 @@ namespace IncomingCasualtyHandling.BL.Models
             {
                 if (tryChangeTabs == "Specialty")
                 {
-                    
+                    var chosenSpecialtyName = ListOfSpecialties[tryTabIndex].Name;
+                    var sortedSpecialtiesList = new List<Specialty>();
+                    sortedSpecialtiesList = ListOfSpecialties.OrderBy(a => a.Name).ToList();
+                    var newIndex = sortedSpecialtiesList.FindIndex(x => x.Name == chosenSpecialtyName);
+                    SelectedTabIndex = newIndex;
                 }
                 else
                 {
