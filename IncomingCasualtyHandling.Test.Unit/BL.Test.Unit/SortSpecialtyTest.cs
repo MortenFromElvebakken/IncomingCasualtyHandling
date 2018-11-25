@@ -166,6 +166,11 @@ namespace IncomingCasualtyHandling.Test.Unit.BL.Test.Unit
                 ETA = new DateTime(2018, 11, 18, 21, 30, 00)
             };
             _listOfPatients.Add(_patient3);
+
+            _sortedListOfPatients.Add(_patient3);
+            _sortedListOfPatients.Add(_patient2); // The 2 patients have same ETA, but patient2's name comes later in the alphabet than patient 3
+            _sortEta.SortListOnEta(_listOfPatients).ReturnsForAnyArgs(_sortedListOfPatients);
+
             _uut.SortForSpecialty(_listOfPatients);
             // Unknown specialties are added last to the List of Specialties
             Assert.That(_detailViewModel.ListOfSpecialtiesPatientLists.Last().Count, Is.EqualTo(2));
