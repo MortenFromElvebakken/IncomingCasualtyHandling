@@ -62,7 +62,7 @@ namespace IncomingCasualtyHandling.Test.Unit.BL.Test.Unit
             _listOfSpecialties.Add(new Specialty { Name = "Vascular surgery" });
 
 
-            _loadConfigSettings.SpecialtiesList = _listOfSpecialties;
+            _loadConfigSettings.ReturnSpecialtyList().Returns(_listOfSpecialties);
 
             _uut = new SortSpecialty(_loadConfigSettings, _overviewViewModel, _detailViewModel, _mainViewModel, _sortEta);
 
