@@ -54,7 +54,6 @@ namespace IncomingCasualtyHandling.BL
             
             foreach (var triageResultList in results)
             {
-                int counter = 0;
                 // Bolean for whether the triage is known
                 bool knownTriage = false;
                 foreach (var triage in TriageList)
@@ -69,7 +68,7 @@ namespace IncomingCasualtyHandling.BL
                         triage.ShowAs = Visibility.Visible;
                         // Create a list from the LINQ statement
                         var patientList = triageResultList.ToList();
-                        //patientList.Sort((a, b) => a.ETA.CompareTo(b.ETA));
+
                         // Add the list to the list of patient lists
                         listOfPatientLists.Add(patientList);
                         // As the triage matched the configuration file triage, the triage is known
@@ -77,7 +76,6 @@ namespace IncomingCasualtyHandling.BL
                         break;
                     }
 
-                    counter++;
                 }
 
                 // If the triage is not in the list, it is unknown to the system and put in the unknown triage list
