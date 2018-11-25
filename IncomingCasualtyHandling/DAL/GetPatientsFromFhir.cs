@@ -16,63 +16,56 @@ namespace IncomingCasualtyHandling.DAL
 {
     public class GetPatientsFromFhir : IGetPatientsFromFHIR
     {
-        private readonly string fhirServerURL;
-        private readonly string hospitalShortName; //Til search params
-        private FhirClient client;
-        private ISerializeToPatient serialisePatient;
-        private ILoadConfigurationSettings _loadConfigSettingsFromXmlDocument;
-        private SearchParams sParameters;
-        private static Thread myThread;
-        private DateTime dateOfLastSearch;
-        private bool internet;
+        private readonly string _fhirServerUrl;
+        private FhirClient _client;
+        private readonly ISerializeToPatient _serializePatient;
+        private readonly ILoadConfigurationSettings _loadConfigSettingsFromXmlDocument;
+        private readonly SearchParams _sParameters;
+        private static Thread _myThread;
+        private DateTime _dateOfLastSearch;
+        private bool _internet;
 
         public GetPatientsFromFhir(ILoadConfigurationSettings _lcs, ISerializeToPatient _isp)
         {
             _loadConfigSettingsFromXmlDocument = _lcs;
-            fhirServerURL = _loadConfigSettingsFromXmlDocument.ServerName;
-            hospitalShortName = _loadConfigSettingsFromXmlDocument.HospitalShortName;
-
-            //Initialize a client to call fhirserver
-            //Hvordan testes internet connection???...
-            //Måske set server op til at kigge på en anden fhir server, fjern internet, men lad localhost
-            //på config fil. Så burde man kunne teste hvor den breaker henne
-            client = new FhirClient(fhirServerURL);
-            serialisePatient = _isp;
-            internet = true;
-            dateOfLastSearch = DateTime.MinValue;
+            _fhirServerUrl = _loadConfigSettingsFromXmlDocument.ServerName;
+            
+            _client = new FhirClient(_fhirServerUrl);
+            _serializePatient = _isp;
+            _internet = true;
+            _dateOfLastSearch = DateTime.MinValue;
 
             //Initialize seachparameters
-            sParameters = new SearchParams();
-            sParameters.Add("active", "true");
-            //sParameters.Add("identifier", "AUH");
+            _sParameters = new SearchParams();
+            _sParameters.Add("active", "true");
+            _sParameters.Add("identifier", _loadConfigSettingsFromXmlDocument.HospitalShortName);
 
 
-            //Create thread that gets new data
-            myThread = new Thread(AsyncGetAllPatients);
-            myThread.IsBackground = true;
+            //Create thread that checks for new data, and runs gets patients if there are updates
+            _myThread = new Thread(AsyncGetAllPatients);
+            _myThread.IsBackground = true;
         }
 
         public void GetAllPatients()
         {
 
-            //Her er parametrene lagt ind, så det er disse en query er bygget på. De er meget case sensitive
-
-            //http://docs.simplifier.net/fhirnetapi/client/search.html
-
             List<PatientModel> listOfPatients = new List<PatientModel>();
             var firstBundle = default(Bundle);
+
+            //In a try catch, in case there is no server connection
             try
             {
-                firstBundle = client.Search<Patient>(sParameters);
-                dateOfLastSearch = DateTime.Now;
-                if (internet == false)
-                    internet = true;
+                firstBundle = _client.Search<Patient>(_sParameters);
+                _dateOfLastSearch = DateTime.Now;
+                if (_internet == false)
+                    _internet = true;
             }
             catch (Exception e)
             {
                 
                 //Sends event that there is no internetconnection, and sets internet bool to false.
-                internet = false;
+                Debug.WriteLine(e.Message);
+                _internet = false;
                 NoInternetConnection(false);
                 
             }
@@ -83,15 +76,15 @@ namespace IncomingCasualtyHandling.DAL
                 foreach (var x in firstBundle.Entry)
                 {
                     var testpatient = (Patient)x.Resource;
-                    PatientModel op = serialisePatient.ReturnPatient(testpatient);
+                    PatientModel op = _serializePatient.ReturnPatient(testpatient);
                     listOfPatients.Add(op);
                 }
-                firstBundle = client.Continue(firstBundle, PageDirection.Next);
+                firstBundle = _client.Continue(firstBundle, PageDirection.Next);
             }
             UpdatePatients(listOfPatients);
-            if (!myThread.IsAlive)
+            if (!_myThread.IsAlive)
             {
-                myThread.Start();
+                _myThread.Start();
             }
 
         }
@@ -106,6 +99,8 @@ namespace IncomingCasualtyHandling.DAL
             handler?.Invoke(_patientList);
         }
 
+
+        //Event for no internet
         public delegate void NoInterNetUpdateHandler(bool b);
         public event NoInterNetUpdateHandler NoInternet;
 
@@ -124,34 +119,35 @@ namespace IncomingCasualtyHandling.DAL
             try
             {
                 //throw new Exception("test");
-                anyChangedResources = client.WholeSystemHistory(dateOfLastSearch, 10);
-                dateOfLastSearch = DateTime.Now.AddSeconds(-1);
-                if (internet == false)
+                anyChangedResources = _client.WholeSystemHistory(_dateOfLastSearch, 10);
+                _dateOfLastSearch = DateTime.Now.AddSeconds(-1);
+                if (_internet == false)
                 {
-                    internet = true;
+                    _internet = true;
                     NoInternetConnection(true);
                 }
                     
             }
             catch (Exception e)
             {
-                internet = false;
+                Debug.WriteLine(e.Message);
+                _internet = false;
                 NoInternetConnection(false);
             }
 
             if (anyChangedResources != null && anyChangedResources.Entry.Count != 0)
             {
-                var newBundle = client.SearchAsync<Patient>(sParameters).Result;
+                var newBundle = _client.SearchAsync<Patient>(_sParameters).Result;
                 List<PatientModel> listOfPatients = new List<PatientModel>();
                 while (newBundle != null)
                 {
                     foreach (var x in newBundle.Entry)
                     {
                         var testpatient = (Patient)x.Resource;
-                        PatientModel op = serialisePatient.ReturnPatient(testpatient);
+                        PatientModel op = _serializePatient.ReturnPatient(testpatient);
                         listOfPatients.Add(op);
                     }
-                    newBundle = client.Continue(newBundle, PageDirection.Next);
+                    newBundle = _client.Continue(newBundle, PageDirection.Next);
                 }
 
                 UpdatePatients(listOfPatients);
@@ -162,7 +158,7 @@ namespace IncomingCasualtyHandling.DAL
 
         public void setFhirClientURL(string s)
         {
-            client = new FhirClient(s);
+            _client = new FhirClient(s);
             GetAllPatients();
         }
     }

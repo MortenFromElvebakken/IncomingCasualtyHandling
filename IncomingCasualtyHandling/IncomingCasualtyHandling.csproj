@@ -135,7 +135,6 @@
     </Compile>
     <Compile Include="DAL\GetPatientsFromFhir.cs" />
     <Compile Include="DAL\SerialiseToPatient.cs" />
-    <Compile Include="DAL\TestSubScriptionClass.cs" />
     <Compile Include="GUI\ObservableObject.cs" />
     <Compile Include="GUI\ViewModels\OverviewView_ViewModel.cs" />
     <Compile Include="GUI\RelayCommand.cs" />

@@ -19,7 +19,7 @@ namespace IncomingCasualtyHandling.DAL
 
         private string _server;
         private string _hospital;
-        private XmlDocument configFile;
+        private readonly XmlDocument _configFile;
         public string ServerName { get; private set; }
         public string HospitalShortName { get; private set; }
         
@@ -27,16 +27,16 @@ namespace IncomingCasualtyHandling.DAL
         public LoadConfigurationSettingsFromXMLDocument()
         {
             XmlServerName = "http://localhost:8080/Conf.Fapi/Configuration.xml";
-            configFile = new XmlDocument();
-            configFile.Load(XmlServerName);
+            _configFile = new XmlDocument();
+            _configFile.Load(XmlServerName);
             GetHospitalShortName();
             GetServerName();
         }
         public LoadConfigurationSettingsFromXMLDocument(string _newXmlServerName)
         {
             XmlServerName = _newXmlServerName; 
-            configFile = new XmlDocument();
-            configFile.Load(XmlServerName);
+            _configFile = new XmlDocument();
+            _configFile.Load(XmlServerName);
 
 
             GetHospitalShortName();
@@ -48,12 +48,12 @@ namespace IncomingCasualtyHandling.DAL
 
         private void GetServerName()
         {
-            _server = configFile.LastChild.ChildNodes[0].InnerText; 
+            _server = _configFile.LastChild.ChildNodes[0].InnerText; 
             ServerName = _server;
         }
         private void GetHospitalShortName()
         {
-            _hospital = configFile.LastChild.ChildNodes[1].InnerText;
+            _hospital = _configFile.LastChild.ChildNodes[1].InnerText;
             HospitalShortName = _hospital;
         }
 
@@ -61,7 +61,7 @@ namespace IncomingCasualtyHandling.DAL
         {
             List<Triage> triageList = new List<Triage>();
             
-            foreach (XmlNode c in configFile.LastChild.ChildNodes[2])
+            foreach (XmlNode c in _configFile.LastChild.ChildNodes[2])
             {
                 var _triage = new Triage();
                 //
@@ -80,7 +80,7 @@ namespace IncomingCasualtyHandling.DAL
         public List<Specialty> ReturnSpecialtyList()
         {
             List<Specialty> specialtiesList = new List<Specialty>();
-            foreach (XmlNode c in configFile.LastChild.ChildNodes[3])
+            foreach (XmlNode c in _configFile.LastChild.ChildNodes[3])
             {
                 var _specialty = new Specialty();
                 _specialty.Name = c.FirstChild.InnerText;
