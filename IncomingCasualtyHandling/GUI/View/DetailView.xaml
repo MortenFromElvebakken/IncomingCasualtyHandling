@@ -43,7 +43,7 @@
                     </TabItem.Header>
                 </TabItem>
             </TabControl>-->
-            <TabControl ItemsSource="{Binding Tabs}" SelectedIndex="{Binding SelectedIndex, Mode=OneWay}">
+            <TabControl ItemsSource="{Binding Tabs}" SelectedIndex="{Binding SelectedIndex, Mode=OneWay}" Style="{DynamicResource TabControlAsWrapPanel}">
                 
                 <TabControl.ItemTemplate>
 
