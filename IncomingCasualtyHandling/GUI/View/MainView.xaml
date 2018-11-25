@@ -16,9 +16,6 @@
 
     <!--Width="1366" Height="768"-->
 
-    <Window.DataContext>
-        <viewModels:MainView_ViewModel/>
-    </Window.DataContext>
     <Window.InputBindings>
         <MouseBinding Gesture="Alt+LeftClick" Command="{Binding ChangeServerName}">
         </MouseBinding>
