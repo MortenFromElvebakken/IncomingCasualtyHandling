@@ -14,6 +14,7 @@ namespace IncomingCasualtyHandling.BL.Models
     {
 
         public string IconPath => "/GUI/Icons/HomeIcon.png";
+
         #region Triages
 
         private List<Triage> _listOfTriages;
@@ -405,8 +406,8 @@ namespace IncomingCasualtyHandling.BL.Models
                 }
                 else if (tryChangeTabs == "Specialty")
                 {
-                    //Tabs laver 16 sorterede tabs der enten er visible eller ej.
-                    //Denne skal hvis man trykker på speciale1, ramme den tab med størst ammount
+                    //If specialty is the case, it needs another index that the one sent from view, this is due to
+                    //the alfabetic sort on tabs. 
                     var chosenSpecialtyName = ListOfSpecialties[tryTabIndex].Name;
                     var sortedSpecialtiesList = new List<Specialty>();
                     sortedSpecialtiesList = ListOfSpecialties.OrderBy(a => a.Name).ToList();

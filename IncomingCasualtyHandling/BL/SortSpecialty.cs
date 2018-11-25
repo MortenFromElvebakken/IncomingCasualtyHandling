@@ -32,6 +32,8 @@ namespace IncomingCasualtyHandling.BL
             _detailView_Model = detailView_Model;
             _mainView_Model = mainview_Model;
         }
+
+
         public void SortForSpecialty(List<PatientModel> listOfPatients)
         {
             // Take all patients and group by specialty

@@ -10,7 +10,6 @@ namespace IncomingCasualtyHandling.BL.Interfaces
     public interface ITimer
     {
         void FindRelativeTime(List<PatientModel> sortedEtas);
-        //void CompareETATimeToCurrentTime(DateTime nextEta);
 
     }
 }

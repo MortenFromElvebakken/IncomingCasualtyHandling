@@ -14,6 +14,8 @@ namespace IncomingCasualtyHandling.BL.Models
 {
     public class MainView_Model : ObservableObject, IMainView_Model
     {
+
+
         private IGetPatientsFromFHIR iGetPatientsFromFhir;
         public MainView_Model(IGetPatientsFromFHIR _IGetPatientsFromFHIR)
         {
@@ -21,28 +23,9 @@ namespace IncomingCasualtyHandling.BL.Models
             iGetPatientsFromFhir.NoInternet += setInternetProperty;
         }
 
-        private static DateTime whenServerStoppedResponding = default(DateTime);
-
-        public void setInternetProperty(bool b)
-        {
-            if (b == false)
-            {
-                whenServerStoppedResponding = DateTime.Now;
-                ConnectionToInternet = Visibility.Visible;
-            }
-            else
-            {
-                ConnectionToInternet = Visibility.Collapsed;
-            }
-        }
-        private string _noConnectionString = string.Format("Could not contact server, no updates are made. Last update: " + whenServerStoppedResponding.ToLongTimeString());
-        public string NoConnectionString
-        {
-            get => _noConnectionString;
-        }
+        
 
         private string _currentDateTime;
-        // Property for binding 
         public string CurrentDateTime
         {
             get => _currentDateTime;
@@ -55,6 +38,21 @@ namespace IncomingCasualtyHandling.BL.Models
                 }
             }
         }
+
+        private string _serverName;
+        public string ServerName
+        {
+            get => _serverName;
+            set
+            {
+                _serverName = value;
+                iGetPatientsFromFhir.setFhirClientURL(_serverName);
+            }
+        }
+
+
+
+        #region Triage, ETA and specialty
 
         private List<Triage> _listOfTriages;
         public List<Triage> ListOfTriages
@@ -111,21 +109,15 @@ namespace IncomingCasualtyHandling.BL.Models
         }
 
         public ETA Eta { get; set; }
+
         public Specialty Specialty1 { get; set; }
+        #endregion
+        
+        
 
+        #region InternetConnection
 
-        //private readonly CultureInfo _culture = CultureInfo.CurrentCulture;
-        private string _serverName;
-        public string ServerName
-        {
-            get => _serverName;
-            set
-            {
-                _serverName = value;
-                iGetPatientsFromFhir.setFhirClientURL(_serverName);
-            }
-        }
-
+        
         private Visibility _connectionToInternet = Visibility.Collapsed;
         public Visibility ConnectionToInternet
         {
@@ -137,7 +129,27 @@ namespace IncomingCasualtyHandling.BL.Models
                 OnPropertyChanged();
             }
         }
+        private static DateTime whenServerStoppedResponding = default(DateTime);
 
+        public void setInternetProperty(bool b)
+        {
+            if (b == false)
+            {
+                whenServerStoppedResponding = DateTime.Now;
+                ConnectionToInternet = Visibility.Visible;
+                OnPropertyChanged(NoConnectionString);
+            }
+            else
+            {
+                ConnectionToInternet = Visibility.Collapsed;
+            }
+        }
+        private string _noConnectionString = string.Format("Could not contact server, no updates are made. Last update: " + whenServerStoppedResponding.ToLongTimeString());
+        public string NoConnectionString
+        {
+            get => _noConnectionString;
+        }
+        #endregion
 
     }
 }
