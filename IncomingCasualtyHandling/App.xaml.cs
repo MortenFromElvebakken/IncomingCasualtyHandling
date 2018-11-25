@@ -62,7 +62,6 @@ namespace IncomingCasualtyHandling
                     else
                     {
                         Environment.Exit(0);
-                        
                     }
             }
             
@@ -96,6 +95,7 @@ namespace IncomingCasualtyHandling
 
             // Create GUI
             MainView _mainView = new MainView();
+
             _mainView.DataContext = _mainViewViewModel;
             
             _mainView.Show();

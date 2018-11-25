@@ -16,7 +16,7 @@ namespace IncomingCasualtyHandling.BL
     public class SortSpecialty : ISortSpecialty
     {
         private ILoadConfigurationSettings LoadXMLSettings;
-        private readonly List<Specialty> specialtiesList;
+        private List<Specialty> specialtiesList;
         private IOverviewView_Model _overviewView_Model;
         private IDetailView_Model _detailView_Model;
         private IMainView_Model _mainView_Model;
@@ -27,7 +27,7 @@ namespace IncomingCasualtyHandling.BL
             _sortEta = sortEta;
             _sortEta.SortedListReady += SortForSpecialty;
             LoadXMLSettings = _loadXMLSettings;
-            specialtiesList = new List<Specialty>(LoadXMLSettings.SpecialtiesList);  //Copy of list from xml
+            
             _overviewView_Model = overviewView_Model;
             _detailView_Model = detailView_Model;
             _mainView_Model = mainview_Model;
@@ -42,7 +42,8 @@ namespace IncomingCasualtyHandling.BL
             var listOfPatientLists = new List<List<PatientModel>>();
             // Create a list to contain patients with an unknown specialty
             var listWithUnknownSpecialty = new List<PatientModel>();
-
+            // Get a copy of list from xml
+            specialtiesList = new List<Specialty>(LoadXMLSettings.ReturnSpecialtyList());  
             // Run through the list of lists (based on specialties)
             foreach (var specialtyResultList in results)
             {
