@@ -9,6 +9,7 @@ namespace IncomingCasualtyHandling.DAL.Interface
     public interface IGetPatientsFromFHIR
     {
         event GetPatientsFromFhir.PatientUpdateHandler PatientDataReady;
+        event GetPatientsFromFhir.NoInterNetUpdateHandler NoInternet;
         void setFhirClientURL(string s);
     }
 }

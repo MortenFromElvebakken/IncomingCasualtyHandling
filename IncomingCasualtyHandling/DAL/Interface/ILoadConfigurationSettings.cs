@@ -11,7 +11,7 @@ namespace IncomingCasualtyHandling.DAL.Interface
     {
         string ServerName { get;}
         string HospitalShortName { get;}
-        List<Specialty> SpecialtiesList { get; set; }
-        List<Triage> TriageList { get; set; }
+        List<Triage> ReturnTriageList();
+        List<Specialty> ReturnSpecialtyList();
     }
 }

@@ -28,14 +28,18 @@
         
         <Grid.RowDefinitions>
             <RowDefinition Height="0.05*"/>
+            <RowDefinition Height="0.1*"></RowDefinition>
             <RowDefinition/>
         </Grid.RowDefinitions>
 
-        <Grid Grid.Row="0">
+        <Grid Grid.Row="0" ZIndex="1">
             <view:TopComponent x:Name="TopComponent" DataContext="CurrentDateTime"></view:TopComponent>
         </Grid>
+        <Grid Grid.Row="0" Grid.RowSpan="2" ZIndex="2">
+            <TextBlock Opacity="0.35" Background="Yellow" Visibility="{Binding ConnectionToInternet}" Text="{Binding NoConnectionString}" TextAlignment="Center" FontSize="30"></TextBlock>
+        </Grid>
 
-        <Grid Grid.Row="1">
+        <Grid Grid.Row="1" Grid.RowSpan="2">
             <ContentControl Content="{Binding CurrentWorkspace}"/>
         </Grid>
     </Grid>

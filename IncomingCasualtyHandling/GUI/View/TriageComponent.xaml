@@ -26,81 +26,100 @@
 
         <Grid Grid.Row="1">
             <UniformGrid Rows="1" Margin="10,10,10,10" VerticalAlignment="Stretch">
-                <Grid Name="Triage1Panel" Visibility="{Binding RelativeSource={RelativeSource AncestorType=Window}, Path=DataContext.Triage1.ShowAs}" MaxWidth="100px">
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="1*"/>
-                        <RowDefinition Style="{StaticResource LabelRow}"/>
-                    </Grid.RowDefinitions>
 
-                    <Grid.InputBindings>
-                        <MouseBinding MouseAction="LeftClick" Command="{Binding RelativeSource={RelativeSource AncestorType=Window}, Path=DataContext.ChangeViewCommandWithProperty}" CommandParameter="Triage 0"></MouseBinding>
-                    </Grid.InputBindings>
 
-                    <ProgressBar Grid.Row="0" Name="Triage1Bar" Foreground="{Binding RelativeSource={RelativeSource AncestorType=Window}, Path=DataContext.Triage1.Colour}" Height="Auto" Maximum="{Binding MaximumTriagePatients}" Value="{Binding RelativeSource={RelativeSource AncestorType=Window}, Path=DataContext.Triage1.Amount}" Orientation="Vertical"></ProgressBar>
-                    <Label Grid.Row="1" Name="Triage1Amount" HorizontalAlignment="Center" VerticalAlignment="Bottom" Content="{Binding RelativeSource={RelativeSource AncestorType=Window}, Path=DataContext.Triage1.Amount}"></Label>
+                <Grid Name="Triage1Panel" Margin="5,0,5,0" Visibility="{Binding RelativeSource={RelativeSource AncestorType=Window}, Path=DataContext.Triage1.ShowAs}" MaxWidth="100px">
+                    
+                    <Border BorderBrush="Black" BorderThickness="1" CornerRadius="10" IsHitTestVisible="True" Background="White">
+                        <Border.InputBindings>
+                            <MouseBinding MouseAction="LeftClick" Command="{Binding RelativeSource={RelativeSource AncestorType=Window}, Path=DataContext.ChangeViewCommandWithProperty}" CommandParameter="Triage 0"></MouseBinding>
+                        </Border.InputBindings>
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="1*"/>
+                                <RowDefinition Style="{StaticResource LabelRow}"/>
+                            </Grid.RowDefinitions>
+                            <ProgressBar Grid.Row="0" Name="Triage1Bar" Foreground="{Binding RelativeSource={RelativeSource AncestorType=Window}, Path=DataContext.Triage1.Colour}" Height="Auto" Maximum="{Binding MaximumTriagePatients}" Value="{Binding RelativeSource={RelativeSource AncestorType=Window}, Path=DataContext.Triage1.Amount}" Orientation="Vertical"></ProgressBar>
+                        <Label Grid.Row="1" Name="Triage1Amount" HorizontalAlignment="Center" VerticalAlignment="Bottom" Content="{Binding RelativeSource={RelativeSource AncestorType=Window}, Path=DataContext.Triage1.Amount}"></Label>
+                        </Grid>
+                    </Border>
                 </Grid>
-                <Grid Name="Triage2Panel" Visibility="{Binding RelativeSource={RelativeSource AncestorType=Window}, Path=DataContext.Triage2.ShowAs}" MaxWidth="100px">
-                    <Grid.RowDefinitions>
-                        <RowDefinition/>
-                        <RowDefinition Style="{StaticResource LabelRow}"/>
-                    </Grid.RowDefinitions>
-
-                    <Grid.InputBindings>
-                        <MouseBinding MouseAction="LeftClick" Command="{Binding RelativeSource={RelativeSource AncestorType=Window}, Path=DataContext.ChangeViewCommandWithProperty}" CommandParameter="Triage 1"></MouseBinding>
-                    </Grid.InputBindings>
-                    <ProgressBar Grid.Row="0" Name="Triage2Bar" Foreground="{Binding RelativeSource={RelativeSource AncestorType=Window}, Path=DataContext.Triage2.Colour}" Height="Auto" Maximum="{Binding MaximumTriagePatients}" Value="{Binding RelativeSource={RelativeSource AncestorType=Window}, Path=DataContext.Triage2.Amount}" Orientation="Vertical"></ProgressBar>
-                    <Label Grid.Row="1" Name="Triage2Amount" HorizontalAlignment="Center" VerticalAlignment="Bottom" Content="{Binding RelativeSource={RelativeSource AncestorType=Window}, Path=DataContext.Triage2.Amount}"></Label>
+                
+                
+                <Grid Name="Triage2Panel" Margin="5,0,5,0" Visibility="{Binding RelativeSource={RelativeSource AncestorType=Window}, Path=DataContext.Triage2.ShowAs}" MaxWidth="100px">
+                    <Border BorderBrush="Black" BorderThickness="1" CornerRadius="10" IsHitTestVisible="True" Background="White">
+                        <Border.InputBindings>
+                            <MouseBinding MouseAction="LeftClick" Command="{Binding RelativeSource={RelativeSource AncestorType=Window}, Path=DataContext.ChangeViewCommandWithProperty}" CommandParameter="Triage 1"></MouseBinding>
+                        </Border.InputBindings>
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="1*"/>
+                                <RowDefinition Style="{StaticResource LabelRow}"/>
+                            </Grid.RowDefinitions>
+                            <ProgressBar Grid.Row="0" Name="Triage2Bar" Foreground="{Binding RelativeSource={RelativeSource AncestorType=Window}, Path=DataContext.Triage2.Colour}" Height="Auto" Maximum="{Binding MaximumTriagePatients}" Value="{Binding RelativeSource={RelativeSource AncestorType=Window}, Path=DataContext.Triage2.Amount}" Orientation="Vertical"></ProgressBar>
+                            <Label Grid.Row="1" Name="Triage2Amount" HorizontalAlignment="Center" VerticalAlignment="Bottom" Content="{Binding RelativeSource={RelativeSource AncestorType=Window}, Path=DataContext.Triage2.Amount}"></Label>
+                        </Grid>
+                    </Border>
                 </Grid>
-                <Grid Name="Triage3Panel" Visibility="{Binding RelativeSource={RelativeSource AncestorType=Window}, Path=DataContext.Triage3.ShowAs}" MaxWidth="100px">
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="1*"/>
-                        <RowDefinition Style="{StaticResource LabelRow}"/>
-                    </Grid.RowDefinitions>
-
-                    <Grid.InputBindings>
-                        <MouseBinding MouseAction="LeftClick" Command="{Binding RelativeSource={RelativeSource AncestorType=Window}, Path=DataContext.ChangeViewCommandWithProperty}" CommandParameter="Triage 2"></MouseBinding>
-                    </Grid.InputBindings>
-                    <ProgressBar Grid.Row="0" Name="Triage3Bar" Foreground="{Binding RelativeSource={RelativeSource AncestorType=Window}, Path=DataContext.Triage3.Colour}" Height="Auto" Maximum="{Binding MaximumTriagePatients}" Value="{Binding RelativeSource={RelativeSource AncestorType=Window}, Path=DataContext.Triage3.Amount}" Orientation="Vertical"></ProgressBar>
-                    <Label Grid.Row="1" Name="Triage3Amount" HorizontalAlignment="Center" VerticalAlignment="Bottom" Content="{Binding RelativeSource={RelativeSource AncestorType=Window}, Path=DataContext.Triage3.Amount}"></Label>
+                <Grid Name="Triage3Panel" Margin="5,0,5,0" Visibility="{Binding RelativeSource={RelativeSource AncestorType=Window}, Path=DataContext.Triage3.ShowAs}" MaxWidth="100px">
+                    <Border BorderBrush="Black" BorderThickness="1" CornerRadius="10" IsHitTestVisible="True" Background="White">
+                        <Border.InputBindings>
+                            <MouseBinding MouseAction="LeftClick" Command="{Binding RelativeSource={RelativeSource AncestorType=Window}, Path=DataContext.ChangeViewCommandWithProperty}" CommandParameter="Triage 2"></MouseBinding>
+                        </Border.InputBindings>
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="1*"/>
+                                <RowDefinition Style="{StaticResource LabelRow}"/>
+                            </Grid.RowDefinitions>
+                            <ProgressBar Grid.Row="0" Name="Triage3Bar" Foreground="{Binding RelativeSource={RelativeSource AncestorType=Window}, Path=DataContext.Triage3.Colour}" Height="Auto" Maximum="{Binding MaximumTriagePatients}" Value="{Binding RelativeSource={RelativeSource AncestorType=Window}, Path=DataContext.Triage3.Amount}" Orientation="Vertical"></ProgressBar>
+                            <Label Grid.Row="1" Name="Triage3Amount" HorizontalAlignment="Center" VerticalAlignment="Bottom" Content="{Binding RelativeSource={RelativeSource AncestorType=Window}, Path=DataContext.Triage3.Amount}"></Label>
+                        </Grid>
+                    </Border>
                 </Grid>
-                <Grid Name="Triage4Panel" Visibility="{Binding RelativeSource={RelativeSource AncestorType=Window}, Path=DataContext.Triage4.ShowAs}" MaxWidth="100px">
-                    <Grid.RowDefinitions>
-                        <RowDefinition/>
-                        <RowDefinition Style="{StaticResource LabelRow}"/>
-                    </Grid.RowDefinitions>
-
-                    <Grid.InputBindings>
-                        <MouseBinding MouseAction="LeftClick" Command="{Binding RelativeSource={RelativeSource AncestorType=Window}, Path=DataContext.ChangeViewCommandWithProperty}" CommandParameter="Triage 3"></MouseBinding>
-                    </Grid.InputBindings>
-
-                    <ProgressBar Grid.Row="0" Name="Triage4Bar" Foreground="{Binding RelativeSource={RelativeSource AncestorType=Window}, Path=DataContext.Triage4.Colour}" Height="Auto" Maximum="{Binding MaximumTriagePatients}" Value="{Binding RelativeSource={RelativeSource AncestorType=Window}, Path=DataContext.Triage4.Amount}" Orientation="Vertical"></ProgressBar>
-                    <Label Grid.Row="1" Name="Triage4Amount" HorizontalAlignment="Center" VerticalAlignment="Bottom" Content="{Binding RelativeSource={RelativeSource AncestorType=Window}, Path=DataContext.Triage4.Amount}"></Label>
+                <Grid Name="Triage4Panel"  Margin="5,0,5,0" Visibility="{Binding RelativeSource={RelativeSource AncestorType=Window}, Path=DataContext.Triage4.ShowAs}" MaxWidth="100px">
+                    <Border BorderBrush="Black" BorderThickness="1" CornerRadius="10" IsHitTestVisible="True" Background="White">
+                        <Border.InputBindings>
+                            <MouseBinding MouseAction="LeftClick" Command="{Binding RelativeSource={RelativeSource AncestorType=Window}, Path=DataContext.ChangeViewCommandWithProperty}" CommandParameter="Triage 3"></MouseBinding>
+                        </Border.InputBindings>
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="1*"/>
+                                <RowDefinition Style="{StaticResource LabelRow}"/>
+                            </Grid.RowDefinitions>
+                            <ProgressBar Grid.Row="0" Name="Triage4Bar" Foreground="{Binding RelativeSource={RelativeSource AncestorType=Window}, Path=DataContext.Triage4.Colour}" Height="Auto" Maximum="{Binding MaximumTriagePatients}" Value="{Binding RelativeSource={RelativeSource AncestorType=Window}, Path=DataContext.Triage4.Amount}" Orientation="Vertical"></ProgressBar>
+                            <Label Grid.Row="1" Name="Triage4Amount" HorizontalAlignment="Center" VerticalAlignment="Bottom" Content="{Binding RelativeSource={RelativeSource AncestorType=Window}, Path=DataContext.Triage4.Amount}"></Label>
+                        </Grid>
+                    </Border>
                 </Grid>
-                <Grid Name="Triage5Panel" Visibility="{Binding RelativeSource={RelativeSource AncestorType=Window}, Path=DataContext.Triage5.ShowAs}" MaxWidth="100px">
-                    <Grid.RowDefinitions>
-                        <RowDefinition/>
-                        <RowDefinition Style="{StaticResource LabelRow}"/>
-                    </Grid.RowDefinitions>
-
-                    <Grid.InputBindings>
-                        <MouseBinding MouseAction="LeftClick" Command="{Binding RelativeSource={RelativeSource AncestorType=Window}, Path=DataContext.ChangeViewCommandWithProperty}" CommandParameter="Triage 4"></MouseBinding>
-                    </Grid.InputBindings>
-
-                    <ProgressBar Grid.Row="0" Name="Triage5Bar" Foreground="{Binding RelativeSource={RelativeSource AncestorType=Window}, Path=DataContext.Triage5.Colour}" Height="Auto" Maximum="{Binding MaximumTriagePatients}" Value="{Binding RelativeSource={RelativeSource AncestorType=Window}, Path=DataContext.Triage5.Amount}" Orientation="Vertical"></ProgressBar>
-                    <Label Grid.Row="1" Name="Triage5Amount" HorizontalAlignment="Center" VerticalAlignment="Bottom" Content="{Binding RelativeSource={RelativeSource AncestorType=Window}, Path=DataContext.Triage5.Amount}"></Label>
+                <Grid Name="Triage5Panel"  Margin="5,0,5,0" Visibility="{Binding RelativeSource={RelativeSource AncestorType=Window}, Path=DataContext.Triage5.ShowAs}" MaxWidth="100px">
+                    <Border BorderBrush="Black" BorderThickness="1" CornerRadius="10" IsHitTestVisible="True" Background="White">
+                        <Border.InputBindings>
+                            <MouseBinding MouseAction="LeftClick" Command="{Binding RelativeSource={RelativeSource AncestorType=Window}, Path=DataContext.ChangeViewCommandWithProperty}" CommandParameter="Triage 4"></MouseBinding>
+                        </Border.InputBindings>
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="1*"/>
+                                <RowDefinition Style="{StaticResource LabelRow}"/>
+                            </Grid.RowDefinitions>
+                            <ProgressBar Grid.Row="0" Name="Triage5Bar" Foreground="{Binding RelativeSource={RelativeSource AncestorType=Window}, Path=DataContext.Triage5.Colour}" Height="Auto" Maximum="{Binding MaximumTriagePatients}" Value="{Binding RelativeSource={RelativeSource AncestorType=Window}, Path=DataContext.Triage5.Amount}" Orientation="Vertical"></ProgressBar>
+                        <Label Grid.Row="1" Name="Triage5Amount" HorizontalAlignment="Center" VerticalAlignment="Bottom" Content="{Binding RelativeSource={RelativeSource AncestorType=Window}, Path=DataContext.Triage5.Amount}"></Label>
+                        </Grid>
+                    </Border>
                 </Grid>
-                <Grid Name="Triage6Panel" Visibility="{Binding RelativeSource={RelativeSource AncestorType=Window}, Path=DataContext.Triage6.ShowAs}" MaxWidth="100px">
-                    <Grid.RowDefinitions>
-                        <RowDefinition/>
-                        <RowDefinition Style="{StaticResource LabelRow}"/>
-                    </Grid.RowDefinitions>
-
-                    <Grid.InputBindings>
-                        <MouseBinding MouseAction="LeftClick" Command="{Binding RelativeSource={RelativeSource AncestorType=Window}, Path=DataContext.ChangeViewCommandWithProperty}" CommandParameter="Triage 5"></MouseBinding>
-                    </Grid.InputBindings>
-
-                    <ProgressBar Grid.Row="0" Name="Triage6Bar" Foreground="{Binding RelativeSource={RelativeSource AncestorType=Window}, Path=DataContext.Triage6.Colour}" Height="Auto" Maximum="{Binding MaximumTriagePatients}" Value="{Binding RelativeSource={RelativeSource AncestorType=Window}, Path=DataContext.Triage6.Amount}" Orientation="Vertical"></ProgressBar>
-                    <Label Grid.Row="1" Name="Triage6Amount" HorizontalAlignment="Center" VerticalAlignment="Bottom" Content="{Binding RelativeSource={RelativeSource AncestorType=Window}, Path=DataContext.Triage6.Amount}"></Label>
+                <Grid Name="Triage6Panel" Margin="5,0,5,0" Visibility="{Binding RelativeSource={RelativeSource AncestorType=Window}, Path=DataContext.Triage6.ShowAs}" MaxWidth="100px">
+                    <Border BorderBrush="Black" BorderThickness="1" CornerRadius="10" IsHitTestVisible="True" Background="White">
+                        <Border.InputBindings>
+                            <MouseBinding MouseAction="LeftClick" Command="{Binding RelativeSource={RelativeSource AncestorType=Window}, Path=DataContext.ChangeViewCommandWithProperty}" CommandParameter="Triage 5"></MouseBinding>
+                        </Border.InputBindings>
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="1*"/>
+                                <RowDefinition Style="{StaticResource LabelRow}"/>
+                            </Grid.RowDefinitions>
+                            <ProgressBar Grid.Row="0" Name="Triage6Bar" Foreground="{Binding RelativeSource={RelativeSource AncestorType=Window}, Path=DataContext.Triage6.Colour}" Height="Auto" Maximum="{Binding MaximumTriagePatients}" Value="{Binding RelativeSource={RelativeSource AncestorType=Window}, Path=DataContext.Triage6.Amount}" Orientation="Vertical"></ProgressBar>
+                            <Label Grid.Row="1" Name="Triage6Amount" HorizontalAlignment="Center" VerticalAlignment="Bottom" Content="{Binding RelativeSource={RelativeSource AncestorType=Window}, Path=DataContext.Triage6.Amount}"></Label>
+                        </Grid>
+                    </Border>
                 </Grid>
             </UniformGrid>
         </Grid>
