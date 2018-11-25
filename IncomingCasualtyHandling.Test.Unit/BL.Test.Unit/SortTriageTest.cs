@@ -53,7 +53,7 @@ namespace IncomingCasualtyHandling.Test.Unit.BL.Test.Unit
             _listOfTriages.Add(new Triage { Name = "TriageBlue" });
 
 
-            _loadConfigSettings.TriageList = _listOfTriages;
+            _loadConfigSettings.ReturnTriageList().Returns(_listOfTriages);
 
             _uut = new SortTriage(_loadConfigSettings, _overviewViewModel, _detailViewModel, _mainViewModel,
                     _sortEta);
