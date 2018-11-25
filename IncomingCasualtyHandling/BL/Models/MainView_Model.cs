@@ -4,6 +4,7 @@ using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using IncomingCasualtyHandling.BL.Interfaces;
 using IncomingCasualtyHandling.BL.Object_classes;
 using IncomingCasualtyHandling.DAL;
@@ -17,6 +18,27 @@ namespace IncomingCasualtyHandling.BL.Models
         public MainView_Model(IGetPatientsFromFHIR _IGetPatientsFromFHIR)
         {
             iGetPatientsFromFhir = _IGetPatientsFromFHIR;
+            iGetPatientsFromFhir.NoInternet += setInternetProperty;
+        }
+
+        private static DateTime whenServerStoppedResponding = default(DateTime);
+
+        public void setInternetProperty(bool b)
+        {
+            if (b == false)
+            {
+                whenServerStoppedResponding = DateTime.Now;
+                ConnectionToInternet = Visibility.Visible;
+            }
+            else
+            {
+                ConnectionToInternet = Visibility.Collapsed;
+            }
+        }
+        private string _noConnectionString = string.Format("Could not contact server, no updates are made. Last update: " + whenServerStoppedResponding.ToLongTimeString());
+        public string NoConnectionString
+        {
+            get => _noConnectionString;
         }
 
         private string _currentDateTime;
@@ -101,6 +123,18 @@ namespace IncomingCasualtyHandling.BL.Models
             {
                 _serverName = value;
                 iGetPatientsFromFhir.setFhirClientURL(_serverName);
+            }
+        }
+
+        private Visibility _connectionToInternet = Visibility.Collapsed;
+        public Visibility ConnectionToInternet
+        {
+            get => _connectionToInternet;
+            set
+            {
+                if (_connectionToInternet == value) return;
+                _connectionToInternet = value;
+                OnPropertyChanged();
             }
         }
 

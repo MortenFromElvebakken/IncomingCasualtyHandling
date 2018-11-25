@@ -24,6 +24,7 @@ namespace IncomingCasualtyHandling.DAL
         private SearchParams sParameters;
         private static Thread myThread;
         private DateTime dateOfLastSearch;
+        private bool internet;
 
         public GetPatientsFromFhir(ILoadConfigurationSettings _lcs, ISerializeToPatient _isp)
         {
@@ -37,12 +38,13 @@ namespace IncomingCasualtyHandling.DAL
             //på config fil. Så burde man kunne teste hvor den breaker henne
             client = new FhirClient(fhirServerURL);
             serialisePatient = _isp;
-
+            internet = true;
+            dateOfLastSearch = DateTime.MinValue;
 
             //Initialize seachparameters
             sParameters = new SearchParams();
             sParameters.Add("active", "true");
-            sParameters.Add("identifier", "AUH");
+            //sParameters.Add("identifier", "AUH");
 
 
             //Create thread that gets new data
@@ -63,11 +65,16 @@ namespace IncomingCasualtyHandling.DAL
             {
                 firstBundle = client.Search<Patient>(sParameters);
                 dateOfLastSearch = DateTime.Now;
+                if (internet == false)
+                    internet = true;
             }
             catch (Exception e)
             {
-                MessageBox.Show(e.Message + "Something went wrong in the connection to the server");
-                throw;
+                
+                //Sends event that there is no internetconnection, and sets internet bool to false.
+                internet = false;
+                NoInternetConnection(false);
+                
             }
 
             //in a bundle, the entries are divided into pages. This while loop ensures every entry is added
@@ -99,18 +106,37 @@ namespace IncomingCasualtyHandling.DAL
             handler?.Invoke(_patientList);
         }
 
+        public delegate void NoInterNetUpdateHandler(bool b);
+        public event NoInterNetUpdateHandler NoInternet;
+
+        private void NoInternetConnection(bool b)
+        {
+            var handler = NoInternet;
+            handler?.Invoke(b);
+        }
+
+        
+
         private void AsyncGetAllPatients()
         {
             var anyChangedResources = default(Bundle);
-            Thread.Sleep(10000);
+            Thread.Sleep(5000);
             try
             {
+                //throw new Exception("test");
                 anyChangedResources = client.WholeSystemHistory(dateOfLastSearch, 10);
-                dateOfLastSearch = DateTime.Now;
+                dateOfLastSearch = DateTime.Now.AddSeconds(-1);
+                if (internet == false)
+                {
+                    internet = true;
+                    NoInternetConnection(true);
+                }
+                    
             }
             catch (Exception e)
             {
-                MessageBox.Show(e.Message + "Something went wrong in the connection to the server");
+                internet = false;
+                NoInternetConnection(false);
             }
 
             if (anyChangedResources != null && anyChangedResources.Entry.Count != 0)
@@ -140,4 +166,6 @@ namespace IncomingCasualtyHandling.DAL
             GetAllPatients();
         }
     }
+
+    
 }

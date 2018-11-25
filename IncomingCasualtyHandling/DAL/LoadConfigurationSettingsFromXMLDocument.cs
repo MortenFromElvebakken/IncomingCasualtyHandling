@@ -20,9 +20,6 @@ namespace IncomingCasualtyHandling.DAL
         private string _server;
         private string _hospital;
         private XmlDocument configFile;
-
-        public List<Triage> TriageList { get; set; }
-        public List<Specialty> SpecialtiesList { get; set; }
         public string ServerName { get; private set; }
         public string HospitalShortName { get; private set; }
         
@@ -32,13 +29,8 @@ namespace IncomingCasualtyHandling.DAL
             XmlServerName = "http://localhost:8080/Conf.Fapi/Configuration.xml";
             configFile = new XmlDocument();
             configFile.Load(XmlServerName);
-
-
             GetHospitalShortName();
             GetServerName();
-            CreateTriageList();
-            CreateSpecialtyList();
-
         }
         public LoadConfigurationSettingsFromXMLDocument(string _newXmlServerName)
         {
@@ -49,8 +41,8 @@ namespace IncomingCasualtyHandling.DAL
 
             GetHospitalShortName();
             GetServerName();
-            CreateTriageList();
-            CreateSpecialtyList();
+            ReturnTriageList();
+            ReturnSpecialtyList();
 
         }
 
@@ -65,9 +57,9 @@ namespace IncomingCasualtyHandling.DAL
             HospitalShortName = _hospital;
         }
 
-        private void CreateTriageList()
+        public List<Triage> ReturnTriageList()
         {
-            List<Triage> _triageList = new List<Triage>();
+            List<Triage> triageList = new List<Triage>();
             
             foreach (XmlNode c in configFile.LastChild.ChildNodes[2])
             {
@@ -77,17 +69,17 @@ namespace IncomingCasualtyHandling.DAL
                 _triage.Colour = c.LastChild.InnerText;
                 _triage.Amount = 0;
                 _triage.ShowAs = Visibility.Collapsed;
-                _triageList.Add(_triage);
+                triageList.Add(_triage);
             }
 
-            TriageList = _triageList;
+            return triageList;
 
         }
         
 
-        private void CreateSpecialtyList()
+        public List<Specialty> ReturnSpecialtyList()
         {
-            List<Specialty> _specialtiesList = new List<Specialty>();
+            List<Specialty> specialtiesList = new List<Specialty>();
             foreach (XmlNode c in configFile.LastChild.ChildNodes[3])
             {
                 var _specialty = new Specialty();
@@ -96,10 +88,10 @@ namespace IncomingCasualtyHandling.DAL
                 _specialty.Amount = 0;
                 _specialty.ShowAs = Visibility.Collapsed;
 
-                _specialtiesList.Add(_specialty);
+                specialtiesList.Add(_specialty);
             }
 
-            SpecialtiesList = _specialtiesList;
+            return specialtiesList;
         }
 
     }

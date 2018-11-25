@@ -91,7 +91,7 @@ namespace IncomingCasualtyHandling.Test.Unit.DAL.Test.Unit
         public void ReturnPatient_ReceivedCompletePatient_CreatesPatientId()
         {
             PatientModel patient = _uut.ReturnPatient(Patient1);
-            Assert.That(patient.PatientId, Is.EqualTo(cpr));
+            Assert.That(patient.CPR, Is.EqualTo(cpr));
         }
 
         //Correct serialisation of Specialty

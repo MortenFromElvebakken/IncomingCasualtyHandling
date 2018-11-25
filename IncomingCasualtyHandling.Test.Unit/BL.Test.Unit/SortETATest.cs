@@ -48,7 +48,7 @@ namespace IncomingCasualtyHandling.Test.Unit.BL.Test.Unit
             _patient1 = new PatientModel
 
             {
-                PatientId = "1",
+                CPR = "1",
                 Name = "Patient One",
                 Age = "10",
                 Gender = AdministrativeGender.Male,
@@ -59,7 +59,7 @@ namespace IncomingCasualtyHandling.Test.Unit.BL.Test.Unit
             };
             _patient2 = new PatientModel
             {
-                PatientId = "2",
+                CPR = "2",
                 Name = "Patient Two",
                 Age = "20",
                 Gender = AdministrativeGender.Female,
@@ -106,7 +106,7 @@ namespace IncomingCasualtyHandling.Test.Unit.BL.Test.Unit
         {
             _patient3 = new PatientModel
             {
-                PatientId = "3",
+                CPR = "3",
                 Name = "Patient Three",
                 Age = "30",
                 Gender = AdministrativeGender.Female,
@@ -132,7 +132,7 @@ namespace IncomingCasualtyHandling.Test.Unit.BL.Test.Unit
         {
             _patient3 = new PatientModel
             {
-                PatientId = "3",
+                CPR = "3",
                 Name = "Patient Three",
                 Age = "30",
                 Gender = AdministrativeGender.Female,
@@ -151,7 +151,7 @@ namespace IncomingCasualtyHandling.Test.Unit.BL.Test.Unit
         {
             _patient3 = new PatientModel
             {
-                PatientId = "3",
+                CPR = "3",
                 Name = "Patient Three",
                 Age = "30",
                 Gender = AdministrativeGender.Female,
@@ -161,7 +161,7 @@ namespace IncomingCasualtyHandling.Test.Unit.BL.Test.Unit
             };
             _patient4 = new PatientModel
             {
-                PatientId = "3",
+                CPR = "3",
                 Name = "Alma",
                 Age = "30",
                 Gender = AdministrativeGender.Female,
