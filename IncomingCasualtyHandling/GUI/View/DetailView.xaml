@@ -70,6 +70,8 @@
                                     <GridViewColumn Header="Triage" CellTemplate="{StaticResource CellTemplateForListviewTriage}"/>
                                     <GridViewColumn Header="Specialty" CellTemplate="{StaticResource CellTemplateForListviewSpecialty}"/>
                                     <GridViewColumn Header="ETA" CellTemplate="{StaticResource CellTemplateForListviewETA}"/>
+                                    <GridViewColumn Header="From destination" CellTemplate="{StaticResource CellTemplateForListviewFromDestination}"/>
+                                    <GridViewColumn Header="From destination" CellTemplate="{StaticResource CellTemplateForListviewLastUpdated}"/>
                                     <!--<GridViewColumn Header="ToHospital" DisplayMemberBinding="{Binding ToHospital}"/>
                                     <GridViewColumn Header="Note" DisplayMemberBinding="{Binding Age}"/>
                                     <GridViewColumn Header="AmbulanceNumber" DisplayMemberBinding="{Binding Age}"/>-->

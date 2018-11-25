@@ -13,6 +13,7 @@ namespace IncomingCasualtyHandling.BL.Object_classes
         public string Specialty { get; set; }
         public string ToHospital { get; set; }
         public string FromDestination { get; set; }
+        public DateTimeOffset LastUpdated { get; set; }
         public DateTime ETA { get; set; }
     }
 }
