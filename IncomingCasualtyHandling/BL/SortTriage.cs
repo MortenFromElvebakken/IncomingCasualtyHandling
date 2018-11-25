@@ -125,11 +125,7 @@ namespace IncomingCasualtyHandling.BL
                     listOfPatientLists.Add(listWithUnknownTriage);
                 }
                 
-                // _sortEta.SortListOnEta(listOfPatientLists.Last());
-
-                
-                //// Add the unknown list to the list with lists of patients
-                //listOfPatientLists.Last().AddRange(listWithUnknownTriage);
+               
             }
 
             _mainView_Model.ListOfTriages = TriageList;

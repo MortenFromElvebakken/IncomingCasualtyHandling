@@ -44,6 +44,7 @@ namespace IncomingCasualtyHandling.BL
             var listWithUnknownSpecialty = new List<PatientModel>();
             // Get a copy of list from xml
             specialtiesList = new List<Specialty>(LoadXMLSettings.ReturnSpecialtyList());  
+
             // Run through the list of lists (based on specialties)
             foreach (var specialtyResultList in results)
             {
@@ -116,13 +117,12 @@ namespace IncomingCasualtyHandling.BL
                 
             }
 
-            //specialtiesList.RemoveAll(p => p.Amount == 0);
-            //specialtiesList.Sort((a,b)=>b.Amount -a.Amount);
-            var FinalList = specialtiesList.OrderByDescending(a => a.Amount).ThenBy(a => a.Name).ToList();
-            //specialtiesList.GroupBy(a => a.Amount).OrderBy(a => a.Name);
-            _overviewView_Model.ListOfSpecialities = FinalList;
-            _mainView_Model.Specialty1 = FinalList[0]; // Sætter specialty 1 i mainmodel så overviewcomponent kan se den med flest
-            _detailView_Model.ListOfSpecialties = FinalList;
+
+            var amountSortedSpecialtyList = specialtiesList.OrderByDescending(a => a.Amount).ThenBy(a => a.Name).ToList();
+            
+            _overviewView_Model.ListOfSpecialities = amountSortedSpecialtyList;
+            _mainView_Model.Specialty1 = amountSortedSpecialtyList[0]; // Sætter specialty 1 i mainmodel så overviewcomponent kan se den med flest
+            _detailView_Model.ListOfSpecialties = amountSortedSpecialtyList;
             _detailView_Model.ListOfSpecialtiesPatientLists = listOfPatientLists;
         }
     }
