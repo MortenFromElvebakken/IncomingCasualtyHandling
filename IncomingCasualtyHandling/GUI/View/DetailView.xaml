@@ -12,7 +12,7 @@
              xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    
+
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="40"/>
@@ -47,12 +47,10 @@
                 </TabItem>
             </TabControl>-->
             <TabControl ItemsSource="{Binding Tabs}" SelectedIndex="{Binding SelectedIndex, Mode=OneWay}">
-                
                 <TabControl.ItemTemplate>
-
                     <DataTemplate>
                         <!--<TabItem Style="{StaticResource ChosenTab}" Header="{Binding Name}"></TabItem>-->
-                        
+
                         <TextBlock Text="{Binding Name}" Margin="0,2" FontSize="20" LineHeight="20" />
                     </DataTemplate>
                 </TabControl.ItemTemplate>
@@ -64,24 +62,22 @@
                 <TabControl.ContentTemplate>
                     <DataTemplate>
                         <ListView ItemsSource="{Binding Data}" ItemContainerStyle="{StaticResource RowColourAlternate}" AlternationCount="2" IsSynchronizedWithCurrentItem="True">
-                            <i:Interaction.Triggers>
-                                <i:EventTrigger EventName="Click">
-                                    <cmd:EventToCommand Command="{Binding Mode=OneWay, Path=GridViewColumnHeaderClickedHandlerCommand}"
-                                                        PassEventArgsToCommand="True" />
-                                </i:EventTrigger>
-                            </i:Interaction.Triggers>
                             <ListView.View>
                                 <GridView>
-                                    <GridViewColumn CellTemplate="{StaticResource CellTemplateForListviewName}">
-                                        <GridViewColumnHeader Content="Name">
-                                            <i:Interaction.Triggers>
-                                                <i:EventTrigger EventName="Click">
-                                                    <cmd:EventToCommand Command="{Binding GridViewColumnHeaderClickedHandlerCommand}" CommandParameter="Hej"/>
-                                                </i:EventTrigger>
-                                            </i:Interaction.Triggers>
-                                        </GridViewColumnHeader>
-                                    </GridViewColumn>
-                                    <GridViewColumn Header="CPR" CellTemplate="{StaticResource CellTemplateForListviewCPR}"/>
+                                    <GridView.Columns>
+                                        <GridViewColumn CellTemplate="{StaticResource CellTemplateForListviewName}">
+                                            <GridViewColumnHeader Content="Name">
+                                                <i:Interaction.Triggers>
+                                                    <i:EventTrigger EventName="Click">
+                                                        <cmd:EventToCommand 
+                                                            Command="{Binding DataContext.GridViewColumnHeaderClickedHandler, RelativeSource={RelativeSource AncestorType=TabControl}}" 
+                                                            CommandParameter="Test" 
+                                                            MustToggleIsEnabledValue="True" />
+                                                    </i:EventTrigger>
+                                                </i:Interaction.Triggers>
+                                            </GridViewColumnHeader>
+                                        </GridViewColumn>
+                                            <GridViewColumn Header="CPR" CellTemplate="{StaticResource CellTemplateForListviewCPR}"/>
                                     <GridViewColumn Header="Age" CellTemplate="{StaticResource CellTemplateForListviewAge}"/>
                                     <GridViewColumn Header="Gender" CellTemplate="{StaticResource CellTemplateForListviewGender}"/>
                                     <GridViewColumn Header="Triage" CellTemplate="{StaticResource CellTemplateForListviewTriage}"/>
@@ -92,6 +88,7 @@
                                     <!--<GridViewColumn Header="ToHospital" DisplayMemberBinding="{Binding ToHospital}"/>
                                     <GridViewColumn Header="Note" DisplayMemberBinding="{Binding Age}"/>
                                     <GridViewColumn Header="AmbulanceNumber" DisplayMemberBinding="{Binding Age}"/>-->
+                                    </GridView.Columns>
                                 </GridView>
                             </ListView.View>
                         </ListView>

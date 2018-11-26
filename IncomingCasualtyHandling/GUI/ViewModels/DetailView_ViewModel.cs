@@ -102,8 +102,10 @@ namespace IncomingCasualtyHandling.GUI.ViewModels
 
         public ICommand GridViewColumnHeaderClickedHandlerCommand { get; set; }
 
-        private void GridViewColumnHeaderClickedHandler(object p)
+        private void GridViewColumnHeaderClickedHandler(object o)
         {
+            var test = o.ToString();
+
             MessageBox.Show("You clicked");
                 
         }
