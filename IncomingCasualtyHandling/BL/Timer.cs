@@ -165,7 +165,7 @@ namespace IncomingCasualtyHandling.BL
                 _nextEta = new ETA
                 {
                     AbsoluteTime = _dateTimeEta.ToShortTimeString(),
-                    RelativeTime = "(" + _prefix + _relativeTime + "minutes)"
+                    RelativeTime = "(" + _prefix + " " + _relativeTime + " minutes)"
                 };
             }
             else
@@ -173,7 +173,7 @@ namespace IncomingCasualtyHandling.BL
                 _nextEta = new ETA
                 {
                     AbsoluteTime = _dateTimeEta.ToShortTimeString(),
-                    RelativeTime = "(" + _prefix + " " + _relativeTime + "minutes)"
+                    RelativeTime = "(" + _prefix + " " + _relativeTime + " minutes)"
                 };
             }
 
