@@ -54,9 +54,13 @@
                         <Grid.InputBindings>
                                 <MouseBinding MouseAction="LeftClick" Command="{Binding ChangeTabsCommand}" CommandParameter="Triage 2"></MouseBinding>
                         </Grid.InputBindings>
+
                         <Viewbox HorizontalAlignment="Center" VerticalAlignment="Center">
-                            <Border CornerRadius="50" MinHeight="40" MinWidth="40" Background="{Binding RelativeSource={RelativeSource AncestorType=Window}, Path=DataContext.Triage3.Colour}" BorderBrush="Black" BorderThickness="1" Padding="2" Margin="1">
-                                <TextBlock Text="{Binding RelativeSource={RelativeSource AncestorType=Window}, Path=DataContext.Triage3.Amount}" VerticalAlignment="Center" FontSize="20" HorizontalAlignment="Center"></TextBlock>
+                            <Border CornerRadius="50" MinHeight="40" MinWidth="40" Background="{Binding RelativeSource={RelativeSource AncestorType=Window}, Path=DataContext.Triage3.Colour}" BorderThickness="1" Padding="2" Margin="1">
+                                <Border.BorderBrush>
+                                    <SolidColorBrush Color="{Binding RelativeSource={RelativeSource AncestorType=Window}, Path=DataContext.Triage3.Colour}" Opacity="0.5"></SolidColorBrush>
+                                </Border.BorderBrush>
+                                    <TextBlock Text="{Binding RelativeSource={RelativeSource AncestorType=Window}, Path=DataContext.Triage3.Amount}" VerticalAlignment="Center" FontSize="20" HorizontalAlignment="Center"></TextBlock>
                             </Border>
                             </Viewbox>
                             
@@ -66,8 +70,11 @@
                                 <MouseBinding MouseAction="LeftClick" Command="{Binding ChangeTabsCommand}" CommandParameter="Triage 3"></MouseBinding>
                         </Grid.InputBindings>
                         <Viewbox HorizontalAlignment="Center" VerticalAlignment="Center">
-                            <Border CornerRadius="50" MinHeight="40" MinWidth="40" Background="{Binding RelativeSource={RelativeSource AncestorType=Window}, Path=DataContext.Triage4.Colour}" BorderBrush="Black" BorderThickness="1" Padding="2" Margin="1">
-                                <TextBlock Text="{Binding RelativeSource={RelativeSource AncestorType=Window}, Path=DataContext.Triage4.Amount}" VerticalAlignment="Center" FontSize="20" HorizontalAlignment="Center"></TextBlock>
+                            <Border CornerRadius="50" MinHeight="40" MinWidth="40" Background="{Binding RelativeSource={RelativeSource AncestorType=Window}, Path=DataContext.Triage4.Colour}" BorderThickness="1" Padding="2" Margin="1">
+                                <Border.BorderBrush>
+                                    <SolidColorBrush Color="{Binding RelativeSource={RelativeSource AncestorType=Window}, Path=DataContext.Triage4.Colour}" Opacity="0.5"></SolidColorBrush>
+                                </Border.BorderBrush>
+                                    <TextBlock Text="{Binding RelativeSource={RelativeSource AncestorType=Window}, Path=DataContext.Triage4.Amount}" VerticalAlignment="Center" FontSize="20" HorizontalAlignment="Center"></TextBlock>
                             </Border>
                             </Viewbox>
                             
@@ -78,8 +85,11 @@
                                 <MouseBinding MouseAction="LeftClick" Command="{Binding ChangeTabsCommand}" CommandParameter="Triage 4"></MouseBinding>
                         </Grid.InputBindings>
                         <Viewbox HorizontalAlignment="Center" VerticalAlignment="Center">
-                            <Border CornerRadius="50" MinHeight="40" MinWidth="40" Background="{Binding RelativeSource={RelativeSource AncestorType=Window}, Path=DataContext.Triage5.Colour}" BorderBrush="Black" BorderThickness="1" Padding="2" Margin="1">
-                                <TextBlock Text="{Binding RelativeSource={RelativeSource AncestorType=Window}, Path=DataContext.Triage5.Amount}" VerticalAlignment="Center" FontSize="20" HorizontalAlignment="Center"></TextBlock>
+                            <Border CornerRadius="50" MinHeight="40" MinWidth="40" Background="{Binding RelativeSource={RelativeSource AncestorType=Window}, Path=DataContext.Triage5.Colour}" BorderThickness="1" Padding="2" Margin="1">
+                                <Border.BorderBrush>
+                                    <SolidColorBrush Color="{Binding RelativeSource={RelativeSource AncestorType=Window}, Path=DataContext.Triage5.Colour}" Opacity="0.5"></SolidColorBrush>
+                                </Border.BorderBrush>
+                                    <TextBlock Text="{Binding RelativeSource={RelativeSource AncestorType=Window}, Path=DataContext.Triage5.Amount}" VerticalAlignment="Center" FontSize="20" HorizontalAlignment="Center"></TextBlock>
                             </Border>
                             </Viewbox>
                             
@@ -90,8 +100,11 @@
                             <MouseBinding MouseAction="LeftClick" Command="{Binding ChangeTabsCommand}" CommandParameter="Triage 5"></MouseBinding>
                         </Grid.InputBindings>
                         <Viewbox HorizontalAlignment="Center" VerticalAlignment="Center">
-                            <Border CornerRadius="50" MinHeight="40" MinWidth="40" Background="{Binding RelativeSource={RelativeSource AncestorType=Window}, Path=DataContext.Triage6.Colour}" BorderBrush="Black" BorderThickness="1" Padding="2" Margin="1">
-                                <TextBlock Text="{Binding RelativeSource={RelativeSource AncestorType=Window}, Path=DataContext.Triage6.Amount}" VerticalAlignment="Center" FontSize="20" HorizontalAlignment="Center"></TextBlock>
+                            <Border CornerRadius="50" MinHeight="40" MinWidth="40" Background="{Binding RelativeSource={RelativeSource AncestorType=Window}, Path=DataContext.Triage6.Colour}" BorderThickness="1" Padding="2" Margin="1">
+                                <Border.BorderBrush>
+                                    <SolidColorBrush Color="{Binding RelativeSource={RelativeSource AncestorType=Window}, Path=DataContext.Triage6.Colour}" Opacity="0.5"></SolidColorBrush>
+                                </Border.BorderBrush>
+                                    <TextBlock Text="{Binding RelativeSource={RelativeSource AncestorType=Window}, Path=DataContext.Triage6.Amount}" VerticalAlignment="Center" FontSize="20" HorizontalAlignment="Center"></TextBlock>
                             </Border>
                         </Viewbox>
 
