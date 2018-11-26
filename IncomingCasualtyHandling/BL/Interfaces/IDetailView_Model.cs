@@ -20,7 +20,6 @@ namespace IncomingCasualtyHandling.BL.Interfaces
         string IconPath { get; }
         int SelectedTabIndex { get; set; }
         string StringFromChangeViewCommandParameter { get; set; }
-        string PatientsInList { get; set; }
         event PropertyChangedEventHandler PropertyChanged;
         void ChangeTabsAllowed(string s);
     }

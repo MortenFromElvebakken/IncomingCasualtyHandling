@@ -36,7 +36,7 @@ namespace IncomingCasualtyHandling.GUI.ViewModels
             get => _detailViewModel.IconPath;
         }
         //To specify which tab is opened, and which is currently open
-        public int SelectedIndex
+        public int SelectedTabIndex
         {
             get => _detailViewModel.SelectedTabIndex;
             set => _detailViewModel.SelectedTabIndex = value;
@@ -49,14 +49,7 @@ namespace IncomingCasualtyHandling.GUI.ViewModels
             set => _detailViewModel.StringFromChangeViewCommandParameter = value;
         }
 
-
-        //to set the counter of patients in bottom right corner
-        public string PatientsInList
-        {
-            get => _detailViewModel.PatientsInList;
-            set => _detailViewModel.PatientsInList = value; // På dem vi aldrig bruger en setter på, skal der så overhovedet laves en?
-            //Herunder hvis der kommer en patient mere i den liste man sidder på, hvordan opdateres patientsinlist så?
-        }
+        
 
         //List of tabs in window, set upon pressing something in overview view
         public List<TabControl> Tabs
@@ -64,6 +57,7 @@ namespace IncomingCasualtyHandling.GUI.ViewModels
             get => _detailViewModel.ListOfTabs;
             set => _detailViewModel.ListOfTabs = value;
         }
+        public TabControl test { get; set; }
 
 
         private IDetailView_Model _detailViewModel;

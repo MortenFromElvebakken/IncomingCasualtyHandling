@@ -36,20 +36,11 @@
 
         <!--<Grid Grid.Row="0" RowSpan="2" ZIndex="1">-->
         <Grid Grid.Row="1" ZIndex="1">
-            <!--<TabControl ItemsSource="{Binding HomeTabTest}">
-                <TabItem>
-                    <TabItem.Header>
-                        <Image Width="20" Source="{Binding IconPath}"></Image>
-                    </TabItem.Header>
-                </TabItem>
-            </TabControl>-->
-            <TabControl ItemsSource="{Binding Tabs}" SelectedIndex="{Binding SelectedIndex, Mode=OneWay}" Style="{DynamicResource TabControlAsWrapPanel}">
-                
+            <TabControl ItemsSource="{Binding Tabs}" Name="TabControl" SelectedIndex="{Binding SelectedTabIndex, Mode=TwoWay}" Style="{DynamicResource TabControlAsWrapPanel}">
                 <TabControl.ItemTemplate>
-
                     <DataTemplate>
                         <!--<TabItem Style="{StaticResource ChosenTab}" Header="{Binding Name}"></TabItem>-->
-                        
+
                         <TextBlock Text="{Binding Name}" Margin="0,2" FontSize="20" LineHeight="20" />
                     </DataTemplate>
                 </TabControl.ItemTemplate>
@@ -60,32 +51,36 @@
                 </TabControl.ItemContainerStyle>
                 <TabControl.ContentTemplate>
                     <DataTemplate>
-                        <ListView ItemsSource="{Binding Data}" ItemContainerStyle="{StaticResource RowColourAlternate}" AlternationCount="2" IsSynchronizedWithCurrentItem="True">
-                            <ListView.View>
-                                <GridView>
-                                    <GridViewColumn Header="Name" CellTemplate="{StaticResource CellTemplateForListviewName}"/>
-                                    <GridViewColumn Header="CPR" CellTemplate="{StaticResource CellTemplateForListviewCPR}"/>
-                                    <GridViewColumn Header="Age" CellTemplate="{StaticResource CellTemplateForListviewAge}"/>
-                                    <GridViewColumn Header="Gender" CellTemplate="{StaticResource CellTemplateForListviewGender}"/>
-                                    <GridViewColumn Header="Triage" CellTemplate="{StaticResource CellTemplateForListviewTriage}"/>
-                                    <GridViewColumn Header="Specialty" CellTemplate="{StaticResource CellTemplateForListviewSpecialty}"/>
-                                    <GridViewColumn Header="ETA" CellTemplate="{StaticResource CellTemplateForListviewETA}"/>
-                                    <GridViewColumn Header="From destination" CellTemplate="{StaticResource CellTemplateForListviewFromDestination}"/>
-                                    <GridViewColumn Header="Last updated" CellTemplate="{StaticResource CellTemplateForListviewLastUpdated}"/>
-                                    <!--<GridViewColumn Header="ToHospital" DisplayMemberBinding="{Binding ToHospital}"/>
+                        <Grid>
+                            <Grid ZIndex="20">
+                                <ListView ItemsSource="{Binding Data}" ItemContainerStyle="{StaticResource RowColourAlternate}" AlternationCount="2" IsSynchronizedWithCurrentItem="True">
+                                <ListView.View>
+                                    <GridView>
+                                        <GridViewColumn Header="Name" CellTemplate="{StaticResource CellTemplateForListviewName}"/>
+                                        <GridViewColumn Header="CPR" CellTemplate="{StaticResource CellTemplateForListviewCPR}"/>
+                                        <GridViewColumn Header="Age" CellTemplate="{StaticResource CellTemplateForListviewAge}"/>
+                                        <GridViewColumn Header="Gender" CellTemplate="{StaticResource CellTemplateForListviewGender}"/>
+                                        <GridViewColumn Header="Triage" CellTemplate="{StaticResource CellTemplateForListviewTriage}"/>
+                                        <GridViewColumn Header="Specialty" CellTemplate="{StaticResource CellTemplateForListviewSpecialty}"/>
+                                        <GridViewColumn Header="ETA" CellTemplate="{StaticResource CellTemplateForListviewETA}"/>
+                                        <GridViewColumn Header="From destination" CellTemplate="{StaticResource CellTemplateForListviewFromDestination}"/>
+                                        <GridViewColumn Header="Last updated" CellTemplate="{StaticResource CellTemplateForListviewLastUpdated}"/>
+                                        <!--<GridViewColumn Header="ToHospital" DisplayMemberBinding="{Binding ToHospital}"/>
                                     <GridViewColumn Header="Note" DisplayMemberBinding="{Binding Age}"/>
                                     <GridViewColumn Header="AmbulanceNumber" DisplayMemberBinding="{Binding Age}"/>-->
-                                </GridView>
-                            </ListView.View>
-                        </ListView>
+                                    </GridView>
+                                </ListView.View>
+                            </ListView>
+                            </Grid>
+                            <Grid ZIndex="99">
+                                <Border BorderBrush="Black" BorderThickness="1.5,1.5,1.5,1.5" Width="100" CornerRadius="10,10,10,10" Margin="0,0,5,5" Background="#7D8FA6" Padding="3,3,3,3" VerticalAlignment="Bottom" HorizontalAlignment="Right">
+                                    <TextBlock Text="{Binding PatientsInThisTab}" FontSize="14" Width="80" VerticalAlignment="Center" TextAlignment="Right" HorizontalAlignment="Center" Foreground="White" Background="#7D8FA6"></TextBlock>
+                                </Border>
+                            </Grid>
+                        </Grid>
                     </DataTemplate>
                 </TabControl.ContentTemplate>
             </TabControl>
-            <Grid ZIndex="99">
-                <Border BorderBrush="Black" BorderThickness="1.5,1.5,1.5,1.5" Width="100" CornerRadius="10,10,10,10" Margin="0,0,5,5" Background="#7D8FA6" Padding="3,3,3,3" VerticalAlignment="Bottom" HorizontalAlignment="Right">
-                    <TextBlock Text="{Binding PatientsInList}" FontSize="14" Width="80" VerticalAlignment="Center" TextAlignment="Right" HorizontalAlignment="Center" Foreground="White" Background="#7D8FA6"></TextBlock>
-                </Border>
-            </Grid>
         </Grid>
     </Grid>
 </UserControl>

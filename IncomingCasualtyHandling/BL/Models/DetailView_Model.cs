@@ -245,8 +245,12 @@ namespace IncomingCasualtyHandling.BL.Models
             get => _selectedTabIndex;
             set
             {
+                if (value >= 0)
+                {
                     _selectedTabIndex = value;
-                    OnPropertyChanged("SelectedIndex");
+                    OnPropertyChanged();
+                }   
+                    //When _selectedIndex is set, it also sets a new PatientsInList string
             }
         }
 
@@ -262,34 +266,35 @@ namespace IncomingCasualtyHandling.BL.Models
                 OnPropertyChanged("StringFromChangeViewCommandParameter");
             }
         }
-
-        private string _patientsInList;
-        public string PatientsInList
-        {
-            get => String.Format(_tabsList[SelectedTabIndex].Data.Count + " patient(s)");
-            set
-            {
-                _patientsInList = value;
-                OnPropertyChanged("PatientsInList");
-            }
-        }
+        
 
         private List<TabControl> _tabsList = new List<TabControl>();
         public List<TabControl> ListOfTabs
         {
             get
             {
-                List<TabControl> _tempTabList = new List<TabControl>();
-                
-                //The parameters sent from the change view/tab command is split, so it can be used to
-                //determine which tabs are to be made. 
-                string[] parameters = StringFromChangeViewCommandParameter.Split(' ');
-                SelectedOverview = parameters[0];
-                SelectedTabIndex = Convert.ToInt16(parameters[1]);
+                return _tabsList;
+            }
+            set
+            {
+                _tabsList = value;
+                OnPropertyChanged("Tabs");
+            }
+        }
 
-                switch (SelectedOverview)
-                {
-                    case "Triage":
+        public void CreateTabs()
+        {
+            List<TabControl> _tempTabList = new List<TabControl>();
+
+            //The parameters sent from the change view/tab command is split, so it can be used to
+            //determine which tabs are to be made. 
+            string[] parameters = StringFromChangeViewCommandParameter.Split(' ');
+            SelectedOverview = parameters[0];
+            //SelectedTabIndex = Convert.ToInt16(parameters[1]);
+
+            switch (SelectedOverview)
+            {
+                case "Triage":
                     {
                         int counter = 0;
                         foreach (var triage in ListOfTriages)
@@ -315,10 +320,11 @@ namespace IncomingCasualtyHandling.BL.Models
                             }
                             counter++;
                         }
-                        _tabsList = _tempTabList;
-                        return _tabsList;
+
+                        ListOfTabs = _tempTabList;
+                        break;
                     }
-                    case "Specialty":
+                case "Specialty":
                     {
                         int counter = 0;
                         foreach (var specialty in ListOfSpecialties)
@@ -345,10 +351,10 @@ namespace IncomingCasualtyHandling.BL.Models
                             counter++;
                         }
                         // Sort the list alphabetically
-                        _tabsList = _tempTabList.OrderBy(t => t.Name).ToList();
-                        return _tabsList;
+                        ListOfTabs = _tempTabList.OrderBy(t => t.Name).ToList();
+                        break;
                     }
-                    default:
+                default:
                     {
                         var _tab = new TabControl()
                         {
@@ -357,15 +363,9 @@ namespace IncomingCasualtyHandling.BL.Models
                             isVisible = Visibility.Visible
                         };
                         _tempTabList.Add(_tab);
-                        _tabsList = _tempTabList;
-                        return _tabsList;
+                        ListOfTabs = _tempTabList;
+                        break;
                     }
-                }
-            }
-            set
-            {
-                _tabsList = value;
-                OnPropertyChanged("Tabs");
             }
         }
 
@@ -383,46 +383,44 @@ namespace IncomingCasualtyHandling.BL.Models
                     sortedSpecialtiesList = ListOfSpecialties.OrderBy(a => a.Name).ToList();
                     var newIndex = sortedSpecialtiesList.FindIndex(x => x.Name == chosenSpecialtyName);
                     SelectedTabIndex = newIndex;
+                    OnPropertyChanged("SelectedTabIndex");
                 }
                 else
                 {
                     if (_tabsList[tryTabIndex].isVisible == Visibility.Visible)
                     {
                         SelectedTabIndex = tryTabIndex;
+                        OnPropertyChanged("SelectedTabIndex");
                     }
                 }
             }
             else
             {
-                if (tryChangeTabs == "Triage")
+                switch (tryChangeTabs)
                 {
-                    if (ListOfTriages[tryTabIndex].Amount != 0)
-                    {
+                    case "Triage":
                         StringFromChangeViewCommandParameter = s;
-                        OnPropertyChanged("Tabs");
-                        OnPropertyChanged("SelectedIndex");
-                        OnPropertyChanged("PatientsInList");
+                        CreateTabs();
+                        SelectedTabIndex = tryTabIndex;
+                        break;
+                    case "Specialty": 
+                    {
+                        //If specialty is the case, it needs another index than the one sent from view, this is due to
+                        //the alfabetic sort on tabs. 
+                        var chosenSpecialtyName = ListOfSpecialties[tryTabIndex].Name;
+                        var sortedSpecialtiesList = new List<Specialty>();
+                        sortedSpecialtiesList = ListOfSpecialties.OrderBy(a => a.Name).ToList();
+                        var newIndex = sortedSpecialtiesList.FindIndex(x => x.Name == chosenSpecialtyName);
+                        StringFromChangeViewCommandParameter = string.Format("Specialty " + newIndex);
+                        CreateTabs();
+                        SelectedTabIndex = newIndex;
+                        break;
                     }
-                }
-                else if (tryChangeTabs == "Specialty")
-                {
-                    //If specialty is the case, it needs another index that the one sent from view, this is due to
-                    //the alfabetic sort on tabs. 
-                    var chosenSpecialtyName = ListOfSpecialties[tryTabIndex].Name;
-                    var sortedSpecialtiesList = new List<Specialty>();
-                    sortedSpecialtiesList = ListOfSpecialties.OrderBy(a => a.Name).ToList();
-                    var newIndex = sortedSpecialtiesList.FindIndex(x => x.Name == chosenSpecialtyName);
-                    StringFromChangeViewCommandParameter = string.Format("Specialty " + newIndex);
-                    OnPropertyChanged("Tabs");
-                    OnPropertyChanged("SelectedIndex");
-                    OnPropertyChanged("PatientsInList");
-                }
-                else
-                {
-                    StringFromChangeViewCommandParameter = s;
-                    OnPropertyChanged("Tabs");
-                    OnPropertyChanged("SelectedIndex");
-                    OnPropertyChanged("PatientsInList");
+                    default:
+                        StringFromChangeViewCommandParameter = s;
+                        CreateTabs();
+                        SelectedTabIndex = tryTabIndex;
+                        break;
                 }
             }
             

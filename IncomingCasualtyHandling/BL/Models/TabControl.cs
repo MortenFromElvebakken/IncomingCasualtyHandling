@@ -13,5 +13,19 @@ namespace IncomingCasualtyHandling.BL.Models
         public string Name { get; set; }
         public List<PatientModel> Data { get; set; }
         public Visibility isVisible { get; set; }
+        public string PatientsInThisTab
+        {
+            get
+            {
+                if (Data != null)
+                {
+                    return string.Format(Data.Count + " Patient(s)");
+                }
+                else
+                {
+                    return "";
+                }
+            }
+        }
     }
 }
