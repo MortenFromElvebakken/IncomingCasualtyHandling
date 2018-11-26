@@ -36,5 +36,7 @@ namespace IncomingCasualtyHandling.GUI.View
             //var sortBy = columnBinding?.Path.Path ?? headerClicked.Column.Header;
             MessageBox.Show("You clicked" + e.OriginalSource.ToString());
         }
+
+
     }
 }

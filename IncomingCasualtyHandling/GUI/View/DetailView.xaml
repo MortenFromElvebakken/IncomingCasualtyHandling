@@ -8,8 +8,11 @@
              xmlns:util="clr-namespace:IncomingCasualtyHandling.GUI"
              xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
              xmlns:xcdg="http://schemas.xceed.com/wpf/xaml/datagrid"
+             xmlns:cmd="clr-namespace:GalaSoft.MvvmLight.Command;assembly=GalaSoft.MvvmLight.Platform"
+             xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
+
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="40"/>
@@ -51,23 +54,122 @@
                 </TabControl.ItemContainerStyle>
                 <TabControl.ContentTemplate>
                     <DataTemplate>
-                        <Grid>
-                            <Grid ZIndex="20">
-                                <ListView ItemsSource="{Binding Data}" ItemContainerStyle="{StaticResource RowColourAlternate}" AlternationCount="2" IsSynchronizedWithCurrentItem="True">
-                                <ListView.View>
-                                    <GridView>
-                                        <GridViewColumn Header="Name" CellTemplate="{StaticResource CellTemplateForListviewName}"/>
-                                        <GridViewColumn Header="CPR" CellTemplate="{StaticResource CellTemplateForListviewCPR}"/>
-                                        <GridViewColumn Header="Age" CellTemplate="{StaticResource CellTemplateForListviewAge}"/>
-                                        <GridViewColumn Header="Gender" CellTemplate="{StaticResource CellTemplateForListviewGender}"/>
-                                        <GridViewColumn Header="Triage" CellTemplate="{StaticResource CellTemplateForListviewTriage}"/>
-                                        <GridViewColumn Header="Specialty" CellTemplate="{StaticResource CellTemplateForListviewSpecialty}"/>
-                                        <GridViewColumn Header="ETA" CellTemplate="{StaticResource CellTemplateForListviewETA}"/>
-                                        <GridViewColumn Header="From destination" CellTemplate="{StaticResource CellTemplateForListviewFromDestination}"/>
-                                        <GridViewColumn Header="Last updated" CellTemplate="{StaticResource CellTemplateForListviewLastUpdated}"/>
+                        <ListView ItemsSource="{Binding Data}" ItemContainerStyle="{StaticResource RowColourAlternate}" AlternationCount="2" IsSynchronizedWithCurrentItem="True">
+                            <ListView.View>
+                                <GridView>
+                                    <GridView.Columns>
+                                        <GridViewColumn CellTemplate="{StaticResource CellTemplateForListviewName}">
+                                            <GridViewColumnHeader Content="Name">
+                                                <i:Interaction.Triggers>
+                                                    <i:EventTrigger EventName="Click">
+                                                        <cmd:EventToCommand 
+                                                            Command="{Binding DataContext.GridViewColumnHeaderClickedHandlerCommand, RelativeSource={RelativeSource AncestorType=UserControl}}" 
+                                                            PassEventArgsToCommand="True"
+                                                            MustToggleIsEnabledValue="True" />
+                                                    </i:EventTrigger>
+                                                </i:Interaction.Triggers>
+                                            </GridViewColumnHeader>
+                                        </GridViewColumn>
+                                        <GridViewColumn  CellTemplate="{StaticResource CellTemplateForListviewCPR}">
+                                            <GridViewColumnHeader Content="CPR">
+                                                <i:Interaction.Triggers>
+                                                    <i:EventTrigger EventName="Click">
+                                                        <cmd:EventToCommand 
+                                                            Command="{Binding DataContext.GridViewColumnHeaderClickedHandlerCommand, RelativeSource={RelativeSource AncestorType=UserControl}}" 
+                                                            CommandParameter="CPR" 
+                                                            MustToggleIsEnabledValue="True" />
+                                                    </i:EventTrigger>
+                                                </i:Interaction.Triggers>
+                                            </GridViewColumnHeader>
+                                        </GridViewColumn>
+                                        <GridViewColumn CellTemplate="{StaticResource CellTemplateForListviewAge}">
+                                            <GridViewColumnHeader Content="Age">
+                                                <i:Interaction.Triggers>
+                                                    <i:EventTrigger EventName="Click">
+                                                        <cmd:EventToCommand 
+                                                            Command="{Binding DataContext.GridViewColumnHeaderClickedHandlerCommand, RelativeSource={RelativeSource AncestorType=UserControl}}" 
+                                                            CommandParameter="Age" 
+                                                            MustToggleIsEnabledValue="True" />
+                                                    </i:EventTrigger>
+                                                </i:Interaction.Triggers>
+                                            </GridViewColumnHeader>
+                                        </GridViewColumn>
+                                        <GridViewColumn CellTemplate="{StaticResource CellTemplateForListviewGender}">
+                                            <GridViewColumnHeader Content="Gender">
+                                                <i:Interaction.Triggers>
+                                                    <i:EventTrigger EventName="Click">
+                                                        <cmd:EventToCommand 
+                                                            Command="{Binding DataContext.GridViewColumnHeaderClickedHandlerCommand, RelativeSource={RelativeSource AncestorType=UserControl}}" 
+                                                            CommandParameter="Gender" 
+                                                            MustToggleIsEnabledValue="True" />
+                                                    </i:EventTrigger>
+                                                </i:Interaction.Triggers>
+                                            </GridViewColumnHeader>
+                                        </GridViewColumn>
+                                        <GridViewColumn CellTemplate="{StaticResource CellTemplateForListviewTriage}">
+                                            <GridViewColumnHeader Content="Triage">
+                                                <i:Interaction.Triggers>
+                                                    <i:EventTrigger EventName="Click">
+                                                        <cmd:EventToCommand 
+                                                            Command="{Binding DataContext.GridViewColumnHeaderClickedHandlerCommand, RelativeSource={RelativeSource AncestorType=UserControl}}" 
+                                                            CommandParameter="Triage" 
+                                                            MustToggleIsEnabledValue="True" />
+                                                    </i:EventTrigger>
+                                                </i:Interaction.Triggers>
+                                            </GridViewColumnHeader>
+                                        </GridViewColumn>
+                                        <GridViewColumn CellTemplate="{StaticResource CellTemplateForListviewSpecialty}">
+                                            <GridViewColumnHeader Content="Specialty">
+                                                <i:Interaction.Triggers>
+                                                    <i:EventTrigger EventName="Click">
+                                                        <cmd:EventToCommand 
+                                                            Command="{Binding DataContext.GridViewColumnHeaderClickedHandlerCommand, RelativeSource={RelativeSource AncestorType=UserControl}}" 
+                                                            CommandParameter="Triage" 
+                                                            MustToggleIsEnabledValue="True" />
+                                                    </i:EventTrigger>
+                                                </i:Interaction.Triggers>
+                                            </GridViewColumnHeader>
+                                        </GridViewColumn>
+                                        <GridViewColumn CellTemplate="{StaticResource CellTemplateForListviewETA}">
+                                            <GridViewColumnHeader Content="ETA">
+                                                <i:Interaction.Triggers>
+                                                    <i:EventTrigger EventName="Click">
+                                                        <cmd:EventToCommand 
+                                                            Command="{Binding DataContext.GridViewColumnHeaderClickedHandlerCommand, RelativeSource={RelativeSource AncestorType=UserControl}}" 
+                                                            CommandParameter="ETA" 
+                                                            MustToggleIsEnabledValue="True" />
+                                                    </i:EventTrigger>
+                                                </i:Interaction.Triggers>
+                                            </GridViewColumnHeader>
+                                        </GridViewColumn>
+                                        <GridViewColumn CellTemplate="{StaticResource CellTemplateForListviewFromDestination}">
+                                            <GridViewColumnHeader Content="From destination">
+                                                <i:Interaction.Triggers>
+                                                    <i:EventTrigger EventName="Click">
+                                                        <cmd:EventToCommand 
+                                                            Command="{Binding DataContext.GridViewColumnHeaderClickedHandlerCommand, RelativeSource={RelativeSource AncestorType=UserControl}}" 
+                                                            CommandParameter="From destination" 
+                                                            MustToggleIsEnabledValue="True" />
+                                                    </i:EventTrigger>
+                                                </i:Interaction.Triggers>
+                                            </GridViewColumnHeader>
+                                        </GridViewColumn>
+                                        <GridViewColumn CellTemplate="{StaticResource CellTemplateForListviewLastUpdated}">
+                                            <GridViewColumnHeader Content="Last updated">
+                                                <i:Interaction.Triggers>
+                                                    <i:EventTrigger EventName="Click">
+                                                        <cmd:EventToCommand 
+                                                            Command="{Binding DataContext.GridViewColumnHeaderClickedHandlerCommand, RelativeSource={RelativeSource AncestorType=UserControl}}" 
+                                                            CommandParameter="Last updated" 
+                                                            MustToggleIsEnabledValue="True" />
+                                                    </i:EventTrigger>
+                                                </i:Interaction.Triggers>
+                                            </GridViewColumnHeader>
+                                        </GridViewColumn>
                                         <!--<GridViewColumn Header="ToHospital" DisplayMemberBinding="{Binding ToHospital}"/>
                                     <GridViewColumn Header="Note" DisplayMemberBinding="{Binding Age}"/>
                                     <GridViewColumn Header="AmbulanceNumber" DisplayMemberBinding="{Binding Age}"/>-->
+                                        </GridView.Columns>
                                     </GridView>
                                 </ListView.View>
                             </ListView>

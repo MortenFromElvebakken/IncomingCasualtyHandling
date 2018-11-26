@@ -99,6 +99,7 @@ namespace IncomingCasualtyHandling
             _mainView.DataContext = _mainViewViewModel;
             
             _mainView.Show();
+
         }
     }
 }

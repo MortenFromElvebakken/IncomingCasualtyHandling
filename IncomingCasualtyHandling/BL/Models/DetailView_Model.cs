@@ -7,6 +7,8 @@ using System.Windows;
 using System.Windows.Controls;
 using IncomingCasualtyHandling.BL.Interfaces;
 using IncomingCasualtyHandling.BL.Object_classes;
+using System.ComponentModel;
+using System.Reflection;
 
 namespace IncomingCasualtyHandling.BL.Models
 {
@@ -120,7 +122,7 @@ namespace IncomingCasualtyHandling.BL.Models
             }
         }
 
-#endregion
+        #endregion
 
         #region specialtiesInList
 
@@ -219,7 +221,7 @@ namespace IncomingCasualtyHandling.BL.Models
             get => ListOfSpecialtiesPatientLists[15];
             set => ListOfSpecialtiesPatientLists[15] = value;
         }
-        
+
         #endregion
 
         #region Eta
@@ -423,8 +425,164 @@ namespace IncomingCasualtyHandling.BL.Models
                         break;
                 }
             }
-            
+
         }
+        #endregion
+
+        #region Sorting list
+
+        // Made with inspiration from:
+        // https://code.msdn.microsoft.com/windowsdesktop/Sorting-a-WPF-ListView-by-209a7d45?fbclid=IwAR0ZrZ0Ee4PDB0Z7TJmLKE55mN2b-GcRY_mho1NtjdALdM3w8vYpKRo0hko
+
+        private string _sortColumn = "ETA";
+        private ListSortDirection _sortDirection = ListSortDirection.Ascending;
+
+        public void GridViewColumnHeaderClicked(string s)
+        {
+            if (_sortColumn == s)
+            {
+                _sortDirection = _sortDirection == ListSortDirection.Ascending
+                    ? ListSortDirection.Descending
+                    : ListSortDirection.Ascending;
+            }
+            else
+            {
+                _sortColumn = s;
+                _sortDirection = ListSortDirection.Ascending;
+            }
+
+            switch (_sortColumn)
+            {
+                case "Name":
+                    {
+                        foreach (var tab in _tabsList)
+                        {
+                            tab.Data?.Sort((p1, p2) => String.Compare(p1.Name, p2.Name, StringComparison.CurrentCulture));
+                            if (_sortDirection == ListSortDirection.Descending)
+                            {
+                                tab.Data?.Reverse();
+                            }
+                        }
+
+                        OnPropertyChanged("Tabs");
+                        break;
+                    }
+                case "CPR":
+                    {
+                        foreach (var tab in _tabsList)
+                        {
+                            tab.Data?.Sort((p1, p2) => String.Compare(p1.CPR, p2.CPR, StringComparison.CurrentCulture));
+                            if (_sortDirection == ListSortDirection.Descending)
+                            {
+                                tab.Data?.Reverse();
+                            }
+                        }
+
+                        OnPropertyChanged("Tabs");
+                        break;
+                    }
+                case "Age":
+                    {
+                        foreach (var tab in _tabsList)
+                        {
+                            tab.Data?.Sort((p1, p2) => String.Compare(p1.Age, p2.Age, StringComparison.CurrentCulture));
+                            if (_sortDirection == ListSortDirection.Descending)
+                            {
+                                tab.Data?.Reverse();
+                            }
+                        }
+
+                        OnPropertyChanged("Tabs");
+                        break;
+                    }
+                case "Gender":
+                    {
+                        foreach (var tab in _tabsList)
+                        {
+                            tab.Data?.Sort((p1, p2) => p1.Gender.CompareTo(p2.Gender));
+                            if (_sortDirection == ListSortDirection.Descending)
+                            {
+                                tab.Data?.Reverse();
+                            }
+                        }
+
+                        OnPropertyChanged("Tabs");
+                        break;
+                    }
+                case "Triage":
+                    {
+                        foreach (var tab in _tabsList)
+                        {
+                            tab.Data?.Sort((p1, p2) => String.Compare(p1.Triage, p2.Triage, StringComparison.CurrentCulture));
+                            if (_sortDirection == ListSortDirection.Descending)
+                            {
+                                tab.Data?.Reverse();
+                            }
+                        }
+
+                        OnPropertyChanged("Tabs");
+                        break;
+                    }
+                case "Specialty":
+                    {
+                        foreach (var tab in _tabsList)
+                        {
+                            tab.Data?.Sort((p1, p2) => String.Compare(p1.Specialty, p2.Specialty, StringComparison.CurrentCulture));
+                            if (_sortDirection == ListSortDirection.Descending)
+                            {
+                                tab.Data?.Reverse();
+                            }
+                        }
+
+                        OnPropertyChanged("Tabs");
+                        break;
+                    }
+                case "ETA":
+                    {
+                        foreach (var tab in _tabsList)
+                        {
+                            tab.Data?.Sort((p1, p2) => p1.ETA.CompareTo(p2.ETA));
+                            if (_sortDirection == ListSortDirection.Descending)
+                            {
+                                tab.Data?.Reverse();
+                            }
+                        }
+
+                        OnPropertyChanged("Tabs");
+                        break;
+                    }
+                case "From destination":
+                    {
+                        foreach (var tab in _tabsList)
+                        {
+                            tab.Data?.Sort((p1, p2) => String.Compare(p1.FromDestination, p2.FromDestination, StringComparison.CurrentCulture));
+                            if (_sortDirection == ListSortDirection.Descending)
+                            {
+                                tab.Data?.Reverse();
+                            }
+                        }
+
+                        OnPropertyChanged("Tabs");
+                        break;
+                    }
+                case "Last updated":
+                    {
+                        foreach (var tab in _tabsList)
+                        {
+                            tab.Data?.Sort((p1, p2) => p1.LastUpdated.CompareTo(p2.LastUpdated));
+                            if (_sortDirection == ListSortDirection.Descending)
+                            {
+                                tab.Data?.Reverse();
+                            }
+                        }
+
+                        OnPropertyChanged("Tabs");
+                        break;
+                    }
+            }
+
+        }
+
         #endregion
     }
 }
