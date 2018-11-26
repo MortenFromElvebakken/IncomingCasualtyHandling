@@ -192,37 +192,14 @@ namespace IncomingCasualtyHandling.Test.Unit.BL.Test.Unit
                 ETA = new DateTime(2018, 11, 18, 21, 30, 00)
             };
             _listOfPatients.Add(_patient3);
+
+            _sortedListOfPatients.Add(_patient3);
+            _sortedListOfPatients.Add(_patient2); // The 2 patients have same ETA, but patient2's name ("Two") comes later in the alphabet than patient 3 ("Three")
+            _sortEta.SortListOnEta(_listOfPatients).ReturnsForAnyArgs(_sortedListOfPatients);
+
             _uut.SortForSpecialty(_listOfPatients);
             // Unknown specialties are added last to the List of Specialties
             Assert.That(_detailViewModel.ListOfSpecialtiesPatientLists.Last().Exists(p => p.Name == "Patient Three"), Is.True);
-        }
-
-        // Test a list with patients 2 patients with same Specialty and ETA
-        // Check that they are sorted alphabetically as second sorting
-        [Test]
-        public void SortForSpecialty_ListWithEqualSpecialties_SecondlySortedAlphabetically()
-        {
-            _patient3 = new PatientModel
-            {
-                CPR = "3",
-                Name = "Alma",
-                Age = "30",
-                Gender = AdministrativeGender.Female,
-                Triage = "TriageYellow",
-                Specialty = _listOfPatients[0].Specialty,
-                ToHospital = "AUH",
-                ETA = _listOfPatients[0].ETA
-            };
-            _listOfPatients.Add(_patient3);
-
-            // Create the test sorted list that the detail view models list should match
-            _sortedListOfPatients.Add(_patient3); // "Alma" comes first in the alphabet
-            _sortedListOfPatients.Add(_patient1); // compared to "Patient One"
-
-
-            _uut.SortForSpecialty(_listOfPatients);
-
-            Assert.That(_detailViewModel.ListOfSpecialtiesPatientLists.Find(s => s[0].Specialty == _listOfPatients[0].Specialty), Is.EqualTo(_sortedListOfPatients));
         }
 
         // Test that specialty with most patients is set in MainView Model
@@ -236,14 +213,16 @@ namespace IncomingCasualtyHandling.Test.Unit.BL.Test.Unit
                 Age = "30",
                 Gender = AdministrativeGender.Female,
                 Triage = "TriageYellow",
-                Specialty = "",
+                Specialty = "Neurology",
                 ToHospital = "AUH",
                 ETA = new DateTime(2018, 11, 18, 21, 30, 00)
             };
             _listOfPatients.Add(_patient3);
+
             _uut.SortForSpecialty(_listOfPatients);
+
             // Unknown specialties are added last to the List of Specialties
-            Assert.That(_detailViewModel.ListOfSpecialtiesPatientLists.Last().Exists(p => p.Name == "Patient Three"), Is.True);
+            Assert.That(_mainViewModel.Specialty1.Name, Is.SameAs(_listOfSpecialties.Find(s => s.Name == "Neurology").Name));
         }
 
         #endregion
