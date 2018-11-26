@@ -23,5 +23,6 @@ namespace IncomingCasualtyHandling.BL.Interfaces
         string PatientsInList { get; set; }
         event PropertyChangedEventHandler PropertyChanged;
         void ChangeTabsAllowed(string s);
+        void GridViewColumnHeaderClicked(string s);
     }
 }

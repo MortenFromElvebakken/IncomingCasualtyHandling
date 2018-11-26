@@ -7,6 +7,8 @@ using System.Windows;
 using System.Windows.Controls;
 using IncomingCasualtyHandling.BL.Interfaces;
 using IncomingCasualtyHandling.BL.Object_classes;
+using System.ComponentModel;
+using System.Reflection;
 
 namespace IncomingCasualtyHandling.BL.Models
 {
@@ -14,6 +16,7 @@ namespace IncomingCasualtyHandling.BL.Models
     {
 
         public string IconPath => "/GUI/Icons/HomeIcon.png";
+
         #region Triages
 
         private List<Triage> _listOfTriages;
@@ -119,7 +122,7 @@ namespace IncomingCasualtyHandling.BL.Models
             }
         }
 
-#endregion
+        #endregion
 
         #region specialtiesInList
 
@@ -218,7 +221,7 @@ namespace IncomingCasualtyHandling.BL.Models
             get => ListOfSpecialtiesPatientLists[15];
             set => ListOfSpecialtiesPatientLists[15] = value;
         }
-        
+
         #endregion
 
         #region Eta
@@ -244,8 +247,8 @@ namespace IncomingCasualtyHandling.BL.Models
             get => _selectedTabIndex;
             set
             {
-                    _selectedTabIndex = value;
-                    OnPropertyChanged("SelectedIndex");
+                _selectedTabIndex = value;
+                OnPropertyChanged("SelectedIndex");
             }
         }
 
@@ -279,7 +282,7 @@ namespace IncomingCasualtyHandling.BL.Models
             get
             {
                 List<TabControl> _tempTabList = new List<TabControl>();
-                
+
                 //The parameters sent from the change view/tab command is split, so it can be used to
                 //determine which tabs are to be made. 
                 string[] parameters = StringFromChangeViewCommandParameter.Split(' ');
@@ -289,67 +292,67 @@ namespace IncomingCasualtyHandling.BL.Models
                 switch (SelectedOverview)
                 {
                     case "Triage":
-                    {
-                        int counter = 0;
-                        foreach (var triage in ListOfTriages)
                         {
-                            if (triage.Amount != 0)
+                            int counter = 0;
+                            foreach (var triage in ListOfTriages)
                             {
-                                var _tab = new TabControl()
+                                if (triage.Amount != 0)
                                 {
-                                    Name = triage.Name,
-                                    Data = ListOfTriagePatientLists.Find(item => item[0].Triage == triage.Name),
-                                    isVisible = Visibility.Visible
-                                };
-                                _tempTabList.Add(_tab);
-                            }
-                            else
-                            {
-                                var _tab = new TabControl()
+                                    var _tab = new TabControl()
+                                    {
+                                        Name = triage.Name,
+                                        Data = ListOfTriagePatientLists.Find(item => item[0].Triage == triage.Name),
+                                        isVisible = Visibility.Visible
+                                    };
+                                    _tempTabList.Add(_tab);
+                                }
+                                else
                                 {
-                                    Name = triage.Name,
-                                    isVisible = Visibility.Collapsed
-                                };
-                                _tempTabList.Add(_tab);
+                                    var _tab = new TabControl()
+                                    {
+                                        Name = triage.Name,
+                                        isVisible = Visibility.Collapsed
+                                    };
+                                    _tempTabList.Add(_tab);
+                                }
+                                counter++;
                             }
-                            counter++;
+                            _tabsList = _tempTabList;
+                            return _tabsList;
                         }
-                        _tabsList = _tempTabList;
-                        return _tabsList;
-                    }
                     case "Specialty":
-                    {
-                        int counter = 0;
-                        foreach (var specialty in ListOfSpecialties)
                         {
-                            if (specialty.Amount != 0)
+                            int counter = 0;
+                            foreach (var specialty in ListOfSpecialties)
                             {
-                                var _tab = new TabControl()
+                                if (specialty.Amount != 0)
                                 {
-                                    Name = specialty.Name,
-                                    Data = ListOfSpecialtiesPatientLists.Find(item => item[0].Specialty == specialty.Name),
-                                    isVisible = Visibility.Visible
-                                };
-                                _tempTabList.Add(_tab);
+                                    var _tab = new TabControl()
+                                    {
+                                        Name = specialty.Name,
+                                        Data = ListOfSpecialtiesPatientLists.Find(item => item[0].Specialty == specialty.Name),
+                                        isVisible = Visibility.Visible
+                                    };
+                                    _tempTabList.Add(_tab);
+                                }
+                                counter++;
                             }
-                            counter++;
+                            // Sort the list alphabetically
+                            _tabsList = _tempTabList.OrderBy(t => t.Name).ToList();
+                            return _tabsList;
                         }
-                        // Sort the list alphabetically
-                        _tabsList = _tempTabList.OrderBy(t => t.Name).ToList();
-                        return _tabsList;
-                    }
                     default:
-                    {
-                        var _tab = new TabControl()
                         {
-                            Name = "ETA",
-                            Data = ETAPatients,
-                            isVisible = Visibility.Visible
-                        };
-                        _tempTabList.Add(_tab);
-                        _tabsList = _tempTabList;
-                        return _tabsList;
-                    }
+                            var _tab = new TabControl()
+                            {
+                                Name = "ETA",
+                                Data = ETAPatients,
+                                isVisible = Visibility.Visible
+                            };
+                            _tempTabList.Add(_tab);
+                            _tabsList = _tempTabList;
+                            return _tabsList;
+                        }
                 }
             }
             set
@@ -391,8 +394,164 @@ namespace IncomingCasualtyHandling.BL.Models
                     OnPropertyChanged("PatientsInList");
                 }
             }
-            
+
         }
+        #endregion
+
+        #region Sorting list
+
+        // Made with inspiration from:
+        // https://code.msdn.microsoft.com/windowsdesktop/Sorting-a-WPF-ListView-by-209a7d45?fbclid=IwAR0ZrZ0Ee4PDB0Z7TJmLKE55mN2b-GcRY_mho1NtjdALdM3w8vYpKRo0hko
+
+        private string _sortColumn = "ETA";
+        private ListSortDirection _sortDirection = ListSortDirection.Ascending;
+
+        public void GridViewColumnHeaderClicked(string s)
+        {
+            if (_sortColumn == s)
+            {
+                _sortDirection = _sortDirection == ListSortDirection.Ascending
+                    ? ListSortDirection.Descending
+                    : ListSortDirection.Ascending;
+            }
+            else
+            {
+                _sortColumn = s;
+                _sortDirection = ListSortDirection.Ascending;
+            }
+
+            switch (_sortColumn)
+            {
+                case "Name":
+                    {
+                        foreach (var tab in _tabsList)
+                        {
+                            tab.Data?.Sort((p1, p2) => String.Compare(p1.Name, p2.Name, StringComparison.CurrentCulture));
+                            if (_sortDirection == ListSortDirection.Descending)
+                            {
+                                tab.Data?.Reverse();
+                            }
+                        }
+
+                        OnPropertyChanged("Tabs");
+                        break;
+                    }
+                case "CPR":
+                    {
+                        foreach (var tab in _tabsList)
+                        {
+                            tab.Data?.Sort((p1, p2) => String.Compare(p1.CPR, p2.CPR, StringComparison.CurrentCulture));
+                            if (_sortDirection == ListSortDirection.Descending)
+                            {
+                                tab.Data?.Reverse();
+                            }
+                        }
+
+                        OnPropertyChanged("Tabs");
+                        break;
+                    }
+                case "Age":
+                    {
+                        foreach (var tab in _tabsList)
+                        {
+                            tab.Data?.Sort((p1, p2) => String.Compare(p1.Age, p2.Age, StringComparison.CurrentCulture));
+                            if (_sortDirection == ListSortDirection.Descending)
+                            {
+                                tab.Data?.Reverse();
+                            }
+                        }
+
+                        OnPropertyChanged("Tabs");
+                        break;
+                    }
+                case "Gender":
+                    {
+                        foreach (var tab in _tabsList)
+                        {
+                            tab.Data?.Sort((p1, p2) => p1.Gender.CompareTo(p2.Gender));
+                            if (_sortDirection == ListSortDirection.Descending)
+                            {
+                                tab.Data?.Reverse();
+                            }
+                        }
+
+                        OnPropertyChanged("Tabs");
+                        break;
+                    }
+                case "Triage":
+                    {
+                        foreach (var tab in _tabsList)
+                        {
+                            tab.Data?.Sort((p1, p2) => String.Compare(p1.Triage, p2.Triage, StringComparison.CurrentCulture));
+                            if (_sortDirection == ListSortDirection.Descending)
+                            {
+                                tab.Data?.Reverse();
+                            }
+                        }
+
+                        OnPropertyChanged("Tabs");
+                        break;
+                    }
+                case "Specialty":
+                    {
+                        foreach (var tab in _tabsList)
+                        {
+                            tab.Data?.Sort((p1, p2) => String.Compare(p1.Specialty, p2.Specialty, StringComparison.CurrentCulture));
+                            if (_sortDirection == ListSortDirection.Descending)
+                            {
+                                tab.Data?.Reverse();
+                            }
+                        }
+
+                        OnPropertyChanged("Tabs");
+                        break;
+                    }
+                case "ETA":
+                    {
+                        foreach (var tab in _tabsList)
+                        {
+                            tab.Data?.Sort((p1, p2) => p1.ETA.CompareTo(p2.ETA));
+                            if (_sortDirection == ListSortDirection.Descending)
+                            {
+                                tab.Data?.Reverse();
+                            }
+                        }
+
+                        OnPropertyChanged("Tabs");
+                        break;
+                    }
+                case "From destination":
+                    {
+                        foreach (var tab in _tabsList)
+                        {
+                            tab.Data?.Sort((p1, p2) => String.Compare(p1.FromDestination, p2.FromDestination, StringComparison.CurrentCulture));
+                            if (_sortDirection == ListSortDirection.Descending)
+                            {
+                                tab.Data?.Reverse();
+                            }
+                        }
+
+                        OnPropertyChanged("Tabs");
+                        break;
+                    }
+                case "Last updated":
+                    {
+                        foreach (var tab in _tabsList)
+                        {
+                            tab.Data?.Sort((p1, p2) => p1.LastUpdated.CompareTo(p2.LastUpdated));
+                            if (_sortDirection == ListSortDirection.Descending)
+                            {
+                                tab.Data?.Reverse();
+                            }
+                        }
+
+                        OnPropertyChanged("Tabs");
+                        break;
+                    }
+            }
+
+        }
+
         #endregion
     }
 }
