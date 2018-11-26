@@ -15,7 +15,8 @@
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsSelected" Value="True">
                             <Setter Property="TextElement.Foreground" TargetName="ContentSite" Value="Black"/>
-                            <Setter TargetName="Border" Property="Background" Value="FloralWhite"/>
+                            <Setter Property="TextElement.FontWeight" Value="Bold"/>
+                            <Setter TargetName="Border" Property="Background" Value="White"/>
                         </Trigger>
                         <Trigger Property="IsSelected" Value="False">
                             <Setter Property="TextElement.Foreground" TargetName="ContentSite" Value="White"/>
@@ -64,14 +65,14 @@
     <DataTemplate x:Key="CellTemplateForListviewName">
         <DockPanel Margin="-5,-3,-5,0">
             <Border CornerRadius="0,0,5,0" BorderBrush="#8292a5" VerticalAlignment="Bottom" HorizontalAlignment="Right" BorderThickness="0,0,1,1">
-                <TextBlock Foreground="DarkBlue" HorizontalAlignment="Center" Text="{Binding Name}" Width="90" FontSize="14" Height="25"/>
+                <TextBlock Foreground="#383F47" HorizontalAlignment="Left" VerticalAlignment="Center"  Text="{Binding Name}" Width="0.5*" FontSize="14" Height="25"/>
             </Border>
         </DockPanel>
     </DataTemplate>
     <DataTemplate x:Key="CellTemplateForListviewCPR">
         <DockPanel Margin="-2,-3,-5,0">
             <Border CornerRadius="0,0,5,0" BorderBrush="#8292a5" VerticalAlignment="Bottom" HorizontalAlignment="Right" BorderThickness="0,0,1,1">
-                <TextBlock Foreground="DarkBlue" HorizontalAlignment="Center" Text="{Binding PatientId}" Width="90" FontSize="14" Height="25"/>
+                <TextBlock Foreground="#383F47" HorizontalAlignment="Left" VerticalAlignment="Center" Text="{Binding PatientId}" Width="90" FontSize="14" Height="25"/>
             </Border>
         </DockPanel>
     </DataTemplate>
@@ -79,49 +80,49 @@
     <DataTemplate x:Key="CellTemplateForListviewAge">
         <DockPanel Margin="-2,-3,-5,0">
             <Border CornerRadius="0,0,5,0" BorderBrush="#8292a5" VerticalAlignment="Bottom" HorizontalAlignment="Right" BorderThickness="0,0,1,1">
-                <TextBlock Foreground="DarkBlue" HorizontalAlignment="Center" Text="{Binding Age}" Width="90" FontSize="14" Height="25"/>
+                <TextBlock Foreground="#383F47" HorizontalAlignment="Stretch" VerticalAlignment="Center" Text="{Binding Age}" Width="40" FontSize="14" Height="25"/>
             </Border>
         </DockPanel>
     </DataTemplate>
     <DataTemplate x:Key="CellTemplateForListviewGender">
         <DockPanel Margin="-2,-3,-5,0">
             <Border CornerRadius="0,0,5,0" BorderBrush="#8292a5" VerticalAlignment="Bottom" HorizontalAlignment="Right" BorderThickness="0,0,1,1">
-                <TextBlock Foreground="DarkBlue" HorizontalAlignment="Center" Text="{Binding Gender}" Width="90" FontSize="14" Height="25"/>
+                <TextBlock Foreground="#383F47" HorizontalAlignment="Left" VerticalAlignment="Center" Text="{Binding Gender}" Width="90" FontSize="14" Height="25"/>
             </Border>
         </DockPanel>
     </DataTemplate>
     <DataTemplate x:Key="CellTemplateForListviewSpecialty">
         <DockPanel Margin="-2,-3,-5,0">
             <Border CornerRadius="0,0,5,0" BorderBrush="#8292a5" VerticalAlignment="Bottom" HorizontalAlignment="Right" BorderThickness="0,0,1,1">
-                <TextBlock Foreground="DarkBlue" HorizontalAlignment="Center" Text="{Binding Specialty}" Width="150" FontSize="14" Height="25"/>
+                <TextBlock Foreground="#383F47" HorizontalAlignment="Left" VerticalAlignment="Center" Text="{Binding Specialty}" Width="150" FontSize="14" Height="25"/>
             </Border>
         </DockPanel>
     </DataTemplate>
     <DataTemplate x:Key="CellTemplateForListviewTriage">
         <DockPanel Margin="-2,-3,-5,0">
-            <Border CornerRadius="0,0,5,0" BorderBrush="#8292a5" VerticalAlignment="Bottom" HorizontalAlignment="Right" BorderThickness="0,0,1,1">
-                <TextBlock Foreground="DarkBlue" HorizontalAlignment="Center" Text="{Binding Triage}" Width="110" FontSize="14" Height="25"/>
+            <Border CornerRadius="0,0,5,0" BorderBrush="#8292a5" VerticalAlignment="Bottom" HorizontalAlignment="Left" BorderThickness="0,0,1,1">
+                <TextBlock Grid.Column="1" Foreground="#383F47" HorizontalAlignment="Left" VerticalAlignment="Center" Text="{Binding Triage}" Width="110" FontSize="14" Height="25"/>
             </Border>
         </DockPanel>
     </DataTemplate>
     <DataTemplate x:Key="CellTemplateForListviewETA">
         <DockPanel Margin="-2,-3,-5,0">
             <Border CornerRadius="0,0,5,0" BorderBrush="#8292a5" VerticalAlignment="Bottom" HorizontalAlignment="Right" BorderThickness="0,0,1,1">
-                <TextBlock Foreground="DarkBlue" HorizontalAlignment="Center" Text="{Binding ETA, StringFormat='HH:mm dd/MM/yyyy'}" Width="130" FontSize="14" Height="25"/>
+                <TextBlock Foreground="#383F47" HorizontalAlignment="Left" VerticalAlignment="Center" Text="{Binding ETA, StringFormat='HH:mm dd/MM/yyyy'}" Width="130" FontSize="14" Height="25"/>
             </Border>
         </DockPanel>
     </DataTemplate>
        <DataTemplate x:Key="CellTemplateForListviewFromDestination">
         <DockPanel Margin="-2,-3,-5,0">
             <Border CornerRadius="0,0,5,0" BorderBrush="#8292a5" VerticalAlignment="Bottom" HorizontalAlignment="Right" BorderThickness="0,0,1,1">
-                <TextBlock Foreground="DarkBlue" HorizontalAlignment="Center" Text="{Binding FromDestination, StringFormat='HH:mm dd/MM/yyyy'}" Width="130" FontSize="14" Height="25"/>
+                <TextBlock Foreground="#383F47" HorizontalAlignment="Left" VerticalAlignment="Center" Text="{Binding FromDestination, StringFormat='HH:mm dd/MM/yyyy'}" Width="130" FontSize="14" Height="25"/>
             </Border>
         </DockPanel>
     </DataTemplate>
     <DataTemplate x:Key="CellTemplateForListviewLastUpdated">
         <DockPanel Margin="-2,-3,-5,0">
             <Border CornerRadius="0,0,5,0" BorderBrush="#8292a5" VerticalAlignment="Bottom" HorizontalAlignment="Right" BorderThickness="0,0,1,1">
-                <TextBlock Foreground="DarkBlue" HorizontalAlignment="Center" Text="{Binding LastUpdated, StringFormat='HH:mm dd/MM/yyyy'}" Width="130" FontSize="14" Height="25"/>
+                <TextBlock Foreground="#383F47" HorizontalAlignment="Left" VerticalAlignment="Center" Text="{Binding LastUpdated, StringFormat='HH:mm dd/MM/yyyy'}" Width="130" FontSize="14" Height="25"/>
             </Border>
         </DockPanel>
     </DataTemplate>
@@ -196,5 +197,6 @@
         </Setter>
     </Style>
 
-  
+
+
 </ResourceDictionary>
