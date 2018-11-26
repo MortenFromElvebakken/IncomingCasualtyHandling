@@ -54,7 +54,9 @@
                 </TabControl.ItemContainerStyle>
                 <TabControl.ContentTemplate>
                     <DataTemplate>
-                        <ListView ItemsSource="{Binding Data}" ItemContainerStyle="{StaticResource RowColourAlternate}" AlternationCount="2" IsSynchronizedWithCurrentItem="True">
+                        <Grid>
+                            <Grid ZIndex="20">
+                            <ListView ItemsSource="{Binding Data}" ItemContainerStyle="{StaticResource RowColourAlternate}" AlternationCount="2" IsSynchronizedWithCurrentItem="True">
                             <ListView.View>
                                 <GridView>
                                     <GridView.Columns>
