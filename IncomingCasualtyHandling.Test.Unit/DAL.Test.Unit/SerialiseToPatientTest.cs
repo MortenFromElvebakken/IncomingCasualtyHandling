@@ -30,7 +30,8 @@ namespace IncomingCasualtyHandling.Test.Unit.DAL.Test.Unit
         string familyName = "Testson";
         string wholeName;
         private AdministrativeGender gender = AdministrativeGender.Unknown;
-        private string toHospital = "To hospital went wrong";
+        private string toHospital = "Unknown";
+        private DateTimeOffset lastUpdated = new DateTimeOffset(2018,11,22,8,0,0, new TimeSpan(0,0,0,0));
 
         [SetUp]
         public void Setup()
@@ -53,6 +54,10 @@ namespace IncomingCasualtyHandling.Test.Unit.DAL.Test.Unit
             Patient1.Extension.Add(new Extension("http://www.example.com/triagetest", new FhirString(triage)));
             Patient1.Extension.Add(new Extension("http://www.example.com/SpecialtyTest", new FhirString(specialty)));
             Patient1.Extension.Add(new Extension("http://www.example.com/datetimeTest", new FhirDateTime(eta)));
+            Meta meta = new Meta();
+            meta.LastUpdated = lastUpdated;
+            Patient1.Meta = meta;
+            
 
         }
 

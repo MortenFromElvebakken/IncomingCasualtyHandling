@@ -10,123 +10,145 @@
         <Border Background="#415262" Margin="1,1,1,1" BorderThickness="1" BorderBrush="Black" CornerRadius="10">
             <Grid>
 
-            
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition/>
-                <ColumnDefinition/>
-                <ColumnDefinition/>
-            </Grid.ColumnDefinitions>
-            <Grid Grid.Column="0">
-                <UniformGrid Rows="1" VerticalAlignment="Stretch">
-                        <Grid Name="Triage1Circle" Visibility="{Binding Triage1.ShowAs}">
-                        <Grid.InputBindings>
-                                <MouseBinding MouseAction="LeftClick" Command="{Binding ChangeTabsCommand}" CommandParameter="Triage 0"></MouseBinding>
-                        </Grid.InputBindings>
-                        <Viewbox HorizontalAlignment="Center" VerticalAlignment="Center">
-                                <Border CornerRadius="20" MinHeight="40" MinWidth="40" Background="{Binding RelativeSource={RelativeSource AncestorType=Window}, Path=DataContext.Triage1.Colour}"  BorderThickness="1" Padding="2" Margin="1">
-                                    <Border.BorderBrush>
-                                        <SolidColorBrush Color="{Binding RelativeSource={RelativeSource AncestorType=Window}, Path=DataContext.Triage1.Colour}" Opacity="0.5"></SolidColorBrush>
-                                    </Border.BorderBrush>
-                                    <TextBlock Text="{Binding RelativeSource={RelativeSource AncestorType=Window}, Path=DataContext.Triage1.Amount}" VerticalAlignment="Center" FontSize="20" HorizontalAlignment="Center"></TextBlock>
-                            </Border>
-                            </Viewbox>
-                        
 
-                    </Grid>
-                        <Grid Name="Triage2Circle" Visibility="{Binding Triage2.ShowAs}">
-
-                            <Grid.InputBindings>
-                                <MouseBinding MouseAction="LeftClick" Command="{Binding ChangeTabsCommand}" CommandParameter="Triage 1"></MouseBinding>
-                            </Grid.InputBindings>
-                        <Viewbox HorizontalAlignment="Center" VerticalAlignment="Center">
-                            <Border CornerRadius="20" MinHeight="40" MinWidth="40"  Background="{Binding RelativeSource={RelativeSource AncestorType=Window}, Path=DataContext.Triage2.Colour}" BorderThickness="1" Padding="2"  Margin="1">
-                                <Border.BorderBrush>
-                                    <SolidColorBrush Color="{Binding RelativeSource={RelativeSource AncestorType=Window}, Path=DataContext.Triage2.Colour}" Opacity="0.5"></SolidColorBrush>
-                                </Border.BorderBrush>
-                                    <TextBlock Text="{Binding RelativeSource={RelativeSource AncestorType=Window}, Path=DataContext.Triage2.Amount}" VerticalAlignment="Center" FontSize="20" HorizontalAlignment="Center"></TextBlock>
-                            </Border>
-                            </Viewbox>
-                            
-
-                        </Grid>
-                        <Grid Name="Triage3Circle" Visibility="{Binding Triage3.ShowAs}" MaxWidth="100px">
-
-                        <Grid.InputBindings>
-                                <MouseBinding MouseAction="LeftClick" Command="{Binding ChangeTabsCommand}" CommandParameter="Triage 2"></MouseBinding>
-                        </Grid.InputBindings>
-                        <Viewbox HorizontalAlignment="Center" VerticalAlignment="Center">
-                            <Border CornerRadius="50" MinHeight="40" MinWidth="40" Background="{Binding RelativeSource={RelativeSource AncestorType=Window}, Path=DataContext.Triage3.Colour}" BorderBrush="Black" BorderThickness="1" Padding="2" Margin="1">
-                                <TextBlock Text="{Binding RelativeSource={RelativeSource AncestorType=Window}, Path=DataContext.Triage3.Amount}" VerticalAlignment="Center" FontSize="20" HorizontalAlignment="Center"></TextBlock>
-                            </Border>
-                            </Viewbox>
-                            
-                    </Grid>
-                        <Grid Name="Triage4Circle" Visibility="{Binding Triage4.ShowAs}" MaxWidth="100px">
-                        <Grid.InputBindings>
-                                <MouseBinding MouseAction="LeftClick" Command="{Binding ChangeTabsCommand}" CommandParameter="Triage 3"></MouseBinding>
-                        </Grid.InputBindings>
-                        <Viewbox HorizontalAlignment="Center" VerticalAlignment="Center">
-                            <Border CornerRadius="50" MinHeight="40" MinWidth="40" Background="{Binding RelativeSource={RelativeSource AncestorType=Window}, Path=DataContext.Triage4.Colour}" BorderBrush="Black" BorderThickness="1" Padding="2" Margin="1">
-                                <TextBlock Text="{Binding RelativeSource={RelativeSource AncestorType=Window}, Path=DataContext.Triage4.Amount}" VerticalAlignment="Center" FontSize="20" HorizontalAlignment="Center"></TextBlock>
-                            </Border>
-                            </Viewbox>
-                            
-                    </Grid>
-                        <Grid Name="Triage5Circle" Visibility="{Binding Triage5.ShowAs}" MaxWidth="100px">
-
-                        <Grid.InputBindings>
-                                <MouseBinding MouseAction="LeftClick" Command="{Binding ChangeTabsCommand}" CommandParameter="Triage 4"></MouseBinding>
-                        </Grid.InputBindings>
-                        <Viewbox HorizontalAlignment="Center" VerticalAlignment="Center">
-                            <Border CornerRadius="50" MinHeight="40" MinWidth="40" Background="{Binding RelativeSource={RelativeSource AncestorType=Window}, Path=DataContext.Triage5.Colour}" BorderBrush="Black" BorderThickness="1" Padding="2" Margin="1">
-                                <TextBlock Text="{Binding RelativeSource={RelativeSource AncestorType=Window}, Path=DataContext.Triage5.Amount}" VerticalAlignment="Center" FontSize="20" HorizontalAlignment="Center"></TextBlock>
-                            </Border>
-                            </Viewbox>
-                            
-                    </Grid>
-                    <Grid Name="Triage6Circle" Visibility="{Binding Triage6.ShowAs}" MaxWidth="100px">
-
-                        <Grid.InputBindings>
-                            <MouseBinding MouseAction="LeftClick" Command="{Binding ChangeTabsCommand}" CommandParameter="Triage 5"></MouseBinding>
-                        </Grid.InputBindings>
-                        <Viewbox HorizontalAlignment="Center" VerticalAlignment="Center">
-                            <Border CornerRadius="50" MinHeight="40" MinWidth="40" Background="{Binding RelativeSource={RelativeSource AncestorType=Window}, Path=DataContext.Triage6.Colour}" BorderBrush="Black" BorderThickness="1" Padding="2" Margin="1">
-                                <TextBlock Text="{Binding RelativeSource={RelativeSource AncestorType=Window}, Path=DataContext.Triage6.Amount}" VerticalAlignment="Center" FontSize="20" HorizontalAlignment="Center"></TextBlock>
-                            </Border>
-                        </Viewbox>
-
-                    </Grid>
-                    </UniformGrid>
-            </Grid>
-            <Grid Grid.Column="1">
-                <Grid Name="Specialty1Panel" Margin="20,2.5,10,2.5" Visibility="{Binding RelativeSource={RelativeSource AncestorType=Window}, Path=DataContext.Specialty1.ShowAs}" VerticalAlignment="Center">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Style="{StaticResource ColourColumn}"/>
-                        <ColumnDefinition Width="1*"/>
-                        <ColumnDefinition Style="{StaticResource AmountColumn}"/>
-                    </Grid.ColumnDefinitions>
-                    <Grid.InputBindings>
-                            <MouseBinding MouseAction="LeftClick"  Command="{Binding ChangeTabsCommand}" CommandParameter="Specialty 0"></MouseBinding>
-                    </Grid.InputBindings>
-                    
-                    <Button Grid.Column="0" Name="Specialty1Colour" IsEnabled="False" Style="{StaticResource SquaredRoundedButton}" Background="{Binding RelativeSource={RelativeSource AncestorType=Window}, Path=DataContext.Specialty1.Colour}" ></Button>
-                    <Label Grid.Column="1" Name="Specialty1Name" Content="{Binding RelativeSource={RelativeSource AncestorType=Window}, Path=DataContext.Specialty1.Name}" VerticalAlignment="Center" HorizontalAlignment="Left"></Label>
-                    <Label Grid.Column="2" Name="Specialty1Amount" Content="{Binding RelativeSource={RelativeSource AncestorType=Window}, Path=DataContext.Specialty1.Amount}" VerticalAlignment="Center" HorizontalAlignment="Left"></Label>
-                </Grid>
-            </Grid>
-            <Grid Grid.Column="2">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition/>
                     <ColumnDefinition/>
+                    <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
-                <Grid.InputBindings>
-                    <MouseBinding MouseAction="LeftClick"  Command="{Binding ChangeTabsCommand}" CommandParameter="Eta 0"></MouseBinding>
-                </Grid.InputBindings>
+                <Grid Grid.Column="0">
+                    
+                        <UniformGrid Rows="1" VerticalAlignment="Stretch">
+
+                            <Grid Name="Triage1Circle" Visibility="{Binding Triage1.ShowAs}">
+                                <Grid.InputBindings>
+                                    <MouseBinding MouseAction="LeftClick" Command="{Binding ChangeTabsCommand}" CommandParameter="Triage 0"></MouseBinding>
+                                </Grid.InputBindings>
+                                <Viewbox HorizontalAlignment="Center" VerticalAlignment="Center">
+                                    <Border CornerRadius="20" MinHeight="40" MinWidth="40" Background="{Binding RelativeSource={RelativeSource AncestorType=Window}, Path=DataContext.Triage1.Colour}"  BorderThickness="1" Padding="2" Margin="1">
+                                        <Border.BorderBrush>
+                                            <SolidColorBrush Color="{Binding RelativeSource={RelativeSource AncestorType=Window}, Path=DataContext.Triage1.Colour}" Opacity="0.5"></SolidColorBrush>
+                                        </Border.BorderBrush>
+                                        <TextBlock Text="{Binding RelativeSource={RelativeSource AncestorType=Window}, Path=DataContext.Triage1.Amount}" VerticalAlignment="Center" FontSize="20" HorizontalAlignment="Center"></TextBlock>
+                                    </Border>
+                                </Viewbox>
+
+
+                            </Grid>
+                            <Grid Name="Triage2Circle" Visibility="{Binding Triage2.ShowAs}">
+
+                                <Grid.InputBindings>
+                                    <MouseBinding MouseAction="LeftClick" Command="{Binding ChangeTabsCommand}" CommandParameter="Triage 1"></MouseBinding>
+                                </Grid.InputBindings>
+                                <Viewbox HorizontalAlignment="Center" VerticalAlignment="Center">
+                                    <Border CornerRadius="20" MinHeight="40" MinWidth="40"  Background="{Binding RelativeSource={RelativeSource AncestorType=Window}, Path=DataContext.Triage2.Colour}" BorderThickness="1" Padding="2"  Margin="1">
+                                        <Border.BorderBrush>
+                                            <SolidColorBrush Color="{Binding RelativeSource={RelativeSource AncestorType=Window}, Path=DataContext.Triage2.Colour}" Opacity="0.5"></SolidColorBrush>
+                                        </Border.BorderBrush>
+                                        <TextBlock Text="{Binding RelativeSource={RelativeSource AncestorType=Window}, Path=DataContext.Triage2.Amount}" VerticalAlignment="Center" FontSize="20" HorizontalAlignment="Center"></TextBlock>
+                                    </Border>
+                                </Viewbox>
+
+
+                            </Grid>
+                            <Grid Name="Triage3Circle" Visibility="{Binding Triage3.ShowAs}" MaxWidth="100px">
+
+                                <Grid.InputBindings>
+                                    <MouseBinding MouseAction="LeftClick" Command="{Binding ChangeTabsCommand}" CommandParameter="Triage 2"></MouseBinding>
+                                </Grid.InputBindings>
+
+                                <Viewbox HorizontalAlignment="Center" VerticalAlignment="Center">
+                                    <Border CornerRadius="50" MinHeight="40" MinWidth="40" Background="{Binding RelativeSource={RelativeSource AncestorType=Window}, Path=DataContext.Triage3.Colour}" BorderThickness="1" Padding="2" Margin="1">
+                                        <Border.BorderBrush>
+                                            <SolidColorBrush Color="{Binding RelativeSource={RelativeSource AncestorType=Window}, Path=DataContext.Triage3.Colour}" Opacity="0.5"></SolidColorBrush>
+                                        </Border.BorderBrush>
+                                        <TextBlock Text="{Binding RelativeSource={RelativeSource AncestorType=Window}, Path=DataContext.Triage3.Amount}" VerticalAlignment="Center" FontSize="20" HorizontalAlignment="Center"></TextBlock>
+                                    </Border>
+                                </Viewbox>
+
+                            </Grid>
+                            <Grid Name="Triage4Circle" Visibility="{Binding Triage4.ShowAs}" MaxWidth="100px">
+                                <Grid.InputBindings>
+                                    <MouseBinding MouseAction="LeftClick" Command="{Binding ChangeTabsCommand}" CommandParameter="Triage 3"></MouseBinding>
+                                </Grid.InputBindings>
+                                <Viewbox HorizontalAlignment="Center" VerticalAlignment="Center">
+                                    <Border CornerRadius="50" MinHeight="40" MinWidth="40" Background="{Binding RelativeSource={RelativeSource AncestorType=Window}, Path=DataContext.Triage4.Colour}" BorderThickness="1" Padding="2" Margin="1">
+                                        <Border.BorderBrush>
+                                            <SolidColorBrush Color="{Binding RelativeSource={RelativeSource AncestorType=Window}, Path=DataContext.Triage4.Colour}" Opacity="0.5"></SolidColorBrush>
+                                        </Border.BorderBrush>
+                                        <TextBlock Text="{Binding RelativeSource={RelativeSource AncestorType=Window}, Path=DataContext.Triage4.Amount}" VerticalAlignment="Center" FontSize="20" HorizontalAlignment="Center"></TextBlock>
+                                    </Border>
+                                </Viewbox>
+
+                            </Grid>
+                            <Grid Name="Triage5Circle" Visibility="{Binding Triage5.ShowAs}" MaxWidth="100px">
+
+                                <Grid.InputBindings>
+                                    <MouseBinding MouseAction="LeftClick" Command="{Binding ChangeTabsCommand}" CommandParameter="Triage 4"></MouseBinding>
+                                </Grid.InputBindings>
+                                <Viewbox HorizontalAlignment="Center" VerticalAlignment="Center">
+                                    <Border CornerRadius="50" MinHeight="40" MinWidth="40" Background="{Binding RelativeSource={RelativeSource AncestorType=Window}, Path=DataContext.Triage5.Colour}" BorderThickness="1" Padding="2" Margin="1">
+                                        <Border.BorderBrush>
+                                            <SolidColorBrush Color="{Binding RelativeSource={RelativeSource AncestorType=Window}, Path=DataContext.Triage5.Colour}" Opacity="0.5"></SolidColorBrush>
+                                        </Border.BorderBrush>
+                                        <TextBlock Text="{Binding RelativeSource={RelativeSource AncestorType=Window}, Path=DataContext.Triage5.Amount}" VerticalAlignment="Center" FontSize="20" HorizontalAlignment="Center"></TextBlock>
+                                    </Border>
+                                </Viewbox>
+
+                            </Grid>
+                            <Grid Name="Triage6Circle" Visibility="{Binding Triage6.ShowAs}" MaxWidth="100px">
+
+                                <Grid.InputBindings>
+                                    <MouseBinding MouseAction="LeftClick" Command="{Binding ChangeTabsCommand}" CommandParameter="Triage 5"></MouseBinding>
+                                </Grid.InputBindings>
+                                <Viewbox HorizontalAlignment="Center" VerticalAlignment="Center">
+                                    <Border CornerRadius="50" MinHeight="40" MinWidth="40" Background="{Binding RelativeSource={RelativeSource AncestorType=Window}, Path=DataContext.Triage6.Colour}" BorderThickness="1" Padding="2" Margin="1">
+                                        <Border.BorderBrush>
+                                            <SolidColorBrush Color="{Binding RelativeSource={RelativeSource AncestorType=Window}, Path=DataContext.Triage6.Colour}" Opacity="0.5"></SolidColorBrush>
+                                        </Border.BorderBrush>
+                                        <TextBlock Text="{Binding RelativeSource={RelativeSource AncestorType=Window}, Path=DataContext.Triage6.Amount}" VerticalAlignment="Center" FontSize="20" HorizontalAlignment="Center"></TextBlock>
+                                    </Border>
+                                </Viewbox>
+
+                            </Grid>
+                        </UniformGrid>
+                    
+
+                </Grid>
+                <Grid Grid.Column="1">
+                    <Border CornerRadius="0" Background="Transparent"  BorderThickness="2,0,2,0" Padding="1" Margin="1">
+                        <Border.BorderBrush>
+                            <SolidColorBrush Color="Gray" Opacity="0.4"></SolidColorBrush>
+                        </Border.BorderBrush>
+                        <Grid Name="Specialty1Panel" Margin="20,2.5,10,2.5" Visibility="{Binding RelativeSource={RelativeSource AncestorType=Window}, Path=DataContext.Specialty1.ShowAs}" VerticalAlignment="Center">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Style="{StaticResource ColourColumn}"/>
+                            <ColumnDefinition Width="1*"/>
+                            <ColumnDefinition Style="{StaticResource AmountColumn}"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.InputBindings>
+                            <MouseBinding MouseAction="LeftClick"  Command="{Binding ChangeTabsCommand}" CommandParameter="Specialty 0"></MouseBinding>
+                        </Grid.InputBindings>
+
+                        <Button Grid.Column="0" Name="Specialty1Colour" IsEnabled="False" Style="{StaticResource SquaredRoundedButton}" Background="{Binding RelativeSource={RelativeSource AncestorType=Window}, Path=DataContext.Specialty1.Colour}" ></Button>
+                        <Label Grid.Column="1" Name="Specialty1Name" Content="{Binding RelativeSource={RelativeSource AncestorType=Window}, Path=DataContext.Specialty1.Name}" VerticalAlignment="Center" HorizontalAlignment="Left"></Label>
+                        <Label Grid.Column="2" Name="Specialty1Amount" Content="{Binding RelativeSource={RelativeSource AncestorType=Window}, Path=DataContext.Specialty1.Amount}" VerticalAlignment="Center" HorizontalAlignment="Left"></Label>
+                    </Grid>
+                    </Border>
+                </Grid>
+                <Grid Grid.Column="2">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.InputBindings>
+                        <MouseBinding MouseAction="LeftClick"  Command="{Binding ChangeTabsCommand}" CommandParameter="Eta 0"></MouseBinding>
+                    </Grid.InputBindings>
                     <Label Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Center">ETA</Label>
-                <Label Grid.Column="1" Name="EtaRelativeTimeText" VerticalAlignment="Center" HorizontalAlignment="Left" Content="{Binding RelativeSource={RelativeSource AncestorType=Window}, Path=DataContext.Eta.AbsoluteTime}"></Label>
-            </Grid>
+                    <Label Grid.Column="1" Name="EtaRelativeTimeText" VerticalAlignment="Center" HorizontalAlignment="Left" Content="{Binding RelativeSource={RelativeSource AncestorType=Window}, Path=DataContext.Eta.AbsoluteTime}"></Label>
+                </Grid>
             </Grid>
         </Border>
-        
+
     </Grid>
 </UserControl>

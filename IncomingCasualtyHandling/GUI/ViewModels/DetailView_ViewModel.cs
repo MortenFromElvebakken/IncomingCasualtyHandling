@@ -95,12 +95,13 @@ namespace IncomingCasualtyHandling.GUI.ViewModels
 
         private void GridViewColumnHeaderClickedHandler(RoutedEventArgs o)
         {
+            // Cast the source of the control that triggered the event
             var source = (System.Windows.Controls.GridViewColumnHeader) o.Source;
+            // Find the name of the column
             var columnName = source.Content;
+            // Use the column name as argument to the method
             _detailViewModel.GridViewColumnHeaderClicked(columnName.ToString());
             
-
-            MessageBox.Show("You clicked");
                 
         }
 
