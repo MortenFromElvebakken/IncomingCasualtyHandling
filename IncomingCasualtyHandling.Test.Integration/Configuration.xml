@@ -1,0 +1,92 @@
+<?xml version="1.0"?>
+	<Configuration>
+		<ServerName>http://localhost:8080/hapi-fhir-jpaserver-example/baseDstu3</ServerName>
+		<Hospital>AUH</Hospital>
+		<Triages>
+			<Triage>
+				<Name>TriageRed</Name>
+				<Colour>#FF0000</Colour>
+			</Triage>
+			<Triage>
+				<Name>TriageOrange</Name>
+				<Colour>#FFA500</Colour>
+			</Triage>
+			<Triage>
+				<Name>TriageYellow</Name>
+				<Colour>#FFFF00</Colour>
+			</Triage>
+			<Triage>
+				<Name>TriageGreen</Name>
+				<Colour>#008000</Colour>
+			</Triage>
+			<Triage>
+				<Name>TriageBlue</Name>
+				<Colour>#0000FF</Colour>
+			</Triage>
+		</Triages>
+		<Specialties>
+			<Specialty>
+				<Name>Diagnostic radiology</Name>
+				<Colour></Colour>
+			</Specialty>
+			<Specialty>
+				<Name>Emergency medicine</Name>
+				<Colour></Colour>
+			</Specialty>
+			<Specialty>
+				<Name>Neurology</Name>
+				<Colour></Colour>
+			</Specialty>
+			<Specialty>
+				<Name>Obstetrics and Gynecology</Name>
+				<Colour></Colour>
+			</Specialty>
+			<Specialty>
+				<Name>Opthalmology</Name>
+				<Colour></Colour>
+			</Specialty>
+			<Specialty>
+				<Name>Orthopaedic surgery</Name>
+				<Colour></Colour>
+			</Specialty>
+			<Specialty>
+				<Name>Otolaryngology</Name>
+				<Colour></Colour>
+			</Specialty>
+			<Specialty>
+				<Name>Pathology-Anatomic and Clinical</Name>
+				<Colour></Colour>
+			</Specialty>
+			<Specialty>
+				<Name>Pediatrics</Name>
+				<Colour></Colour>
+			</Specialty>
+			<Specialty>
+				<Name>Plastic surgery</Name>
+				<Colour></Colour>
+			</Specialty>
+			<Specialty>
+				<Name>Psychiatry</Name>
+				<Colour></Colour>
+			</Specialty><Specialty>
+				<Name>Surgery-general</Name>
+				<Colour></Colour>
+			</Specialty>
+			<Specialty>
+				<Name>Thoracic surgery</Name>
+				<Colour></Colour>
+			</Specialty>
+			<Specialty>
+				<Name>Unknown</Name>
+				<Colour></Colour>
+			</Specialty>
+			<Specialty>
+				<Name>Urology</Name>
+				<Colour></Colour>
+			</Specialty>
+			<Specialty>
+				<Name>Vascular surgery</Name>
+				<Colour></Colour>
+			</Specialty>
+		</Specialties>
+	</Configuration>
