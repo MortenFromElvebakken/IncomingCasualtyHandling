@@ -102,7 +102,6 @@ namespace IncomingCasualtyHandling.BL
         ETA _nextEta = new ETA();
 
         // Compares the parameter time with the current time
-        // Returns the relative time in minutes
         private void CompareETATimeToCurrentTime(DateTime nextEta)
         {
             _dateTimeEta = nextEta;
@@ -136,19 +135,12 @@ namespace IncomingCasualtyHandling.BL
                 _prefix = "-";
                 _positiveTimeSpan = timeSpan.Negate();
             }
-            // Add a minute to get the right minute count, as seconds aren't shown. E.g. 41 minutes and 20 seconds becomes 42 minutes.
-            _positiveTimeSpan = _positiveTimeSpan.Add(new TimeSpan(0, 1, 0));
 
-            //// Time less than a minute:
-            //if (timeDifference < 1 * MinuteInSeconds)
-            //{
-            //    //Set relative time to show no missing minutes
-            //    _relativeTime = _positiveTimeSpan.Minutes.ToString().PadLeft(2, '0') + ":" + _positiveTimeSpan.Seconds.ToString().PadLeft(2, '0');
-            //}
             // Time less than 99 hours but more than a minute:
             if (timeDifference < 999 * MinuteInSeconds && _timeDifference > 0)
             {
-                _relativeTime = _positiveTimeSpan.Minutes.ToString().PadLeft(2, '0');
+                // Ceil the total minute count, as seconds aren't shown. E.g. 41 minutes and 20 seconds becomes 42 minutes.
+                _relativeTime = Math.Ceiling(_positiveTimeSpan.TotalMinutes).ToString().PadLeft(2, '0');
             }
 
             if (timeDifference > 999* MinuteInSeconds)
@@ -165,7 +157,7 @@ namespace IncomingCasualtyHandling.BL
                 _nextEta = new ETA
                 {
                     AbsoluteTime = _dateTimeEta.ToShortTimeString(),
-                    RelativeTime = "(" + _prefix + " " + _relativeTime + " minutes)"
+                    RelativeTime = "(" + _prefix + _relativeTime + " minutes)"
                 };
             }
             else

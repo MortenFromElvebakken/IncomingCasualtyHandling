@@ -10,6 +10,7 @@ using Hl7.Fhir.Model;
 using Hl7.Fhir.Rest;
 using IncomingCasualtyHandling.BL;
 using IncomingCasualtyHandling.BL.Interfaces;
+using IncomingCasualtyHandling.BL.Models;
 using IncomingCasualtyHandling.BL.Object_classes;
 using IncomingCasualtyHandling.DAL;
 using IncomingCasualtyHandling.DAL.Interface;
@@ -20,19 +21,15 @@ using NUnit.Framework;
 namespace IncomingCasualtyHandling.Test.Integration
 {
     [TestFixture]
-    class IT4_SortETA_TimerSortTriageSortSpecialty
+    class IT5_Timer_Models
     {
         // Fakes
         private IFhirClient _client;
+
+        // System under test        
         private IMainView_Model _MV_M;
         private IOverviewView_Model _OV_M;
         private IDetailView_Model _DV_M;
-
-
-        // System under test        
-        private ISortTriage _sortTriage;
-        private ISortSpecialty _sortSpecialty;
-        private ICountTime _countTime;
 
         // Drivers
         private GetPatientsFromFhir _getPatients;
@@ -41,6 +38,9 @@ namespace IncomingCasualtyHandling.Test.Integration
         private ILoadConfigurationSettings _loadConfig;
         private ISortETA _sortEta;
         private SerialiseToPatient _serialise;
+        private ISortTriage _sortTriage;
+        private ISortSpecialty _sortSpecialty;
+        private ICountTime _countTime;
 
         // Data
         private string _xmlDocumentPath;
@@ -65,11 +65,6 @@ namespace IncomingCasualtyHandling.Test.Integration
         [SetUp]
         public void SetUp()
         {
-            _MV_M = Substitute.For<IMainView_Model>();
-            _OV_M = Substitute.For<IOverviewView_Model>();
-            _DV_M = Substitute.For<IDetailView_Model>();
-
-
             _serialise = new SerialiseToPatient();
 
             _xmlDocumentPath =
@@ -77,6 +72,10 @@ namespace IncomingCasualtyHandling.Test.Integration
             _loadConfig = new LoadConfigurationSettingsFromXMLDocument(_xmlDocumentPath);
 
             _getPatients = new GetPatientsFromFhir(_loadConfig, _serialise);
+
+            _MV_M = new MainView_Model(_getPatients);
+            _OV_M = new OverviewView_Model();
+            _DV_M = new DetailView_Model();
 
             _countTime = new CountTime(_MV_M, _OV_M);
 
@@ -121,9 +120,31 @@ namespace IncomingCasualtyHandling.Test.Integration
 
         }
 
-        #region  Timer
+        
+        // CAN'T GET IT TO WORK RIGHT NOW [Test]
+        public void CurrentDateTimeTick_ChangePropertyInModel_PropertyInMainViewModelChanges()
+        {
+            // Sleep 1.5 second to make sure, that tick has occured
+            Thread.Yield();
+            Assert.NotNull(_MV_M.CurrentDateTime);
+        }
+
         [Test]
-        public void SortForETA_CallCountTime_RelativeTimeSetInMainModel()
+        public void FindRelativeTime_SetTimeInMainModel_AbsoluteTimeSetInMainModel()
+        {
+            // Set ETA to 2 hours from now
+            DateTime twoHoursFromNow = DateTime.Now.AddHours(2);
+            Patient1.Extension[2].Value = new FhirDateTime(twoHoursFromNow);
+
+            string twoHoursInAbsolute = twoHoursFromNow.ToShortTimeString();
+
+            _getPatients.GetAllPatients();
+
+            Assert.That(_MV_M.Eta.AbsoluteTime, Is.EqualTo(twoHoursInAbsolute));
+
+        }
+        [Test]
+        public void FindRelativeTime_SetTimeInMainModel_RelativeTimeSetInMainModel()
         {
             // Set ETA to 2 hours from now
             DateTime twoHoursFromNow = DateTime.Now.AddHours(2);
@@ -136,91 +157,6 @@ namespace IncomingCasualtyHandling.Test.Integration
             Assert.That(_MV_M.Eta.RelativeTime, Is.EqualTo(twoHoursInMinutes));
 
         }
-
-        [Test]
-        public void SortForETA_CallCountTime_RelativeTimeSetInOverviewModel()
-        {
-            // Set ETA to 2 hours from now
-            DateTime twoHoursFromNow = DateTime.Now.AddHours(2);
-            Patient1.Extension[2].Value = new FhirDateTime(twoHoursFromNow);
-            
-            string twoHoursInMinutes = "(-120 minutes)";
-
-            _getPatients.GetAllPatients();
-
-            Assert.That(_OV_M.Eta.RelativeTime, Is.EqualTo(twoHoursInMinutes));
-
-        }
-
-        #endregion
-
-        #region SortTriage
-        [Test]
-        public void SortForETA_RaiseOnSortedListEvent_SortTriageReactsAndPlacesTriagesInMainViewModel()
-        {
-            _getPatients.GetAllPatients();
-
-            Assert.That(_MV_M.ListOfTriages[0].Amount, Is.EqualTo(1));
-
-        }
-
-        [Test]
-        public void SortForETA_RaiseOnSortedListEvent_SortTriageReactsAndPlacesTriagesInDetailViewModel()
-        {
-            _getPatients.GetAllPatients();
-
-            Assert.That(_DV_M.ListOfTriages[0].Amount, Is.EqualTo(1));
-
-        }
-
-        [Test]
-        public void SortForETA_RaiseOnSortedListEvent_SortTriageReactsAndPlacesTriagePatientsInDetailViewModel()
-        {
-            _getPatients.GetAllPatients();
-
-            Assert.That(_DV_M.ListOfTriagePatientLists[0].Count, Is.EqualTo(1));
-
-        }
-        #endregion
-
-        #region SortSpecialty
-        [Test]
-        public void SortForETA_RaiseOnSortedListEvent_SortSpecialtyReactsAndPlacesTopSpecialtyInMainViewModel()
-        {
-            _getPatients.GetAllPatients();
-
-            Assert.That(_MV_M.Specialty1.Name, Is.EqualTo(specialty));
-
-        }
-
-        [Test]
-        public void SortForETA_RaiseOnSortedListEvent_SortSpecialtyReactsAndPlacesTopSpecialtyInOverviewViewModel()
-        {
-            _getPatients.GetAllPatients();
-
-            Assert.That(_OV_M.ListOfSpecialities.Find(s => s.Name == specialty).Amount, Is.EqualTo(1));
-
-        }
-
-        [Test]
-        public void SortForETA_RaiseOnSortedListEvent_SortSpecialtyReactsAndPlacesSpecialtiesInDetailViewModel()
-        {
-            _getPatients.GetAllPatients();
-
-            Assert.That(_DV_M.ListOfSpecialties.Find(s => s.Name == specialty).Amount, Is.EqualTo(1));
-
-        }
-
-        [Test]
-        public void SortForETA_RaiseOnSortedListEvent_SortSpecialtyReactsAndPlacesSpecialtyPatientsInDetailViewModel()
-        {
-            _getPatients.GetAllPatients();
-
-            Assert.That(_DV_M.ListOfSpecialtiesPatientLists.Exists(s => s.Exists(p => p.Name == wholeName)), Is.True);
-
-        }
-        #endregion
-
     }
 
 }
