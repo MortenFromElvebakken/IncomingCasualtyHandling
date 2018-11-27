@@ -16,7 +16,7 @@ namespace IncomingCasualtyHandling.DAL
 {
     public class GetPatientsFromFhir : IGetPatientsFromFHIR
     {
-        private readonly string _fhirServerUrl;
+        private string _fhirServerUrl;
         private FhirClient _client;
         private readonly ISerializeToPatient _serializePatient;
         private readonly ILoadConfigurationSettings _loadConfigSettingsFromXmlDocument;
@@ -110,23 +110,90 @@ namespace IncomingCasualtyHandling.DAL
             handler?.Invoke(b);
         }
 
-        
+
+        private bool sameAsLast;
+        List<Patient> lastChangedPatients = default(List<Patient>);
+
+        private bool checkIfSamePatientsReturned(Bundle b)
+        {
+            if (b.Entry.Count == 0)
+            {
+                return true;
+            }
+            else
+            {
+                int counterTest = 0;
+                List<Patient> changedPatients = new List<Patient>();
+                foreach (var entry in b.Entry)
+                {
+                    var testEntry = _client.Read<Patient>(_fhirServerUrl + "/Patient/" + b.Entry[counterTest].Resource.Id);
+                    changedPatients.Add(testEntry);
+                    counterTest++;
+                }
+
+                int CheckIfPatientsAreTheSame = counterTest;
+                for (int i = 0; i < counterTest; i++)
+                {
+                    if (lastChangedPatients != null && changedPatients[i].Meta.LastUpdated == lastChangedPatients[i].Meta.LastUpdated)
+                    {
+                        CheckIfPatientsAreTheSame--;
+                    }
+                }
+
+                if (CheckIfPatientsAreTheSame == 0)
+                {
+                    return true;
+                }
+                else
+                {
+                    lastChangedPatients = changedPatients;
+                    return false;
+                }
+                
+            }
+        }
 
         private void AsyncGetAllPatients()
         {
+            sameAsLast = true;
             var anyChangedResources = default(Bundle);
             Thread.Sleep(5000);
             try
             {
                 //throw new Exception("test");
                 anyChangedResources = _client.WholeSystemHistory(_dateOfLastSearch, 10);
-                _dateOfLastSearch = DateTime.Now.AddSeconds(-1);
+                _dateOfLastSearch = DateTime.Now.AddSeconds(-5);
                 if (_internet == false)
                 {
                     _internet = true;
                     NoInternetConnection(true);
                 }
-                    
+
+                sameAsLast = checkIfSamePatientsReturned(anyChangedResources);
+
+                //int counterTest = 0;
+                //foreach (var entry in anyChangedResources.Entry)
+                //{
+                //    var testEntry = _client.Read<Patient>(_fhirServerUrl + "/Patient/" + anyChangedResources.Entry[counterTest].Resource.Id);
+                //    counterTest++;
+                //}
+
+                //int CheckIfPatientsAreTheSame = counterTest;
+                //for (int i = 0; i < counterTest; i++)
+                //{
+                //    if (lastChangedPatients != null && changedPatients[i].Meta.LastUpdated == lastChangedPatients[i].Meta.LastUpdated)
+                //    {
+                //        CheckIfPatientsAreTheSame--;
+                //    }
+                //}
+
+                //if (anyChangedResources.Entry.Count != 0 && CheckIfPatientsAreTheSame == 0)
+                //{
+                //    sameAsLast = false;
+                //}
+
+
+
             }
             catch (Exception e)
             {
@@ -135,10 +202,23 @@ namespace IncomingCasualtyHandling.DAL
                 NoInternetConnection(false);
             }
 
-            if (anyChangedResources != null && anyChangedResources.Entry.Count != 0)
+            if (anyChangedResources != null && !sameAsLast)
             {
-                var newBundle = _client.SearchAsync<Patient>(_sParameters).Result;
+                //Logik på alle patienter som dukker i ændrede resources, henter dem enkeltvis og sammenligner med det bundle den får tilbage, hvis de er active true, og ikke
+                // findes i bundle, tilføj, hvis de er active false og findes i bundle, skal den fjerne. 
+                //
+                //List<Patient> otherEntries = new List<Patient>();
+                //int counter = 0;
+                //foreach (var x in anyChangedResources.Entry)
+                //{
+                //    var testEntry = _client.Read<Patient>(_fhirServerUrl + "/Patient/" + anyChangedResources.Entry[counter].Resource.Id);
+                //    otherEntries.Add(testEntry);
+                //    counter++;
+                //}
+               
+                var newBundle = _client.Search<Patient>(_sParameters);
                 List<PatientModel> listOfPatients = new List<PatientModel>();
+                
                 while (newBundle != null)
                 {
                     foreach (var x in newBundle.Entry)
@@ -149,9 +229,44 @@ namespace IncomingCasualtyHandling.DAL
                     }
                     newBundle = _client.Continue(newBundle, PageDirection.Next);
                 }
+                foreach (var patient in lastChangedPatients)
+                {
+                    if (patient.Active == false)
+                    {
+                        var cpr = patient.Identifier[0].Value;
+                        foreach (var p in listOfPatients)
+                        {
+                            if (p.CPR == cpr)
+                            {
+                                listOfPatients.Remove(p);
+                                break;
+                            }
+                        }
+                    }
+                    if (patient.Active == true)
+                    {
+                        var cpr = patient.Identifier[0].Value;
+                        int counter2 = 0;
+                        bool didItContainElement = false;
+                        foreach (var p in listOfPatients)
+                        {
+                            if (p.CPR == cpr)
+                            {
+                                    listOfPatients[counter2] = _serializePatient.ReturnPatient(patient);
+                                    didItContainElement = true;
+                                break;
+                            }
 
-                UpdatePatients(listOfPatients);
+                            counter2++;
+                        }
 
+                        if (!didItContainElement)
+                        {
+                            listOfPatients.Add(_serializePatient.ReturnPatient(patient));
+                        }
+                    }
+                }
+                    UpdatePatients(listOfPatients);
             }
             AsyncGetAllPatients();
         }
@@ -159,6 +274,7 @@ namespace IncomingCasualtyHandling.DAL
         public void setFhirClientURL(string s)
         {
             _client = new FhirClient(s);
+            _fhirServerUrl = s;
             GetAllPatients();
         }
     }

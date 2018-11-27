@@ -79,6 +79,7 @@ namespace IncomingCasualtyHandling.GUI.ViewModels
         {
             if(CurrentWorkspace == _overviewViewViewModel)
             {
+                _detailViewViewModel.ChangedFromMain = true;
                 _detailViewViewModel.ChangeTabs(x);
                 CurrentWorkspace = _detailViewViewModel;
             }

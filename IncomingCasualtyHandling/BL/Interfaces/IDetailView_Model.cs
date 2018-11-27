@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
@@ -23,5 +24,8 @@ namespace IncomingCasualtyHandling.BL.Interfaces
         event PropertyChangedEventHandler PropertyChanged;
         void ChangeTabsAllowed(string s);
         void GridViewColumnHeaderClicked(string s);
+        bool ChangedFromMain { set; }
+        ObservableCollection<TabControl> ObservableCollectionTabs { get; }
+        void SetTabIndex();
     }
 }
