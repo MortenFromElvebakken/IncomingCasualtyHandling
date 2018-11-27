@@ -71,34 +71,33 @@ namespace IncomingCasualtyHandling
             // Create BLL
             // First Models
             // Then Logics
-            IDetailView_Model _detailViewModel = new DetailView_Model();
-            IOverviewView_Model _overviewViewModel = new OverviewView_Model();
+            IDetailView_Model detailViewModel = new DetailView_Model();
+            IOverviewView_Model overviewViewModel = new OverviewView_Model();
             //IMainView_Model _mainViewModel = new MainView_Model();
 
 
-            IGetPatientsFromFHIR IGetPatientsFromFhir = fhirCommands;
-            IMainView_Model _mainViewModel = new MainView_Model(IGetPatientsFromFhir);
-            ITimer timer = new Timer(_mainViewModel, _overviewViewModel);
-            //var sortETA = new SortETA(_overviewViewModel,_detailViewModel, _mainViewModel, timer, IGetPatientsFromFhir);
+            IGetPatientsFromFHIR getPatientsFromFhir = fhirCommands;
+            IMainView_Model mainViewModel = new MainView_Model(getPatientsFromFhir);
+            ICountTime countTime = new CountTime(mainViewModel, overviewViewModel);
+            //var sortETA = new SortETA(_overviewViewModel,_detailViewModel, _mainViewModel, countTime, IGetPatientsFromFhir);
             //var sortSpecialty = new SortSpecialty(lcs, _overviewViewModel, _detailViewModel, _mainViewModel, IGetPatientsFromFhir);
             //var sortTriage = new SortTriage(lcs, _overviewViewModel, _detailViewModel, _mainViewModel, IGetPatientsFromFhir);
-            var sortETA = new SortETA(_overviewViewModel, _detailViewModel, _mainViewModel, timer, IGetPatientsFromFhir);
-            var sortSpecialty = new SortSpecialty(lcs, _overviewViewModel, _detailViewModel, _mainViewModel, sortETA);
-            var sortTriage = new SortTriage(lcs, _overviewViewModel, _detailViewModel, _mainViewModel, sortETA);
+            var sortETA = new SortETA(overviewViewModel, detailViewModel, mainViewModel, countTime, getPatientsFromFhir);
+            var sortSpecialty = new SortSpecialty(lcs, overviewViewModel, detailViewModel, mainViewModel, sortETA);
+            var sortTriage = new SortTriage(lcs, overviewViewModel, detailViewModel, mainViewModel, sortETA);
             fhirCommands.GetAllPatients();
 
           
             //Create viewmodels
-            DetailView_ViewModel _detailViewViewModel = new DetailView_ViewModel(_detailViewModel);
-            OverviewView_ViewModel _overviewViewViewModel = new OverviewView_ViewModel(_overviewViewModel);
-            MainView_ViewModel _mainViewViewModel = new MainView_ViewModel(_mainViewModel, _overviewViewViewModel, _detailViewViewModel);
+            DetailView_ViewModel detailViewViewModel = new DetailView_ViewModel(detailViewModel);
+            OverviewView_ViewModel overviewViewViewModel = new OverviewView_ViewModel(overviewViewModel);
+            MainView_ViewModel mainViewViewModel = new MainView_ViewModel(mainViewModel, overviewViewViewModel, detailViewViewModel);
 
             // Create GUI
-            MainView _mainView = new MainView();
+            MainView mainView = new MainView {DataContext = mainViewViewModel};
 
-            _mainView.DataContext = _mainViewViewModel;
-            
-            _mainView.Show();
+            // Start application
+            mainView.Show();
 
         }
     }

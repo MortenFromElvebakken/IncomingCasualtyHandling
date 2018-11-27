@@ -11,20 +11,20 @@ using IncomingCasualtyHandling.BL.Object_classes;
 
 namespace IncomingCasualtyHandling.BL
 {
-    public class Timer : ITimer
+    public class CountTime : ICountTime
     {
 
         private IMainView_Model _mainViewModel;
         private IOverviewView_Model _overviewViewModel;
 
-        // Timer made with inspiration from:
+        // CountTime made with inspiration from:
         // https://stackoverflow.com/a/5410783
 
         readonly DispatcherTimer _currentDateTimeTimer = new DispatcherTimer();
         readonly DispatcherTimer _etaTimer = new DispatcherTimer();
 
 
-        public Timer(IMainView_Model mainViewModel, IOverviewView_Model overviewViewModel)
+        public CountTime(IMainView_Model mainViewModel, IOverviewView_Model overviewViewModel)
         {
             // Set Models
             _mainViewModel = mainViewModel;
@@ -39,7 +39,7 @@ namespace IncomingCasualtyHandling.BL
         // Set the culture to be the systems culture:
         private readonly CultureInfo _culture = CultureInfo.CurrentCulture;
 
-        // Timer-event that keeps track of current time and updates MainView_Model
+        // CountTime-event that keeps track of current time and updates MainView_Model
         private void CurrentDateTime_TimerTick(object sender, EventArgs e)
         {
             DateTime d;
@@ -185,7 +185,7 @@ namespace IncomingCasualtyHandling.BL
 
         }
 
-        // Timer-event that keeps track of relative time until ETA and updates OverviewView_Model
+        // CountTime-event that keeps track of relative time until ETA and updates OverviewView_Model
         private void ETATime_TimerTick(object sender, EventArgs e, DateTime nextEta)
         {
             // Find the current timespan

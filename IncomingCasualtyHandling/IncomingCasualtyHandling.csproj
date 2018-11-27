@@ -111,7 +111,7 @@
     <Compile Include="BL\Interfaces\ISortETA.cs" />
     <Compile Include="BL\Interfaces\ISortTriage.cs" />
     <Compile Include="BL\Interfaces\ISortSpecialty.cs" />
-    <Compile Include="BL\Interfaces\ITimer.cs" />
+    <Compile Include="BL\Interfaces\ICountTime.cs" />
     <Compile Include="BL\Models\TabControl.cs" />
     <Compile Include="BL\Models\DetailView_Model.cs" />
     <Compile Include="BL\Models\MainView_Model.cs" />
@@ -122,7 +122,7 @@
     <Compile Include="BL\SortETA.cs" />
     <Compile Include="BL\SortSpecialty.cs" />
     <Compile Include="BL\SortTriage.cs" />
-    <Compile Include="BL\Timer.cs" />
+    <Compile Include="BL\CountTime.cs" />
     <Compile Include="DAL\Interface\IGetPatientsFromFHIR.cs" />
     <Compile Include="DAL\Interface\ILoadConfigurationSettings.cs" />
     <Compile Include="DAL\Interface\ISerializeToPatient.cs" />

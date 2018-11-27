@@ -7,7 +7,7 @@ using IncomingCasualtyHandling.BL.Object_classes;
 
 namespace IncomingCasualtyHandling.BL.Interfaces
 {
-    public interface ITimer
+    public interface ICountTime
     {
         void FindRelativeTime(List<PatientModel> sortedEtas);
 

@@ -17,7 +17,7 @@ namespace IncomingCasualtyHandling.BL
         private IOverviewView_Model _overviewViewModel;
         private IDetailView_Model _detailView_Model;
         private IMainView_Model _mainView_Model;
-        private ITimer _timer;
+        private ICountTime _countTime;
 
         // List to hold patients without ETA
         private readonly List<PatientModel> _patientsWithoutEta = new List<PatientModel>();
@@ -25,14 +25,14 @@ namespace IncomingCasualtyHandling.BL
         private int _range;
 
         //Constructor
-        public SortETA(IOverviewView_Model overviewView_Model, IDetailView_Model detailView_Model, IMainView_Model mainView_Model, ITimer timer, IGetPatientsFromFHIR receivePatientsFromFhir)
+        public SortETA(IOverviewView_Model overviewView_Model, IDetailView_Model detailView_Model, IMainView_Model mainView_Model, ICountTime countTime, IGetPatientsFromFHIR receivePatientsFromFhir)
         {
 
             receivePatientsFromFhir.PatientDataReady += SortForETA;
             _overviewViewModel = overviewView_Model;
             _detailView_Model = detailView_Model;
             _mainView_Model = mainView_Model;
-            _timer = timer;
+            _countTime = countTime;
         }
 
         // Method that sorts ETAs
@@ -47,8 +47,8 @@ namespace IncomingCasualtyHandling.BL
 
             _detailView_Model.ETAPatients = listOfPatients;
 
-            // When the ETA's are sorted, they are send to the Timer-class to work on relative time
-            _timer.FindRelativeTime(listOfPatients);
+            // When the ETA's are sorted, they are send to the CountTime-class to work on relative time
+            _countTime.FindRelativeTime(listOfPatients);
 
         }
 

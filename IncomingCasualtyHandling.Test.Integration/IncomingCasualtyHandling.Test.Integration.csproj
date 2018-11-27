@@ -74,6 +74,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="IT4_SortETA_TimerSortTriageSortSpecialty.cs" />
+    <Compile Include="IT3_GetPatients_SortETA.cs" />
     <Compile Include="IT2_GetPatients_Serialise.cs" />
     <Compile Include="IT1_GetPatients_LoadConfig.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
