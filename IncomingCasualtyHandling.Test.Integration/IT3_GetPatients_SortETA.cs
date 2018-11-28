@@ -113,6 +113,8 @@ namespace IncomingCasualtyHandling.Test.Integration
             meta.LastUpdated = lastUpdated;
             Patient1.Meta = meta;
 
+            Patient1.Active = true;
+
             _getPatients.Client = Substitute.For<IFhirClient>();
             _client = _getPatients.Client;
 
@@ -124,18 +126,10 @@ namespace IncomingCasualtyHandling.Test.Integration
             _client.Search<Patient>(new SearchParams()).ReturnsForAnyArgs(_bundle);
             _client.WholeSystemHistory(null, null, new SummaryType()).ReturnsForAnyArgs(_bundle);
             _client.SearchAsync<Patient>(new SearchParams()).ReturnsForAnyArgs(_bundle);
-
+            _client.Read<Patient>("Test").ReturnsForAnyArgs(Patient1);
         }
 
-        [Test]
-        public void GetAllPatients_RaisesEvent_SerialisePatientsReactsAndRaisesEvent()
-        {
-            _getPatients.GetAllPatients();
-            Assert.That(_nEventsRaised, Is.EqualTo(1));
-
-        }
-
-        [Test]
+       [Test]
         public void GetAllPatients_RaisesEvent_SerialisePatientsReactsAndRaisesEventWithPatient()
         {
             _getPatients.GetAllPatients();
@@ -163,7 +157,7 @@ namespace IncomingCasualtyHandling.Test.Integration
             _nEventsRaised = 0;
 
             // Wait for Async to get called
-            Thread.Sleep(20000);
+            Thread.Sleep(7000);
 
             // Verify, that SerialisePatient class was called => patient list has a patient
             Assert.That(_sortedPatients[0].Name, Is.EqualTo(newWholeName));
