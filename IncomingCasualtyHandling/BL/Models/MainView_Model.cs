@@ -108,7 +108,20 @@ namespace IncomingCasualtyHandling.BL.Models
             set => ListOfTriages[5] = value;
         }
 
-        public ETA ETA { get; set; }
+        private ETA _ETA;
+        public ETA ETA
+        {
+            get => _ETA;
+            set
+            {
+                if (value != null)
+                {
+                    _ETA = value;
+                    OnPropertyChanged();
+                }
+                
+            }
+        }
 
         public Specialty Specialty1 { get; set; }
         #endregion

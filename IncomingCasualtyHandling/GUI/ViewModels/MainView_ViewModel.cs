@@ -159,6 +159,6 @@ namespace IncomingCasualtyHandling.GUI.ViewModels
 
         public Specialty Specialty1 => _mainModel.Specialty1;
 
-        public ETA Eta => _mainModel.ETA;
+        public ETA ETA => _mainModel.ETA;
     }
 }
