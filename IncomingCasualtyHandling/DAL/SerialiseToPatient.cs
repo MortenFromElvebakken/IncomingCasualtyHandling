@@ -60,7 +60,11 @@ namespace IncomingCasualtyHandling.DAL
                 newEntry.GetStringExtension("http://www.example.com/triagetest") ?? "Unknown";
             newPatientModel.Specialty =
                 newEntry.GetStringExtension("http://www.example.com/SpecialtyTest") ?? "Unknown";
-            newPatientModel.ETA = Convert.ToDateTime(newEntry.GetExtension("http://www.example.com/datetimeTest").Value.ToString());
+            // Get the ETA. Find the seconds-element and remove it from the ETA that is put on the patient object
+            // This is done due to the UI only showing minutes; when the relative time is calculated, this should rely on minutes too
+            var eta = Convert.ToDateTime(newEntry.GetExtension("http://www.example.com/datetimeTest").Value.ToString());
+            var seconds = eta.Second;
+            newPatientModel.ETA = eta.AddSeconds(-seconds);
 
             newPatientModel.Age = CalculateAge(Convert.ToDateTime(newEntry.BirthDate));
             newPatientModel.LastUpdated = newEntry.Meta.LastUpdated.Value;

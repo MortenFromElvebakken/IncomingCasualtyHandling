@@ -24,7 +24,8 @@ namespace IncomingCasualtyHandling.BL
         //readonly DispatcherTimer _currentDateTimeTimer = new DispatcherTimer();
         readonly DispatcherTimer _etaTimer = new DispatcherTimer();
 
-        private System.Timers.Timer _currentDateTimeTimer;
+        private readonly Timer _currentDateTimeTimer = new Timer();
+        private Timer etaTimer = new Timer();
 
         public CountTime(IMainView_Model mainViewModel, IOverviewView_Model overviewViewModel)
         {
@@ -32,8 +33,7 @@ namespace IncomingCasualtyHandling.BL
             _mainViewModel = mainViewModel;
             _overviewViewModel = overviewViewModel;
 
-            _currentDateTimeTimer = new Timer();
-            _currentDateTimeTimer.Elapsed += new System.Timers.ElapsedEventHandler(CurrentDateTime_TimerTick);
+            _currentDateTimeTimer.Elapsed += new ElapsedEventHandler(CurrentDateTime_TimerTick);
             _currentDateTimeTimer.Interval = 1000;
             _currentDateTimeTimer.AutoReset = true;
             _currentDateTimeTimer.Enabled = true;
@@ -45,9 +45,7 @@ namespace IncomingCasualtyHandling.BL
         // CountTime-event that keeps track of current time and updates MainView_Model
         private void CurrentDateTime_TimerTick(object sender, EventArgs e)
         {
-            DateTime d;
-
-            d = DateTime.Now;
+            DateTime d = DateTime.Now;
             string day = d.Day.ToString().PadLeft(2, '0');
             string month = d.ToString("MMM", _culture);
             string year = d.Year.ToString();
@@ -117,13 +115,18 @@ namespace IncomingCasualtyHandling.BL
 
             CalculateRelativeTime(_timeDifference, _timeSpan);
 
-            // Prepare ETA timer and start it
-            _etaTimer.Tick += (sender, e) =>
-            {
-                ETATime_TimerTick(sender, e, nextEta);
-            };
-            _etaTimer.Interval = TimeSpan.FromSeconds(1);
-            _etaTimer.Start();
+            //// Prepare ETA timer and start it
+            //_etaTimer.Tick += (sender, e) =>
+            //{
+            //    ETATime_TimerTick(sender, e, nextEta);
+            //};
+            //_etaTimer.Interval = TimeSpan.FromSeconds(1);
+            //_etaTimer.Start();
+
+            etaTimer.Elapsed += (sender, e) => { ETATime_TimerTick(sender, e, nextEta); };
+            etaTimer.Interval = 1000; // 1 second
+            etaTimer.AutoReset = true; //Should run more than once
+            etaTimer.Enabled = true; // Start timer
 
         }
 
@@ -172,9 +175,6 @@ namespace IncomingCasualtyHandling.BL
                 };
             }
 
-
-            
-
             _overviewViewModel.Eta = _nextEta;
             _mainViewModel.Eta = _nextEta;
 
@@ -186,16 +186,16 @@ namespace IncomingCasualtyHandling.BL
             // Find the current timespan
             _timeSpan = new TimeSpan(DateTime.Now.Ticks - nextEta.Ticks);
             // Remove a second
-            _timeSpan = _timeSpan.Subtract(new TimeSpan(0, 0, 1));
+            //_timeSpan = _timeSpan.Subtract(new TimeSpan(0, 0, 1));
             // Find the time difference
             _timeDifference = Math.Abs(_timeSpan.TotalSeconds);
 
-            // OBS - skal vi have denne if eller ej?
             // Check if ETA is NOW, because then a new ETA should be found
             if (_timeSpan.TotalSeconds > -Second)
             {
                 // Stop the timer
-                DispatcherTimer timer = (DispatcherTimer)sender;
+                //DispatcherTimer timer = (DispatcherTimer)sender;
+                Timer timer = (Timer) sender;
                 timer.Stop();
                 // Find the next ETA in the list
                 FindRelativeTime(_listOfEtas);
