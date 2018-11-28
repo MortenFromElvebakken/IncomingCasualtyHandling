@@ -20,19 +20,19 @@ using NUnit.Framework;
 namespace IncomingCasualtyHandling.Test.Integration
 {
     [TestFixture]
-    class IT4_SortETA_TimerSortTriageSortSpecialty
+    class IT4_SortETA_TimerSortTriageSortSpecialtyDVModel
     {
         // Fakes
         private IFhirClient _client;
         private IMainView_Model _MV_M;
         private IOverviewView_Model _OV_M;
-        private IDetailView_Model _DV_M;
 
 
         // System under test        
         private SortTriage _sortTriage;
         private SortSpecialty _sortSpecialty;
         private ICountTime _countTime;
+        private IDetailView_Model _DV_M;
 
         // Drivers
         private LoadData _getPatients;
@@ -64,8 +64,6 @@ namespace IncomingCasualtyHandling.Test.Integration
         {
             _MV_M = Substitute.For<IMainView_Model>();
             _OV_M = Substitute.For<IOverviewView_Model>();
-            _DV_M = Substitute.For<IDetailView_Model>();
-
 
             _convert = new ConvertToICHPatient();
 
@@ -77,6 +75,7 @@ namespace IncomingCasualtyHandling.Test.Integration
             _getPatients = new LoadData(_loadConfig, _convert);
 
             _countTime = Substitute.For<ICountTime>();
+            _DV_M = Substitute.For<IDetailView_Model>();
 
             _sortEta = new SortETA(_OV_M, _DV_M, _MV_M, _countTime, _getPatients);
 
@@ -150,6 +149,17 @@ namespace IncomingCasualtyHandling.Test.Integration
             _getPatients.GetAllPatients();
 
             Assert.That(_sortSpecialty.SpecialtiesList.Find(s => s.Name == specialty).Amount, Is.EqualTo(1));
+
+        }
+        #endregion
+
+        #region DetailView Model
+        [Test]
+        public void SortForETA_SetETAPatients_ETAPatientsSetInDetailModel()
+        {
+            _getPatients.GetAllPatients();
+
+            Assert.IsTrue(_DV_M.ETAPatients.Exists(p => p.Name == wholeName));
 
         }
         #endregion
