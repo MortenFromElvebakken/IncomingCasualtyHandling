@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -9,6 +10,7 @@ using IncomingCasualtyHandling.BL.Interfaces;
 using IncomingCasualtyHandling.BL.Object_classes;
 using System.ComponentModel;
 using System.Reflection;
+using System.Threading;
 
 namespace IncomingCasualtyHandling.BL.Models
 {
@@ -46,6 +48,11 @@ namespace IncomingCasualtyHandling.BL.Models
                     string propertyName = "Triage" + counter + "Patients";
                     OnPropertyChanged(propertyName);
                     counter++;
+                }
+
+                if (SelectedOverview == "Triage")
+                {
+                    CreateTabs();
                 }
             }
         }
@@ -118,6 +125,11 @@ namespace IncomingCasualtyHandling.BL.Models
                     //og derfor rykkes et andet sted hen, er det så hele rækkefølgen der opdateres?
                     OnPropertyChanged(propertyName);
                     counter++;
+                }
+
+                if (SelectedOverview == "Specialty")
+                {
+                 CreateTabs();   
                 }
             }
         }
@@ -234,13 +246,17 @@ namespace IncomingCasualtyHandling.BL.Models
             {
                 _ETAPatients = value;
                 OnPropertyChanged("ETAPatients");
+                if (SelectedOverview == "ETA")
+                {
+                    CreateTabs();
+                }
             }
         }
 
         #endregion
 
         #region tabItems
-
+        
         private int _selectedTabIndex;
         public int SelectedTabIndex
         {
@@ -250,10 +266,29 @@ namespace IncomingCasualtyHandling.BL.Models
                 if (value >= 0)
                 {
                     _selectedTabIndex = value;
+                    OldValue = value;
                     OnPropertyChanged();
-                }   
+                }
+                else
+                {
+                    OldValue = _selectedTabIndex;
+                    _selectedTabIndex = value;
+                    Thread testThread = new Thread(setTabIndexAgain);
+                    testThread.Start();
+                }
                     //When _selectedIndex is set, it also sets a new PatientsInList string
             }
+        }
+        private int OldValue { get; set; }
+        public void setTabIndexAgain()
+        {
+            Thread.Sleep(50);
+            SelectedTabIndex = OldValue;
+        }
+
+        public void SetTabIndex()
+        {
+            SelectedTabIndex = OldValue;
         }
 
         public string SelectedOverview { get; set; }
@@ -281,6 +316,20 @@ namespace IncomingCasualtyHandling.BL.Models
             {
                 _tabsList = value;
                 OnPropertyChanged("Tabs");
+                //OnPropertyChanged("SelectedTabIndex");
+            }
+        }
+
+        private ObservableCollection<TabControl> _ObservableCollectionTabs;
+
+        public ObservableCollection<TabControl> ObservableCollectionTabs
+        {
+            get => _ObservableCollectionTabs;
+            set
+            {
+                _ObservableCollectionTabs = value;
+                OnPropertyChanged("Tabs2");
+                OnPropertyChanged("SelectedTabIndex");
             }
         }
 
@@ -323,7 +372,8 @@ namespace IncomingCasualtyHandling.BL.Models
                             counter++;
                         }
 
-                        ListOfTabs = _tempTabList;
+                        ObservableCollectionTabs = new ObservableCollection<TabControl>(_tempTabList);
+                        //ListOfTabs = _tempTabList;
                         break;
                     }
                 case "Specialty":
@@ -353,7 +403,10 @@ namespace IncomingCasualtyHandling.BL.Models
                             counter++;
                         }
                         // Sort the list alphabetically
-                        ListOfTabs = _tempTabList.OrderBy(t => t.Name).ToList();
+                        ObservableCollectionTabs = new ObservableCollection<TabControl>(_tempTabList.OrderBy(x => x.Name).ToList());
+                        //var test = _tempTabList.OrderBy(t => t.Name);
+                        //ObservableCollectionTabs = test;
+                        //ListOfTabs = _tempTabList.OrderBy(t => t.Name).ToList();
                         break;
                     }
                 default:
@@ -365,34 +418,46 @@ namespace IncomingCasualtyHandling.BL.Models
                             isVisible = Visibility.Visible
                         };
                         _tempTabList.Add(_tab);
-                        ListOfTabs = _tempTabList;
+                        ObservableCollectionTabs = new ObservableCollection<TabControl>(_tempTabList);
+                        //ListOfTabs = _tempTabList;
                         break;
                     }
             }
         }
+        public bool ChangedFromMain { get; set; }
 
         public void ChangeTabsAllowed(string s)
         {
             string[] parameters = s.Split(' ');
             var tryChangeTabs = parameters[0];
             var tryTabIndex = Convert.ToInt16(parameters[1]);
-            if (tryChangeTabs == SelectedOverview)
+            if (tryChangeTabs == SelectedOverview && !ChangedFromMain)
             {
+                
                 if (tryChangeTabs == "Specialty")
                 {
                     var chosenSpecialtyName = ListOfSpecialties[tryTabIndex].Name;
                     var sortedSpecialtiesList = new List<Specialty>();
                     sortedSpecialtiesList = ListOfSpecialties.OrderBy(a => a.Name).ToList();
                     var newIndex = sortedSpecialtiesList.FindIndex(x => x.Name == chosenSpecialtyName);
+                    //if (ChangedFromMain)
+                    //{
+                    //    CreateTabs();
+                    //    ChangedFromMain = false;
+                    //}
                     SelectedTabIndex = newIndex;
-                    OnPropertyChanged("SelectedTabIndex");
                 }
                 else
                 {
-                    if (_tabsList[tryTabIndex].isVisible == Visibility.Visible)
+                    //if (ChangedFromMain)
+                    //{
+                    //    CreateTabs();
+                    //    ChangedFromMain = false;
+                    //}
+                    if (_ObservableCollectionTabs[tryTabIndex].isVisible == Visibility.Visible)    //_tabsList[tryTabIndex].isVisible == Visibility.Visible)
                     {
+                        
                         SelectedTabIndex = tryTabIndex;
-                        OnPropertyChanged("SelectedTabIndex");
                     }
                 }
             }
@@ -424,6 +489,8 @@ namespace IncomingCasualtyHandling.BL.Models
                         SelectedTabIndex = tryTabIndex;
                         break;
                 }
+
+                ChangedFromMain = false;
             }
 
         }
@@ -582,6 +649,7 @@ namespace IncomingCasualtyHandling.BL.Models
             }
 
         }
+        
 
         #endregion
     }
