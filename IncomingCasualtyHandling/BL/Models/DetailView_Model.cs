@@ -268,6 +268,7 @@ namespace IncomingCasualtyHandling.BL.Models
                     _selectedTabIndex = value;
                     OldValue = value;
                     OnPropertyChanged();
+                    OnPropertyChanged("Data");
                 }
                 else
                 {
@@ -330,6 +331,7 @@ namespace IncomingCasualtyHandling.BL.Models
                 _ObservableCollectionTabs = value;
                 OnPropertyChanged("Tabs2");
                 OnPropertyChanged("SelectedTabIndex");
+                OnPropertyChanged("Data");
             }
         }
 
@@ -355,7 +357,7 @@ namespace IncomingCasualtyHandling.BL.Models
                                 var _tab = new TabControl()
                                 {
                                     Name = triage.Name,
-                                    Data = ListOfTriagePatientLists.Find(item => item[0].Triage == triage.Name),
+                                    Data = new ObservableCollection<PatientModel>(ListOfTriagePatientLists.Find(item => item[0].Triage == triage.Name)),
                                     isVisible = Visibility.Visible
                                 };
                                 _tempTabList.Add(_tab);
@@ -386,7 +388,7 @@ namespace IncomingCasualtyHandling.BL.Models
                                 var _tab = new TabControl()
                                 {
                                     Name = specialty.Name,
-                                    Data = ListOfSpecialtiesPatientLists.Find(item => item[0].Specialty == specialty.Name),
+                                    Data = new ObservableCollection<PatientModel>(ListOfSpecialtiesPatientLists.Find(item => item[0].Specialty == specialty.Name)),
                                     isVisible = Visibility.Visible
                                 };
                                 _tempTabList.Add(_tab);
@@ -414,7 +416,7 @@ namespace IncomingCasualtyHandling.BL.Models
                         var _tab = new TabControl()
                         {
                             Name = "ETA",
-                            Data = ETAPatients,
+                            Data = new ObservableCollection<PatientModel>(ETAPatients),
                             isVisible = Visibility.Visible
                         };
                         _tempTabList.Add(_tab);
@@ -522,128 +524,192 @@ namespace IncomingCasualtyHandling.BL.Models
             {
                 case "Name":
                     {
-                        foreach (var tab in _tabsList)
+                        foreach (var tab in _ObservableCollectionTabs)
                         {
-                            tab.Data?.Sort((p1, p2) => String.Compare(p1.Name, p2.Name, StringComparison.CurrentCulture));
-                            if (_sortDirection == ListSortDirection.Descending)
+                            if (tab.Data != null)
                             {
-                                tab.Data?.Reverse();
+                                var testlist = new List<PatientModel>(tab.Data.ToList());
+                                testlist.Sort((p1, p2) => String.Compare(p1.Name, p2.Name, StringComparison.CurrentCulture));
+                                if (_sortDirection == ListSortDirection.Descending)
+                                {
+                                    testlist.Reverse();
+                                    tab.Data = new ObservableCollection<PatientModel>(testlist);
+                                }
+                                else
+                                {
+                                    tab.Data = new ObservableCollection<PatientModel>(testlist);
+                                }
                             }
                         }
-
-                        OnPropertyChanged("Tabs");
                         break;
                     }
                 case "CPR":
                     {
-                        foreach (var tab in _tabsList)
+                        foreach (var tab in _ObservableCollectionTabs)
                         {
-                            tab.Data?.Sort((p1, p2) => String.Compare(p1.CPR, p2.CPR, StringComparison.CurrentCulture));
-                            if (_sortDirection == ListSortDirection.Descending)
+                            if (tab.Data != null)
                             {
-                                tab.Data?.Reverse();
+                                var testlist = new List<PatientModel>(tab.Data.ToList());
+                                testlist.Sort((p1, p2) => String.Compare(p1.CPR, p2.CPR, StringComparison.CurrentCulture));
+                                if (_sortDirection == ListSortDirection.Descending)
+                                {
+                                    testlist.Reverse();
+                                    tab.Data = new ObservableCollection<PatientModel>(testlist);
+                                }
+                                else
+                                {
+                                    tab.Data = new ObservableCollection<PatientModel>(testlist);
+                                }
                             }
                         }
-
-                        OnPropertyChanged("Tabs");
                         break;
                     }
                 case "Age":
                     {
-                        foreach (var tab in _tabsList)
+                        foreach (var tab in _ObservableCollectionTabs)
                         {
-                            tab.Data?.Sort((p1, p2) => String.Compare(p1.Age, p2.Age, StringComparison.CurrentCulture));
-                            if (_sortDirection == ListSortDirection.Descending)
+                            if (tab.Data != null)
                             {
-                                tab.Data?.Reverse();
+                                var testlist = new List<PatientModel>(tab.Data.ToList());
+                                testlist.Sort((p1, p2) => String.Compare(p1.Age, p2.Age, StringComparison.CurrentCulture));
+                                if (_sortDirection == ListSortDirection.Descending)
+                                {
+                                    testlist.Reverse();
+                                    tab.Data = new ObservableCollection<PatientModel>(testlist);
+                                }
+                                else
+                                {
+                                    tab.Data = new ObservableCollection<PatientModel>(testlist);
+                                }
                             }
                         }
-
-                        OnPropertyChanged("Tabs");
                         break;
                     }
                 case "Gender":
                     {
-                        foreach (var tab in _tabsList)
+                        foreach (var tab in _ObservableCollectionTabs)
                         {
-                            tab.Data?.Sort((p1, p2) => p1.Gender.CompareTo(p2.Gender));
-                            if (_sortDirection == ListSortDirection.Descending)
+                            if (tab.Data != null)
                             {
-                                tab.Data?.Reverse();
+                                var testlist = new List<PatientModel>(tab.Data.ToList());
+                                testlist.Sort((p1, p2) => String.Compare(p1.Gender.ToString(), p2.Gender.ToString(), StringComparison.CurrentCulture));
+                                if (_sortDirection == ListSortDirection.Descending)
+                                {
+                                    testlist.Reverse();
+                                    tab.Data = new ObservableCollection<PatientModel>(testlist);
+                                }
+                                else
+                                {
+                                    tab.Data = new ObservableCollection<PatientModel>(testlist);
+                                }
                             }
                         }
-
-                        OnPropertyChanged("Tabs");
                         break;
                     }
                 case "Triage":
                     {
-                        foreach (var tab in _tabsList)
+                        foreach (var tab in _ObservableCollectionTabs)
                         {
-                            tab.Data?.Sort((p1, p2) => String.Compare(p1.Triage, p2.Triage, StringComparison.CurrentCulture));
-                            if (_sortDirection == ListSortDirection.Descending)
+                            if (tab.Data != null)
                             {
-                                tab.Data?.Reverse();
+                                var testlist = new List<PatientModel>(tab.Data.ToList());
+                                testlist.Sort((p1, p2) => String.Compare(p1.Triage, p2.Triage, StringComparison.CurrentCulture));
+                                if (_sortDirection == ListSortDirection.Descending)
+                                {
+                                    testlist.Reverse();
+                                    tab.Data = new ObservableCollection<PatientModel>(testlist);
+                                }
+                                else
+                                {
+                                    tab.Data = new ObservableCollection<PatientModel>(testlist);
+                                }
                             }
                         }
-
-                        OnPropertyChanged("Tabs");
                         break;
                     }
                 case "Specialty":
                     {
-                        foreach (var tab in _tabsList)
+                        foreach (var tab in _ObservableCollectionTabs)
                         {
-                            tab.Data?.Sort((p1, p2) => String.Compare(p1.Specialty, p2.Specialty, StringComparison.CurrentCulture));
-                            if (_sortDirection == ListSortDirection.Descending)
+                            if (tab.Data != null)
                             {
-                                tab.Data?.Reverse();
+                                var testlist = new List<PatientModel>(tab.Data.ToList());
+                                testlist.Sort((p1, p2) => String.Compare(p1.Specialty, p2.Specialty, StringComparison.CurrentCulture));
+                                if (_sortDirection == ListSortDirection.Descending)
+                                {
+                                    testlist.Reverse();
+                                    tab.Data = new ObservableCollection<PatientModel>(testlist);
+                                }
+                                else
+                                {
+                                    tab.Data = new ObservableCollection<PatientModel>(testlist);
+                                }
                             }
                         }
-
-                        OnPropertyChanged("Tabs");
                         break;
                     }
                 case "ETA":
                     {
-                        foreach (var tab in _tabsList)
+                        foreach (var tab in _ObservableCollectionTabs)
                         {
-                            tab.Data?.Sort((p1, p2) => p1.ETA.CompareTo(p2.ETA));
-                            if (_sortDirection == ListSortDirection.Descending)
+                            if (tab.Data != null)
                             {
-                                tab.Data?.Reverse();
+                                var testlist = new List<PatientModel>(tab.Data.ToList());
+                                testlist.Sort((p1, p2) => p1.ETA.CompareTo(p2.ETA));
+                                if (_sortDirection == ListSortDirection.Descending)
+                                {
+                                    testlist.Reverse();
+                                    tab.Data = new ObservableCollection<PatientModel>(testlist);
+                                }
+                                else
+                                {
+                                    tab.Data = new ObservableCollection<PatientModel>(testlist);
+                                }
                             }
                         }
-
-                        OnPropertyChanged("Tabs");
                         break;
                     }
                 case "From destination":
                     {
-                        foreach (var tab in _tabsList)
+                        foreach (var tab in _ObservableCollectionTabs)
                         {
-                            tab.Data?.Sort((p1, p2) => String.Compare(p1.FromDestination, p2.FromDestination, StringComparison.CurrentCulture));
-                            if (_sortDirection == ListSortDirection.Descending)
+                            //tab.Data?.Sort((p1, p2) => String.Compare(p1.FromDestination, p2.FromDestination, StringComparison.CurrentCulture));
+                            if (tab.Data != null)
                             {
-                                tab.Data?.Reverse();
+                                var testlist = new List<PatientModel>(tab.Data.ToList());
+                                testlist.Sort((p1, p2) => String.Compare(p1.FromDestination, p2.FromDestination, StringComparison.CurrentCulture));
+                                if (_sortDirection == ListSortDirection.Descending)
+                                {
+                                    testlist.Reverse();
+                                    tab.Data = new ObservableCollection<PatientModel>(testlist);
+                                }
+                                else
+                                {
+                                    tab.Data = new ObservableCollection<PatientModel>(testlist);
+                                }
                             }
                         }
-
-                        OnPropertyChanged("Tabs");
                         break;
                     }
                 case "Last updated":
                     {
-                        foreach (var tab in _tabsList)
+                        foreach (var tab in _ObservableCollectionTabs)
                         {
-                            tab.Data?.Sort((p1, p2) => p1.LastUpdated.CompareTo(p2.LastUpdated));
-                            if (_sortDirection == ListSortDirection.Descending)
+                            if (tab.Data != null)
                             {
-                                tab.Data?.Reverse();
+                                var testlist = new List<PatientModel>(tab.Data.ToList());
+                                testlist.Sort((p1, p2) => p1.LastUpdated.CompareTo(p2.LastUpdated));
+                                if (_sortDirection == ListSortDirection.Descending)
+                                {
+                                    testlist.Reverse();
+                                    tab.Data = new ObservableCollection<PatientModel>(testlist);
+                                }
+                                else
+                                {
+                                    tab.Data = new ObservableCollection<PatientModel>(testlist);
+                                }
                             }
                         }
-
-                        OnPropertyChanged("Tabs");
                         break;
                     }
             }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -8,10 +9,21 @@ using IncomingCasualtyHandling.BL.Object_classes;
 
 namespace IncomingCasualtyHandling.BL.Models
 {
-    public class TabControl
+    public class TabControl: ObservableObject
     {
         public string Name { get; set; }
-        public List<PatientModel> Data { get; set; }
+
+        private ObservableCollection<PatientModel> _data;
+        public ObservableCollection<PatientModel> Data
+        {
+            get => _data;
+            set
+            {
+                _data = value;
+                OnPropertyChanged();
+            }
+        }
+
         public Visibility isVisible { get; set; }
         public string PatientsInThisTab
         {

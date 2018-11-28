@@ -25,6 +25,15 @@ namespace IncomingCasualtyHandling.GUI.View
             InitializeComponent();
         }
 
-        
+
+        private void UIElement_OnLayoutUpdated(object sender, EventArgs e)
+        {
+
+            MessageBox.Show("test");
+        }
+        private void FrameworkElement_OnDataContextChanged(object sender, DependencyPropertyChangedEventArgs e)
+        {
+            MessageBox.Show("test");
+        }
     }
 }
