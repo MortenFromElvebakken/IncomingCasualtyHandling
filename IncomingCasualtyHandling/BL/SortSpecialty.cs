@@ -34,16 +34,16 @@ namespace IncomingCasualtyHandling.BL
         }
 
 
-        public void SortForSpecialty(List<PatientModel> listOfPatients)
+        public void SortForSpecialty(List<ICHPatient> listOfPatients)
         {
             // Take all patients and group by specialty
             // Gives a "list of groups"
             var results = listOfPatients.GroupBy(p => p.Specialty).ToList();
 
             // Create a list to contain lists with patients
-            var listOfPatientLists = new List<List<PatientModel>>();
+            var listOfPatientLists = new List<List<ICHPatient>>();
             // Create a list to contain patients with an unknown specialty
-            var listWithUnknownSpecialty = new List<PatientModel>();
+            var listWithUnknownSpecialty = new List<ICHPatient>();
             // Get a copy of list from xml
             specialtiesList = new List<Specialty>(LoadXMLSettings.ReturnSpecialtyList());  
 

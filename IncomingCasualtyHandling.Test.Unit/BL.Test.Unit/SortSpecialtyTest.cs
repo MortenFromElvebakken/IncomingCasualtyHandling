@@ -31,8 +31,8 @@ namespace IncomingCasualtyHandling.Test.Unit.BL.Test.Unit
 
 
         private List<Specialty> _listOfSpecialties;
-        private List<PatientModel> _listOfPatients, _sortedListOfPatients;
-        private PatientModel _patient1, _patient2, _patient3, _patient4, _patient5;
+        private List<ICHPatient> _listOfPatients, _sortedListOfPatients;
+        private ICHPatient _patient1, _patient2, _patient3;
 
         [SetUp]
         public void Setup()
@@ -67,9 +67,9 @@ namespace IncomingCasualtyHandling.Test.Unit.BL.Test.Unit
             _uut = new SortSpecialty(_loadConfigSettings, _overviewViewModel, _detailViewModel, _mainViewModel, _sortEta);
 
             // Create a list with patients
-            _listOfPatients = new List<PatientModel>();
-            _sortedListOfPatients = new List<PatientModel>();
-            _patient1 = new PatientModel
+            _listOfPatients = new List<ICHPatient>();
+            _sortedListOfPatients = new List<ICHPatient>();
+            _patient1 = new ICHPatient
 
             {
                 CPR = "1",
@@ -81,7 +81,7 @@ namespace IncomingCasualtyHandling.Test.Unit.BL.Test.Unit
                 ToHospital = "AUH",
                 ETA = new DateTime(2018, 11, 18, 22, 30, 00)
             };
-            _patient2 = new PatientModel
+            _patient2 = new ICHPatient
             {
                 CPR = "2",
                 Name = "Patient Two",
@@ -134,7 +134,7 @@ namespace IncomingCasualtyHandling.Test.Unit.BL.Test.Unit
         [Test]
         public void SortForSpecialty_ListWith3DifferentSpecialties_AddSortedListWith3ListsToModel()
         {
-            _patient3 = new PatientModel
+            _patient3 = new ICHPatient
             {
                 CPR = "3",
                 Name = "Patient Three",
@@ -154,7 +154,7 @@ namespace IncomingCasualtyHandling.Test.Unit.BL.Test.Unit
         [Test]
         public void SortForSpecialty_ListWith2UnknownSpecialties_AddSortedListWith2ListsToModel()
         {
-            _patient3 = new PatientModel
+            _patient3 = new ICHPatient
             {
                 CPR = "3",
                 Name = "Patient Three",
@@ -180,7 +180,7 @@ namespace IncomingCasualtyHandling.Test.Unit.BL.Test.Unit
         [Test]
         public void SortForSpecialty_ListWithPatientWithoutSpecialty_PatientEndsInUnknownSpecialtyList()
         {
-            _patient3 = new PatientModel
+            _patient3 = new ICHPatient
             {
                 CPR = "3",
                 Name = "Patient Three",
@@ -206,7 +206,7 @@ namespace IncomingCasualtyHandling.Test.Unit.BL.Test.Unit
         [Test]
         public void SortForSpecialty_MostNeurologyPatients_Specialty1IsNeurology()
         {
-            _patient3 = new PatientModel
+            _patient3 = new ICHPatient
             {
                 CPR = "3",
                 Name = "Patient Three",

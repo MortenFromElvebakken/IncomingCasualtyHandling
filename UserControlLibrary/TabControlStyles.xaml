@@ -65,14 +65,14 @@
     <DataTemplate x:Key="CellTemplateForListviewName">
         <DockPanel Margin="-5,-3,-5,0">
             <Border CornerRadius="0,0,5,0" BorderBrush="#8292a5" VerticalAlignment="Bottom" HorizontalAlignment="Right" BorderThickness="0,0,1,1">
-                <TextBlock Foreground="#383F47" HorizontalAlignment="Left" VerticalAlignment="Center"  Text="{Binding Name}" Width="0.5*" FontSize="14" Height="25"/>
+                <TextBlock Foreground="#383F47" HorizontalAlignment="Left" VerticalAlignment="Center"  Text="{Binding Name}" Width="150" FontSize="14" Height="25"/>
             </Border>
         </DockPanel>
     </DataTemplate>
     <DataTemplate x:Key="CellTemplateForListviewCPR">
         <DockPanel Margin="-2,-3,-5,0">
             <Border CornerRadius="0,0,5,0" BorderBrush="#8292a5" VerticalAlignment="Bottom" HorizontalAlignment="Right" BorderThickness="0,0,1,1">
-                <TextBlock Foreground="#383F47" HorizontalAlignment="Left" VerticalAlignment="Center" Text="{Binding PatientId}" Width="90" FontSize="14" Height="25"/>
+                <TextBlock Foreground="DarkBlue" HorizontalAlignment="Center" Text="{Binding CPR}" Width="90" FontSize="14" Height="25"/>
             </Border>
         </DockPanel>
     </DataTemplate>

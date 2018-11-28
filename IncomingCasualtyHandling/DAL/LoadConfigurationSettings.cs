@@ -13,7 +13,7 @@ using IncomingCasualtyHandling.DAL.Interface;
 
 namespace IncomingCasualtyHandling.DAL
 {
-    public class LoadConfigurationSettingsFromXMLDocument: ILoadConfigurationSettings
+    public class LoadConfigurationSettings: ILoadConfigurationSettings
     {
         public string XmlServerName { get; set; }
 
@@ -24,7 +24,7 @@ namespace IncomingCasualtyHandling.DAL
         public string HospitalShortName { get; private set; }
         
 
-        public LoadConfigurationSettingsFromXMLDocument()
+        public LoadConfigurationSettings()
         {
             XmlServerName = "http://localhost:8080/Conf.Fapi/Configuration.xml";
             _configFile = new XmlDocument();
@@ -32,7 +32,7 @@ namespace IncomingCasualtyHandling.DAL
             GetHospitalShortName();
             GetServerName();
         }
-        public LoadConfigurationSettingsFromXMLDocument(string _newXmlServerName)
+        public LoadConfigurationSettings(string _newXmlServerName)
         {
             XmlServerName = _newXmlServerName; 
             _configFile = new XmlDocument();

@@ -36,16 +36,16 @@ namespace IncomingCasualtyHandling.Test.Integration
         private ISortETA _sortEta;
 
         // Drivers
-        private GetPatientsFromFhir _getPatients;
+        private LoadData _getPatients;
 
         // Included 
         private ILoadConfigurationSettings _loadConfig;
-        private SerialiseToPatient _serialise;
+        private ConvertToICHPatient _convert;
 
         // Data
         private string _xmlDocumentPath;
         private string _xmlServerName = "http://localhost:8080/hapi-fhir-jpaserver-example/baseDstu3";
-        private List<PatientModel> _patientList;
+        private List<ICHPatient> _patientList;
         public Patient Patient1 = new Patient();
 
         string triage = "TriageRed";
@@ -60,7 +60,7 @@ namespace IncomingCasualtyHandling.Test.Integration
         private DateTimeOffset lastUpdated = new DateTimeOffset(2018, 11, 22, 8, 0, 0, new TimeSpan(0, 0, 0, 0));
 
         private int _nEventsRaised;
-        private List<PatientModel> _sortedPatients;
+        private List<ICHPatient> _sortedPatients;
 
         [SetUp]
         public void SetUp()
@@ -74,13 +74,13 @@ namespace IncomingCasualtyHandling.Test.Integration
             _DV_M = Substitute.For<IDetailView_Model>();
 
 
-            _serialise = new SerialiseToPatient();
+            _convert = new ConvertToICHPatient();
 
             _xmlDocumentPath =
                 "E://Visual Studio 2017//BAC//IncomingCasualtyHandling.Test.Integration//Configuration.xml";
-            _loadConfig = new LoadConfigurationSettingsFromXMLDocument(_xmlDocumentPath);
+            _loadConfig = new LoadConfigurationSettings(_xmlDocumentPath);
 
-            _getPatients = new GetPatientsFromFhir(_loadConfig, _serialise);
+            _getPatients = new LoadData(_loadConfig, _convert);
 
             _getPatients.PatientDataReady += (o) => _patientList = o;
 

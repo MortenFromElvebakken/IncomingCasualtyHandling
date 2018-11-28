@@ -33,14 +33,14 @@ namespace IncomingCasualtyHandling
 
             try
             {
-                lcs = new LoadConfigurationSettingsFromXMLDocument();
+                lcs = new LoadConfigurationSettings();
             }
             catch (Exception)
             {
                 //Initializing class as default, which returns null if nothing else has been done
                 //This is to be able to check if it creates exceptions when reading from server, and if so, open up a new window
                 //Where the user is prompted to give a URL to the configuration.xml file
-                lcs = default(LoadConfigurationSettingsFromXMLDocument);
+                lcs = default(LoadConfigurationSettings);
                 ConfigFileWindow configFileWindow = new ConfigFileWindow();
                 Application.Current.ShutdownMode = ShutdownMode.OnExplicitShutdown;
                 
@@ -50,7 +50,7 @@ namespace IncomingCasualtyHandling
                         try
                         {
                             //new constructor that takes the newly specified Configuration file location
-                            lcs = new LoadConfigurationSettingsFromXMLDocument(configFileWindow.ServerTextBoxName.Text);
+                            lcs = new LoadConfigurationSettings(configFileWindow.ServerTextBoxName.Text);
                             Application.Current.ShutdownMode = ShutdownMode.OnMainWindowClose;
                         }
                         catch (Exception exception)
@@ -65,8 +65,8 @@ namespace IncomingCasualtyHandling
                     }
             }
             
-            ISerializeToPatient isp = new SerialiseToPatient();
-            var fhirCommands = new GetPatientsFromFhir(lcs,isp);
+            IConvertToICHPatient isp = new ConvertToICHPatient();
+            var fhirCommands = new LoadData(lcs,isp);
 
             // Create BLL
             // First Models
@@ -76,13 +76,13 @@ namespace IncomingCasualtyHandling
             //IMainView_Model _mainViewModel = new MainView_Model();
 
 
-            IGetPatientsFromFHIR getPatientsFromFhir = fhirCommands;
-            IMainView_Model mainViewModel = new MainView_Model(getPatientsFromFhir);
+            ILoadData loadData = fhirCommands;
+            IMainView_Model mainViewModel = new MainView_Model(loadData);
             ICountTime countTime = new CountTime(mainViewModel, overviewViewModel);
             //var sortETA = new SortETA(_overviewViewModel,_detailViewModel, _mainViewModel, countTime, IGetPatientsFromFhir);
             //var sortSpecialty = new SortSpecialty(lcs, _overviewViewModel, _detailViewModel, _mainViewModel, IGetPatientsFromFhir);
             //var sortTriage = new SortTriage(lcs, _overviewViewModel, _detailViewModel, _mainViewModel, IGetPatientsFromFhir);
-            var sortETA = new SortETA(overviewViewModel, detailViewModel, mainViewModel, countTime, getPatientsFromFhir);
+            var sortETA = new SortETA(overviewViewModel, detailViewModel, mainViewModel, countTime, loadData);
             var sortSpecialty = new SortSpecialty(lcs, overviewViewModel, detailViewModel, mainViewModel, sortETA);
             var sortTriage = new SortTriage(lcs, overviewViewModel, detailViewModel, mainViewModel, sortETA);
             fhirCommands.GetAllPatients();

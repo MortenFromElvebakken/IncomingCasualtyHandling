@@ -10,7 +10,7 @@ namespace IncomingCasualtyHandling.BL.Interfaces
 {
     public interface IOverviewView_Model
     {
-        ETA Eta { get; set; }
+        ETA ETA { get; set; }
         List<Specialty> ListOfSpecialities { get; set; }
         int MaximumTriagePatients { get; }
         Specialty Specialty1 { get; set; }

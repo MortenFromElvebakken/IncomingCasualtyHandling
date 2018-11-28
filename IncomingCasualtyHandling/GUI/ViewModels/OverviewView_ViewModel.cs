@@ -59,7 +59,7 @@ namespace IncomingCasualtyHandling.GUI.ViewModels
 
         #region ETA
 
-        public ETA Eta => _overviewModel.Eta;
+        public ETA ETA => _overviewModel.ETA;
 
         #endregion
 

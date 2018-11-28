@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
@@ -12,10 +13,10 @@ namespace IncomingCasualtyHandling.BL.Interfaces
     public interface IDetailView_Model
     {
         List<Triage> ListOfTriages { get; set; }
-        List<List<PatientModel>> ListOfTriagePatientLists { get; set; }
+        List<List<ICHPatient>> ListOfTriagePatientLists { get; set; }
         List<Specialty> ListOfSpecialties { get; set; }
-        List<List<PatientModel>> ListOfSpecialtiesPatientLists { get; set; }
-        List<PatientModel> ETAPatients { get; set; }
+        List<List<ICHPatient>> ListOfSpecialtiesPatientLists { get; set; }
+        List<ICHPatient> ETAPatients { get; set; }
         List<TabControl> ListOfTabs { get; set; }
         string IconPath { get; }
         int SelectedTabIndex { get; set; }
@@ -23,5 +24,8 @@ namespace IncomingCasualtyHandling.BL.Interfaces
         event PropertyChangedEventHandler PropertyChanged;
         void ChangeTabsAllowed(string s);
         void GridViewColumnHeaderClicked(string s);
+        bool ChangedFromMain { set; }
+        ObservableCollection<TabControl> ObservableCollectionTabs { get; }
+        void SetTabIndex();
     }
 }

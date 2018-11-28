@@ -9,6 +9,6 @@ namespace IncomingCasualtyHandling.BL.Interfaces
 {
     public interface ISortSpecialty
     {
-        void SortForSpecialty(List<PatientModel> listOfPatients);
+        void SortForSpecialty(List<ICHPatient> listOfPatients);
     }
 }

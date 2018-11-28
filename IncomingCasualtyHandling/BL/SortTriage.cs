@@ -38,11 +38,11 @@ namespace IncomingCasualtyHandling.BL
 
         }
 
-        public void SortForTriage(List<PatientModel> listOfPatients)
+        public void SortForTriage(List<ICHPatient> listOfPatients)
         {
             // Create a list of lists of patients
-            List<List<PatientModel>> listOfPatientLists = new List<List<PatientModel>>();
-            List<PatientModel> listWithUnknownTriage = new List<PatientModel>();
+            List<List<ICHPatient>> listOfPatientLists = new List<List<ICHPatient>>();
+            List<ICHPatient> listWithUnknownTriage = new List<ICHPatient>();
             var results = listOfPatients.GroupBy(p => p.Triage);
             TriageList = new List<Triage>(LoadXMLSettings.ReturnTriageList());
             //TriageList = new List<Triage>(LoadXMLSettings.TriageList);  //To get a copy of the list loaded from XML-file

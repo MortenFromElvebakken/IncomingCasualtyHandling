@@ -49,7 +49,11 @@ namespace IncomingCasualtyHandling.GUI.ViewModels
             set => _detailViewModel.StringFromChangeViewCommandParameter = value;
         }
 
-        
+
+        public ObservableCollection<TabControl> Tabs2
+        {
+            get => _detailViewModel.ObservableCollectionTabs;
+        }
 
         //List of tabs in window, set upon pressing something in overview view
         public List<TabControl> Tabs
@@ -70,8 +74,9 @@ namespace IncomingCasualtyHandling.GUI.ViewModels
             _detailViewModel.PropertyChanged += DetailViewModelOnPropertyChanged;
             ChangeTabsCommand = new RelayCommand<object>(ChangeTabs);
             GridViewColumnHeaderClickedHandlerCommand = new RelayCommand<RoutedEventArgs>(GridViewColumnHeaderClickedHandler);
-            
-           
+            //SourceUpdatedTab = new RelayCommand(sourceUpdatedTabSet);
+
+
         }
 
         private void DetailViewModelOnPropertyChanged(object sender, PropertyChangedEventArgs e)
@@ -83,6 +88,8 @@ namespace IncomingCasualtyHandling.GUI.ViewModels
         {
             _detailViewModel.ChangeTabsAllowed(x.ToString());
         }
+        public bool ChangedFromMain {set => _detailViewModel.ChangedFromMain = true; }
+
 
         public ICommand GridViewColumnHeaderClickedHandlerCommand { get; set; }
 
@@ -97,5 +104,12 @@ namespace IncomingCasualtyHandling.GUI.ViewModels
             
                 
         }
+
+        //public ICommand SourceUpdatedTab { get; set; }
+
+        //private void sourceUpdatedTabSet()
+        //{
+        //    _detailViewModel.SetTabIndex();
+        //}
     }
 }

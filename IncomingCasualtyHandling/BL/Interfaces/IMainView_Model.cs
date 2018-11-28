@@ -20,7 +20,7 @@ namespace IncomingCasualtyHandling.BL.Interfaces
         Triage Triage4 { get; set; }
         Triage Triage5 { get; set; }
         Triage Triage6 { get; set; }
-        ETA Eta { get; set; }
+        ETA ETA { get; set; }
         string ServerName { get; set; }
         Visibility ConnectionToInternet { get; set; }
         string NoConnectionString { get;}

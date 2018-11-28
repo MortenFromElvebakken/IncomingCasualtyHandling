@@ -20,12 +20,12 @@ namespace IncomingCasualtyHandling.BL
         private ICountTime _countTime;
 
         // List to hold patients without ETA
-        private readonly List<PatientModel> _patientsWithoutEta = new List<PatientModel>();
+        private readonly List<ICHPatient> _patientsWithoutEta = new List<ICHPatient>();
         // Variable to hold the range to "remove" patients without ETA within
         private int _range;
 
         //Constructor
-        public SortETA(IOverviewView_Model overviewView_Model, IDetailView_Model detailView_Model, IMainView_Model mainView_Model, ICountTime countTime, IGetPatientsFromFHIR receivePatientsFromFhir)
+        public SortETA(IOverviewView_Model overviewView_Model, IDetailView_Model detailView_Model, IMainView_Model mainView_Model, ICountTime countTime, ILoadData receivePatientsFromFhir)
         {
 
             receivePatientsFromFhir.PatientDataReady += SortForETA;
@@ -37,9 +37,9 @@ namespace IncomingCasualtyHandling.BL
 
         // Method that sorts ETAs
         // Adds a sorted patientList to DetailView_Model
-        public void SortForETA(List<PatientModel> listOfPatients)
+        public void SortForETA(List<ICHPatient> listOfPatients)
         {
-            //List<PatientModel> SortedETAList = listOfPatients.OrderBy(o => o.ETA).ThenBy(n => n.Name).ToList();
+            //List<ICHPatient> SortedETAList = listOfPatients.OrderBy(o => o.ETA).ThenBy(n => n.Name).ToList();
 
             listOfPatients = SortListOnEta(listOfPatients);
 
@@ -52,16 +52,16 @@ namespace IncomingCasualtyHandling.BL
 
         }
 
-        private void OnSortedListReady(List<PatientModel> patientList)
+        private void OnSortedListReady(List<ICHPatient> patientList)
         {
             var handler = SortedListReady;
             handler?.Invoke(patientList);
         }
 
-        public delegate void PatientUpdateHandler(List<PatientModel> sortedPatients);
+        public delegate void PatientUpdateHandler(List<ICHPatient> sortedPatients);
         public event PatientUpdateHandler SortedListReady;
 
-        public List<PatientModel> SortListOnEta(List<PatientModel> listToSort)
+        public List<ICHPatient> SortListOnEta(List<ICHPatient> listToSort)
         {
             _patientsWithoutEta.Clear();
             _range = 0;

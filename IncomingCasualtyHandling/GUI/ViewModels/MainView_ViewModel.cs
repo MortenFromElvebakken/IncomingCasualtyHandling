@@ -16,8 +16,7 @@ namespace IncomingCasualtyHandling.GUI.ViewModels
     // the class is an ObservableObject in order to be able to call OnPropertyChanged on properties
     internal class MainView_ViewModel : ObservableObject
     {
-        private string _test;
-        private List<PatientModel> _listOfPatients;
+        private List<ICHPatient> _listOfPatients;
 
         IOverviewView_Model _overviewModel;
 
@@ -79,6 +78,7 @@ namespace IncomingCasualtyHandling.GUI.ViewModels
         {
             if(CurrentWorkspace == _overviewViewViewModel)
             {
+                _detailViewViewModel.ChangedFromMain = true;
                 _detailViewViewModel.ChangeTabs(x);
                 CurrentWorkspace = _detailViewViewModel;
             }
@@ -135,7 +135,7 @@ namespace IncomingCasualtyHandling.GUI.ViewModels
 
         public string NoConnectionString => _mainModel.NoConnectionString;
 
-        public List<PatientModel> ListOfPatients
+        public List<ICHPatient> ListOfPatients
         {
             get { return _listOfPatients; }
             set
@@ -159,6 +159,6 @@ namespace IncomingCasualtyHandling.GUI.ViewModels
 
         public Specialty Specialty1 => _mainModel.Specialty1;
 
-        public ETA Eta => _mainModel.Eta;
+        public ETA ETA => _mainModel.ETA;
     }
 }

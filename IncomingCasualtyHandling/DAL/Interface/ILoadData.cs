@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace IncomingCasualtyHandling.DAL.Interface
 {
-    public interface IGetPatientsFromFHIR
+    public interface ILoadData
     {
-        event GetPatientsFromFhir.PatientUpdateHandler PatientDataReady;
-        event GetPatientsFromFhir.NoInterNetUpdateHandler NoInternet;
+        event LoadData.PatientUpdateHandler PatientDataReady;
+        event LoadData.NoInterNetUpdateHandler NoInternet;
         void setFhirClientURL(string s);
     }
 }

@@ -4,6 +4,7 @@ using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Timers;
 using System.Windows.Threading;
 using IncomingCasualtyHandling.BL.Interfaces;
 using IncomingCasualtyHandling.BL.Models;
@@ -20,9 +21,8 @@ namespace IncomingCasualtyHandling.BL
         // CountTime made with inspiration from:
         // https://stackoverflow.com/a/5410783
 
-        readonly DispatcherTimer _currentDateTimeTimer = new DispatcherTimer();
-        readonly DispatcherTimer _etaTimer = new DispatcherTimer();
-
+        private readonly Timer _currentDateTimeTimer = new Timer();
+        private readonly Timer _etaTimer = new Timer();
 
         public CountTime(IMainView_Model mainViewModel, IOverviewView_Model overviewViewModel)
         {
@@ -30,10 +30,10 @@ namespace IncomingCasualtyHandling.BL
             _mainViewModel = mainViewModel;
             _overviewViewModel = overviewViewModel;
 
-            // Prepare current datetime timer and start it
-            _currentDateTimeTimer.Tick += new EventHandler(CurrentDateTime_TimerTick);
-            _currentDateTimeTimer.Interval = TimeSpan.FromSeconds(1);
-            _currentDateTimeTimer.Start();
+            _currentDateTimeTimer.Elapsed += new ElapsedEventHandler(CurrentDateTime_TimerTick);
+            _currentDateTimeTimer.Interval = 1000;
+            _currentDateTimeTimer.AutoReset = true;
+            _currentDateTimeTimer.Enabled = true;
         }
 
         // Set the culture to be the systems culture:
@@ -42,9 +42,7 @@ namespace IncomingCasualtyHandling.BL
         // CountTime-event that keeps track of current time and updates MainView_Model
         private void CurrentDateTime_TimerTick(object sender, EventArgs e)
         {
-            DateTime d;
-
-            d = DateTime.Now;
+            DateTime d = DateTime.Now;
             string day = d.Day.ToString().PadLeft(2, '0');
             string month = d.ToString("MMM", _culture);
             string year = d.Year.ToString();
@@ -55,10 +53,10 @@ namespace IncomingCasualtyHandling.BL
         }
 
         // List to contain ETAs
-        private List<PatientModel> _listOfEtas;
+        private List<ICHPatient> _listOfEtas;
         
         // Method to find the next coming ETA
-        public void FindRelativeTime(List<PatientModel> sortedEtas)
+        public void FindRelativeTime(List<ICHPatient> sortedEtas)
         {
             _listOfEtas = sortedEtas;
             // Check the ETAs to see, if they are in the future
@@ -78,7 +76,7 @@ namespace IncomingCasualtyHandling.BL
                 AbsoluteTime = "--:--",
                 RelativeTime = ""
             };
-            _overviewViewModel.Eta = _nextEta;
+            _overviewViewModel.ETA = _nextEta;
 
         }
 
@@ -114,13 +112,11 @@ namespace IncomingCasualtyHandling.BL
 
             CalculateRelativeTime(_timeDifference, _timeSpan);
 
-            // Prepare ETA timer and start it
-            _etaTimer.Tick += (sender, e) =>
-            {
-                ETATime_TimerTick(sender, e, nextEta);
-            };
-            _etaTimer.Interval = TimeSpan.FromSeconds(1);
-            _etaTimer.Start();
+
+            _etaTimer.Elapsed += (sender, e) => { ETATime_TimerTick(sender, e, nextEta); };
+            _etaTimer.Interval = 1000; // 1 second
+            _etaTimer.AutoReset = true; //Should run more than once
+            _etaTimer.Enabled = true; // Start timer
 
         }
 
@@ -172,8 +168,8 @@ namespace IncomingCasualtyHandling.BL
 
             
 
-            _overviewViewModel.Eta = _nextEta;
-            _mainViewModel.Eta = _nextEta;
+            _overviewViewModel.ETA = _nextEta;
+            _mainViewModel.ETA = _nextEta;
 
         }
 
@@ -187,12 +183,11 @@ namespace IncomingCasualtyHandling.BL
             // Find the time difference
             _timeDifference = Math.Abs(_timeSpan.TotalSeconds);
 
-            // OBS - skal vi have denne if eller ej?
             // Check if ETA is NOW, because then a new ETA should be found
             if (_timeSpan.TotalSeconds > -Second)
             {
                 // Stop the timer
-                DispatcherTimer timer = (DispatcherTimer)sender;
+                Timer timer = (Timer) sender;
                 timer.Stop();
                 // Find the next ETA in the list
                 FindRelativeTime(_listOfEtas);

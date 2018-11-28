@@ -35,17 +35,17 @@ namespace IncomingCasualtyHandling.Test.Integration
         private ICountTime _countTime;
 
         // Drivers
-        private GetPatientsFromFhir _getPatients;
+        private LoadData _getPatients;
 
         // Included 
         private ILoadConfigurationSettings _loadConfig;
         private ISortETA _sortEta;
-        private SerialiseToPatient _serialise;
+        private ConvertToICHPatient _convert;
 
         // Data
         private string _xmlDocumentPath;
         private string _xmlServerName = "http://localhost:8080/hapi-fhir-jpaserver-example/baseDstu3";
-        private List<PatientModel> _patientList;
+        private List<ICHPatient> _patientList;
         public Patient Patient1 = new Patient();
 
         string triage = "TriageRed";
@@ -67,13 +67,13 @@ namespace IncomingCasualtyHandling.Test.Integration
             _DV_M = Substitute.For<IDetailView_Model>();
 
 
-            _serialise = new SerialiseToPatient();
+            _convert = new ConvertToICHPatient();
 
             _xmlDocumentPath =
                 "E://Visual Studio 2017//BAC//IncomingCasualtyHandling.Test.Integration//Configuration.xml";
-            _loadConfig = new LoadConfigurationSettingsFromXMLDocument(_xmlDocumentPath);
+            _loadConfig = new LoadConfigurationSettings(_xmlDocumentPath);
 
-            _getPatients = new GetPatientsFromFhir(_loadConfig, _serialise);
+            _getPatients = new LoadData(_loadConfig, _convert);
 
             _countTime = Substitute.For<ICountTime>();
 

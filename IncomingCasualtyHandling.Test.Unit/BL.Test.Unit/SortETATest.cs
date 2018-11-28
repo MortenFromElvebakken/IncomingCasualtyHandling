@@ -27,10 +27,10 @@ namespace IncomingCasualtyHandling.Test.Unit.BL.Test.Unit
         private IMainView_Model _mainViewModel;
 
         private ICountTime _countTime;
-        private IGetPatientsFromFHIR _getPatientsFromFHIR;
+        private ILoadData _loadData;
 
-        private List<PatientModel> _listOfPatients, _sortedListOfPatients;
-        private PatientModel _patient1, _patient2, _patient3, _patient4, _patient5;
+        private List<ICHPatient> _listOfPatients, _sortedListOfPatients;
+        private ICHPatient _patient1, _patient2, _patient3, _patient4;
 
         [SetUp]
         public void Setup()
@@ -39,13 +39,13 @@ namespace IncomingCasualtyHandling.Test.Unit.BL.Test.Unit
             _detailViewModel = Substitute.For<IDetailView_Model>();
             _mainViewModel = Substitute.For<IMainView_Model>();
             _countTime = Substitute.For<ICountTime>();
-            _getPatientsFromFHIR = Substitute.For<IGetPatientsFromFHIR>();
-            _uut = new SortETA(_overviewViewModel, _detailViewModel, _mainViewModel, _countTime, _getPatientsFromFHIR);
+            _loadData = Substitute.For<ILoadData>();
+            _uut = new SortETA(_overviewViewModel, _detailViewModel, _mainViewModel, _countTime, _loadData);
 
             // Create a list with patients
-            _listOfPatients = new List<PatientModel>();
-            _sortedListOfPatients = new List<PatientModel>();
-            _patient1 = new PatientModel
+            _listOfPatients = new List<ICHPatient>();
+            _sortedListOfPatients = new List<ICHPatient>();
+            _patient1 = new ICHPatient
 
             {
                 CPR = "1",
@@ -57,7 +57,7 @@ namespace IncomingCasualtyHandling.Test.Unit.BL.Test.Unit
                 ToHospital = "AUH",
                 ETA = new DateTime(2018, 11, 18, 22, 30, 00)
             };
-            _patient2 = new PatientModel
+            _patient2 = new ICHPatient
             {
                 CPR = "2",
                 Name = "Patient Two",
@@ -104,7 +104,7 @@ namespace IncomingCasualtyHandling.Test.Unit.BL.Test.Unit
         [Test]
         public void SortForETA_ListWithEqualETAs_SecondlySortedAlphabetically()
         {
-            _patient3 = new PatientModel
+            _patient3 = new ICHPatient
             {
                 CPR = "3",
                 Name = "Patient Three",
@@ -130,7 +130,7 @@ namespace IncomingCasualtyHandling.Test.Unit.BL.Test.Unit
         [Test]
         public void SortForETA_PatientWithoutETA_PlaceLastInList()
         {
-            _patient3 = new PatientModel
+            _patient3 = new ICHPatient
             {
                 CPR = "3",
                 Name = "Patient Three",
@@ -149,7 +149,7 @@ namespace IncomingCasualtyHandling.Test.Unit.BL.Test.Unit
         [Test]
         public void SortForETA_PatientsWithoutETA_PlaceAlphabeticallyLastInList()
         {
-            _patient3 = new PatientModel
+            _patient3 = new ICHPatient
             {
                 CPR = "3",
                 Name = "Patient Three",
@@ -159,7 +159,7 @@ namespace IncomingCasualtyHandling.Test.Unit.BL.Test.Unit
                 Specialty = "Psychology",
                 ToHospital = "AUH"
             };
-            _patient4 = new PatientModel
+            _patient4 = new ICHPatient
             {
                 CPR = "3",
                 Name = "Alma",

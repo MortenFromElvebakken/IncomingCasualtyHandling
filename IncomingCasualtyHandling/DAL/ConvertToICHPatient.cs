@@ -12,63 +12,66 @@ using IncomingCasualtyHandling.DAL.Interface;
 
 namespace IncomingCasualtyHandling.DAL
 {
-    public class SerialiseToPatient : ISerializeToPatient
+    public class ConvertToICHPatient : IConvertToICHPatient
     {
-        public SerialiseToPatient()
+        public ConvertToICHPatient()
         {
 
         }
 
-        public PatientModel ReturnPatient(Patient newEntry)
+        public ICHPatient ReturnPatient(Patient newEntry)
         {
-            PatientModel newPatientModel = new PatientModel();
+            ICHPatient newIchPatient = new ICHPatient();
 
             // Uses ?? Operand to determine if lefthandside of argument is null, in that case use right hand side.
             
-            newPatientModel.Name = newEntry.Name[0].Text ?? "John Doe";
-            newPatientModel.Gender = newEntry.Gender ?? AdministrativeGender.Unknown;
+            newIchPatient.Name = newEntry.Name[0].Text ?? "John Doe";
+            newIchPatient.Gender = newEntry.Gender ?? AdministrativeGender.Unknown;
             try
             {
-                newPatientModel.CPR = newEntry.Identifier[0].Value;
+                newIchPatient.CPR = newEntry.Identifier[0].Value;
             }
             catch (Exception e)
             {
-                newPatientModel.CPR = "*E_CPR";
+                newIchPatient.CPR = "*E_CPR";
             }
             
             try
             {
-                newPatientModel.ToHospital = newEntry.Identifier[1].Value;
+                newIchPatient.ToHospital = newEntry.Identifier[1].Value;
 
             }
             catch (Exception e)
             {
-                newPatientModel.ToHospital = "Unknown";
+                newIchPatient.ToHospital = "Unknown";
             }
 
             try
             {
-                newPatientModel.FromDestination = newEntry.Identifier[2].Value;
+                newIchPatient.FromDestination = newEntry.Identifier[2].Value;
             }
             catch (Exception e)
             {
-                newPatientModel.FromDestination = "Unknown";
+                newIchPatient.FromDestination = "Unknown";
             }
             
 
-            newPatientModel.Triage =
+            newIchPatient.Triage =
                 newEntry.GetStringExtension("http://www.example.com/triagetest") ?? "Unknown";
-            newPatientModel.Specialty =
+            newIchPatient.Specialty =
                 newEntry.GetStringExtension("http://www.example.com/SpecialtyTest") ?? "Unknown";
-            newPatientModel.ETA = Convert.ToDateTime(newEntry.GetExtension("http://www.example.com/datetimeTest").Value.ToString());
+            // Get the ETA. Find the seconds-element and remove it from the ETA that is put on the patient object
+            // This is done due to the UI only showing minutes; when the relative time is calculated, this should rely on minutes too
+            var eta = Convert.ToDateTime(newEntry.GetExtension("http://www.example.com/datetimeTest").Value.ToString());
+            var seconds = eta.Second;
+            newIchPatient.ETA = eta.AddSeconds(-seconds);
 
-            newPatientModel.Age = CalculateAge(Convert.ToDateTime(newEntry.BirthDate));
-            newPatientModel.LastUpdated = newEntry.Meta.LastUpdated.Value;
+            newIchPatient.Age = CalculateAge(Convert.ToDateTime(newEntry.BirthDate));
+            newIchPatient.LastUpdated = newEntry.Meta.LastUpdated.Value;
 
-            //DateTime eta = Convert.ToDateTime(newEntry.GetStringExtension("http://www.example.com/datetimeTest")?? DateTime.MinValue.ToString());
-            // Hvad  kan vi gøre hvis der ingen ETA er?
-            //newPatientModel.ETA = eta;
-            return newPatientModel;
+            newIchPatient.Age = CalculateAge(Convert.ToDateTime(newEntry.BirthDate));
+            newIchPatient.LastUpdated = newEntry.Meta.LastUpdated.Value;
+            return newIchPatient;
             
         }
 
