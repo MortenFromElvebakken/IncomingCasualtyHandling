@@ -76,8 +76,9 @@ namespace IncomingCasualtyHandling.Test.Integration
 
             _convert = new ConvertToICHPatient();
 
-            _xmlDocumentPath =
-                "E://Visual Studio 2017//BAC//IncomingCasualtyHandling.Test.Integration//Configuration.xml";
+            var currentDirectory = Path.GetDirectoryName(Path.GetDirectoryName(
+                TestContext.CurrentContext.TestDirectory));
+            _xmlDocumentPath = currentDirectory + "\\Configuration.xml";
             _loadConfig = new LoadConfigurationSettings(_xmlDocumentPath);
 
             _getPatients = new LoadData(_loadConfig, _convert);
