@@ -26,7 +26,7 @@ namespace IncomingCasualtyHandling.Test.Unit.BL.Test.Unit
         private IDetailView_Model _detailViewModel;
         private IMainView_Model _mainViewModel;
 
-        private ITimer _timer;
+        private ICountTime _countTime;
         private IGetPatientsFromFHIR _getPatientsFromFHIR;
 
         private List<PatientModel> _listOfPatients, _sortedListOfPatients;
@@ -38,9 +38,9 @@ namespace IncomingCasualtyHandling.Test.Unit.BL.Test.Unit
             _overviewViewModel = Substitute.For<IOverviewView_Model>();
             _detailViewModel = Substitute.For<IDetailView_Model>();
             _mainViewModel = Substitute.For<IMainView_Model>();
-            _timer = Substitute.For<ITimer>();
+            _countTime = Substitute.For<ICountTime>();
             _getPatientsFromFHIR = Substitute.For<IGetPatientsFromFHIR>();
-            _uut = new SortETA(_overviewViewModel, _detailViewModel, _mainViewModel, _timer, _getPatientsFromFHIR);
+            _uut = new SortETA(_overviewViewModel, _detailViewModel, _mainViewModel, _countTime, _getPatientsFromFHIR);
 
             // Create a list with patients
             _listOfPatients = new List<PatientModel>();

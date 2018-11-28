@@ -16,8 +16,8 @@ namespace IncomingCasualtyHandling.DAL
 {
     public class GetPatientsFromFhir : IGetPatientsFromFHIR
     {
-        private string _fhirServerUrl;
-        private FhirClient _client;
+        private readonly string _fhirServerUrl;
+        public IFhirClient Client { get; set; }
         private readonly ISerializeToPatient _serializePatient;
         private readonly ILoadConfigurationSettings _loadConfigSettingsFromXmlDocument;
         private readonly SearchParams _sParameters;
@@ -28,9 +28,9 @@ namespace IncomingCasualtyHandling.DAL
         public GetPatientsFromFhir(ILoadConfigurationSettings _lcs, ISerializeToPatient _isp)
         {
             _loadConfigSettingsFromXmlDocument = _lcs;
-            _fhirServerUrl = _loadConfigSettingsFromXmlDocument.ServerName;
+            _fhirServerUrl = GetServerUrl();
             
-            _client = new FhirClient(_fhirServerUrl);
+            Client = new FhirClient(_fhirServerUrl);
             _serializePatient = _isp;
             _internet = true;
             _dateOfLastSearch = DateTime.MinValue;
@@ -46,6 +46,11 @@ namespace IncomingCasualtyHandling.DAL
             _myThread.IsBackground = true;
         }
 
+        public string GetServerUrl()
+        {
+            return _loadConfigSettingsFromXmlDocument.ServerName;
+        }
+
         public void GetAllPatients()
         {
 
@@ -55,7 +60,7 @@ namespace IncomingCasualtyHandling.DAL
             //In a try catch, in case there is no server connection
             try
             {
-                firstBundle = _client.Search<Patient>(_sParameters);
+                firstBundle = Client.Search<Patient>(_sParameters);
                 _dateOfLastSearch = DateTime.Now;
                 if (_internet == false)
                     _internet = true;
@@ -79,7 +84,7 @@ namespace IncomingCasualtyHandling.DAL
                     PatientModel op = _serializePatient.ReturnPatient(testpatient);
                     listOfPatients.Add(op);
                 }
-                firstBundle = _client.Continue(firstBundle, PageDirection.Next);
+                firstBundle = Client.Continue(firstBundle, PageDirection.Next);
             }
             UpdatePatients(listOfPatients);
             if (!_myThread.IsAlive)
@@ -161,7 +166,7 @@ namespace IncomingCasualtyHandling.DAL
             try
             {
                 //throw new Exception("test");
-                anyChangedResources = _client.WholeSystemHistory(_dateOfLastSearch, 10);
+                anyChangedResources = Client.WholeSystemHistory(_dateOfLastSearch, 10);
                 _dateOfLastSearch = DateTime.Now.AddSeconds(-5);
                 if (_internet == false)
                 {
@@ -204,19 +209,7 @@ namespace IncomingCasualtyHandling.DAL
 
             if (anyChangedResources != null && !sameAsLast)
             {
-                //Logik på alle patienter som dukker i ændrede resources, henter dem enkeltvis og sammenligner med det bundle den får tilbage, hvis de er active true, og ikke
-                // findes i bundle, tilføj, hvis de er active false og findes i bundle, skal den fjerne. 
-                //
-                //List<Patient> otherEntries = new List<Patient>();
-                //int counter = 0;
-                //foreach (var x in anyChangedResources.Entry)
-                //{
-                //    var testEntry = _client.Read<Patient>(_fhirServerUrl + "/Patient/" + anyChangedResources.Entry[counter].Resource.Id);
-                //    otherEntries.Add(testEntry);
-                //    counter++;
-                //}
-               
-                var newBundle = _client.Search<Patient>(_sParameters);
+                var newBundle = Client.SearchAsync<Patient>(_sParameters).Result;
                 List<PatientModel> listOfPatients = new List<PatientModel>();
                 
                 while (newBundle != null)
@@ -227,7 +220,7 @@ namespace IncomingCasualtyHandling.DAL
                         PatientModel op = _serializePatient.ReturnPatient(testpatient);
                         listOfPatients.Add(op);
                     }
-                    newBundle = _client.Continue(newBundle, PageDirection.Next);
+                    newBundle = Client.Continue(newBundle, PageDirection.Next);
                 }
                 foreach (var patient in lastChangedPatients)
                 {
@@ -273,7 +266,7 @@ namespace IncomingCasualtyHandling.DAL
 
         public void setFhirClientURL(string s)
         {
-            _client = new FhirClient(s);
+            Client = new FhirClient(s);
             _fhirServerUrl = s;
             GetAllPatients();
         }
