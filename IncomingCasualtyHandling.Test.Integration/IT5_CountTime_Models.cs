@@ -121,7 +121,6 @@ namespace IncomingCasualtyHandling.Test.Integration
         }
 
         
-        // CAN'T GET IT TO WORK RIGHT NOW
         [Test]
         public void CurrentDateTimeTick_ChangePropertyInModel_PropertyInMainViewModelChanges()
         {

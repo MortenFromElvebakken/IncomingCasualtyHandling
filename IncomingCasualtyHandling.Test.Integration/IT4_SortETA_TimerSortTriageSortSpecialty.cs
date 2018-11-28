@@ -59,9 +59,6 @@ namespace IncomingCasualtyHandling.Test.Integration
         private string toHospital = "Unknown";
         private DateTimeOffset lastUpdated = new DateTimeOffset(2018, 11, 22, 8, 0, 0, new TimeSpan(0, 0, 0, 0));
 
-        private int _nEventsRaised;
-        private List<PatientModel> _sortedPatients;
-
         [SetUp]
         public void SetUp()
         {
@@ -78,12 +75,12 @@ namespace IncomingCasualtyHandling.Test.Integration
 
             _getPatients = new GetPatientsFromFhir(_loadConfig, _serialise);
 
-            _countTime = new CountTime(_MV_M, _OV_M);
+            _countTime = Substitute.For<ICountTime>();
 
             _sortEta = new SortETA(_OV_M, _DV_M, _MV_M, _countTime, _getPatients);
 
-            _sortTriage = new SortTriage(_loadConfig, _OV_M, _DV_M, _MV_M, _sortEta);
-            _sortSpecialty = new SortSpecialty(_loadConfig, _OV_M, _DV_M, _MV_M, _sortEta);
+            _sortTriage = Substitute.For<ISortTriage>();
+            _sortSpecialty = Substitute.For<ISortSpecialty>();
             
             // Create patient
             wholeName = givenName + " " + familyName;
@@ -123,7 +120,7 @@ namespace IncomingCasualtyHandling.Test.Integration
 
         #region  Timer
         [Test]
-        public void SortForETA_CallCountTime_RelativeTimeSetInMainModel()
+        public void SortForETA_CallCountTime_TimerReceivedCall()
         {
             // Set ETA to 2 hours from now
             DateTime twoHoursFromNow = DateTime.Now.AddHours(2);
@@ -132,23 +129,10 @@ namespace IncomingCasualtyHandling.Test.Integration
             string twoHoursInMinutes = "(-120 minutes)";
 
             _getPatients.GetAllPatients();
+
+            _countTime.ReceivedWithAnyArgs().FindRelativeTime(new List<PatientModel>());
 
             Assert.That(_MV_M.Eta.RelativeTime, Is.EqualTo(twoHoursInMinutes));
-
-        }
-
-        [Test]
-        public void SortForETA_CallCountTime_RelativeTimeSetInOverviewModel()
-        {
-            // Set ETA to 2 hours from now
-            DateTime twoHoursFromNow = DateTime.Now.AddHours(2);
-            Patient1.Extension[2].Value = new FhirDateTime(twoHoursFromNow);
-            
-            string twoHoursInMinutes = "(-120 minutes)";
-
-            _getPatients.GetAllPatients();
-
-            Assert.That(_OV_M.Eta.RelativeTime, Is.EqualTo(twoHoursInMinutes));
 
         }
 
