@@ -20,7 +20,7 @@ namespace IncomingCasualtyHandling.Test.Integration
         private IConvertToICHPatient _serialise;
 
         // System under test
-        private ILoadConfigurationSettings _loadConfig;
+        private LoadConfigurationSettings _loadConfig;
 
         // Drivers
         private LoadData _getPatients;

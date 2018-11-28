@@ -52,14 +52,14 @@ namespace IncomingCasualtyHandling.BL
 
         }
 
+        public delegate void PatientUpdateHandler(List<ICHPatient> sortedPatients);
+        public event PatientUpdateHandler SortedListReady;
+
         private void OnSortedListReady(List<ICHPatient> patientList)
         {
             var handler = SortedListReady;
             handler?.Invoke(patientList);
         }
-
-        public delegate void PatientUpdateHandler(List<ICHPatient> sortedPatients);
-        public event PatientUpdateHandler SortedListReady;
 
         public List<ICHPatient> SortListOnEta(List<ICHPatient> listToSort)
         {

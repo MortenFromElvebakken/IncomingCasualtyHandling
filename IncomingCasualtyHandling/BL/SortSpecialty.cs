@@ -16,7 +16,7 @@ namespace IncomingCasualtyHandling.BL
     public class SortSpecialty : ISortSpecialty
     {
         private ILoadConfigurationSettings LoadXMLSettings;
-        private List<Specialty> specialtiesList;
+        public List<Specialty> SpecialtiesList;
         private IOverviewView_Model _overviewView_Model;
         private IDetailView_Model _detailView_Model;
         private IMainView_Model _mainView_Model;
@@ -45,7 +45,7 @@ namespace IncomingCasualtyHandling.BL
             // Create a list to contain patients with an unknown specialty
             var listWithUnknownSpecialty = new List<ICHPatient>();
             // Get a copy of list from xml
-            specialtiesList = new List<Specialty>(LoadXMLSettings.ReturnSpecialtyList());  
+            SpecialtiesList = new List<Specialty>(LoadXMLSettings.ReturnSpecialtyList());  
 
             // Run through the list of lists (based on specialties)
             foreach (var specialtyResultList in results)
@@ -53,7 +53,7 @@ namespace IncomingCasualtyHandling.BL
                 // Boolean to keep track of, whether the specialty is known (recognized from the XML-file) or not
                 bool knownSpecialty = false;
 
-                foreach (var specialty in specialtiesList)
+                foreach (var specialty in SpecialtiesList)
                 {
                       // If the specialty in the list matches a specialty from the XML-file:
                     if (specialtyResultList.Key == specialty.Name)
@@ -75,7 +75,7 @@ namespace IncomingCasualtyHandling.BL
                 if (!knownSpecialty)
                 {
                     // Find the unknownSpecialty and update it's properties
-                    var unknownSpecialty = specialtiesList.Find(n => n.Name == "Unknown");
+                    var unknownSpecialty = SpecialtiesList.Find(n => n.Name == "Unknown");
                     unknownSpecialty.Amount = unknownSpecialty.Amount + specialtyResultList.Count();
                     unknownSpecialty.ShowAs = Visibility.Visible;
 
@@ -120,7 +120,7 @@ namespace IncomingCasualtyHandling.BL
             }
 
 
-            var amountSortedSpecialtyList = specialtiesList.OrderByDescending(a => a.Amount).ThenBy(a => a.Name).ToList();
+            var amountSortedSpecialtyList = SpecialtiesList.OrderByDescending(a => a.Amount).ThenBy(a => a.Name).ToList();
             
             _overviewView_Model.ListOfSpecialities = amountSortedSpecialtyList;
             _mainView_Model.Specialty1 = amountSortedSpecialtyList[0]; // Sætter specialty 1 i mainmodel så overviewcomponent kan se den med flest

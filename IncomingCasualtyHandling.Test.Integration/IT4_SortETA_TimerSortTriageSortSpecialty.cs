@@ -30,16 +30,16 @@ namespace IncomingCasualtyHandling.Test.Integration
 
 
         // System under test        
-        private ISortTriage _sortTriage;
-        private ISortSpecialty _sortSpecialty;
+        private SortTriage _sortTriage;
+        private SortSpecialty _sortSpecialty;
         private ICountTime _countTime;
 
         // Drivers
         private LoadData _getPatients;
 
         // Included 
-        private ILoadConfigurationSettings _loadConfig;
-        private ISortETA _sortEta;
+        private LoadConfigurationSettings _loadConfig;
+        private SortETA _sortEta;
         private ConvertToICHPatient _convert;
 
         // Data
@@ -79,8 +79,8 @@ namespace IncomingCasualtyHandling.Test.Integration
 
             _sortEta = new SortETA(_OV_M, _DV_M, _MV_M, _countTime, _getPatients);
 
-            _sortTriage = Substitute.For<ISortTriage>();
-            _sortSpecialty = Substitute.For<ISortSpecialty>();
+            _sortTriage = new SortTriage(_loadConfig, _OV_M, _DV_M, _MV_M, _sortEta);
+            _sortSpecialty = new SortSpecialty(_loadConfig, _OV_M, _DV_M, _MV_M, _sortEta);
             
             // Create patient
             wholeName = givenName + " " + familyName;
@@ -122,17 +122,9 @@ namespace IncomingCasualtyHandling.Test.Integration
         [Test]
         public void SortForETA_CallCountTime_TimerReceivedCall()
         {
-            // Set ETA to 2 hours from now
-            DateTime twoHoursFromNow = DateTime.Now.AddHours(2);
-            Patient1.Extension[2].Value = new FhirDateTime(twoHoursFromNow);
-
-            string twoHoursInMinutes = "(-120 minutes)";
-
             _getPatients.GetAllPatients();
 
-            _countTime.ReceivedWithAnyArgs().FindRelativeTime(new List<PatientModel>());
-
-            Assert.That(_MV_M.Eta.RelativeTime, Is.EqualTo(twoHoursInMinutes));
+            _countTime.ReceivedWithAnyArgs().FindRelativeTime(new List<ICHPatient>());
 
         }
 
@@ -140,67 +132,23 @@ namespace IncomingCasualtyHandling.Test.Integration
 
         #region SortTriage
         [Test]
-        public void SortForETA_RaiseOnSortedListEvent_SortTriageReactsAndPlacesTriagesInMainViewModel()
+        public void SortForETA_RaisesEvent_SortTriageReceivedCall()
         {
             _getPatients.GetAllPatients();
 
-            Assert.That(_MV_M.ListOfTriages[0].Amount, Is.EqualTo(1));
+            Assert.That(_sortTriage.TriageList[0].Amount, Is.EqualTo(1));
 
         }
 
-        [Test]
-        public void SortForETA_RaiseOnSortedListEvent_SortTriageReactsAndPlacesTriagesInDetailViewModel()
-        {
-            _getPatients.GetAllPatients();
-
-            Assert.That(_DV_M.ListOfTriages[0].Amount, Is.EqualTo(1));
-
-        }
-
-        [Test]
-        public void SortForETA_RaiseOnSortedListEvent_SortTriageReactsAndPlacesTriagePatientsInDetailViewModel()
-        {
-            _getPatients.GetAllPatients();
-
-            Assert.That(_DV_M.ListOfTriagePatientLists[0].Count, Is.EqualTo(1));
-
-        }
         #endregion
 
         #region SortSpecialty
         [Test]
-        public void SortForETA_RaiseOnSortedListEvent_SortSpecialtyReactsAndPlacesTopSpecialtyInMainViewModel()
+        public void SortForETA_RaisesEvent_SortSpecialtyReceivedCall()
         {
             _getPatients.GetAllPatients();
 
-            Assert.That(_MV_M.Specialty1.Name, Is.EqualTo(specialty));
-
-        }
-
-        [Test]
-        public void SortForETA_RaiseOnSortedListEvent_SortSpecialtyReactsAndPlacesTopSpecialtyInOverviewViewModel()
-        {
-            _getPatients.GetAllPatients();
-
-            Assert.That(_OV_M.ListOfSpecialities.Find(s => s.Name == specialty).Amount, Is.EqualTo(1));
-
-        }
-
-        [Test]
-        public void SortForETA_RaiseOnSortedListEvent_SortSpecialtyReactsAndPlacesSpecialtiesInDetailViewModel()
-        {
-            _getPatients.GetAllPatients();
-
-            Assert.That(_DV_M.ListOfSpecialties.Find(s => s.Name == specialty).Amount, Is.EqualTo(1));
-
-        }
-
-        [Test]
-        public void SortForETA_RaiseOnSortedListEvent_SortSpecialtyReactsAndPlacesSpecialtyPatientsInDetailViewModel()
-        {
-            _getPatients.GetAllPatients();
-
-            Assert.That(_DV_M.ListOfSpecialtiesPatientLists.Exists(s => s.Exists(p => p.Name == wholeName)), Is.True);
+            Assert.That(_sortSpecialty.SpecialtiesList.Find(s => s.Name == specialty).Amount, Is.EqualTo(1));
 
         }
         #endregion
