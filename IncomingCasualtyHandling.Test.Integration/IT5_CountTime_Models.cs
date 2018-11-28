@@ -21,7 +21,7 @@ using NUnit.Framework;
 namespace IncomingCasualtyHandling.Test.Integration
 {
     [TestFixture]
-    class IT5_Timer_Models
+    class IT5_CountTime_Models
     {
         // Fakes
         private IFhirClient _client;
@@ -125,7 +125,7 @@ namespace IncomingCasualtyHandling.Test.Integration
         public void CurrentDateTimeTick_ChangePropertyInModel_PropertyInMainViewModelChanges()
         {
             // Sleep 1.5 second to make sure, that tick has occured
-            Thread.Yield();
+            Thread.Sleep(3000);
             Assert.NotNull(_MV_M.CurrentDateTime);
         }
 
