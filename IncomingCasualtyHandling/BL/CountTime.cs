@@ -21,10 +21,8 @@ namespace IncomingCasualtyHandling.BL
         // CountTime made with inspiration from:
         // https://stackoverflow.com/a/5410783
 
-        readonly DispatcherTimer _etaTimer = new DispatcherTimer();
-
         private readonly Timer _currentDateTimeTimer = new Timer();
-        private Timer etaTimer = new Timer();
+        private readonly Timer _etaTimer = new Timer();
 
         public CountTime(IMainView_Model mainViewModel, IOverviewView_Model overviewViewModel)
         {
@@ -115,10 +113,10 @@ namespace IncomingCasualtyHandling.BL
             CalculateRelativeTime(_timeDifference, _timeSpan);
 
 
-            etaTimer.Elapsed += (sender, e) => { ETATime_TimerTick(sender, e, nextEta); };
-            etaTimer.Interval = 1000; // 1 second
-            etaTimer.AutoReset = true; //Should run more than once
-            etaTimer.Enabled = true; // Start timer
+            _etaTimer.Elapsed += (sender, e) => { ETATime_TimerTick(sender, e, nextEta); };
+            _etaTimer.Interval = 1000; // 1 second
+            _etaTimer.AutoReset = true; //Should run more than once
+            _etaTimer.Enabled = true; // Start timer
 
         }
 
