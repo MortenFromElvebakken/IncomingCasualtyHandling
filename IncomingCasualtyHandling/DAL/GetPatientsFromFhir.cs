@@ -16,7 +16,7 @@ namespace IncomingCasualtyHandling.DAL
 {
     public class GetPatientsFromFhir : IGetPatientsFromFHIR
     {
-        private readonly string _fhirServerUrl;
+        private string _fhirServerUrl;
         public IFhirClient Client { get; set; }
         private readonly ISerializeToPatient _serializePatient;
         private readonly ILoadConfigurationSettings _loadConfigSettingsFromXmlDocument;
@@ -131,7 +131,7 @@ namespace IncomingCasualtyHandling.DAL
                 List<Patient> changedPatients = new List<Patient>();
                 foreach (var entry in b.Entry)
                 {
-                    var testEntry = _client.Read<Patient>(_fhirServerUrl + "/Patient/" + b.Entry[counterTest].Resource.Id);
+                    var testEntry = Client.Read<Patient>(_fhirServerUrl + "/Patient/" + b.Entry[counterTest].Resource.Id);
                     changedPatients.Add(testEntry);
                     counterTest++;
                 }
@@ -179,7 +179,7 @@ namespace IncomingCasualtyHandling.DAL
                 //int counterTest = 0;
                 //foreach (var entry in anyChangedResources.Entry)
                 //{
-                //    var testEntry = _client.Read<Patient>(_fhirServerUrl + "/Patient/" + anyChangedResources.Entry[counterTest].Resource.Id);
+                //    var testEntry = Client.Read<Patient>(_fhirServerUrl + "/Patient/" + anyChangedResources.Entry[counterTest].Resource.Id);
                 //    counterTest++;
                 //}
 
