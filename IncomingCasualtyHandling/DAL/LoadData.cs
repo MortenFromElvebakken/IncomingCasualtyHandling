@@ -14,24 +14,24 @@ using Task = Hl7.Fhir.Model.Task;
 
 namespace IncomingCasualtyHandling.DAL
 {
-    public class GetPatientsFromFhir : IGetPatientsFromFHIR
+    public class LoadData : ILoadData
     {
         private string _fhirServerUrl;
         public IFhirClient Client { get; set; }
-        private readonly ISerializeToPatient _serializePatient;
+        private readonly IConvertToICHPatient _convertICHPatient;
         private readonly ILoadConfigurationSettings _loadConfigSettingsFromXmlDocument;
         private readonly SearchParams _sParameters;
         private static Thread _myThread;
         private DateTime _dateOfLastSearch;
         private bool _internet;
 
-        public GetPatientsFromFhir(ILoadConfigurationSettings _lcs, ISerializeToPatient _isp)
+        public LoadData(ILoadConfigurationSettings _lcs, IConvertToICHPatient _isp)
         {
             _loadConfigSettingsFromXmlDocument = _lcs;
             _fhirServerUrl = GetServerUrl();
             
             Client = new FhirClient(_fhirServerUrl);
-            _serializePatient = _isp;
+            _convertICHPatient = _isp;
             _internet = true;
             _dateOfLastSearch = DateTime.MinValue;
 
@@ -54,7 +54,7 @@ namespace IncomingCasualtyHandling.DAL
         public void GetAllPatients()
         {
 
-            List<PatientModel> listOfPatients = new List<PatientModel>();
+            List<ICHPatient> listOfPatients = new List<ICHPatient>();
             var firstBundle = default(Bundle);
 
             //In a try catch, in case there is no server connection
@@ -81,7 +81,7 @@ namespace IncomingCasualtyHandling.DAL
                 foreach (var x in firstBundle.Entry)
                 {
                     var testpatient = (Patient)x.Resource;
-                    PatientModel op = _serializePatient.ReturnPatient(testpatient);
+                    ICHPatient op = _convertICHPatient.ReturnPatient(testpatient);
                     listOfPatients.Add(op);
                 }
                 firstBundle = Client.Continue(firstBundle, PageDirection.Next);
@@ -95,10 +95,10 @@ namespace IncomingCasualtyHandling.DAL
         }
 
         //eventlogic, creates Event with list of patients, and invokes it. 
-        public delegate void PatientUpdateHandler(List<PatientModel> _listOfPatients);
+        public delegate void PatientUpdateHandler(List<ICHPatient> _listOfPatients);
         public event PatientUpdateHandler PatientDataReady;
 
-        private void UpdatePatients(List<PatientModel> _patientList)
+        private void UpdatePatients(List<ICHPatient> _patientList)
         {
             var handler = PatientDataReady;
             handler?.Invoke(_patientList);
@@ -175,30 +175,6 @@ namespace IncomingCasualtyHandling.DAL
                 }
 
                 sameAsLast = checkIfSamePatientsReturned(anyChangedResources);
-
-                //int counterTest = 0;
-                //foreach (var entry in anyChangedResources.Entry)
-                //{
-                //    var testEntry = Client.Read<Patient>(_fhirServerUrl + "/Patient/" + anyChangedResources.Entry[counterTest].Resource.Id);
-                //    counterTest++;
-                //}
-
-                //int CheckIfPatientsAreTheSame = counterTest;
-                //for (int i = 0; i < counterTest; i++)
-                //{
-                //    if (lastChangedPatients != null && changedPatients[i].Meta.LastUpdated == lastChangedPatients[i].Meta.LastUpdated)
-                //    {
-                //        CheckIfPatientsAreTheSame--;
-                //    }
-                //}
-
-                //if (anyChangedResources.Entry.Count != 0 && CheckIfPatientsAreTheSame == 0)
-                //{
-                //    sameAsLast = false;
-                //}
-
-
-
             }
             catch (Exception e)
             {
@@ -210,14 +186,14 @@ namespace IncomingCasualtyHandling.DAL
             if (anyChangedResources != null && !sameAsLast)
             {
                 var newBundle = Client.SearchAsync<Patient>(_sParameters).Result;
-                List<PatientModel> listOfPatients = new List<PatientModel>();
+                List<ICHPatient> listOfPatients = new List<ICHPatient>();
                 
                 while (newBundle != null)
                 {
                     foreach (var x in newBundle.Entry)
                     {
                         var testpatient = (Patient)x.Resource;
-                        PatientModel op = _serializePatient.ReturnPatient(testpatient);
+                        ICHPatient op = _convertICHPatient.ReturnPatient(testpatient);
                         listOfPatients.Add(op);
                     }
                     newBundle = Client.Continue(newBundle, PageDirection.Next);
@@ -245,7 +221,7 @@ namespace IncomingCasualtyHandling.DAL
                         {
                             if (p.CPR == cpr)
                             {
-                                    listOfPatients[counter2] = _serializePatient.ReturnPatient(patient);
+                                    listOfPatients[counter2] = _convertICHPatient.ReturnPatient(patient);
                                     didItContainElement = true;
                                 break;
                             }
@@ -255,7 +231,7 @@ namespace IncomingCasualtyHandling.DAL
 
                         if (!didItContainElement)
                         {
-                            listOfPatients.Add(_serializePatient.ReturnPatient(patient));
+                            listOfPatients.Add(_convertICHPatient.ReturnPatient(patient));
                         }
                     }
                 }

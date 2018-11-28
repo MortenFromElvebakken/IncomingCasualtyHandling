@@ -16,11 +16,11 @@ namespace IncomingCasualtyHandling.BL.Models
     {
 
 
-        private IGetPatientsFromFHIR iGetPatientsFromFhir;
-        public MainView_Model(IGetPatientsFromFHIR _IGetPatientsFromFHIR)
+        private ILoadData _iLoadData;
+        public MainView_Model(ILoadData iLoadData)
         {
-            iGetPatientsFromFhir = _IGetPatientsFromFHIR;
-            iGetPatientsFromFhir.NoInternet += setInternetProperty;
+            _iLoadData = iLoadData;
+            _iLoadData.NoInternet += setInternetProperty;
         }
 
         
@@ -46,7 +46,7 @@ namespace IncomingCasualtyHandling.BL.Models
             set
             {
                 _serverName = value;
-                iGetPatientsFromFhir.setFhirClientURL(_serverName);
+                _iLoadData.setFhirClientURL(_serverName);
             }
         }
 
@@ -108,7 +108,7 @@ namespace IncomingCasualtyHandling.BL.Models
             set => ListOfTriages[5] = value;
         }
 
-        public ETA Eta { get; set; }
+        public ETA ETA { get; set; }
 
         public Specialty Specialty1 { get; set; }
         #endregion

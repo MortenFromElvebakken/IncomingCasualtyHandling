@@ -32,8 +32,8 @@ namespace IncomingCasualtyHandling.Test.Unit.BL.Test.Unit
 
 
         private List<Triage> _listOfTriages;
-        private List<PatientModel> _listOfPatients, _sortedListOfPatients;
-        private PatientModel _patient1, _patient2, _patient3, _patient4, _patient5;
+        private List<ICHPatient> _listOfPatients, _sortedListOfPatients;
+        private ICHPatient _patient1, _patient2, _patient3, _patient4, _patient5;
         string unknownTriageName = "TriageUnknown";
 
         [SetUp]
@@ -59,9 +59,9 @@ namespace IncomingCasualtyHandling.Test.Unit.BL.Test.Unit
                     _sortEta);
 
             // Create a list with patients
-            _listOfPatients = new List<PatientModel>();
-            _sortedListOfPatients = new List<PatientModel>();
-            _patient1 = new PatientModel
+            _listOfPatients = new List<ICHPatient>();
+            _sortedListOfPatients = new List<ICHPatient>();
+            _patient1 = new ICHPatient
 
             {
                 CPR = "1",
@@ -73,7 +73,7 @@ namespace IncomingCasualtyHandling.Test.Unit.BL.Test.Unit
                 ToHospital = "AUH",
                 ETA = new DateTime(2018, 11, 18, 22, 30, 00)
             };
-            _patient2 = new PatientModel
+            _patient2 = new ICHPatient
             {
                 CPR = "2",
                 Name = "Patient Two",
@@ -134,7 +134,7 @@ namespace IncomingCasualtyHandling.Test.Unit.BL.Test.Unit
         [Test]
         public void SortForTriage_ListWith3DifferentSpecialties_AddSortedListWith3ListsToModel()
         {
-            _patient3 = new PatientModel
+            _patient3 = new ICHPatient
             {
                 CPR = "3",
                 Name = "Patient Three",
@@ -154,7 +154,7 @@ namespace IncomingCasualtyHandling.Test.Unit.BL.Test.Unit
         [Test]
         public void SortForTriage_ListWithUnknownTriage_AddSortedListWith3ListsToModel()
         {
-            _patient3 = new PatientModel
+            _patient3 = new ICHPatient
             {
                 CPR = "3",
                 Name = "Patient Three",
@@ -167,7 +167,7 @@ namespace IncomingCasualtyHandling.Test.Unit.BL.Test.Unit
             };
             _listOfPatients.Add(_patient3);
 
-            PatientModel patient3Wut = new PatientModel
+            ICHPatient patient3Wut = new ICHPatient
             {
                 CPR = "3",
                 Name = "Patient Three",
@@ -190,7 +190,7 @@ namespace IncomingCasualtyHandling.Test.Unit.BL.Test.Unit
         [Test]
         public void SortForSpecialty_ListWithPatientWithoutTriage_PatientEndsInUnknownTriageList()
         {
-            _patient3 = new PatientModel
+            _patient3 = new ICHPatient
             {
                 CPR = "3",
                 Name = "Patient Three",
@@ -203,7 +203,7 @@ namespace IncomingCasualtyHandling.Test.Unit.BL.Test.Unit
             };
             _listOfPatients.Add(_patient3);
 
-            PatientModel patient3Wut = new PatientModel
+            ICHPatient patient3Wut = new ICHPatient
             {
                 CPR = "3",
                 Name = "Patient Three",
@@ -227,7 +227,7 @@ namespace IncomingCasualtyHandling.Test.Unit.BL.Test.Unit
         public void SortForSpecialty_ListWithPatientWithoutTriageAndEta_PatientEndsLastInUnknownTriageList()
         {
             _patient1.Triage = _listOfTriages[3].Name;
-            _patient3 = new PatientModel
+            _patient3 = new ICHPatient
             {
                 CPR = "3",
                 Name = "Patient Three",
@@ -237,7 +237,7 @@ namespace IncomingCasualtyHandling.Test.Unit.BL.Test.Unit
                 Specialty = "",
                 ToHospital = "AUH",
             };
-            _patient4 = new PatientModel
+            _patient4 = new ICHPatient
             {
                 CPR = "4",
                 Name = "Patient Four",
@@ -251,9 +251,9 @@ namespace IncomingCasualtyHandling.Test.Unit.BL.Test.Unit
             _listOfPatients.Add(_patient3);
             _listOfPatients.Add(_patient4);
 
-            List<PatientModel> unknownTriagePatients = new List<PatientModel>();
+            List<ICHPatient> unknownTriagePatients = new List<ICHPatient>();
             
-            PatientModel patient3UnknownTriage = new PatientModel
+            ICHPatient patient3UnknownTriage = new ICHPatient
             {
                 CPR = "3",
                 Name = "Patient Three",
@@ -263,7 +263,7 @@ namespace IncomingCasualtyHandling.Test.Unit.BL.Test.Unit
                 Specialty = "",
                 ToHospital = "AUH",
             };
-            PatientModel patient4UnknownTriage = new PatientModel
+            ICHPatient patient4UnknownTriage = new ICHPatient
             {
                 CPR = "4",
                 Name = "Patient Four",

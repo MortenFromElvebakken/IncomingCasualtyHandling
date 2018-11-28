@@ -9,7 +9,7 @@ namespace IncomingCasualtyHandling.BL.Interfaces
 {
     public interface ICountTime
     {
-        void FindRelativeTime(List<PatientModel> sortedEtas);
+        void FindRelativeTime(List<ICHPatient> sortedETAs);
 
     }
 }

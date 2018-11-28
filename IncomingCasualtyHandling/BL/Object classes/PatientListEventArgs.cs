@@ -8,11 +8,11 @@ namespace IncomingCasualtyHandling.BL.Object_classes
 {
     public class PatientListEventArgs
     {
-        public PatientListEventArgs(List<PatientModel> sortedList)
+        public PatientListEventArgs(List<ICHPatient> sortedList)
         {
             this.SortedList = sortedList;
         }
 
-        public List<PatientModel> SortedList { get; }
+        public List<ICHPatient> SortedList { get; }
     }
 }

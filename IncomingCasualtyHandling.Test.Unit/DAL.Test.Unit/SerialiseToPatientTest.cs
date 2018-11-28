@@ -18,7 +18,7 @@ namespace IncomingCasualtyHandling.Test.Unit.DAL.Test.Unit
     {
         #region Arrange
 
-        private ISerializeToPatient _uut;
+        private IConvertToICHPatient _uut;
 
         public Patient Patient1;
 
@@ -36,7 +36,7 @@ namespace IncomingCasualtyHandling.Test.Unit.DAL.Test.Unit
         [SetUp]
         public void Setup()
         {
-            _uut = new SerialiseToPatient();
+            _uut = new ConvertToICHPatient();
 
             wholeName = givenName + " " + familyName;
 
@@ -71,56 +71,56 @@ namespace IncomingCasualtyHandling.Test.Unit.DAL.Test.Unit
         [Test]
         public void ReturnPatient_ReceivedCompletePatient_CreatesPatientEta()
         {
-            PatientModel patient = _uut.ReturnPatient(Patient1);
-            Assert.That(patient.ETA, Is.EqualTo(eta));
+            ICHPatient ichPatient = _uut.ReturnPatient(Patient1);
+            Assert.That(ichPatient.ETA, Is.EqualTo(eta));
         }
 
         //Correct serialisation of Gender
         [Test]
         public void ReturnPatient_ReceivedCompletePatient_CreatesPatientGender()
         {
-            PatientModel patient = _uut.ReturnPatient(Patient1);
-            Assert.That(patient.Gender, Is.EqualTo(gender));
+            ICHPatient ichPatient = _uut.ReturnPatient(Patient1);
+            Assert.That(ichPatient.Gender, Is.EqualTo(gender));
         }
 
         //Correct serialisation of Name
         [Test]
         public void ReturnPatient_ReceivedCompletePatient_CreatesPatientName()
         {
-            PatientModel patient = _uut.ReturnPatient(Patient1);
-            Assert.That(patient.Name, Is.EqualTo(wholeName));
+            ICHPatient ichPatient = _uut.ReturnPatient(Patient1);
+            Assert.That(ichPatient.Name, Is.EqualTo(wholeName));
         }
 
         // Correct serialisation of CPR
         [Test]
         public void ReturnPatient_ReceivedCompletePatient_CreatesPatientId()
         {
-            PatientModel patient = _uut.ReturnPatient(Patient1);
-            Assert.That(patient.CPR, Is.EqualTo(cpr));
+            ICHPatient ichPatient = _uut.ReturnPatient(Patient1);
+            Assert.That(ichPatient.CPR, Is.EqualTo(cpr));
         }
 
         //Correct serialisation of Specialty
         [Test]
         public void ReturnPatient_ReceivedCompletePatient_CreatesPatientSpecialty()
         {
-            PatientModel patient = _uut.ReturnPatient(Patient1);
-            Assert.That(patient.Specialty, Is.EqualTo(specialty));
+            ICHPatient ichPatient = _uut.ReturnPatient(Patient1);
+            Assert.That(ichPatient.Specialty, Is.EqualTo(specialty));
         }
 
         //Correct serialisation of Triage
         [Test]
         public void ReturnPatient_ReceivedCompletePatient_CreatesPatientTriage()
         {
-            PatientModel patient = _uut.ReturnPatient(Patient1);
-            Assert.That(patient.Triage, Is.EqualTo(triage));
+            ICHPatient ichPatient = _uut.ReturnPatient(Patient1);
+            Assert.That(ichPatient.Triage, Is.EqualTo(triage));
         }
 
         //Correct serialisation of ToHospital
         [Test]
         public void ReturnPatient_ReceivedPatientWithoutToHospital_CreatesPatientToHospitalCorrect()
         {
-            PatientModel patient = _uut.ReturnPatient(Patient1);
-            Assert.That(patient.ToHospital, Is.EqualTo(toHospital));
+            ICHPatient ichPatient = _uut.ReturnPatient(Patient1);
+            Assert.That(ichPatient.ToHospital, Is.EqualTo(toHospital));
         }
 
         #endregion

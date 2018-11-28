@@ -8,8 +8,8 @@ using System.Threading.Tasks;
 
 namespace IncomingCasualtyHandling.DAL.Interface
 {
-    public interface ISerializeToPatient
+    public interface IConvertToICHPatient
     {
-        PatientModel ReturnPatient(Patient newEntry);
+        ICHPatient ReturnPatient(Patient newEntry);
     }
 }

@@ -3,7 +3,7 @@ using Hl7.Fhir.Model;
 
 namespace IncomingCasualtyHandling.BL.Object_classes
 {
-    public class PatientModel : ObservableObject
+    public class ICHPatient : ObservableObject
     {
         public string CPR { get; set; }
         public string Name { get; set; }

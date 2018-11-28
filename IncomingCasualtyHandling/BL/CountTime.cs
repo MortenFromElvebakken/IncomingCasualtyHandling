@@ -55,10 +55,10 @@ namespace IncomingCasualtyHandling.BL
         }
 
         // List to contain ETAs
-        private List<PatientModel> _listOfEtas;
+        private List<ICHPatient> _listOfEtas;
         
         // Method to find the next coming ETA
-        public void FindRelativeTime(List<PatientModel> sortedEtas)
+        public void FindRelativeTime(List<ICHPatient> sortedEtas)
         {
             _listOfEtas = sortedEtas;
             // Check the ETAs to see, if they are in the future

@@ -17,13 +17,13 @@ namespace IncomingCasualtyHandling.Test.Integration
     class IT1_GetPatients_LoadConfig
     {
         // Fakes
-        private ISerializeToPatient _serialise;
+        private IConvertToICHPatient _serialise;
 
         // System under test
         private ILoadConfigurationSettings _loadConfig;
 
         // Drivers
-        private GetPatientsFromFhir _getPatients;
+        private LoadData _getPatients;
 
         // Included 
 
@@ -35,13 +35,13 @@ namespace IncomingCasualtyHandling.Test.Integration
         [SetUp]
         public void SetUp()
         {
-            _serialise = Substitute.For<ISerializeToPatient>();
+            _serialise = Substitute.For<IConvertToICHPatient>();
 
             _xmlDocumentPath =
                 "E://Visual Studio 2017//BAC//IncomingCasualtyHandling.Test.Integration//Configuration.xml";
-            _loadConfig = new LoadConfigurationSettingsFromXMLDocument(_xmlDocumentPath);
+            _loadConfig = new LoadConfigurationSettings(_xmlDocumentPath);
 
-            _getPatients = new GetPatientsFromFhir(_loadConfig, _serialise);
+            _getPatients = new LoadData(_loadConfig, _serialise);
 
         }
 

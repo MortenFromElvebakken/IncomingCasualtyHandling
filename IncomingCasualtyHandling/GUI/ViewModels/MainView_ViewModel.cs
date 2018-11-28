@@ -17,7 +17,7 @@ namespace IncomingCasualtyHandling.GUI.ViewModels
     internal class MainView_ViewModel : ObservableObject
     {
         private string _test;
-        private List<PatientModel> _listOfPatients;
+        private List<ICHPatient> _listOfPatients;
 
         IOverviewView_Model _overviewModel;
 
@@ -136,7 +136,7 @@ namespace IncomingCasualtyHandling.GUI.ViewModels
 
         public string NoConnectionString => _mainModel.NoConnectionString;
 
-        public List<PatientModel> ListOfPatients
+        public List<ICHPatient> ListOfPatients
         {
             get { return _listOfPatients; }
             set
@@ -160,6 +160,6 @@ namespace IncomingCasualtyHandling.GUI.ViewModels
 
         public Specialty Specialty1 => _mainModel.Specialty1;
 
-        public ETA Eta => _mainModel.Eta;
+        public ETA Eta => _mainModel.ETA;
     }
 }

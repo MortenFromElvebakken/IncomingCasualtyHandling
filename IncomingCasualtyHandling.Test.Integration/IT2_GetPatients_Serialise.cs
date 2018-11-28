@@ -24,10 +24,10 @@ namespace IncomingCasualtyHandling.Test.Integration
         private IFhirClient _client;
 
         // System under test        
-        private SerialiseToPatient _serialise;
+        private ConvertToICHPatient _convert;
 
         // Drivers
-        private GetPatientsFromFhir _getPatients;
+        private LoadData _getPatients;
 
         // Included 
         private ILoadConfigurationSettings _loadConfig;
@@ -35,7 +35,7 @@ namespace IncomingCasualtyHandling.Test.Integration
         // Data
         private string _xmlDocumentPath;
         private string _xmlServerName = "http://localhost:8080/hapi-fhir-jpaserver-example/baseDstu3";
-        private List<PatientModel> _patientList;
+        private List<ICHPatient> _patientList;
         public Patient Patient1 = new Patient();
 
         string triage = "TriageRed";
@@ -52,13 +52,13 @@ namespace IncomingCasualtyHandling.Test.Integration
         [SetUp]
         public void SetUp()
         {
-            _serialise = new SerialiseToPatient();
+            _convert = new ConvertToICHPatient();
 
             _xmlDocumentPath =
                 "E://Visual Studio 2017//BAC//IncomingCasualtyHandling.Test.Integration//Configuration.xml";
-            _loadConfig = new LoadConfigurationSettingsFromXMLDocument(_xmlDocumentPath);
+            _loadConfig = new LoadConfigurationSettings(_xmlDocumentPath);
 
-            _getPatients = new GetPatientsFromFhir(_loadConfig, _serialise);
+            _getPatients = new LoadData(_loadConfig, _convert);
 
             _getPatients.PatientDataReady += (o) => _patientList = o;
 

@@ -13,8 +13,8 @@ namespace IncomingCasualtyHandling.BL.Models
     {
         public string Name { get; set; }
 
-        private ObservableCollection<PatientModel> _data;
-        public ObservableCollection<PatientModel> Data
+        private ObservableCollection<ICHPatient> _data;
+        public ObservableCollection<ICHPatient> Data
         {
             get => _data;
             set

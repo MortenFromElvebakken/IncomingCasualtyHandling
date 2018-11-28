@@ -136,7 +136,7 @@ namespace IncomingCasualtyHandling.BL.Models
         #region ETA
 
         private ETA _eta;
-        public ETA Eta
+        public ETA ETA
         {
             get => _eta;
             set

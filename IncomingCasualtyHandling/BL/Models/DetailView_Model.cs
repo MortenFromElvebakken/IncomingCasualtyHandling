@@ -12,6 +12,7 @@ using System.ComponentModel;
 using System.Reflection;
 using System.Threading;
 
+
 namespace IncomingCasualtyHandling.BL.Models
 {
     public class DetailView_Model : ObservableObject, IDetailView_Model
@@ -34,9 +35,9 @@ namespace IncomingCasualtyHandling.BL.Models
             }
         }
 
-        private List<List<PatientModel>> _listOfTriagePatientLists;
+        private List<List<ICHPatient>> _listOfTriagePatientLists;
 
-        public List<List<PatientModel>> ListOfTriagePatientLists
+        public List<List<ICHPatient>> ListOfTriagePatientLists
         {
             get => _listOfTriagePatientLists;
             set
@@ -58,37 +59,37 @@ namespace IncomingCasualtyHandling.BL.Models
         }
 
 
-        public List<PatientModel> Triage1Patients
+        public List<ICHPatient> Triage1Patients
         {
             get => ListOfTriagePatientLists[0];
             set => ListOfTriagePatientLists[0] = value;
         }
 
-        public List<PatientModel> Triage2Patients
+        public List<ICHPatient> Triage2Patients
         {
             get => ListOfTriagePatientLists[1];
             set => ListOfTriagePatientLists[1] = value;
         }
 
-        public List<PatientModel> Triage3Patients
+        public List<ICHPatient> Triage3Patients
         {
             get => ListOfTriagePatientLists[2];
             set => ListOfTriagePatientLists[2] = value;
         }
 
-        public List<PatientModel> Triage4Patients
+        public List<ICHPatient> Triage4Patients
         {
             get => ListOfTriagePatientLists[3];
             set => ListOfTriagePatientLists[3] = value;
         }
 
-        public List<PatientModel> Triage5Patients
+        public List<ICHPatient> Triage5Patients
         {
             get => ListOfTriagePatientLists[4];
             set => ListOfTriagePatientLists[4] = value;
         }
 
-        public List<PatientModel> Triage6Patients
+        public List<ICHPatient> Triage6Patients
         {
             get => ListOfTriagePatientLists[5];
             set => ListOfTriagePatientLists[5] = value;
@@ -110,8 +111,8 @@ namespace IncomingCasualtyHandling.BL.Models
             }
         }
 
-        private List<List<PatientModel>> _listOfSpecialtiesPatientLists;
-        public List<List<PatientModel>> ListOfSpecialtiesPatientLists
+        private List<List<ICHPatient>> _listOfSpecialtiesPatientLists;
+        public List<List<ICHPatient>> ListOfSpecialtiesPatientLists
         {
             get => _listOfSpecialtiesPatientLists;
             set
@@ -138,97 +139,97 @@ namespace IncomingCasualtyHandling.BL.Models
 
         #region specialtiesInList
 
-        public List<PatientModel> Specialty1Patients
+        public List<ICHPatient> Specialty1Patients
         {
             get => ListOfSpecialtiesPatientLists[0];
             set => ListOfSpecialtiesPatientLists[0] = value;
         }
 
-        public List<PatientModel> Specialty2Patients
+        public List<ICHPatient> Specialty2Patients
         {
             get => ListOfSpecialtiesPatientLists[1];
             set => ListOfSpecialtiesPatientLists[1] = value;
         }
 
-        public List<PatientModel> Specialty3Patients
+        public List<ICHPatient> Specialty3Patients
         {
             get => ListOfSpecialtiesPatientLists[2];
             set => ListOfSpecialtiesPatientLists[2] = value;
         }
 
-        public List<PatientModel> Specialty4Patients
+        public List<ICHPatient> Specialty4Patients
         {
             get => ListOfSpecialtiesPatientLists[3];
             set => ListOfSpecialtiesPatientLists[3] = value;
         }
 
-        public List<PatientModel> Specialty5Patients
+        public List<ICHPatient> Specialty5Patients
         {
             get => ListOfSpecialtiesPatientLists[4];
             set => ListOfSpecialtiesPatientLists[4] = value;
         }
 
-        public List<PatientModel> Specialty6Patients
+        public List<ICHPatient> Specialty6Patients
         {
             get => ListOfSpecialtiesPatientLists[5];
             set => ListOfSpecialtiesPatientLists[5] = value;
         }
 
-        public List<PatientModel> Specialty7Patients
+        public List<ICHPatient> Specialty7Patients
         {
             get => ListOfSpecialtiesPatientLists[6];
             set => ListOfSpecialtiesPatientLists[6] = value;
         }
 
-        public List<PatientModel> Specialty8Patients
+        public List<ICHPatient> Specialty8Patients
         {
             get => ListOfSpecialtiesPatientLists[7];
             set => ListOfSpecialtiesPatientLists[7] = value;
         }
 
-        public List<PatientModel> Specialty9Patients
+        public List<ICHPatient> Specialty9Patients
         {
             get => ListOfSpecialtiesPatientLists[8];
             set => ListOfSpecialtiesPatientLists[8] = value;
         }
 
-        public List<PatientModel> Specialty10Patients
+        public List<ICHPatient> Specialty10Patients
         {
             get => ListOfSpecialtiesPatientLists[9];
             set => ListOfSpecialtiesPatientLists[9] = value;
         }
 
-        public List<PatientModel> Specialty11Patients
+        public List<ICHPatient> Specialty11Patients
         {
             get => ListOfSpecialtiesPatientLists[10];
             set => ListOfSpecialtiesPatientLists[10] = value;
         }
 
-        public List<PatientModel> Specialty12Patients
+        public List<ICHPatient> Specialty12Patients
         {
             get => ListOfSpecialtiesPatientLists[11];
             set => ListOfSpecialtiesPatientLists[11] = value;
         }
 
-        public List<PatientModel> Specialty13Patients
+        public List<ICHPatient> Specialty13Patients
         {
             get => ListOfSpecialtiesPatientLists[12];
             set => ListOfSpecialtiesPatientLists[12] = value;
         }
 
-        public List<PatientModel> Specialty14Patients
+        public List<ICHPatient> Specialty14Patients
         {
             get => ListOfSpecialtiesPatientLists[13];
             set => ListOfSpecialtiesPatientLists[13] = value;
         }
 
-        public List<PatientModel> Specialty15Patients
+        public List<ICHPatient> Specialty15Patients
         {
             get => ListOfSpecialtiesPatientLists[14];
             set => ListOfSpecialtiesPatientLists[14] = value;
         }
 
-        public List<PatientModel> Specialty16Patients
+        public List<ICHPatient> Specialty16Patients
         {
             get => ListOfSpecialtiesPatientLists[15];
             set => ListOfSpecialtiesPatientLists[15] = value;
@@ -236,10 +237,10 @@ namespace IncomingCasualtyHandling.BL.Models
 
         #endregion
 
-        #region Eta
+        #region ETA
 
-        private List<PatientModel> _ETAPatients;
-        public List<PatientModel> ETAPatients
+        private List<ICHPatient> _ETAPatients;
+        public List<ICHPatient> ETAPatients
         {
             get => _ETAPatients;
             set
@@ -274,17 +275,17 @@ namespace IncomingCasualtyHandling.BL.Models
                 {
                     OldValue = _selectedTabIndex;
                     _selectedTabIndex = value;
-                    Thread testThread = new Thread(setTabIndexAgain);
+                    Thread testThread = new Thread(SetTabIndexAgain);
                     testThread.Start();
                 }
-                    //When _selectedIndex is set, it also sets a new PatientsInList string
             }
         }
         private int OldValue { get; set; }
-        public void setTabIndexAgain()
+        public void SetTabIndexAgain()
         {
             Thread.Sleep(50);
             SelectedTabIndex = OldValue;
+            
         }
 
         public void SetTabIndex()
@@ -357,7 +358,7 @@ namespace IncomingCasualtyHandling.BL.Models
                                 var _tab = new TabControl()
                                 {
                                     Name = triage.Name,
-                                    Data = new ObservableCollection<PatientModel>(ListOfTriagePatientLists.Find(item => item[0].Triage == triage.Name)),
+                                    Data = new ObservableCollection<ICHPatient>(ListOfTriagePatientLists.Find(item => item[0].Triage == triage.Name)),
                                     isVisible = Visibility.Visible
                                 };
                                 _tempTabList.Add(_tab);
@@ -388,7 +389,7 @@ namespace IncomingCasualtyHandling.BL.Models
                                 var _tab = new TabControl()
                                 {
                                     Name = specialty.Name,
-                                    Data = new ObservableCollection<PatientModel>(ListOfSpecialtiesPatientLists.Find(item => item[0].Specialty == specialty.Name)),
+                                    Data = new ObservableCollection<ICHPatient>(ListOfSpecialtiesPatientLists.Find(item => item[0].Specialty == specialty.Name)),
                                     isVisible = Visibility.Visible
                                 };
                                 _tempTabList.Add(_tab);
@@ -416,7 +417,7 @@ namespace IncomingCasualtyHandling.BL.Models
                         var _tab = new TabControl()
                         {
                             Name = "ETA",
-                            Data = new ObservableCollection<PatientModel>(ETAPatients),
+                            Data = new ObservableCollection<ICHPatient>(ETAPatients),
                             isVisible = Visibility.Visible
                         };
                         _tempTabList.Add(_tab);
@@ -528,16 +529,16 @@ namespace IncomingCasualtyHandling.BL.Models
                         {
                             if (tab.Data != null)
                             {
-                                var testlist = new List<PatientModel>(tab.Data.ToList());
+                                var testlist = new List<ICHPatient>(tab.Data.ToList());
                                 testlist.Sort((p1, p2) => String.Compare(p1.Name, p2.Name, StringComparison.CurrentCulture));
                                 if (_sortDirection == ListSortDirection.Descending)
                                 {
                                     testlist.Reverse();
-                                    tab.Data = new ObservableCollection<PatientModel>(testlist);
+                                    tab.Data = new ObservableCollection<ICHPatient>(testlist);
                                 }
                                 else
                                 {
-                                    tab.Data = new ObservableCollection<PatientModel>(testlist);
+                                    tab.Data = new ObservableCollection<ICHPatient>(testlist);
                                 }
                             }
                         }
@@ -549,16 +550,16 @@ namespace IncomingCasualtyHandling.BL.Models
                         {
                             if (tab.Data != null)
                             {
-                                var testlist = new List<PatientModel>(tab.Data.ToList());
+                                var testlist = new List<ICHPatient>(tab.Data.ToList());
                                 testlist.Sort((p1, p2) => String.Compare(p1.CPR, p2.CPR, StringComparison.CurrentCulture));
                                 if (_sortDirection == ListSortDirection.Descending)
                                 {
                                     testlist.Reverse();
-                                    tab.Data = new ObservableCollection<PatientModel>(testlist);
+                                    tab.Data = new ObservableCollection<ICHPatient>(testlist);
                                 }
                                 else
                                 {
-                                    tab.Data = new ObservableCollection<PatientModel>(testlist);
+                                    tab.Data = new ObservableCollection<ICHPatient>(testlist);
                                 }
                             }
                         }
@@ -570,16 +571,16 @@ namespace IncomingCasualtyHandling.BL.Models
                         {
                             if (tab.Data != null)
                             {
-                                var testlist = new List<PatientModel>(tab.Data.ToList());
+                                var testlist = new List<ICHPatient>(tab.Data.ToList());
                                 testlist.Sort((p1, p2) => String.Compare(p1.Age, p2.Age, StringComparison.CurrentCulture));
                                 if (_sortDirection == ListSortDirection.Descending)
                                 {
                                     testlist.Reverse();
-                                    tab.Data = new ObservableCollection<PatientModel>(testlist);
+                                    tab.Data = new ObservableCollection<ICHPatient>(testlist);
                                 }
                                 else
                                 {
-                                    tab.Data = new ObservableCollection<PatientModel>(testlist);
+                                    tab.Data = new ObservableCollection<ICHPatient>(testlist);
                                 }
                             }
                         }
@@ -591,16 +592,16 @@ namespace IncomingCasualtyHandling.BL.Models
                         {
                             if (tab.Data != null)
                             {
-                                var testlist = new List<PatientModel>(tab.Data.ToList());
+                                var testlist = new List<ICHPatient>(tab.Data.ToList());
                                 testlist.Sort((p1, p2) => String.Compare(p1.Gender.ToString(), p2.Gender.ToString(), StringComparison.CurrentCulture));
                                 if (_sortDirection == ListSortDirection.Descending)
                                 {
                                     testlist.Reverse();
-                                    tab.Data = new ObservableCollection<PatientModel>(testlist);
+                                    tab.Data = new ObservableCollection<ICHPatient>(testlist);
                                 }
                                 else
                                 {
-                                    tab.Data = new ObservableCollection<PatientModel>(testlist);
+                                    tab.Data = new ObservableCollection<ICHPatient>(testlist);
                                 }
                             }
                         }
@@ -612,16 +613,16 @@ namespace IncomingCasualtyHandling.BL.Models
                         {
                             if (tab.Data != null)
                             {
-                                var testlist = new List<PatientModel>(tab.Data.ToList());
+                                var testlist = new List<ICHPatient>(tab.Data.ToList());
                                 testlist.Sort((p1, p2) => String.Compare(p1.Triage, p2.Triage, StringComparison.CurrentCulture));
                                 if (_sortDirection == ListSortDirection.Descending)
                                 {
                                     testlist.Reverse();
-                                    tab.Data = new ObservableCollection<PatientModel>(testlist);
+                                    tab.Data = new ObservableCollection<ICHPatient>(testlist);
                                 }
                                 else
                                 {
-                                    tab.Data = new ObservableCollection<PatientModel>(testlist);
+                                    tab.Data = new ObservableCollection<ICHPatient>(testlist);
                                 }
                             }
                         }
@@ -633,16 +634,16 @@ namespace IncomingCasualtyHandling.BL.Models
                         {
                             if (tab.Data != null)
                             {
-                                var testlist = new List<PatientModel>(tab.Data.ToList());
+                                var testlist = new List<ICHPatient>(tab.Data.ToList());
                                 testlist.Sort((p1, p2) => String.Compare(p1.Specialty, p2.Specialty, StringComparison.CurrentCulture));
                                 if (_sortDirection == ListSortDirection.Descending)
                                 {
                                     testlist.Reverse();
-                                    tab.Data = new ObservableCollection<PatientModel>(testlist);
+                                    tab.Data = new ObservableCollection<ICHPatient>(testlist);
                                 }
                                 else
                                 {
-                                    tab.Data = new ObservableCollection<PatientModel>(testlist);
+                                    tab.Data = new ObservableCollection<ICHPatient>(testlist);
                                 }
                             }
                         }
@@ -654,16 +655,16 @@ namespace IncomingCasualtyHandling.BL.Models
                         {
                             if (tab.Data != null)
                             {
-                                var testlist = new List<PatientModel>(tab.Data.ToList());
+                                var testlist = new List<ICHPatient>(tab.Data.ToList());
                                 testlist.Sort((p1, p2) => p1.ETA.CompareTo(p2.ETA));
                                 if (_sortDirection == ListSortDirection.Descending)
                                 {
                                     testlist.Reverse();
-                                    tab.Data = new ObservableCollection<PatientModel>(testlist);
+                                    tab.Data = new ObservableCollection<ICHPatient>(testlist);
                                 }
                                 else
                                 {
-                                    tab.Data = new ObservableCollection<PatientModel>(testlist);
+                                    tab.Data = new ObservableCollection<ICHPatient>(testlist);
                                 }
                             }
                         }
@@ -676,16 +677,16 @@ namespace IncomingCasualtyHandling.BL.Models
                             //tab.Data?.Sort((p1, p2) => String.Compare(p1.FromDestination, p2.FromDestination, StringComparison.CurrentCulture));
                             if (tab.Data != null)
                             {
-                                var testlist = new List<PatientModel>(tab.Data.ToList());
+                                var testlist = new List<ICHPatient>(tab.Data.ToList());
                                 testlist.Sort((p1, p2) => String.Compare(p1.FromDestination, p2.FromDestination, StringComparison.CurrentCulture));
                                 if (_sortDirection == ListSortDirection.Descending)
                                 {
                                     testlist.Reverse();
-                                    tab.Data = new ObservableCollection<PatientModel>(testlist);
+                                    tab.Data = new ObservableCollection<ICHPatient>(testlist);
                                 }
                                 else
                                 {
-                                    tab.Data = new ObservableCollection<PatientModel>(testlist);
+                                    tab.Data = new ObservableCollection<ICHPatient>(testlist);
                                 }
                             }
                         }
@@ -697,16 +698,16 @@ namespace IncomingCasualtyHandling.BL.Models
                         {
                             if (tab.Data != null)
                             {
-                                var testlist = new List<PatientModel>(tab.Data.ToList());
+                                var testlist = new List<ICHPatient>(tab.Data.ToList());
                                 testlist.Sort((p1, p2) => p1.LastUpdated.CompareTo(p2.LastUpdated));
                                 if (_sortDirection == ListSortDirection.Descending)
                                 {
                                     testlist.Reverse();
-                                    tab.Data = new ObservableCollection<PatientModel>(testlist);
+                                    tab.Data = new ObservableCollection<ICHPatient>(testlist);
                                 }
                                 else
                                 {
-                                    tab.Data = new ObservableCollection<PatientModel>(testlist);
+                                    tab.Data = new ObservableCollection<ICHPatient>(testlist);
                                 }
                             }
                         }

@@ -9,6 +9,6 @@ namespace IncomingCasualtyHandling.BL.Interfaces
 {
     public interface ISortTriage
     {
-        void SortForTriage(List<PatientModel> listOfPatients);
+        void SortForTriage(List<ICHPatient> listOfPatients);
     }
 }
