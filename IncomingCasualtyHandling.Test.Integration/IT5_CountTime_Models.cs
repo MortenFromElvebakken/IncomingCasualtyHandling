@@ -140,7 +140,7 @@ namespace IncomingCasualtyHandling.Test.Integration
 
             _getPatients.GetAllPatients();
 
-            Assert.That(_MV_M.Eta.AbsoluteTime, Is.EqualTo(twoHoursInAbsolute));
+            Assert.That(_MV_M.ETA.AbsoluteTime, Is.EqualTo(twoHoursInAbsolute));
 
         }
         [Test]
@@ -154,7 +154,7 @@ namespace IncomingCasualtyHandling.Test.Integration
 
             _getPatients.GetAllPatients();
 
-            Assert.That(_MV_M.Eta.RelativeTime, Is.EqualTo(twoHoursInMinutes));
+            Assert.That(_MV_M.ETA.RelativeTime, Is.EqualTo(twoHoursInMinutes));
 
         }
     }

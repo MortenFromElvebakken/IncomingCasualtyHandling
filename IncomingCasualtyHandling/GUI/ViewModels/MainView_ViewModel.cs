@@ -16,7 +16,6 @@ namespace IncomingCasualtyHandling.GUI.ViewModels
     // the class is an ObservableObject in order to be able to call OnPropertyChanged on properties
     internal class MainView_ViewModel : ObservableObject
     {
-        private string _test;
         private List<ICHPatient> _listOfPatients;
 
         IOverviewView_Model _overviewModel;

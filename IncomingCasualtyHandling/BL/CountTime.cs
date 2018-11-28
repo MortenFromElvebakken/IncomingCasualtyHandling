@@ -78,7 +78,7 @@ namespace IncomingCasualtyHandling.BL
                 AbsoluteTime = "--:--",
                 RelativeTime = ""
             };
-            _overviewViewModel.Eta = _nextEta;
+            _overviewViewModel.ETA = _nextEta;
 
         }
 
@@ -172,8 +172,8 @@ namespace IncomingCasualtyHandling.BL
 
             
 
-            _overviewViewModel.Eta = _nextEta;
-            _mainViewModel.Eta = _nextEta;
+            _overviewViewModel.ETA = _nextEta;
+            _mainViewModel.ETA = _nextEta;
 
         }
 

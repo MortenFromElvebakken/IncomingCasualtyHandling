@@ -32,7 +32,7 @@ namespace IncomingCasualtyHandling.Test.Unit.BL.Test.Unit
 
         private List<Specialty> _listOfSpecialties;
         private List<ICHPatient> _listOfPatients, _sortedListOfPatients;
-        private ICHPatient _patient1, _patient2, _patient3, _patient4, _patient5;
+        private ICHPatient _patient1, _patient2, _patient3;
 
         [SetUp]
         public void Setup()
