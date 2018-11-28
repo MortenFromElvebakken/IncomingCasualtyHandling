@@ -121,7 +121,7 @@ namespace IncomingCasualtyHandling.Test.Integration
         }
 
         
-        // CAN'T GET IT TO WORK RIGHT NOW [Test]
+        [Test]
         public void CurrentDateTimeTick_ChangePropertyInModel_PropertyInMainViewModelChanges()
         {
             // Sleep 1.5 second to make sure, that tick has occured

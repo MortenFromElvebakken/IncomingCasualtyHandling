@@ -4,6 +4,7 @@ using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Timers;
 using System.Windows.Threading;
 using IncomingCasualtyHandling.BL.Interfaces;
 using IncomingCasualtyHandling.BL.Models;
@@ -20,9 +21,10 @@ namespace IncomingCasualtyHandling.BL
         // CountTime made with inspiration from:
         // https://stackoverflow.com/a/5410783
 
-        readonly DispatcherTimer _currentDateTimeTimer = new DispatcherTimer();
+        //readonly DispatcherTimer _currentDateTimeTimer = new DispatcherTimer();
         readonly DispatcherTimer _etaTimer = new DispatcherTimer();
 
+        private System.Timers.Timer _currentDateTimeTimer;
 
         public CountTime(IMainView_Model mainViewModel, IOverviewView_Model overviewViewModel)
         {
@@ -30,10 +32,11 @@ namespace IncomingCasualtyHandling.BL
             _mainViewModel = mainViewModel;
             _overviewViewModel = overviewViewModel;
 
-            // Prepare current datetime timer and start it
-            _currentDateTimeTimer.Tick += new EventHandler(CurrentDateTime_TimerTick);
-            _currentDateTimeTimer.Interval = TimeSpan.FromSeconds(1);
-            _currentDateTimeTimer.Start();
+            _currentDateTimeTimer = new Timer();
+            _currentDateTimeTimer.Elapsed += new System.Timers.ElapsedEventHandler(CurrentDateTime_TimerTick);
+            _currentDateTimeTimer.Interval = 1000;
+            _currentDateTimeTimer.AutoReset = true;
+            _currentDateTimeTimer.Enabled = true;
         }
 
         // Set the culture to be the systems culture:
