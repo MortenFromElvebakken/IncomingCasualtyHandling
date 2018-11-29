@@ -3,7 +3,7 @@ using System.Runtime.CompilerServices;
 using WindowTest2.Annotations;
 
 
-namespace IncomingCasualtyHandling.GUI.ViewModels
+namespace IncomingCasualtyHandling
 {
     public abstract class ObservableObject : INotifyPropertyChanged
     {

@@ -118,14 +118,13 @@
     <Compile Include="BL\Models\OverviewView_Model.cs" />
     <Compile Include="BL\Object classes\ETA.cs" />
     <Compile Include="BL\Object classes\PatientListEventArgs.cs" />
-    <Compile Include="BL\ObservableObject.cs" />
     <Compile Include="BL\SortETA.cs" />
     <Compile Include="BL\SortSpecialty.cs" />
     <Compile Include="BL\SortTriage.cs" />
     <Compile Include="BL\CountTime.cs" />
-    <Compile Include="DAL\Interface\ILoadData.cs" />
-    <Compile Include="DAL\Interface\ILoadConfigurationSettings.cs" />
-    <Compile Include="DAL\Interface\IConvertToICHPatient.cs" />
+    <Compile Include="DAL\Interfaces\ILoadData.cs" />
+    <Compile Include="DAL\Interfaces\ILoadConfigurationSettings.cs" />
+    <Compile Include="DAL\Interfaces\IConvertToICHPatient.cs" />
     <Compile Include="DAL\LoadConfigurationSettings.cs" />
     <Compile Include="GUI\GridViewSort.cs" />
     <Compile Include="GUI\ViewModels\DetailView_ViewModel.cs" />
@@ -150,7 +149,7 @@
     </Compile>
     <Compile Include="DAL\LoadData.cs" />
     <Compile Include="DAL\ConvertToICHPatient.cs" />
-    <Compile Include="GUI\ObservableObject.cs" />
+    <Compile Include="ObservableObject.cs" />
     <Compile Include="GUI\ViewModels\OverviewView_ViewModel.cs" />
     <Compile Include="GUI\RelayCommand.cs" />
     <Compile Include="GUI\ViewModels\Workspace_ViewModel.cs" />
