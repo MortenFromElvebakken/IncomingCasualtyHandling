@@ -90,15 +90,15 @@ namespace IncomingCasualtyHandling.DAL
         //Todo with clinical impression ressource on fhir
         public void SetMedicinalNote()
         {
-            //Lav kald til database lag der tjekker på patientens id om der ligger en clinical impression?
+            //NotYetImplemented
         }
         public void SetTraumaNote()
         {
-
+            //NotYetImplemented
         }
         public void SetAmbulanceNumber()
         {
-
+            //NotYetImplemented
         }
 
 
