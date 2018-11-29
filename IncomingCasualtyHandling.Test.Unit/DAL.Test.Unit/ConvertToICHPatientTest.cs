@@ -14,7 +14,7 @@ using NUnit.Framework;
 namespace IncomingCasualtyHandling.Test.Unit.DAL.Test.Unit
 {
     [TestFixture]
-    public class SerialiseToPatientTest
+    public class ConvertToICHPatientTest
     {
         #region Arrange
 

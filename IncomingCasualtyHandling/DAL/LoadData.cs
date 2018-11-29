@@ -16,7 +16,7 @@ namespace IncomingCasualtyHandling.DAL
 {
     public class LoadData : ILoadData
     {
-        private string _fhirServerUrl;
+        public string FhirServerUrl { get; set; }
         public IFhirClient Client { get; set; }
         private readonly IConvertToICHPatient _convertICHPatient;
         private readonly ILoadConfigurationSettings _loadConfigSettingsFromXmlDocument;
@@ -28,9 +28,9 @@ namespace IncomingCasualtyHandling.DAL
         public LoadData(ILoadConfigurationSettings _lcs, IConvertToICHPatient _isp)
         {
             _loadConfigSettingsFromXmlDocument = _lcs;
-            _fhirServerUrl = GetServerUrl();
+            FhirServerUrl = GetServerUrl();
             
-            Client = new FhirClient(_fhirServerUrl);
+            Client = new FhirClient(FhirServerUrl);
             _convertICHPatient = _isp;
             _internet = true;
             _dateOfLastSearch = DateTime.MinValue;
@@ -131,7 +131,7 @@ namespace IncomingCasualtyHandling.DAL
                 List<Patient> changedPatients = new List<Patient>();
                 foreach (var entry in b.Entry)
                 {
-                    var testEntry = Client.Read<Patient>(_fhirServerUrl + "/Patient/" + b.Entry[counterTest].Resource.Id);
+                    var testEntry = Client.Read<Patient>(FhirServerUrl + "/Patient/" + b.Entry[counterTest].Resource.Id);
                     changedPatients.Add(testEntry);
                     counterTest++;
                 }
@@ -243,7 +243,7 @@ namespace IncomingCasualtyHandling.DAL
         public void setFhirClientURL(string s)
         {
             Client = new FhirClient(s);
-            _fhirServerUrl = s;
+            FhirServerUrl = s;
             GetAllPatients();
         }
     }

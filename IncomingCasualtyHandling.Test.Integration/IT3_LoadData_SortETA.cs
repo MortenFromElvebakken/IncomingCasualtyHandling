@@ -8,6 +8,8 @@ using System.Threading.Tasks;
 using System.Xml;
 using Hl7.Fhir.Model;
 using Hl7.Fhir.Rest;
+using IncomingCasualtyHandling.BL;
+using IncomingCasualtyHandling.BL.Interfaces;
 using IncomingCasualtyHandling.BL.Object_classes;
 using IncomingCasualtyHandling.DAL;
 using IncomingCasualtyHandling.DAL.Interface;
@@ -18,19 +20,27 @@ using NUnit.Framework;
 namespace IncomingCasualtyHandling.Test.Integration
 {
     [TestFixture]
-    class IT2_GetPatients_Serialise
+    class IT3_LoadData_SortETA
     {
         // Fakes
         private IFhirClient _client;
+        private ISortTriage _sortTriage;
+        private ISortSpecialty _sortSpecialty;
+        private ICountTime _countTime;
+        private IMainView_Model _MV_M;
+        private IOverviewView_Model _OV_M;
+        private IDetailView_Model _DV_M;
+
 
         // System under test        
-        private ConvertToICHPatient _convert;
+        private ISortETA _sortEta;
 
         // Drivers
         private LoadData _getPatients;
 
         // Included 
         private ILoadConfigurationSettings _loadConfig;
+        private ConvertToICHPatient _convert;
 
         // Data
         private string _xmlDocumentPath;
@@ -49,9 +59,21 @@ namespace IncomingCasualtyHandling.Test.Integration
         private string toHospital = "Unknown";
         private DateTimeOffset lastUpdated = new DateTimeOffset(2018, 11, 22, 8, 0, 0, new TimeSpan(0, 0, 0, 0));
 
+        private int _nEventsRaised;
+        private List<ICHPatient> _sortedPatients;
+
         [SetUp]
         public void SetUp()
         {
+
+            _sortTriage = Substitute.For<ISortTriage>();
+            _sortSpecialty = Substitute.For<ISortSpecialty>();
+            _countTime = Substitute.For<ICountTime>();
+            _MV_M = Substitute.For<IMainView_Model>();
+            _OV_M = Substitute.For<IOverviewView_Model>();
+            _DV_M = Substitute.For<IDetailView_Model>();
+
+
             _convert = new ConvertToICHPatient();
 
             var currentDirectory = Path.GetDirectoryName(Path.GetDirectoryName(
@@ -62,6 +84,14 @@ namespace IncomingCasualtyHandling.Test.Integration
             _getPatients = new LoadData(_loadConfig, _convert);
 
             _getPatients.PatientDataReady += (o) => _patientList = o;
+
+            _sortEta = new SortETA(_OV_M, _DV_M, _MV_M, _countTime, _getPatients);
+
+            _sortEta.SortedListReady += (o) =>
+            {
+                ++_nEventsRaised;
+                _sortedPatients = o;
+            };
 
             // Create patient
             wholeName = givenName + " " + familyName;
@@ -88,71 +118,53 @@ namespace IncomingCasualtyHandling.Test.Integration
 
             _getPatients.Client = Substitute.For<IFhirClient>();
             _client = _getPatients.Client;
-        }
-
-        [Test]
-        public void GetAllPatients_CallSerialisePatient_SerialisePatientsReturnsPatient()
-        {
-            Bundle _bundle = new Bundle();
-            Bundle.EntryComponent _entry = new Bundle.EntryComponent();
-            _entry.Resource = Patient1;
-            _bundle.Entry.Add(_entry);
-            _client.Search<Patient>(new SearchParams()).ReturnsForAnyArgs(_bundle);
-            _getPatients.GetAllPatients();
-            
-            Assert.That(_patientList.Count, Is.EqualTo(1));
-            
-        }
-
-        [Test]
-        public void AsynchGetAllPatients_NoNewPatient_DoesNotCallSerialisePatient()
-        {
 
             Bundle _bundle = new Bundle();
             Bundle.EntryComponent _entry = new Bundle.EntryComponent();
             _entry.Resource = Patient1;
             _bundle.Entry.Add(_entry);
+
             _client.Search<Patient>(new SearchParams()).ReturnsForAnyArgs(_bundle);
+            _client.WholeSystemHistory(null, null, new SummaryType()).ReturnsForAnyArgs(_bundle);
+            _client.SearchAsync<Patient>(new SearchParams()).ReturnsForAnyArgs(_bundle);
+            _client.Read<Patient>("Test").ReturnsForAnyArgs(Patient1);
+        }
+
+       [Test]
+        public void GetAllPatients_RaisesEvent_SerialisePatientsReactsAndRaisesEventWithPatient()
+        {
             _getPatients.GetAllPatients();
-
-            // Clear the list for this raised event
-            _patientList.Clear();
-
-            // Wait for Async to get called
-            Thread.Sleep(5000);
-
-            // Verify, that no SerialisePatient class wasn't called => no patients in the list
-            Assert.That(_patientList.Count, Is.EqualTo(0));
-
+            Assert.That(_sortedPatients[0].Name, Is.EqualTo(wholeName));
         }
 
         [Test]
-        public void AsynchGetAllPatients_UpdateOnPatient_CallSerialisePatient()
+        public void AsynchGetAllPatients_RaisesEvent_SerialisePatientsReactsAndRaisesEventWithPatient()
         {
-            Bundle _bundle = new Bundle();
-            Bundle.EntryComponent _entry = new Bundle.EntryComponent();
-            _entry.Resource = Patient1;
-            _bundle.Entry.Add(_entry);
-            _client.Search<Patient>(new SearchParams()).ReturnsForAnyArgs(_bundle);
             _getPatients.GetAllPatients();
-            // Clear the list for this raised event
-            _patientList.Clear();
 
             // Update Patient
+            string newFirstName = "Integration";
+            string newFamilyName = "Test";
+            string newWholeName = newFirstName + " " + newFamilyName;
+            var newName = new HumanName();
+            newName.WithGiven(givenName);
+            newName.AndFamily(familyName);
+            newName.Text = newWholeName;
+            Patient1.Name.Insert(0, newName);
             Meta meta = new Meta();
             meta.LastUpdated = new DateTimeOffset(2018, 11, 22, 10, 0, 0, new TimeSpan(0, 0, 0, 0));
             Patient1.Meta = meta;
 
-            _client.WholeSystemHistory(null, null, new SummaryType()).ReturnsForAnyArgs(_bundle);
-            _client.SearchAsync<Patient>(new SearchParams()).ReturnsForAnyArgs(_bundle);
-            _client.Read<Patient>("Test").ReturnsForAnyArgs(Patient1);
+            _nEventsRaised = 0;
+
             // Wait for Async to get called
             Thread.Sleep(7000);
 
             // Verify, that SerialisePatient class was called => patient list has a patient
-            Assert.That(_patientList.Count, Is.EqualTo(1));
+            Assert.That(_sortedPatients[0].Name, Is.EqualTo(newWholeName));
 
         }
+
     }
 
 }

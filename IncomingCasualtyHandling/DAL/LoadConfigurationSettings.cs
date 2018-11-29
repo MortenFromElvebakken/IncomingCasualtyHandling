@@ -32,6 +32,7 @@ namespace IncomingCasualtyHandling.DAL
             GetHospitalShortName();
             GetServerName();
         }
+
         public LoadConfigurationSettings(string _newXmlServerName)
         {
             XmlServerName = _newXmlServerName; 
