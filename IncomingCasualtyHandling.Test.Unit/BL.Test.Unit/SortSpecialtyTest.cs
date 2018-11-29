@@ -42,6 +42,7 @@ namespace IncomingCasualtyHandling.Test.Unit.BL.Test.Unit
             _detailViewModel = Substitute.For<IDetailView_Model>();
             _mainViewModel = Substitute.For<IMainView_Model>();
             _sortEta = Substitute.For<ISortETA>();
+            
 
             _listOfSpecialties = new List<Specialty>();
             _listOfSpecialties.Add(new Specialty{Name = "Diagnostic radiology"});
@@ -130,6 +131,17 @@ namespace IncomingCasualtyHandling.Test.Unit.BL.Test.Unit
             Assert.That(_detailViewModel.ListOfSpecialtiesPatientLists.Count, Is.EqualTo(2));
         }
 
+        // Test a list with 2 patients with different specialties, place them alphabetically correct
+        [Test]
+        public void SortForSpecialty_ListWith2DifferentSpecialties_CorrectSpecialtyOnFirstSpotInListWith2ListsInModel()
+        {
+            List<ICHPatient> unknownList = new List<ICHPatient>();
+            unknownList.Add(_patient2);
+            _sortEta.SortListOnEta(new List<ICHPatient>()).ReturnsForAnyArgs(unknownList);
+            _uut.SortForSpecialty(_listOfPatients);
+            Assert.IsTrue(_detailViewModel.ListOfSpecialtiesPatientLists[0].Exists(p => p.Specialty=="Neurology"));
+        }
+
         // Test a list with 3 patients with different specialties
         [Test]
         public void SortForSpecialty_ListWith3DifferentSpecialties_AddSortedListWith3ListsToModel()
@@ -148,6 +160,26 @@ namespace IncomingCasualtyHandling.Test.Unit.BL.Test.Unit
             _listOfPatients.Add(_patient3);
             _uut.SortForSpecialty(_listOfPatients);
             Assert.That(_detailViewModel.ListOfSpecialtiesPatientLists.Count, Is.EqualTo(3));
+        }
+
+        // Test a list with 3 patients with 2 different specialties, test that the one with greatest amount is placed first
+        [Test]
+        public void SortForSpecialty_ListWith3DifferentSpecialties_CorrectSpecialtyOnFirstSpotInListWith2ListsInModel()
+        {
+            _patient3 = new ICHPatient
+            {
+                CPR = "3",
+                Name = "Patient Three",
+                Age = "30",
+                Gender = AdministrativeGender.Female,
+                Triage = "TriageYellow",
+                Specialty = _patient1.Specialty,
+                ToHospital = "AUH",
+                ETA = new DateTime(2018, 11, 18, 21, 30, 00)
+            };
+            _listOfPatients.Add(_patient3);
+            _uut.SortForSpecialty(_listOfPatients);
+            Assert.IsTrue(_detailViewModel.ListOfSpecialtiesPatientLists[0].Exists(p => p.Specialty == "Neurology"));
         }
 
         // Test a list with patients with specialties unknown to system
