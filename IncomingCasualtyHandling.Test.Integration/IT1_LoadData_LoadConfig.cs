@@ -14,7 +14,7 @@ using NUnit.Framework;
 namespace IncomingCasualtyHandling.Test.Integration
 {
     [TestFixture]
-    class IT1_GetPatients_LoadConfig
+    class IT1_LoadData_LoadConfig
     {
         // Fakes
         private IConvertToICHPatient _serialise;
@@ -23,7 +23,7 @@ namespace IncomingCasualtyHandling.Test.Integration
         private LoadConfigurationSettings _loadConfig;
 
         // Drivers
-        private LoadData _getPatients;
+        private LoadData _loadData;
 
         // Included 
 
@@ -42,14 +42,14 @@ namespace IncomingCasualtyHandling.Test.Integration
             _xmlDocumentPath = currentDirectory + "\\Configuration.xml";
             _loadConfig = new LoadConfigurationSettings(_xmlDocumentPath);
 
-            _getPatients = new LoadData(_loadConfig, _serialise);
+            _loadData = new LoadData(_loadConfig, _serialise);
 
         }
 
         [Test]
-        public void GetPatientsFromFhirConstructor_GetServerUrl_ServerUrlReturnedFromLoad()
+        public void LoadDataConstructor_GetServerUrl_ServerUrlReturnedFromLoad()
         {
-            var url = _getPatients.GetServerUrl();
+            var url = _loadData.GetServerUrl();
             Assert.That(url, Is.EqualTo(_xmlServerName));
             
         }
