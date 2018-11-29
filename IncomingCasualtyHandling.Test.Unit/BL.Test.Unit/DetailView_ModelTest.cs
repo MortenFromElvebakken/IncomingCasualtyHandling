@@ -24,7 +24,7 @@ namespace IncomingCasualtyHandling.Test.Unit.BL.Test.Unit
         private TabControl _tab1;
         private ObservableCollection<ICHPatient> _listOfPatients;
         private ObservableCollection<ICHPatient> _sortedListOfPatients;
-        private ICHPatient _patient1, _patient2, _patient3, _patient4;
+        private ICHPatient _patient1, _patient2, _patient3;
 
         [SetUp]
         public void SetUp()
