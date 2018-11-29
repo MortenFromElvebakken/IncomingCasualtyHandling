@@ -14,9 +14,7 @@ namespace IncomingCasualtyHandling.BL
 {
     public class SortETA : ISortETA
     {
-        private IOverviewView_Model _overviewViewModel;
         private IDetailView_Model _detailView_Model;
-        private IMainView_Model _mainView_Model;
         private ICountTime _countTime;
 
         // List to hold patients without ETA
@@ -29,9 +27,7 @@ namespace IncomingCasualtyHandling.BL
         {
 
             receivePatientsFromFhir.PatientDataReady += SortForETA;
-            _overviewViewModel = overviewView_Model;
             _detailView_Model = detailView_Model;
-            _mainView_Model = mainView_Model;
             _countTime = countTime;
         }
 

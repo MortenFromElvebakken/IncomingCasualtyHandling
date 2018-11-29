@@ -97,7 +97,7 @@ namespace IncomingCasualtyHandling.BL
         private TimeSpan _positiveTimeSpan;
         private double _timeDifference;
         private DateTime _dateTimeEta = new DateTime();
-        ETA _nextEta = new ETA();
+        private ETA _nextEta = new ETA();
 
         // Compares the parameter time with the current time
         private void CompareETATimeToCurrentTime(DateTime nextEta)

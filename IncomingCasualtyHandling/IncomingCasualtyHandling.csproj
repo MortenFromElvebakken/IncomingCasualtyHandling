@@ -117,7 +117,6 @@
     <Compile Include="BL\Models\MainView_Model.cs" />
     <Compile Include="BL\Models\OverviewView_Model.cs" />
     <Compile Include="BL\Object classes\ETA.cs" />
-    <Compile Include="BL\Object classes\PatientListEventArgs.cs" />
     <Compile Include="BL\SortETA.cs" />
     <Compile Include="BL\SortSpecialty.cs" />
     <Compile Include="BL\SortTriage.cs" />
