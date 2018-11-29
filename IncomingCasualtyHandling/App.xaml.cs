@@ -82,9 +82,9 @@ namespace IncomingCasualtyHandling
             //var sortETA = new SortETA(_overviewViewModel,_detailViewModel, _mainViewModel, countTime, IGetPatientsFromFhir);
             //var sortSpecialty = new SortSpecialty(lcs, _overviewViewModel, _detailViewModel, _mainViewModel, IGetPatientsFromFhir);
             //var sortTriage = new SortTriage(lcs, _overviewViewModel, _detailViewModel, _mainViewModel, IGetPatientsFromFhir);
-            var sortETA = new SortETA(overviewViewModel, detailViewModel, mainViewModel, countTime, loadData);
+            var sortETA = new SortETA(detailViewModel, countTime, loadData);
             var sortSpecialty = new SortSpecialty(lcs, overviewViewModel, detailViewModel, mainViewModel, sortETA);
-            var sortTriage = new SortTriage(lcs, overviewViewModel, detailViewModel, mainViewModel, sortETA);
+            var sortTriage = new SortTriage(lcs, detailViewModel, mainViewModel, sortETA);
             fhirCommands.GetAllPatients();
 
           

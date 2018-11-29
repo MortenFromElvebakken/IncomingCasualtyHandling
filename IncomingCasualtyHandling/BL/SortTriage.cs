@@ -17,7 +17,6 @@ namespace IncomingCasualtyHandling.BL
     {
         public ILoadConfigurationSettings LoadXMLSettings;
         public List<Triage> TriageList;
-        private IOverviewView_Model _overviewView_Model;
         private IDetailView_Model _detailView_Model;
         private IMainView_Model _mainView_Model;
 
@@ -25,14 +24,11 @@ namespace IncomingCasualtyHandling.BL
 
         string unknownTriageName = "TriageUnknown";
 
-        public SortTriage(ILoadConfigurationSettings _loadXMLSettings, IOverviewView_Model overviewView_Model, IDetailView_Model detailView_Model, IMainView_Model mainView_Model, ISortETA sortEta)
+        public SortTriage(ILoadConfigurationSettings _loadXMLSettings, IDetailView_Model detailView_Model, IMainView_Model mainView_Model, ISortETA sortEta)
         {
             _sortEta = sortEta;
             _sortEta.SortedListReady += SortForTriage;
             LoadXMLSettings = _loadXMLSettings;
-            
-
-            _overviewView_Model = overviewView_Model;
             _detailView_Model = detailView_Model;
             _mainView_Model = mainView_Model;
 

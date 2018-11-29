@@ -23,7 +23,7 @@ namespace IncomingCasualtyHandling.BL
         private int _range;
 
         //Constructor
-        public SortETA(IOverviewView_Model overviewView_Model, IDetailView_Model detailView_Model, IMainView_Model mainView_Model, ICountTime countTime, ILoadData receivePatientsFromFhir)
+        public SortETA(IDetailView_Model detailView_Model, ICountTime countTime, ILoadData receivePatientsFromFhir)
         {
 
             receivePatientsFromFhir.PatientDataReady += SortForETA;
