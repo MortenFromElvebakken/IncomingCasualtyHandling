@@ -21,7 +21,7 @@ namespace IncomingCasualtyHandling.Test.Unit.BL.Test.Unit
     {
         #region Arrange
 
-        private ICountTime _uut;
+        private CountTime _uut;
 
         private IOverviewView_Model _overviewViewModel;
         private IMainView_Model _mainViewModel;
@@ -34,9 +34,7 @@ namespace IncomingCasualtyHandling.Test.Unit.BL.Test.Unit
         {
             _overviewViewModel = Substitute.For<IOverviewView_Model>();
             _mainViewModel = Substitute.For<IMainView_Model>();
-            _uut = new CountTime(_mainViewModel, _overviewViewModel);
-            
-            
+            _uut = new CountTime(_mainViewModel, _overviewViewModel);            
 
             // Create a list with patients
             _listOfPatients = new List<ICHPatient>();
@@ -66,8 +64,6 @@ namespace IncomingCasualtyHandling.Test.Unit.BL.Test.Unit
 
             _listOfPatients.Add(_patient1);
             _listOfPatients.Add(_patient2);
-
-            
         }
 
         #endregion
