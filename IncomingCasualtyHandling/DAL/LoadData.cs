@@ -19,15 +19,15 @@ namespace IncomingCasualtyHandling.DAL
         public string FhirServerUrl { get; set; }
         public IFhirClient Client { get; set; }
         private readonly IConvertToICHPatient _convertICHPatient;
-        private readonly ILoadConfigurationSettings _loadConfigSettingsFromXmlDocument;
-        private readonly SearchParams _sParameters;
+        private readonly ILoadConfigurationSettings _loadConfigurationSettings;
+        private SearchParams _sParameters;
         private static Thread _myThread;
         private DateTime _dateOfLastSearch;
         private bool _internet;
 
         public LoadData(ILoadConfigurationSettings _lcs, IConvertToICHPatient _isp)
         {
-            _loadConfigSettingsFromXmlDocument = _lcs;
+            _loadConfigurationSettings = _lcs;
             FhirServerUrl = GetServerUrl();
             
             Client = new FhirClient(FhirServerUrl);
@@ -38,7 +38,7 @@ namespace IncomingCasualtyHandling.DAL
             //Initialize seachparameters
             _sParameters = new SearchParams();
             _sParameters.Add("active", "true");
-            _sParameters.Add("identifier", _loadConfigSettingsFromXmlDocument.HospitalShortName);
+            _sParameters.Add("identifier", _loadConfigurationSettings.HospitalShortName);
 
 
             //Create thread that checks for new data, and runs gets patients if there are updates
@@ -46,9 +46,9 @@ namespace IncomingCasualtyHandling.DAL
             _myThread.IsBackground = true;
         }
 
-        public string GetServerUrl()
+        private string GetServerUrl()
         {
-            return _loadConfigSettingsFromXmlDocument.ServerName;
+            return _loadConfigurationSettings.ServerName;
         }
 
         public void GetAllPatients()
@@ -117,7 +117,7 @@ namespace IncomingCasualtyHandling.DAL
 
 
         private bool _sameAsLast;
-        List<Patient> _lastChangedPatients = default(List<Patient>);
+        private List<Patient> _lastChangedPatients = default(List<Patient>);
 
         private bool CheckIfSamePatientsReturned(Bundle b)
         {
@@ -242,7 +242,11 @@ namespace IncomingCasualtyHandling.DAL
 
         public void setFhirClientURL(string s)
         {
-            Client = new FhirClient(s);
+            Client = new FhirClient(s); 
+            //var newSearchParams = new SearchParams();
+            //newSearchParams.Add("active", "true");
+            //newSearchParams.Add("identifier", _loadConfigurationSettings.HospitalShortName);
+            //_sParameters = newSearchParams;
             FhirServerUrl = s;
             GetAllPatients();
         }

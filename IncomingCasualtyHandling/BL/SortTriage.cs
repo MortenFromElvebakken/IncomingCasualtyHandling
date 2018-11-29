@@ -15,7 +15,7 @@ namespace IncomingCasualtyHandling.BL
 {
     public class SortTriage : ISortTriage
     {
-        public ILoadConfigurationSettings LoadXMLSettings;
+        private ILoadConfigurationSettings LoadXMLSettings;
         public List<Triage> TriageList;
         private IDetailView_Model _detailView_Model;
         private IMainView_Model _mainView_Model;
