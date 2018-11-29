@@ -67,7 +67,7 @@ namespace IncomingCasualtyHandling.Test.Unit.DAL.Test.Unit
         #region Act and Assert
         // Method_Scenario_Result
 
-        //Correct serialisation of ETA
+        //Correct convertion of ETA
         [Test]
         public void ReturnPatient_ReceivedCompletePatient_CreatesPatientEta()
         {
@@ -75,7 +75,7 @@ namespace IncomingCasualtyHandling.Test.Unit.DAL.Test.Unit
             Assert.That(ichPatient.ETA, Is.EqualTo(eta));
         }
 
-        //Correct serialisation of Gender
+        //Correct convertion of Gender
         [Test]
         public void ReturnPatient_ReceivedCompletePatient_CreatesPatientGender()
         {
@@ -83,7 +83,7 @@ namespace IncomingCasualtyHandling.Test.Unit.DAL.Test.Unit
             Assert.That(ichPatient.Gender, Is.EqualTo(gender));
         }
 
-        //Correct serialisation of Name
+        //Correct convertion of Name
         [Test]
         public void ReturnPatient_ReceivedCompletePatient_CreatesPatientName()
         {
@@ -91,7 +91,7 @@ namespace IncomingCasualtyHandling.Test.Unit.DAL.Test.Unit
             Assert.That(ichPatient.Name, Is.EqualTo(wholeName));
         }
 
-        // Correct serialisation of CPR
+        // Correct convertion of CPR
         [Test]
         public void ReturnPatient_ReceivedCompletePatient_CreatesPatientId()
         {
@@ -99,7 +99,7 @@ namespace IncomingCasualtyHandling.Test.Unit.DAL.Test.Unit
             Assert.That(ichPatient.CPR, Is.EqualTo(cpr));
         }
 
-        //Correct serialisation of Specialty
+        //Correct convertion of Specialty
         [Test]
         public void ReturnPatient_ReceivedCompletePatient_CreatesPatientSpecialty()
         {
@@ -107,7 +107,7 @@ namespace IncomingCasualtyHandling.Test.Unit.DAL.Test.Unit
             Assert.That(ichPatient.Specialty, Is.EqualTo(specialty));
         }
 
-        //Correct serialisation of Triage
+        //Correct convertion of Triage
         [Test]
         public void ReturnPatient_ReceivedCompletePatient_CreatesPatientTriage()
         {
@@ -115,7 +115,7 @@ namespace IncomingCasualtyHandling.Test.Unit.DAL.Test.Unit
             Assert.That(ichPatient.Triage, Is.EqualTo(triage));
         }
 
-        //Correct serialisation of ToHospital
+        //Correct convertion of ToHospital
         [Test]
         public void ReturnPatient_ReceivedPatientWithoutToHospital_CreatesPatientToHospitalCorrect()
         {

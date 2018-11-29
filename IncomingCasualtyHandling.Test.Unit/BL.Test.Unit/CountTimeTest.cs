@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using IncomingCasualtyHandling.BL;
 using IncomingCasualtyHandling.BL.Interfaces;
@@ -25,8 +26,8 @@ namespace IncomingCasualtyHandling.Test.Unit.BL.Test.Unit
         private IOverviewView_Model _overviewViewModel;
         private IMainView_Model _mainViewModel;
 
-        private List<ICHPatient> _listOfPatients, _sortedListOfPatients;
-        private ICHPatient _patient1, _patient2, _patient3, _patient4, _patient5;
+        private List<ICHPatient> _listOfPatients;
+        private ICHPatient _patient1, _patient2;
 
         [SetUp]
         public void Setup()
@@ -39,7 +40,6 @@ namespace IncomingCasualtyHandling.Test.Unit.BL.Test.Unit
 
             // Create a list with patients
             _listOfPatients = new List<ICHPatient>();
-            _sortedListOfPatients = new List<ICHPatient>();
             _patient1 = new ICHPatient
 
             {
@@ -75,9 +75,9 @@ namespace IncomingCasualtyHandling.Test.Unit.BL.Test.Unit
         #region Act and Assert
         // Metode_Scenarie_Resultat
 
-        // Regular test, Main Model
+        // Find the next coming patient and calculate ETA, put in Main Model
         [Test]
-        public void FindRelativeTime_RelativeTimeCalculated_MainViewModelUpdated()
+        public void FindRelativeTime_RelativeTimeCalculated_MainModelUpdated()
         {
             string twoHoursInMinutes = "(-120 minutes)";
             _patient1.ETA = DateTime.Now.AddHours(2);
@@ -87,9 +87,49 @@ namespace IncomingCasualtyHandling.Test.Unit.BL.Test.Unit
             Assert.That(_mainViewModel.ETA.RelativeTime, Is.EqualTo(twoHoursInMinutes));
         }
 
-        // Regular test, Overview Model
+        // Find the next coming patient and calculate ETA, put in Overview Model
         [Test]
-        public void FindRelativeTime_RelativeTimeCalculated_OverviewViewModelUpdated()
+        public void FindRelativeTime_RelativeTimeCalculated_OverviewModelUpdated()
+        {
+            string twoHoursInMinutes = "(-120 minutes)";
+            _patient1.ETA = DateTime.Now.AddHours(2);
+            _patient2.ETA = DateTime.Now.AddHours(3);
+            _uut.FindRelativeTime(_listOfPatients);
+
+            Assert.That(_overviewViewModel.ETA.RelativeTime, Is.EqualTo(twoHoursInMinutes));
+        }
+
+        // Relative ETA is counted down, Main Model
+        [Test]
+        public void ETATimeTimerTick_RelativeTimeIsReducedWithAMinute_MainModelUpdated()
+        {
+            string afterAMinute = "(-119 minutes)";
+            _patient1.ETA = DateTime.Now.AddHours(2);
+            _patient2.ETA = DateTime.Now.AddHours(3);
+            _uut.FindRelativeTime(_listOfPatients);
+
+            Thread.Sleep(65000); //Wait at least a minute
+
+            Assert.That(_mainViewModel.ETA.RelativeTime, Is.EqualTo(afterAMinute));
+        }
+
+        // Relative ETA is counted down, Overview Model
+        [Test]
+        public void ETATimeTimerTick_RelativeTimeIsReducedWithAMinute_OverviewModelUpdated()
+        {
+            string afterAMinute = "(-119 minutes)";
+            _patient1.ETA = DateTime.Now.AddHours(2);
+            _patient2.ETA = DateTime.Now.AddHours(3);
+            _uut.FindRelativeTime(_listOfPatients);
+
+            Thread.Sleep(65000); //Wait at least a minute
+
+            Assert.That(_mainViewModel.ETA.RelativeTime, Is.EqualTo(afterAMinute));
+        }
+
+        // Find the next coming patient and calculate ETA, put in Overview Model
+        [Test]
+        public void ETATimeTimerTick_RelativeTimeIsReducedWithAMinute_OverviewViewModelUpdated()
         {
             string twoHoursInMinutes = "(-120 minutes)";
             _patient1.ETA = DateTime.Now.AddHours(2);

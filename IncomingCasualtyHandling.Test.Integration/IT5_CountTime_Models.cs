@@ -80,9 +80,9 @@ namespace IncomingCasualtyHandling.Test.Integration
 
             _countTime = new CountTime(_MV_M, _OV_M);
 
-            _sortEta = new SortETA(_OV_M, _DV_M, _MV_M, _countTime, _getPatients);
+            _sortEta = new SortETA(_DV_M, _countTime, _getPatients);
 
-            _sortTriage = new SortTriage(_loadConfig, _OV_M, _DV_M, _MV_M, _sortEta);
+            _sortTriage = new SortTriage(_loadConfig,_DV_M, _MV_M, _sortEta);
             _sortSpecialty = new SortSpecialty(_loadConfig, _OV_M, _DV_M, _MV_M, _sortEta);
             
             // Create patient

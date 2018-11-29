@@ -32,6 +32,9 @@ namespace IncomingCasualtyHandling.Test.Unit.BL.Test.Unit
         private List<ICHPatient> _listOfPatients, _sortedListOfPatients;
         private ICHPatient _patient1, _patient2, _patient3, _patient4;
 
+        private int _nEventsRaised;
+        private List<ICHPatient> _sortedPatients;
+
         [SetUp]
         public void Setup()
         {
@@ -40,7 +43,13 @@ namespace IncomingCasualtyHandling.Test.Unit.BL.Test.Unit
             _mainViewModel = Substitute.For<IMainView_Model>();
             _countTime = Substitute.For<ICountTime>();
             _loadData = Substitute.For<ILoadData>();
-            _uut = new SortETA(_overviewViewModel, _detailViewModel, _mainViewModel, _countTime, _loadData);
+            _uut = new SortETA(_detailViewModel, _countTime, _loadData);
+
+            _uut.SortedListReady += (o) =>
+            {
+                ++_nEventsRaised;
+                _sortedPatients = o;
+            };
 
             // Create a list with patients
             _listOfPatients = new List<ICHPatient>();
@@ -97,6 +106,15 @@ namespace IncomingCasualtyHandling.Test.Unit.BL.Test.Unit
             _sortedListOfPatients.Add(_patient1);
             _uut.SortForETA(_listOfPatients);
             Assert.That(_detailViewModel.ETAPatients, Is.EqualTo(_sortedListOfPatients));
+        }
+
+        // Test that event is raised
+        [Test]
+        public void SortForETA_ListWithPatients_RaisesEvent()
+        {
+            _nEventsRaised = 0;
+            _uut.SortForETA(_listOfPatients);
+            Assert.That(_nEventsRaised, Is.EqualTo(1));
         }
 
         // Test a list with 2 patients with same ETA
