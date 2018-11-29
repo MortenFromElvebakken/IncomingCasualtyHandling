@@ -6,6 +6,15 @@ namespace IncomingCasualtyHandling.BL.Models
 {
     public class OverviewView_Model : ObservableObject, IOverviewView_Model
     {
+        #region Constructor
+
+        public OverviewView_Model()
+        {
+
+        }
+
+        #endregion
+
         #region Triage
 
         private int _maximumTriagePatients = 10;
@@ -148,13 +157,6 @@ namespace IncomingCasualtyHandling.BL.Models
 
         #endregion
 
-        #region Constructor
-
-        public OverviewView_Model()
-        {
-           
-        }
-
-#endregion
+        
     }
 }

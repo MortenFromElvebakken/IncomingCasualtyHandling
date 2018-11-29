@@ -97,7 +97,7 @@ namespace IncomingCasualtyHandling.BL.Models
 
         #endregion
 
-        #region specialties
+        #region Specialties
 
         private List<Specialty> _listOfSpecialties;
         public List<Specialty> ListOfSpecialties
@@ -137,7 +137,7 @@ namespace IncomingCasualtyHandling.BL.Models
 
         #endregion
 
-        #region specialtiesInList
+        #region SpecialtiesInList
 
         public List<ICHPatient> Specialty1Patients
         {
@@ -256,7 +256,7 @@ namespace IncomingCasualtyHandling.BL.Models
 
         #endregion
 
-        #region tabItems
+        #region TabItems
         
         private int _selectedTabIndex;
         public int SelectedTabIndex
@@ -509,36 +509,43 @@ namespace IncomingCasualtyHandling.BL.Models
 
         public void GridViewColumnHeaderClicked(string s)
         {
+            // Check whether the header is the same as the one already sorting on
             if (_sortColumn == s)
             {
+                // If it is the same header, then the sorting direction should be changed
                 _sortDirection = _sortDirection == ListSortDirection.Ascending
                     ? ListSortDirection.Descending
                     : ListSortDirection.Ascending;
             }
             else
             {
+                // If it's not the same header, then the sorting direction should be ascending
                 _sortColumn = s;
                 _sortDirection = ListSortDirection.Ascending;
             }
 
+            // Check what to sort based upon
             switch (_sortColumn)
             {
                 case "Name":
                     {
+                        // Take each tab and sort it's data
                         foreach (var tab in _ObservableCollectionTabs)
                         {
                             if (tab.Data != null)
                             {
-                                var testlist = new List<ICHPatient>(tab.Data.ToList());
-                                testlist.Sort((p1, p2) => String.Compare(p1.Name, p2.Name, StringComparison.CurrentCulture));
+                                var listOfPatients = new List<ICHPatient>(tab.Data.ToList());
+                                listOfPatients.Sort((p1, p2) => String.Compare(p1.Name, p2.Name, StringComparison.CurrentCulture));
+                                // Check the sorting direction
                                 if (_sortDirection == ListSortDirection.Descending)
                                 {
-                                    testlist.Reverse();
-                                    tab.Data = new ObservableCollection<ICHPatient>(testlist);
+                                    // The sort-method by default sorts ascending. Thus the sorted data must be reversed
+                                    listOfPatients.Reverse();
+                                    tab.Data = new ObservableCollection<ICHPatient>(listOfPatients);
                                 }
                                 else
                                 {
-                                    tab.Data = new ObservableCollection<ICHPatient>(testlist);
+                                    tab.Data = new ObservableCollection<ICHPatient>(listOfPatients);
                                 }
                             }
                         }
@@ -550,16 +557,16 @@ namespace IncomingCasualtyHandling.BL.Models
                         {
                             if (tab.Data != null)
                             {
-                                var testlist = new List<ICHPatient>(tab.Data.ToList());
-                                testlist.Sort((p1, p2) => String.Compare(p1.CPR, p2.CPR, StringComparison.CurrentCulture));
+                                var listOfPatients = new List<ICHPatient>(tab.Data.ToList());
+                                listOfPatients.Sort((p1, p2) => String.Compare(p1.CPR, p2.CPR, StringComparison.CurrentCulture));
                                 if (_sortDirection == ListSortDirection.Descending)
                                 {
-                                    testlist.Reverse();
-                                    tab.Data = new ObservableCollection<ICHPatient>(testlist);
+                                    listOfPatients.Reverse();
+                                    tab.Data = new ObservableCollection<ICHPatient>(listOfPatients);
                                 }
                                 else
                                 {
-                                    tab.Data = new ObservableCollection<ICHPatient>(testlist);
+                                    tab.Data = new ObservableCollection<ICHPatient>(listOfPatients);
                                 }
                             }
                         }
@@ -571,16 +578,16 @@ namespace IncomingCasualtyHandling.BL.Models
                         {
                             if (tab.Data != null)
                             {
-                                var testlist = new List<ICHPatient>(tab.Data.ToList());
-                                testlist.Sort((p1, p2) => String.Compare(p1.Age, p2.Age, StringComparison.CurrentCulture));
+                                var listOfPatients = new List<ICHPatient>(tab.Data.ToList());
+                                listOfPatients.Sort((p1, p2) => String.Compare(p1.Age, p2.Age, StringComparison.CurrentCulture));
                                 if (_sortDirection == ListSortDirection.Descending)
                                 {
-                                    testlist.Reverse();
-                                    tab.Data = new ObservableCollection<ICHPatient>(testlist);
+                                    listOfPatients.Reverse();
+                                    tab.Data = new ObservableCollection<ICHPatient>(listOfPatients);
                                 }
                                 else
                                 {
-                                    tab.Data = new ObservableCollection<ICHPatient>(testlist);
+                                    tab.Data = new ObservableCollection<ICHPatient>(listOfPatients);
                                 }
                             }
                         }
@@ -592,16 +599,16 @@ namespace IncomingCasualtyHandling.BL.Models
                         {
                             if (tab.Data != null)
                             {
-                                var testlist = new List<ICHPatient>(tab.Data.ToList());
-                                testlist.Sort((p1, p2) => String.Compare(p1.Gender.ToString(), p2.Gender.ToString(), StringComparison.CurrentCulture));
+                                var listOfPatients = new List<ICHPatient>(tab.Data.ToList());
+                                listOfPatients.Sort((p1, p2) => String.Compare(p1.Gender.ToString(), p2.Gender.ToString(), StringComparison.CurrentCulture));
                                 if (_sortDirection == ListSortDirection.Descending)
                                 {
-                                    testlist.Reverse();
-                                    tab.Data = new ObservableCollection<ICHPatient>(testlist);
+                                    listOfPatients.Reverse();
+                                    tab.Data = new ObservableCollection<ICHPatient>(listOfPatients);
                                 }
                                 else
                                 {
-                                    tab.Data = new ObservableCollection<ICHPatient>(testlist);
+                                    tab.Data = new ObservableCollection<ICHPatient>(listOfPatients);
                                 }
                             }
                         }
@@ -613,16 +620,16 @@ namespace IncomingCasualtyHandling.BL.Models
                         {
                             if (tab.Data != null)
                             {
-                                var testlist = new List<ICHPatient>(tab.Data.ToList());
-                                testlist.Sort((p1, p2) => String.Compare(p1.Triage, p2.Triage, StringComparison.CurrentCulture));
+                                var listOfPatients = new List<ICHPatient>(tab.Data.ToList());
+                                listOfPatients.Sort((p1, p2) => String.Compare(p1.Triage, p2.Triage, StringComparison.CurrentCulture));
                                 if (_sortDirection == ListSortDirection.Descending)
                                 {
-                                    testlist.Reverse();
-                                    tab.Data = new ObservableCollection<ICHPatient>(testlist);
+                                    listOfPatients.Reverse();
+                                    tab.Data = new ObservableCollection<ICHPatient>(listOfPatients);
                                 }
                                 else
                                 {
-                                    tab.Data = new ObservableCollection<ICHPatient>(testlist);
+                                    tab.Data = new ObservableCollection<ICHPatient>(listOfPatients);
                                 }
                             }
                         }
@@ -634,16 +641,16 @@ namespace IncomingCasualtyHandling.BL.Models
                         {
                             if (tab.Data != null)
                             {
-                                var testlist = new List<ICHPatient>(tab.Data.ToList());
-                                testlist.Sort((p1, p2) => String.Compare(p1.Specialty, p2.Specialty, StringComparison.CurrentCulture));
+                                var listOfPatients = new List<ICHPatient>(tab.Data.ToList());
+                                listOfPatients.Sort((p1, p2) => String.Compare(p1.Specialty, p2.Specialty, StringComparison.CurrentCulture));
                                 if (_sortDirection == ListSortDirection.Descending)
                                 {
-                                    testlist.Reverse();
-                                    tab.Data = new ObservableCollection<ICHPatient>(testlist);
+                                    listOfPatients.Reverse();
+                                    tab.Data = new ObservableCollection<ICHPatient>(listOfPatients);
                                 }
                                 else
                                 {
-                                    tab.Data = new ObservableCollection<ICHPatient>(testlist);
+                                    tab.Data = new ObservableCollection<ICHPatient>(listOfPatients);
                                 }
                             }
                         }
@@ -655,16 +662,16 @@ namespace IncomingCasualtyHandling.BL.Models
                         {
                             if (tab.Data != null)
                             {
-                                var testlist = new List<ICHPatient>(tab.Data.ToList());
-                                testlist.Sort((p1, p2) => p1.ETA.CompareTo(p2.ETA));
+                                var listOfPatients = new List<ICHPatient>(tab.Data.ToList());
+                                listOfPatients.Sort((p1, p2) => p1.ETA.CompareTo(p2.ETA));
                                 if (_sortDirection == ListSortDirection.Descending)
                                 {
-                                    testlist.Reverse();
-                                    tab.Data = new ObservableCollection<ICHPatient>(testlist);
+                                    listOfPatients.Reverse();
+                                    tab.Data = new ObservableCollection<ICHPatient>(listOfPatients);
                                 }
                                 else
                                 {
-                                    tab.Data = new ObservableCollection<ICHPatient>(testlist);
+                                    tab.Data = new ObservableCollection<ICHPatient>(listOfPatients);
                                 }
                             }
                         }
@@ -677,16 +684,16 @@ namespace IncomingCasualtyHandling.BL.Models
                             //tab.Data?.Sort((p1, p2) => String.Compare(p1.FromDestination, p2.FromDestination, StringComparison.CurrentCulture));
                             if (tab.Data != null)
                             {
-                                var testlist = new List<ICHPatient>(tab.Data.ToList());
-                                testlist.Sort((p1, p2) => String.Compare(p1.FromDestination, p2.FromDestination, StringComparison.CurrentCulture));
+                                var listOfPatients = new List<ICHPatient>(tab.Data.ToList());
+                                listOfPatients.Sort((p1, p2) => String.Compare(p1.FromDestination, p2.FromDestination, StringComparison.CurrentCulture));
                                 if (_sortDirection == ListSortDirection.Descending)
                                 {
-                                    testlist.Reverse();
-                                    tab.Data = new ObservableCollection<ICHPatient>(testlist);
+                                    listOfPatients.Reverse();
+                                    tab.Data = new ObservableCollection<ICHPatient>(listOfPatients);
                                 }
                                 else
                                 {
-                                    tab.Data = new ObservableCollection<ICHPatient>(testlist);
+                                    tab.Data = new ObservableCollection<ICHPatient>(listOfPatients);
                                 }
                             }
                         }
@@ -698,16 +705,16 @@ namespace IncomingCasualtyHandling.BL.Models
                         {
                             if (tab.Data != null)
                             {
-                                var testlist = new List<ICHPatient>(tab.Data.ToList());
-                                testlist.Sort((p1, p2) => p1.LastUpdated.CompareTo(p2.LastUpdated));
+                                var listOfPatients = new List<ICHPatient>(tab.Data.ToList());
+                                listOfPatients.Sort((p1, p2) => p1.LastUpdated.CompareTo(p2.LastUpdated));
                                 if (_sortDirection == ListSortDirection.Descending)
                                 {
-                                    testlist.Reverse();
-                                    tab.Data = new ObservableCollection<ICHPatient>(testlist);
+                                    listOfPatients.Reverse();
+                                    tab.Data = new ObservableCollection<ICHPatient>(listOfPatients);
                                 }
                                 else
                                 {
-                                    tab.Data = new ObservableCollection<ICHPatient>(testlist);
+                                    tab.Data = new ObservableCollection<ICHPatient>(listOfPatients);
                                 }
                             }
                         }
