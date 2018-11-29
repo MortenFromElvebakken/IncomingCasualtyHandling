@@ -18,7 +18,7 @@ using NUnit.Framework;
 namespace IncomingCasualtyHandling.Test.Integration
 {
     [TestFixture]
-    class IT2_LoadData_Convert
+    class IT2_LoadData_ConvertToICHPatient
     {
         // Fakes
         private IFhirClient _client;
@@ -121,7 +121,7 @@ namespace IncomingCasualtyHandling.Test.Integration
             // Wait for Async to get called
             Thread.Sleep(5000);
 
-            // Verify, that no ConvertToICHPatient class wasn't called => no patients in the list
+            // Verify, that no ConvertToICHPatient class wasn't called => no patients in the list, as event wasn't raised
             Assert.That(_patientList.Count, Is.EqualTo(0));
 
         }
