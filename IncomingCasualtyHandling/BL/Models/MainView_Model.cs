@@ -20,7 +20,7 @@ namespace IncomingCasualtyHandling.BL.Models
         public MainView_Model(ILoadData iLoadData)
         {
             _iLoadData = iLoadData;
-            _iLoadData.NoInternet += setInternetProperty;
+            _iLoadData.NoInternet += SetInternetProperty;
         }
 
         
@@ -142,13 +142,13 @@ namespace IncomingCasualtyHandling.BL.Models
                 OnPropertyChanged();
             }
         }
-        private static DateTime whenServerStoppedResponding = default(DateTime);
+        private static DateTime _whenServerStoppedResponding = default(DateTime);
 
-        public void setInternetProperty(bool b)
+        public void SetInternetProperty(bool b)
         {
             if (b == false)
             {
-                whenServerStoppedResponding = DateTime.Now;
+                _whenServerStoppedResponding = DateTime.Now;
                 ConnectionToInternet = Visibility.Visible;
                 OnPropertyChanged(NoConnectionString);
             }
@@ -157,7 +157,7 @@ namespace IncomingCasualtyHandling.BL.Models
                 ConnectionToInternet = Visibility.Collapsed;
             }
         }
-        private string _noConnectionString = string.Format("Could not contact server, no updates are made. Last update: " + whenServerStoppedResponding.ToLongTimeString());
+        private string _noConnectionString = string.Format("Could not contact server, no updates are made. Last update: " + _whenServerStoppedResponding.ToLongTimeString());
         public string NoConnectionString
         {
             get => _noConnectionString;
