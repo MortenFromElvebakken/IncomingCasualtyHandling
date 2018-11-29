@@ -15,59 +15,58 @@ namespace IncomingCasualtyHandling.GUI.ViewModels
 {
     public class DetailView_ViewModel : Workspace_ViewModel
     {
-        public string IconPath => _detailViewModel.IconPath;
+        public string IconPath => _detailView_Model.IconPath;
 
         //To specify which tab is opened, and which is currently open
         public int SelectedTabIndex
         {
-            get => _detailViewModel.SelectedTabIndex;
-            set => _detailViewModel.SelectedTabIndex = value;
+            get => _detailView_Model.SelectedTabIndex;
+            set => _detailView_Model.SelectedTabIndex = value;
 
         }
         //To get which button is pressed from the overviewview, in order to open correct tab
         public string StringFromParameter
         {
-            get => _detailViewModel.StringFromChangeViewCommandParameter;
-            set => _detailViewModel.StringFromChangeViewCommandParameter = value;
+            get => _detailView_Model.StringFromChangeViewCommandParameter;
+            set => _detailView_Model.StringFromChangeViewCommandParameter = value;
         }
 
 
         public ObservableCollection<TabControl> Tabs
         {
-            get => _detailViewModel.ObservableCollectionTabs;
+            get => _detailView_Model.ObservableCollectionTabs;
         }
         
 
 
-        private IDetailView_Model _detailViewModel;
+        private IDetailView_Model _detailView_Model;
         public DetailView_ViewModel()
         { }
 
-        public DetailView_ViewModel(IDetailView_Model detailViewModel)
+        public DetailView_ViewModel(IDetailView_Model detailView_Model)
         {
-            _detailViewModel = detailViewModel;
-            _detailViewModel.PropertyChanged += DetailViewModelOnPropertyChanged;
+            _detailView_Model = detailView_Model;
+            _detailView_Model.PropertyChanged += DetailViewModelOnPropertyChanged;
             ChangeTabsCommand = new RelayCommand<object>(ChangeTabs);
             GridViewColumnHeaderClickedHandlerCommand = new RelayCommand<RoutedEventArgs>(GridViewColumnHeaderClickedHandler);
-            //SourceUpdatedTab = new RelayCommand(sourceUpdatedTabSet);
-
-
+            
         }
 
         private void DetailViewModelOnPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
             OnPropertyChanged(e.PropertyName);
         }
+
+
         public ICommand ChangeTabsCommand { get; set; }
         public void ChangeTabs(object x)
         {
-            _detailViewModel.ChangeTabsAllowed(x.ToString());
+            _detailView_Model.ChangeTabsAllowed(x.ToString());
         }
-        public bool ChangedFromMain {set => _detailViewModel.ChangedFromMain = true; }
+        public bool ChangedFromMain {set => _detailView_Model.ChangedFromMain = true; }
 
 
         public ICommand GridViewColumnHeaderClickedHandlerCommand { get; set; }
-
         private void GridViewColumnHeaderClickedHandler(RoutedEventArgs o)
         {
             // Cast the source of the control that triggered the event
@@ -75,7 +74,7 @@ namespace IncomingCasualtyHandling.GUI.ViewModels
             // Find the name of the column
             var columnName = source.Content;
             // Use the column name as argument to the method
-            _detailViewModel.GridViewColumnHeaderClicked(columnName.ToString());
+            _detailView_Model.GridViewColumnHeaderClicked(columnName.ToString());
             
                 
         }

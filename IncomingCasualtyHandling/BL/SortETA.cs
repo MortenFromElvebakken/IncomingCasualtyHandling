@@ -14,9 +14,7 @@ namespace IncomingCasualtyHandling.BL
 {
     public class SortETA : ISortETA
     {
-        private IOverviewView_Model _overviewViewModel;
         private IDetailView_Model _detailView_Model;
-        private IMainView_Model _mainView_Model;
         private ICountTime _countTime;
 
         // List to hold patients without ETA
@@ -25,13 +23,11 @@ namespace IncomingCasualtyHandling.BL
         private int _range;
 
         //Constructor
-        public SortETA(IOverviewView_Model overviewView_Model, IDetailView_Model detailView_Model, IMainView_Model mainView_Model, ICountTime countTime, ILoadData receivePatientsFromFhir)
+        public SortETA(IDetailView_Model detailView_Model, ICountTime countTime, ILoadData receivePatientsFromFhir)
         {
 
             receivePatientsFromFhir.PatientDataReady += SortForETA;
-            _overviewViewModel = overviewView_Model;
             _detailView_Model = detailView_Model;
-            _mainView_Model = mainView_Model;
             _countTime = countTime;
         }
 

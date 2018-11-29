@@ -16,13 +16,13 @@ namespace IncomingCasualtyHandling.GUI.ViewModels
     // the class is an ObservableObject in order to be able to call OnPropertyChanged on properties
     internal class MainView_ViewModel : ObservableObject
     {
-        private List<ICHPatient> _listOfPatients;
+        
 
         IOverviewView_Model _overviewModel;
 
         // Objects for the two subviews
-        OverviewView_ViewModel _overviewViewViewModel; 
-        DetailView_ViewModel _detailViewViewModel; 
+        OverviewView_ViewModel _overviewView_ViewModel; 
+        DetailView_ViewModel _detailView_ViewModel; 
 
         // Model for ViewModel
         private IMainView_Model _mainModel;
@@ -36,14 +36,13 @@ namespace IncomingCasualtyHandling.GUI.ViewModels
         {
             
             _mainModel = mainModel;
-            _overviewViewViewModel = overviewViewViewModel;
-            _detailViewViewModel = detailViewViewModel;
+            _overviewView_ViewModel = overviewViewViewModel;
+            _detailView_ViewModel = detailViewViewModel;
             
             _mainModel.PropertyChanged += MainModelOnPropertyChanged;
 
             //Setup the current workspace aka the view to be shown
-            CurrentWorkspace = _overviewViewViewModel;
-            ChangeViewCommand = new RelayCommand(ChangeView);
+            CurrentWorkspace = _overviewView_ViewModel;
             ChangeViewCommandWithProperty = new RelayCommand<object>(ChangeViewWithParameter);
             ChangeServerName = new RelayCommand(ChangeServer);
         }
@@ -76,15 +75,15 @@ namespace IncomingCasualtyHandling.GUI.ViewModels
         public ICommand ChangeViewCommandWithProperty { get; set; }
         private void ChangeViewWithParameter(object x)
         {
-            if(CurrentWorkspace == _overviewViewViewModel)
+            if(CurrentWorkspace == _overviewView_ViewModel)
             {
-                _detailViewViewModel.ChangedFromMain = true;
-                _detailViewViewModel.ChangeTabs(x);
-                CurrentWorkspace = _detailViewViewModel;
+                _detailView_ViewModel.ChangedFromMain = true;
+                _detailView_ViewModel.ChangeTabs(x);
+                CurrentWorkspace = _detailView_ViewModel;
             }
             else
             {
-                _detailViewViewModel.ChangeTabs(x);
+                _detailView_ViewModel.ChangeTabs(x);
             }
         }
         public ICommand ChangeServerName { get; set; }
@@ -97,30 +96,15 @@ namespace IncomingCasualtyHandling.GUI.ViewModels
                 if (serverChangeWindow.ServerName.Text != "")
                 {
                     _mainModel.ServerName = serverChangeWindow.ServerName.Text;
-                    if (CurrentWorkspace != _detailViewViewModel)
+                    if (CurrentWorkspace != _detailView_ViewModel)
                     {
-                        CurrentWorkspace = _overviewViewViewModel;
+                        CurrentWorkspace = _overviewView_ViewModel;
                     }
                 }
             }
         }
 
-        // Command for command-binding to change view
-        public ICommand ChangeViewCommand { get; set; }
-
-        public void ChangeView()
-        {
-            if (CurrentWorkspace == _overviewViewViewModel)
-            {
-                CurrentWorkspace = _detailViewViewModel;
-                
-            }
-            else
-            {
-                CurrentWorkspace = _overviewViewViewModel;
-            }
-
-        }
+        
 
         // Property for binding for TopComponent Timer
         public string CurrentDateTime
@@ -135,6 +119,8 @@ namespace IncomingCasualtyHandling.GUI.ViewModels
 
         public string NoConnectionString => _mainModel.NoConnectionString;
 
+
+        private List<ICHPatient> _listOfPatients;
         public List<ICHPatient> ListOfPatients
         {
             get { return _listOfPatients; }
