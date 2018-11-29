@@ -91,7 +91,7 @@ namespace IncomingCasualtyHandling.Test.Integration
         }
 
         [Test]
-        public void GetAllPatients_CallSerialisePatient_SerialisePatientsReturnsPatient()
+        public void GetAllPatients_CallConvertToICHPatient_ConvertToICHPatientReturnsPatient()
         {
             Bundle _bundle = new Bundle();
             Bundle.EntryComponent _entry = new Bundle.EntryComponent();
@@ -105,7 +105,7 @@ namespace IncomingCasualtyHandling.Test.Integration
         }
 
         [Test]
-        public void AsynchGetAllPatients_NoNewPatient_DoesNotCallSerialisePatient()
+        public void AsynchGetAllPatients_NoNewPatient_DoesNotCallConvertToICHPatient()
         {
 
             Bundle _bundle = new Bundle();
@@ -121,13 +121,13 @@ namespace IncomingCasualtyHandling.Test.Integration
             // Wait for Async to get called
             Thread.Sleep(5000);
 
-            // Verify, that no SerialisePatient class wasn't called => no patients in the list
+            // Verify, that no ConvertToICHPatient class wasn't called => no patients in the list
             Assert.That(_patientList.Count, Is.EqualTo(0));
 
         }
 
         [Test]
-        public void AsynchGetAllPatients_UpdateOnPatient_CallSerialisePatient()
+        public void AsynchGetAllPatients_UpdateOnPatient_CallConvertToICHPatient()
         {
             Bundle _bundle = new Bundle();
             Bundle.EntryComponent _entry = new Bundle.EntryComponent();
@@ -149,7 +149,7 @@ namespace IncomingCasualtyHandling.Test.Integration
             // Wait for Async to get called
             Thread.Sleep(7000);
 
-            // Verify, that SerialisePatient class was called => patient list has a patient
+            // Verify, that ConvertToICHPatient class was called => patient list has a patient
             Assert.That(_patientList.Count, Is.EqualTo(1));
 
         }

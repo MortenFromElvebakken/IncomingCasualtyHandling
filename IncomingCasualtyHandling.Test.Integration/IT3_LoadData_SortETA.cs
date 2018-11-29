@@ -131,14 +131,14 @@ namespace IncomingCasualtyHandling.Test.Integration
         }
 
        [Test]
-        public void GetAllPatients_RaisesEvent_SerialisePatientsReactsAndRaisesEventWithPatient()
+        public void GetAllPatients_RaisesEvent_SortETAReactsOnEvent()
         {
             _getPatients.GetAllPatients();
             Assert.That(_sortedPatients[0].Name, Is.EqualTo(wholeName));
         }
 
         [Test]
-        public void AsynchGetAllPatients_RaisesEvent_SerialisePatientsReactsAndRaisesEventWithPatient()
+        public void AsynchGetAllPatients_RaisesEvent_SortETAReactsOnEvent()
         {
             _getPatients.GetAllPatients();
 
