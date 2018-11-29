@@ -112,7 +112,7 @@
     <Compile Include="BL\Interfaces\ISortTriage.cs" />
     <Compile Include="BL\Interfaces\ISortSpecialty.cs" />
     <Compile Include="BL\Interfaces\ICountTime.cs" />
-    <Compile Include="BL\Models\TabControl.cs" />
+    <Compile Include="BL\Object classes\TabControl.cs" />
     <Compile Include="BL\Models\DetailView_Model.cs" />
     <Compile Include="BL\Models\MainView_Model.cs" />
     <Compile Include="BL\Models\OverviewView_Model.cs" />
