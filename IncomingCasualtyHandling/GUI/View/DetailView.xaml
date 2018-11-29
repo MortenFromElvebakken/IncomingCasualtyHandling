@@ -39,7 +39,7 @@
 
         <!--<Grid Grid.Row="0" RowSpan="2" ZIndex="1">-->
         <Grid Grid.Row="1" ZIndex="1">
-            <TabControl ItemsSource="{Binding Tabs2}" Name="TabControl" SelectedIndex="{Binding SelectedTabIndex, Mode=TwoWay}" Style="{DynamicResource TabControlAsWrapPanel}">
+            <TabControl ItemsSource="{Binding Tabs}" Name="TabControl" SelectedIndex="{Binding SelectedTabIndex, Mode=TwoWay}" Style="{DynamicResource TabControlAsWrapPanel}">
                 <TabControl.ItemTemplate>
                     <DataTemplate>
 

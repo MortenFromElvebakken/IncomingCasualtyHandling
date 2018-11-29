@@ -17,7 +17,6 @@ namespace IncomingCasualtyHandling.BL.Interfaces
         List<Specialty> ListOfSpecialties { get; set; }
         List<List<ICHPatient>> ListOfSpecialtiesPatientLists { get; set; }
         List<ICHPatient> ETAPatients { get; set; }
-        List<TabControl> ListOfTabs { get; set; }
         string IconPath { get; }
         int SelectedTabIndex { get; set; }
         string StringFromChangeViewCommandParameter { get; set; }
@@ -26,6 +25,5 @@ namespace IncomingCasualtyHandling.BL.Interfaces
         void GridViewColumnHeaderClicked(string s);
         bool ChangedFromMain { set; }
         ObservableCollection<TabControl> ObservableCollectionTabs { get; }
-        void SetTabIndex();
     }
 }

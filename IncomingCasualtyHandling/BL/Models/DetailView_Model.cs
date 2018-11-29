@@ -307,30 +307,15 @@ namespace IncomingCasualtyHandling.BL.Models
         }
         
 
-        private List<TabControl> _tabsList = new List<TabControl>();
-        public List<TabControl> ListOfTabs
-        {
-            get
-            {
-                return _tabsList;
-            }
-            set
-            {
-                _tabsList = value;
-                OnPropertyChanged("Tabs");
-                //OnPropertyChanged("SelectedTabIndex");
-            }
-        }
-
-        private ObservableCollection<TabControl> _ObservableCollectionTabs;
+        private ObservableCollection<TabControl> _observableCollectionTabs;
 
         public ObservableCollection<TabControl> ObservableCollectionTabs
         {
-            get => _ObservableCollectionTabs;
+            get => _observableCollectionTabs;
             set
             {
-                _ObservableCollectionTabs = value;
-                OnPropertyChanged("Tabs2");
+                _observableCollectionTabs = value;
+                OnPropertyChanged("Tabs");
                 OnPropertyChanged("SelectedTabIndex");
                 OnPropertyChanged("Data");
             }
@@ -457,7 +442,7 @@ namespace IncomingCasualtyHandling.BL.Models
                     //    CreateTabs();
                     //    ChangedFromMain = false;
                     //}
-                    if (_ObservableCollectionTabs[tryTabIndex].isVisible == Visibility.Visible)    //_tabsList[tryTabIndex].isVisible == Visibility.Visible)
+                    if (_observableCollectionTabs[tryTabIndex].isVisible == Visibility.Visible)    //_tabsList[tryTabIndex].isVisible == Visibility.Visible)
                     {
                         
                         SelectedTabIndex = tryTabIndex;
@@ -530,7 +515,7 @@ namespace IncomingCasualtyHandling.BL.Models
                 case "Name":
                     {
                         // Take each tab and sort it's data
-                        foreach (var tab in _ObservableCollectionTabs)
+                        foreach (var tab in _observableCollectionTabs)
                         {
                             if (tab.Data != null)
                             {
@@ -553,7 +538,7 @@ namespace IncomingCasualtyHandling.BL.Models
                     }
                 case "CPR":
                     {
-                        foreach (var tab in _ObservableCollectionTabs)
+                        foreach (var tab in _observableCollectionTabs)
                         {
                             if (tab.Data != null)
                             {
@@ -574,7 +559,7 @@ namespace IncomingCasualtyHandling.BL.Models
                     }
                 case "Age":
                     {
-                        foreach (var tab in _ObservableCollectionTabs)
+                        foreach (var tab in _observableCollectionTabs)
                         {
                             if (tab.Data != null)
                             {
@@ -595,7 +580,7 @@ namespace IncomingCasualtyHandling.BL.Models
                     }
                 case "Gender":
                     {
-                        foreach (var tab in _ObservableCollectionTabs)
+                        foreach (var tab in _observableCollectionTabs)
                         {
                             if (tab.Data != null)
                             {
@@ -616,7 +601,7 @@ namespace IncomingCasualtyHandling.BL.Models
                     }
                 case "Triage":
                     {
-                        foreach (var tab in _ObservableCollectionTabs)
+                        foreach (var tab in _observableCollectionTabs)
                         {
                             if (tab.Data != null)
                             {
@@ -637,7 +622,7 @@ namespace IncomingCasualtyHandling.BL.Models
                     }
                 case "Specialty":
                     {
-                        foreach (var tab in _ObservableCollectionTabs)
+                        foreach (var tab in _observableCollectionTabs)
                         {
                             if (tab.Data != null)
                             {
@@ -658,7 +643,7 @@ namespace IncomingCasualtyHandling.BL.Models
                     }
                 case "ETA":
                     {
-                        foreach (var tab in _ObservableCollectionTabs)
+                        foreach (var tab in _observableCollectionTabs)
                         {
                             if (tab.Data != null)
                             {
@@ -679,7 +664,7 @@ namespace IncomingCasualtyHandling.BL.Models
                     }
                 case "From destination":
                     {
-                        foreach (var tab in _ObservableCollectionTabs)
+                        foreach (var tab in _observableCollectionTabs)
                         {
                             //tab.Data?.Sort((p1, p2) => String.Compare(p1.FromDestination, p2.FromDestination, StringComparison.CurrentCulture));
                             if (tab.Data != null)
@@ -701,7 +686,7 @@ namespace IncomingCasualtyHandling.BL.Models
                     }
                 case "Last updated":
                     {
-                        foreach (var tab in _ObservableCollectionTabs)
+                        foreach (var tab in _observableCollectionTabs)
                         {
                             if (tab.Data != null)
                             {

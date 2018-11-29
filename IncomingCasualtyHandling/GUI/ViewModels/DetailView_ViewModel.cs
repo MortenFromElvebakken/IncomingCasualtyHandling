@@ -15,26 +15,8 @@ namespace IncomingCasualtyHandling.GUI.ViewModels
 {
     public class DetailView_ViewModel : Workspace_ViewModel
     {
-        //List<Triage> _listOfTriages = new List<Triage>();
+        public string IconPath => _detailViewModel.IconPath;
 
-        //private List<Triage> ListOfTriages
-        //{
-        //    get => _detailViewModel.ListOfTriages;
-        //    set => _listOfTriages = value;
-        //}
-
-
-        //Opret  properties til brug af overviewcomponent
-
-        //antal af triagerede i hver gruppe
-        //Antal speciale i øverste speciale
-        //Næste ETA
-        
-        //for homeicon
-        public string IconPath
-        {
-            get => _detailViewModel.IconPath;
-        }
         //To specify which tab is opened, and which is currently open
         public int SelectedTabIndex
         {
@@ -50,18 +32,11 @@ namespace IncomingCasualtyHandling.GUI.ViewModels
         }
 
 
-        public ObservableCollection<TabControl> Tabs2
+        public ObservableCollection<TabControl> Tabs
         {
             get => _detailViewModel.ObservableCollectionTabs;
         }
-
-        //List of tabs in window, set upon pressing something in overview view
-        public List<TabControl> Tabs
-        {
-            get => _detailViewModel.ListOfTabs;
-            set => _detailViewModel.ListOfTabs = value;
-        }
-        public TabControl test { get; set; }
+        
 
 
         private IDetailView_Model _detailViewModel;
@@ -104,12 +79,5 @@ namespace IncomingCasualtyHandling.GUI.ViewModels
             
                 
         }
-
-        //public ICommand SourceUpdatedTab { get; set; }
-
-        //private void sourceUpdatedTabSet()
-        //{
-        //    _detailViewModel.SetTabIndex();
-        //}
     }
 }

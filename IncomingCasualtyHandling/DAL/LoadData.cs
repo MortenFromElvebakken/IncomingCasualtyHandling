@@ -116,10 +116,10 @@ namespace IncomingCasualtyHandling.DAL
         }
 
 
-        private bool sameAsLast;
-        List<Patient> lastChangedPatients = default(List<Patient>);
+        private bool _sameAsLast;
+        List<Patient> _lastChangedPatients = default(List<Patient>);
 
-        private bool checkIfSamePatientsReturned(Bundle b)
+        private bool CheckIfSamePatientsReturned(Bundle b)
         {
             if (b.Entry.Count == 0)
             {
@@ -139,7 +139,7 @@ namespace IncomingCasualtyHandling.DAL
                 int CheckIfPatientsAreTheSame = counterTest;
                 for (int i = 0; i < counterTest; i++)
                 {
-                    if (lastChangedPatients != null && changedPatients[i].Meta.LastUpdated == lastChangedPatients[i].Meta.LastUpdated)
+                    if (_lastChangedPatients != null && changedPatients[i].Meta.LastUpdated == _lastChangedPatients[i].Meta.LastUpdated)
                     {
                         CheckIfPatientsAreTheSame--;
                     }
@@ -151,7 +151,7 @@ namespace IncomingCasualtyHandling.DAL
                 }
                 else
                 {
-                    lastChangedPatients = changedPatients;
+                    _lastChangedPatients = changedPatients;
                     return false;
                 }
                 
@@ -160,7 +160,7 @@ namespace IncomingCasualtyHandling.DAL
 
         private void AsyncGetAllPatients()
         {
-            sameAsLast = true;
+            _sameAsLast = true;
             var anyChangedResources = default(Bundle);
             Thread.Sleep(5000);
             try
@@ -174,7 +174,7 @@ namespace IncomingCasualtyHandling.DAL
                     NoInternetConnection(true);
                 }
 
-                sameAsLast = checkIfSamePatientsReturned(anyChangedResources);
+                _sameAsLast = CheckIfSamePatientsReturned(anyChangedResources);
             }
             catch (Exception e)
             {
@@ -183,7 +183,7 @@ namespace IncomingCasualtyHandling.DAL
                 NoInternetConnection(false);
             }
 
-            if (anyChangedResources != null && !sameAsLast)
+            if (anyChangedResources != null && !_sameAsLast)
             {
                 var newBundle = Client.SearchAsync<Patient>(_sParameters).Result;
                 List<ICHPatient> listOfPatients = new List<ICHPatient>();
@@ -198,7 +198,7 @@ namespace IncomingCasualtyHandling.DAL
                     }
                     newBundle = Client.Continue(newBundle, PageDirection.Next);
                 }
-                foreach (var patient in lastChangedPatients)
+                foreach (var patient in _lastChangedPatients)
                 {
                     if (patient.Active == false)
                     {
