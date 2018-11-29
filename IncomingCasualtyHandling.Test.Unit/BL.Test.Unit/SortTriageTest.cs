@@ -167,7 +167,7 @@ namespace IncomingCasualtyHandling.Test.Unit.BL.Test.Unit
             };
             _listOfPatients.Add(_patient3);
 
-            ICHPatient patient3Wut = new ICHPatient
+            ICHPatient patient3UnknownTriage = new ICHPatient
             {
                 CPR = "3",
                 Name = "Patient Three",
@@ -178,7 +178,7 @@ namespace IncomingCasualtyHandling.Test.Unit.BL.Test.Unit
                 ToHospital = "AUH",
                 ETA = new DateTime(2018, 11, 18, 21, 30, 00)
             };
-            _sortedListOfPatients.Add(patient3Wut);
+            _sortedListOfPatients.Add(patient3UnknownTriage);
             _sortEta.SortListOnEta(_listOfPatients).ReturnsForAnyArgs(_sortedListOfPatients);
 
             _uut.SortForTriage(_listOfPatients);
