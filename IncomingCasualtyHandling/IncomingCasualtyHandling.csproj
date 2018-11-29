@@ -126,7 +126,6 @@
     <Compile Include="DAL\Interfaces\ILoadConfigurationSettings.cs" />
     <Compile Include="DAL\Interfaces\IConvertToICHPatient.cs" />
     <Compile Include="DAL\LoadConfigurationSettings.cs" />
-    <Compile Include="GUI\GridViewSort.cs" />
     <Compile Include="GUI\ViewModels\DetailView_ViewModel.cs" />
     <Compile Include="GUI\ViewModels\MainView_ViewModel.cs" />
     <Compile Include="BL\Object classes\Specialty.cs" />
