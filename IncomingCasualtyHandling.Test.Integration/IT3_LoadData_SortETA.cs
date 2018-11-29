@@ -27,8 +27,6 @@ namespace IncomingCasualtyHandling.Test.Integration
         private ISortTriage _sortTriage;
         private ISortSpecialty _sortSpecialty;
         private ICountTime _countTime;
-        private IMainView_Model _MV_M;
-        private IOverviewView_Model _OV_M;
         private IDetailView_Model _DV_M;
 
 
@@ -69,8 +67,6 @@ namespace IncomingCasualtyHandling.Test.Integration
             _sortTriage = Substitute.For<ISortTriage>();
             _sortSpecialty = Substitute.For<ISortSpecialty>();
             _countTime = Substitute.For<ICountTime>();
-            _MV_M = Substitute.For<IMainView_Model>();
-            _OV_M = Substitute.For<IOverviewView_Model>();
             _DV_M = Substitute.For<IDetailView_Model>();
 
 
@@ -85,7 +81,7 @@ namespace IncomingCasualtyHandling.Test.Integration
 
             _getPatients.PatientDataReady += (o) => _patientList = o;
 
-            _sortEta = new SortETA(_OV_M, _DV_M, _MV_M, _countTime, _getPatients);
+            _sortEta = new SortETA(_DV_M, _countTime, _getPatients);
 
             _sortEta.SortedListReady += (o) =>
             {

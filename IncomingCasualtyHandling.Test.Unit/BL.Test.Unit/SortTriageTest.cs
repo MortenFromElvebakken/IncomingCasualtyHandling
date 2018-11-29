@@ -55,7 +55,7 @@ namespace IncomingCasualtyHandling.Test.Unit.BL.Test.Unit
 
             _loadConfigSettings.ReturnTriageList().Returns(_listOfTriages);
 
-            _uut = new SortTriage(_loadConfigSettings, _overviewViewModel, _detailViewModel, _mainViewModel,
+            _uut = new SortTriage(_loadConfigSettings, _detailViewModel, _mainViewModel,
                     _sortEta);
 
             // Create a list with patients
