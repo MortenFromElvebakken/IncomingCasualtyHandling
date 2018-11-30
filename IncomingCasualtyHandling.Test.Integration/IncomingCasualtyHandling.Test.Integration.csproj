@@ -79,8 +79,8 @@
     <Compile Include="IT5_CountTime_Models.cs" />
     <Compile Include="IT4_SortETA_TimerSortTriageSortSpecialtyDVModel.cs" />
     <Compile Include="IT3_LoadData_SortETA.cs" />
-    <Compile Include="IT2_LoadData_Convert.cs" />
-    <Compile Include="IT1_LoadData_LoadConfig.cs" />
+    <Compile Include="IT2_LoadData_ConvertToICHPatient.cs" />
+    <Compile Include="IT1_LoadData_LoadConfigurationSettigs.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

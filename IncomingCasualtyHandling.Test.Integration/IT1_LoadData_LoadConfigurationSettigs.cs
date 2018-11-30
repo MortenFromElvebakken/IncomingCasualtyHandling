@@ -14,7 +14,7 @@ using NUnit.Framework;
 namespace IncomingCasualtyHandling.Test.Integration
 {
     [TestFixture]
-    class IT1_LoadData_LoadConfig
+    class IT1_LoadData_LoadConfigurationSettigs
     {
         // Fakes
         private IConvertToICHPatient _serialise;
@@ -49,7 +49,7 @@ namespace IncomingCasualtyHandling.Test.Integration
         [Test]
         public void LoadDataConstructor_GetServerUrl_ServerUrlReturnedFromLoad()
         {
-            var url = _loadData.GetServerUrl();
+            var url = _loadData.FhirServerUrl;
             Assert.That(url, Is.EqualTo(_xmlServerName));
             
         }
