@@ -9,8 +9,6 @@
     <Grid>
         <Border Background="#415262" Margin="1,1,1,1" BorderThickness="1" BorderBrush="Black" CornerRadius="10">
             <Grid>
-
-
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition/>
                     <ColumnDefinition/>
@@ -145,7 +143,7 @@
                         <MouseBinding MouseAction="LeftClick"  Command="{Binding ChangeTabsCommand}" CommandParameter="Eta 0"></MouseBinding>
                     </Grid.InputBindings>
                     <Label Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Center">ETA</Label>
-                    <Label Grid.Column="1" Name="EtaRelativeTimeText" VerticalAlignment="Center" HorizontalAlignment="Left" Content="{Binding RelativeSource={RelativeSource AncestorType=Window}, Path=DataContext.Eta.AbsoluteTime}"></Label>
+                    <Label Grid.Column="1" Name="EtaRelativeTimeText" VerticalAlignment="Center" HorizontalAlignment="Left" Content="{Binding RelativeSource={RelativeSource AncestorType=Window}, Path=DataContext.ETA.AbsoluteTime}"></Label>
                 </Grid>
             </Grid>
         </Border>
