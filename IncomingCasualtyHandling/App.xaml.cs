@@ -78,7 +78,7 @@ namespace IncomingCasualtyHandling
 
             ILoadData loadData = fhirCommands;
             IMainView_Model mainViewModel = new MainView_Model(loadData);
-            ICountTime countTime = new CountTime(mainViewModel, overviewViewModel);
+            ICountTime countTime = new CountTime(mainViewModel);
             //var sortETA = new SortETA(_overviewViewModel,_detailViewModel, _mainViewModel, countTime, IGetPatientsFromFhir);
             //var sortSpecialty = new SortSpecialty(lcs, _overviewViewModel, _detailViewModel, _mainViewModel, IGetPatientsFromFhir);
             //var sortTriage = new SortTriage(lcs, _overviewViewModel, _detailViewModel, _mainViewModel, IGetPatientsFromFhir);

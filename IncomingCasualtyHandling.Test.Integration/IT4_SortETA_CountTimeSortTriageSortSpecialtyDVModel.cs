@@ -20,7 +20,7 @@ using NUnit.Framework;
 namespace IncomingCasualtyHandling.Test.Integration
 {
     [TestFixture]
-    class IT4_SortETA_TimerSortTriageSortSpecialtyDVModel
+    class IT4_SortETA_CountTimeSortTriageSortSpecialtyDVModel
     {
         // Fakes
         private IFhirClient _client;
@@ -64,6 +64,7 @@ namespace IncomingCasualtyHandling.Test.Integration
         {
             _MV_M = Substitute.For<IMainView_Model>();
             _OV_M = Substitute.For<IOverviewView_Model>();
+            _DV_M = Substitute.For<IDetailView_Model>();
 
             _convert = new ConvertToICHPatient();
 
@@ -74,11 +75,8 @@ namespace IncomingCasualtyHandling.Test.Integration
 
             _getPatients = new LoadData(_loadConfig, _convert);
 
-            _countTime = Substitute.For<ICountTime>();
-            _DV_M = Substitute.For<IDetailView_Model>();
-
+            _countTime = new CountTime(_MV_M);
             _sortEta = new SortETA(_DV_M, _countTime, _getPatients);
-
             _sortTriage = new SortTriage(_loadConfig, _DV_M, _MV_M, _sortEta);
             _sortSpecialty = new SortSpecialty(_loadConfig, _OV_M, _DV_M, _MV_M, _sortEta);
             
@@ -120,14 +118,14 @@ namespace IncomingCasualtyHandling.Test.Integration
 
         #region  Timer
         [Test]
-        public void SortForETA_CallCountTime_TimerReceivedCall()
+        public void SortForETA_CallCountTime_TimerReceivedCallWhichTriggersUpdateOfMainModel()
         {
             _getPatients.GetAllPatients();
 
-            _countTime.ReceivedWithAnyArgs().FindRelativeTime(new List<ICHPatient>());
+            // Check that Count Time received call by verifying, that it has run its method and updated model
+            Assert.NotNull(_MV_M.ETA);
 
         }
-
         #endregion
 
         #region SortTriage

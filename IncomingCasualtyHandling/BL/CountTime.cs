@@ -16,7 +16,6 @@ namespace IncomingCasualtyHandling.BL
     {
 
         private IMainView_Model _mainViewModel;
-        private IOverviewView_Model _overviewViewModel;
 
         // CountTime made with inspiration from:
         // https://stackoverflow.com/a/5410783
@@ -24,11 +23,10 @@ namespace IncomingCasualtyHandling.BL
         private readonly Timer _currentDateTimeTimer = new Timer();
         private readonly Timer _etaTimer = new Timer();
 
-        public CountTime(IMainView_Model mainViewModel, IOverviewView_Model overviewViewModel)
+        public CountTime(IMainView_Model mainViewModel)
         {
-            // Set Models
+            // Set Model
             _mainViewModel = mainViewModel;
-            _overviewViewModel = overviewViewModel;
 
             _currentDateTimeTimer.Elapsed += new ElapsedEventHandler(CurrentDateTime_TimerTick);
             _currentDateTimeTimer.Interval = 1000;
@@ -76,7 +74,7 @@ namespace IncomingCasualtyHandling.BL
                 AbsoluteTime = "--:--",
                 RelativeTime = ""
             };
-            _overviewViewModel.ETA = _nextEta;
+            _mainViewModel.ETA = _nextEta;
 
         }
 
@@ -87,7 +85,6 @@ namespace IncomingCasualtyHandling.BL
         // Constants for relative time method
         private const int Second = 1;
         private const int MinuteInSeconds = 60 * Second;
-        private const int HourInMinutes = 60 * MinuteInSeconds;
 
         // Prefix for relative time
         private string _prefix;
@@ -165,10 +162,6 @@ namespace IncomingCasualtyHandling.BL
                 };
             }
 
-
-            
-
-            _overviewViewModel.ETA = _nextEta;
             _mainViewModel.ETA = _nextEta;
 
         }
