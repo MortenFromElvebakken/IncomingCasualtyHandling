@@ -10,6 +10,6 @@ namespace IncomingCasualtyHandling.DAL.Interface
 {
     public interface IConvertToICHPatient
     {
-        ICHPatient ReturnPatient(Patient newEntry, List<Triage> triageList);
+        ICHPatient ReturnPatient(Patient newEntry);
     }
 }

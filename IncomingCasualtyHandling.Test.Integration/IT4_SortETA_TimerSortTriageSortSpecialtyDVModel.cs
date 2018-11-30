@@ -64,14 +64,13 @@ namespace IncomingCasualtyHandling.Test.Integration
         {
             _MV_M = Substitute.For<IMainView_Model>();
             _OV_M = Substitute.For<IOverviewView_Model>();
-
-            _convert = new ConvertToICHPatient();
+            
 
             var currentDirectory = Path.GetDirectoryName(Path.GetDirectoryName(
                 TestContext.CurrentContext.TestDirectory));
             _xmlDocumentPath = currentDirectory + "\\Configuration.xml";
             _loadConfig = new LoadConfigurationSettings(_xmlDocumentPath);
-
+            _convert = new ConvertToICHPatient(_loadConfig);
             _getPatients = new LoadData(_loadConfig, _convert);
 
             _countTime = Substitute.For<ICountTime>();

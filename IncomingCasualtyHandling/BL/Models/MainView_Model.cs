@@ -157,11 +157,7 @@ namespace IncomingCasualtyHandling.BL.Models
                 ConnectionToInternet = Visibility.Collapsed;
             }
         }
-        private string _noConnectionString = string.Format("Could not contact server, no updates are made. Last update: " + _whenServerStoppedResponding.ToLongTimeString());
-        public string NoConnectionString
-        {
-            get => _noConnectionString;
-        }
+        public string NoConnectionString { get; } = string.Format("Could not contact server, no updates are made. Last update: " + _whenServerStoppedResponding.ToLongTimeString());
         #endregion
 
     }

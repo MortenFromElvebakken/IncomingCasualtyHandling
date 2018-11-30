@@ -287,11 +287,7 @@ namespace IncomingCasualtyHandling.BL.Models
             SelectedTabIndex = OldValue;
             
         }
-
-        public void SetTabIndex()
-        {
-            SelectedTabIndex = OldValue;
-        }
+        
 
         public string SelectedOverview { get; set; }
 

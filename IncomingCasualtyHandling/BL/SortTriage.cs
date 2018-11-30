@@ -39,7 +39,7 @@ namespace IncomingCasualtyHandling.BL
             // Create a list of lists of patients
             List<List<ICHPatient>> listOfPatientLists = new List<List<ICHPatient>>();
             List<ICHPatient> listWithUnknownTriage = new List<ICHPatient>();
-            var results = listOfPatients.GroupBy(p => p.Triage);
+            var results = listOfPatients.GroupBy(p => p.Triage.Name);
             TriageList = new List<Triage>(LoadXMLSettings.ReturnTriageList());
             //TriageList = new List<Triage>(LoadXMLSettings.TriageList);  //To get a copy of the list loaded from XML-file
             // Create an unknown triage
@@ -58,7 +58,7 @@ namespace IncomingCasualtyHandling.BL
                 {
                     // Check the triage list with patients to the configuration file triages
                     // If the triage matches:
-                    if (triageResultList.Key.Name == triage.Name)
+                    if (triageResultList.Key == triage.Name)
                     {
                         // Set the amount of patients
                         triage.Amount = triageResultList.Count();
