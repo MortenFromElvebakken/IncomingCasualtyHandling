@@ -10,6 +10,7 @@ using Hl7.Fhir.Model;
 using Hl7.Fhir.Rest;
 using IncomingCasualtyHandling.BL;
 using IncomingCasualtyHandling.BL.Interfaces;
+using IncomingCasualtyHandling.BL.Models;
 using IncomingCasualtyHandling.BL.Object_classes;
 using IncomingCasualtyHandling.DAL;
 using IncomingCasualtyHandling.DAL.Interface;
@@ -64,6 +65,7 @@ namespace IncomingCasualtyHandling.Test.Integration
         {
             _MV_M = Substitute.For<IMainView_Model>();
             _OV_M = Substitute.For<IOverviewView_Model>();
+            _DV_M = new DetailView_Model();
             
 
             var currentDirectory = Path.GetDirectoryName(Path.GetDirectoryName(
