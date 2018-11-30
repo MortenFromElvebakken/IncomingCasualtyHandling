@@ -58,7 +58,7 @@ namespace IncomingCasualtyHandling.BL
                 {
                     // Check the triage list with patients to the configuration file triages
                     // If the triage matches:
-                    if (triageResultList.Key == triage.Name)
+                    if (triageResultList.Key.Name == triage.Name)
                     {
                         // Set the amount of patients
                         triage.Amount = triageResultList.Count();
@@ -87,7 +87,7 @@ namespace IncomingCasualtyHandling.BL
                     // Set the triage of the patients to "Unknown" in the system
                     foreach (var unknownTriagePatient in triageResultList)
                     {
-                        unknownTriagePatient.Triage = unknownTriageName;
+                        unknownTriagePatient.Triage.Name = unknownTriageName;
                     }
 
                     // Add the patients to the list
@@ -101,11 +101,11 @@ namespace IncomingCasualtyHandling.BL
             {
                 // Add the patients to the Unknown-triage patient list
                 // Check whether the list already exists
-                if (listOfPatientLists.Exists(l => l.Exists(p => p.Triage == unknownTriageName)))
+                if (listOfPatientLists.Exists(l => l.Exists(p => p.Triage.Name == unknownTriageName)))
                 {
                     var tempUnknownPatientList =
-                        listOfPatientLists.Find(l => l.Exists(p => p.Triage == unknownTriageName));
-                    var index = listOfPatientLists.FindIndex(l => l.Exists(p => p.Triage == unknownTriageName));
+                        listOfPatientLists.Find(l => l.Exists(p => p.Triage.Name == unknownTriageName));
+                    var index = listOfPatientLists.FindIndex(l => l.Exists(p => p.Triage.Name == unknownTriageName));
 
                     // Add the unknown triage patients
                     tempUnknownPatientList.AddRange(listWithUnknownTriage);

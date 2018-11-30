@@ -343,7 +343,7 @@ namespace IncomingCasualtyHandling.BL.Models
                                 var _tab = new TabControl()
                                 {
                                     Name = triage.Name,
-                                    Data = new ObservableCollection<ICHPatient>(ListOfTriagePatientLists.Find(item => item[0].Triage == triage.Name)),
+                                    Data = new ObservableCollection<ICHPatient>(ListOfTriagePatientLists.Find(item => item[0].Triage.Name == triage.Name)),
                                     isVisible = Visibility.Visible
                                 };
                                 _tempTabList.Add(_tab);
@@ -606,7 +606,7 @@ namespace IncomingCasualtyHandling.BL.Models
                             if (tab.Data != null)
                             {
                                 var listOfPatients = new List<ICHPatient>(tab.Data.ToList());
-                                listOfPatients.Sort((p1, p2) => String.Compare(p1.Triage, p2.Triage, StringComparison.CurrentCulture));
+                                listOfPatients.Sort((p1, p2) => String.Compare(p1.Triage.Name, p2.Triage.Name, StringComparison.CurrentCulture));
                                 if (_sortDirection == ListSortDirection.Descending)
                                 {
                                     listOfPatients.Reverse();

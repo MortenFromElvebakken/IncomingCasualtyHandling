@@ -19,7 +19,7 @@ namespace IncomingCasualtyHandling.DAL
 
         }
 
-        public ICHPatient ReturnPatient(Patient newEntry)
+        public ICHPatient ReturnPatient(Patient newEntry, List<Triage> TriageList)
         {
             ICHPatient newIchPatient = new ICHPatient();
 
@@ -54,10 +54,11 @@ namespace IncomingCasualtyHandling.DAL
             {
                 newIchPatient.FromDestination = "Unknown";
             }
+
+            var stringTriage = newEntry.GetStringExtension("http://www.example.com/triagetest") ?? "Unknown";
             
 
-            newIchPatient.Triage =
-                newEntry.GetStringExtension("http://www.example.com/triagetest") ?? "Unknown";
+            newIchPatient.Triage = TriageList.Find(a => a.Name == stringTriage) ?? new Triage(){Name = "Unknown"};
             newIchPatient.Specialty =
                 newEntry.GetStringExtension("http://www.example.com/SpecialtyTest") ?? "Unknown";
             // Get the ETA. Find the seconds-element and remove it from the ETA that is put on the patient object

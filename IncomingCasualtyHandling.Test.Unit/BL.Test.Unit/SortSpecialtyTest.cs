@@ -77,7 +77,7 @@ namespace IncomingCasualtyHandling.Test.Unit.BL.Test.Unit
                 Name = "Patient One",
                 Age = "10",
                 Gender = AdministrativeGender.Male,
-                Triage = "TriageRed",
+                Triage = new Triage() { Name = "TriageRed" },
                 Specialty = "Neurology",
                 ToHospital = "AUH",
                 ETA = new DateTime(2018, 11, 18, 22, 30, 00)
@@ -88,7 +88,7 @@ namespace IncomingCasualtyHandling.Test.Unit.BL.Test.Unit
                 Name = "Patient Two",
                 Age = "20",
                 Gender = AdministrativeGender.Female,
-                Triage = "TriageYellow",
+                Triage = new Triage() { Name = "TriageYellow" },
                 Specialty = "Psychology",
                 ToHospital = "AUH",
                 ETA = new DateTime(2018, 11, 18, 21, 30, 00)
@@ -152,7 +152,7 @@ namespace IncomingCasualtyHandling.Test.Unit.BL.Test.Unit
                 Name = "Patient Three",
                 Age = "30",
                 Gender = AdministrativeGender.Female,
-                Triage = "TriageYellow",
+                Triage = new Triage() { Name = "TriageYellow" },
                 Specialty = _listOfSpecialties[1].Name,
                 ToHospital = "AUH",
                 ETA = new DateTime(2018, 11, 18, 21, 30, 00)
@@ -172,7 +172,7 @@ namespace IncomingCasualtyHandling.Test.Unit.BL.Test.Unit
                 Name = "Patient Three",
                 Age = "30",
                 Gender = AdministrativeGender.Female,
-                Triage = "TriageYellow",
+                Triage = new Triage() { Name = "TriageYellow" },
                 Specialty = _patient1.Specialty,
                 ToHospital = "AUH",
                 ETA = new DateTime(2018, 11, 18, 21, 30, 00)
@@ -192,7 +192,7 @@ namespace IncomingCasualtyHandling.Test.Unit.BL.Test.Unit
                 Name = "Patient Three",
                 Age = "30",
                 Gender = AdministrativeGender.Female,
-                Triage = "TriageYellow",
+                Triage = new Triage() { Name = "TriageYellow" },
                 Specialty = "Test specialty",
                 ToHospital = "AUH",
                 ETA = new DateTime(2018, 11, 18, 21, 30, 00)
@@ -218,7 +218,7 @@ namespace IncomingCasualtyHandling.Test.Unit.BL.Test.Unit
                 Name = "Patient Three",
                 Age = "30",
                 Gender = AdministrativeGender.Female,
-                Triage = "TriageYellow",
+                Triage = new Triage() { Name = "TriageYellow" },
                 Specialty = "",
                 ToHospital = "AUH",
                 ETA = new DateTime(2018, 11, 18, 21, 30, 00)
@@ -244,7 +244,7 @@ namespace IncomingCasualtyHandling.Test.Unit.BL.Test.Unit
                 Name = "Patient Three",
                 Age = "30",
                 Gender = AdministrativeGender.Female,
-                Triage = "TriageYellow",
+                Triage = new Triage() { Name = "TriageYellow" },
                 Specialty = "Neurology",
                 ToHospital = "AUH",
                 ETA = new DateTime(2018, 11, 18, 21, 30, 00)

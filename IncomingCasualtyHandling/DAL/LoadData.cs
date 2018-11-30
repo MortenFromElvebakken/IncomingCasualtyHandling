@@ -81,7 +81,7 @@ namespace IncomingCasualtyHandling.DAL
                 foreach (var x in firstBundle.Entry)
                 {
                     var testpatient = (Patient)x.Resource;
-                    ICHPatient op = _convertICHPatient.ReturnPatient(testpatient);
+                    ICHPatient op = _convertICHPatient.ReturnPatient(testpatient, _loadConfigurationSettings.ReturnTriageList());
                     listOfPatients.Add(op);
                 }
                 firstBundle = Client.Continue(firstBundle, PageDirection.Next);
@@ -193,7 +193,7 @@ namespace IncomingCasualtyHandling.DAL
                     foreach (var x in newBundle.Entry)
                     {
                         var testpatient = (Patient)x.Resource;
-                        ICHPatient op = _convertICHPatient.ReturnPatient(testpatient);
+                        ICHPatient op = _convertICHPatient.ReturnPatient(testpatient, _loadConfigurationSettings.ReturnTriageList());
                         listOfPatients.Add(op);
                     }
                     newBundle = Client.Continue(newBundle, PageDirection.Next);
@@ -221,7 +221,7 @@ namespace IncomingCasualtyHandling.DAL
                         {
                             if (p.CPR == cpr)
                             {
-                                    listOfPatients[counter2] = _convertICHPatient.ReturnPatient(patient);
+                                    listOfPatients[counter2] = _convertICHPatient.ReturnPatient(patient, _loadConfigurationSettings.ReturnTriageList());
                                     didItContainElement = true;
                                 break;
                             }
@@ -231,7 +231,7 @@ namespace IncomingCasualtyHandling.DAL
 
                         if (!didItContainElement)
                         {
-                            listOfPatients.Add(_convertICHPatient.ReturnPatient(patient));
+                            listOfPatients.Add(_convertICHPatient.ReturnPatient(patient,_loadConfigurationSettings.ReturnTriageList()));
                         }
                     }
                 }

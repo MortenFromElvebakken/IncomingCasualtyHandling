@@ -9,7 +9,7 @@ namespace IncomingCasualtyHandling.BL.Object_classes
         public string Name { get; set; }
         public string Age { get; set; }
         public AdministrativeGender Gender { get; set; }
-        public string Triage { get; set; }
+        public Triage Triage { get; set; }
         public string Specialty { get; set; }
         public string ToHospital { get; set; }
         public string FromDestination { get; set; }
