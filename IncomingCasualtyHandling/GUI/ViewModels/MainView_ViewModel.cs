@@ -43,6 +43,7 @@ namespace IncomingCasualtyHandling.GUI.ViewModels
 
             //Setup the current workspace aka the view to be shown
             CurrentWorkspace = _overviewView_ViewModel;
+            ReturnToMainCommand = new RelayCommand(ReturnToMain);
             ChangeViewCommandWithProperty = new RelayCommand<object>(ChangeViewWithParameter);
             ChangeServerName = new RelayCommand(ChangeServer);
         }
@@ -69,6 +70,14 @@ namespace IncomingCasualtyHandling.GUI.ViewModels
                     OnPropertyChanged();
                 }
             }
+        }
+
+        // Command for command-binding to change view
+        public ICommand ReturnToMainCommand { get; set; }
+
+        public void ReturnToMain()
+        {
+                CurrentWorkspace = _overviewView_ViewModel;
         }
 
         //Test for new command with command-binding to change view depending on property specified in command

@@ -26,7 +26,7 @@
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
             <Grid Grid.Column="0">
-                <xctk:IconButton Padding="5" Command="{Binding RelativeSource={RelativeSource AncestorType=Window}, Path=DataContext.ChangeViewCommand}" >
+                <xctk:IconButton Padding="5" Command="{Binding RelativeSource={RelativeSource AncestorType=Window}, Path=DataContext.ReturnToMainCommand}" >
                     <xctk:IconButton.Icon>
                         <Image Source="{Binding IconPath}"></Image>
                     </xctk:IconButton.Icon>

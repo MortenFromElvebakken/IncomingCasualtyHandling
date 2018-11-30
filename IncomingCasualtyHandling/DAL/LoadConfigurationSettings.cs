@@ -85,7 +85,15 @@ namespace IncomingCasualtyHandling.DAL
             {
                 var _specialty = new Specialty();
                 _specialty.Name = c.FirstChild.InnerText;
-                _specialty.Colour = "#af3205";//c.LastChild.InnerText; //Not yet implemented since colour isnt known on the specialties
+                if (c.LastChild.InnerText != "")
+                {
+                    _specialty.Colour = c.LastChild.InnerText;
+                }
+                else
+                {
+                    _specialty.Colour = "#808080";
+
+                }
                 _specialty.Amount = 0;
                 _specialty.ShowAs = Visibility.Collapsed;
 
