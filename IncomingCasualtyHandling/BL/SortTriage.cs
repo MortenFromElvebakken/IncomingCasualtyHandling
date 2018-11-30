@@ -39,7 +39,7 @@ namespace IncomingCasualtyHandling.BL
             // Create a list of lists of patients
             List<List<ICHPatient>> listOfPatientLists = new List<List<ICHPatient>>();
             List<ICHPatient> listWithUnknownTriage = new List<ICHPatient>();
-            var results = listOfPatients.GroupBy(p => p.Triage);
+            var results = listOfPatients.GroupBy(p => p.Triage.Name);
             TriageList = new List<Triage>(LoadXMLSettings.ReturnTriageList());
             //TriageList = new List<Triage>(LoadXMLSettings.TriageList);  //To get a copy of the list loaded from XML-file
             // Create an unknown triage
@@ -87,7 +87,7 @@ namespace IncomingCasualtyHandling.BL
                     // Set the triage of the patients to "Unknown" in the system
                     foreach (var unknownTriagePatient in triageResultList)
                     {
-                        unknownTriagePatient.Triage = unknownTriageName;
+                        unknownTriagePatient.Triage.Name = unknownTriageName;
                     }
 
                     // Add the patients to the list
@@ -101,11 +101,11 @@ namespace IncomingCasualtyHandling.BL
             {
                 // Add the patients to the Unknown-triage patient list
                 // Check whether the list already exists
-                if (listOfPatientLists.Exists(l => l.Exists(p => p.Triage == unknownTriageName)))
+                if (listOfPatientLists.Exists(l => l.Exists(p => p.Triage.Name == unknownTriageName)))
                 {
                     var tempUnknownPatientList =
-                        listOfPatientLists.Find(l => l.Exists(p => p.Triage == unknownTriageName));
-                    var index = listOfPatientLists.FindIndex(l => l.Exists(p => p.Triage == unknownTriageName));
+                        listOfPatientLists.Find(l => l.Exists(p => p.Triage.Name == unknownTriageName));
+                    var index = listOfPatientLists.FindIndex(l => l.Exists(p => p.Triage.Name == unknownTriageName));
 
                     // Add the unknown triage patients
                     tempUnknownPatientList.AddRange(listWithUnknownTriage);

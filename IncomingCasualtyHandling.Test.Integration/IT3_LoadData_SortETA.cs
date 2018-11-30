@@ -70,13 +70,13 @@ namespace IncomingCasualtyHandling.Test.Integration
             _DV_M = Substitute.For<IDetailView_Model>();
 
 
-            _convert = new ConvertToICHPatient();
+            
 
             var currentDirectory = Path.GetDirectoryName(Path.GetDirectoryName(
                 TestContext.CurrentContext.TestDirectory));
             _xmlDocumentPath = currentDirectory + "\\Configuration.xml";
             _loadConfig = new LoadConfigurationSettings(_xmlDocumentPath);
-
+            _convert = new ConvertToICHPatient(_loadConfig);
             _getPatients = new LoadData(_loadConfig, _convert);
 
             _getPatients.PatientDataReady += (o) => _patientList = o;

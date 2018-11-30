@@ -14,9 +14,11 @@ namespace IncomingCasualtyHandling.DAL
 {
     public class ConvertToICHPatient : IConvertToICHPatient
     {
-        public ConvertToICHPatient()
+        private ILoadConfigurationSettings _loadConfigurationSettings;
+        //private LoadConfigurationSettings _loadConfigurationSettings;
+        public ConvertToICHPatient(ILoadConfigurationSettings loadConfigurationSettings)
         {
-
+            _loadConfigurationSettings = loadConfigurationSettings;
         }
 
         public ICHPatient ReturnPatient(Patient newEntry)
@@ -54,10 +56,11 @@ namespace IncomingCasualtyHandling.DAL
             {
                 newIchPatient.FromDestination = "Unknown";
             }
+
+            var stringTriage = newEntry.GetStringExtension("http://www.example.com/triagetest") ?? "Unknown";
             
 
-            newIchPatient.Triage =
-                newEntry.GetStringExtension("http://www.example.com/triagetest") ?? "Unknown";
+            newIchPatient.Triage = _loadConfigurationSettings.ReturnTriageList().Find(a => a.Name == stringTriage) ?? new Triage(){Name = "Unknown"};
             newIchPatient.Specialty =
                 newEntry.GetStringExtension("http://www.example.com/SpecialtyTest") ?? "Unknown";
             // Get the ETA. Find the seconds-element and remove it from the ETA that is put on the patient object

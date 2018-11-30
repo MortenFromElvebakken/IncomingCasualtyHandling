@@ -19,7 +19,7 @@ namespace IncomingCasualtyHandling.Test.Unit.DAL.Test.Unit
         #region Arrange
 
         private IConvertToICHPatient _uut;
-
+        private ILoadConfigurationSettings _loadConfig;
         public Patient Patient1;
 
         string triage = "TriageRed";
@@ -33,11 +33,16 @@ namespace IncomingCasualtyHandling.Test.Unit.DAL.Test.Unit
         private string toHospital = "Unknown";
         private DateTimeOffset lastUpdated = new DateTimeOffset(2018,11,22,8,0,0, new TimeSpan(0,0,0,0));
 
+        private List<Triage> _triageList = new List<Triage>()
+        {
+            new Triage(){Name = "TriageRed"}
+        };
         [SetUp]
         public void Setup()
         {
-            _uut = new ConvertToICHPatient();
-
+            _loadConfig = Substitute.For<ILoadConfigurationSettings>();
+            _uut = new ConvertToICHPatient(_loadConfig);
+            _loadConfig.ReturnTriageList().Returns(_triageList);
             wholeName = givenName + " " + familyName;
 
             Patient1 = new Patient();
@@ -112,7 +117,7 @@ namespace IncomingCasualtyHandling.Test.Unit.DAL.Test.Unit
         public void ReturnPatient_ReceivedCompletePatient_CreatesPatientTriage()
         {
             ICHPatient ichPatient = _uut.ReturnPatient(Patient1);
-            Assert.That(ichPatient.Triage, Is.EqualTo(triage));
+            Assert.That(ichPatient.Triage.Name, Is.EqualTo(triage));
         }
 
         //Correct convertion of ToHospital

@@ -48,17 +48,17 @@ namespace IncomingCasualtyHandling.Test.Integration
         private AdministrativeGender gender = AdministrativeGender.Unknown;
         private string toHospital = "Unknown";
         private DateTimeOffset lastUpdated = new DateTimeOffset(2018, 11, 22, 8, 0, 0, new TimeSpan(0, 0, 0, 0));
-
+        
         [SetUp]
         public void SetUp()
         {
-            _convert = new ConvertToICHPatient();
+            
 
             var currentDirectory = Path.GetDirectoryName(Path.GetDirectoryName(
                 TestContext.CurrentContext.TestDirectory));
             _xmlDocumentPath = currentDirectory + "\\Configuration.xml";
             _loadConfig = new LoadConfigurationSettings(_xmlDocumentPath);
-
+            _convert = new ConvertToICHPatient(_loadConfig);
             _loadData = new LoadData(_loadConfig, _convert);
 
             _loadData.PatientDataReady += (o) => _patientList = o;

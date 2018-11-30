@@ -64,8 +64,8 @@ namespace IncomingCasualtyHandling
                         Environment.Exit(0);
                     }
             }
-            
-            IConvertToICHPatient isp = new ConvertToICHPatient();
+
+            IConvertToICHPatient isp = new ConvertToICHPatient(lcs);
             var fhirCommands = new LoadData(lcs,isp);
 
             // Create BLL
