@@ -27,66 +27,66 @@
 		<Specialties>
 			<Specialty>
 				<Name>Diagnostic radiology</Name>
-				<Colour></Colour>
+				<Colour>#007F7F</Colour>
 			</Specialty>
 			<Specialty>
 				<Name>Emergency medicine</Name>
-				<Colour></Colour>
+				<Colour>#975EC8</Colour>
 			</Specialty>
 			<Specialty>
 				<Name>Neurology</Name>
-				<Colour></Colour>
+				<Colour>#47B72C</Colour>
 			</Specialty>
 			<Specialty>
 				<Name>Obstetrics and Gynecology</Name>
-				<Colour></Colour>
+				<Colour>#FFB27F</Colour>
 			</Specialty>
 			<Specialty>
 				<Name>Opthalmology</Name>
-				<Colour></Colour>
+				<Colour>#FF99E3</Colour>
 			</Specialty>
 			<Specialty>
 				<Name>Orthopaedic surgery</Name>
-				<Colour></Colour>
+				<Colour>#BB1282</Colour>
 			</Specialty>
 			<Specialty>
 				<Name>Otolaryngology</Name>
-				<Colour></Colour>
+				<Colour>#8200BF</Colour>
 			</Specialty>
 			<Specialty>
-				<Name>Pathology-Anatomic and Clinical</Name>
-				<Colour></Colour>
+				<Name>Pathology-Anatomic &amp; Clinical</Name>
+				<Colour>#B8BC34</Colour>
 			</Specialty>
 			<Specialty>
 				<Name>Pediatrics</Name>
-				<Colour></Colour>
+				<Colour>#A3CC92</Colour>
 			</Specialty>
 			<Specialty>
 				<Name>Plastic surgery</Name>
-				<Colour></Colour>
+				<Colour>#00137F</Colour>
 			</Specialty>
 			<Specialty>
 				<Name>Psychiatry</Name>
-				<Colour></Colour>
+				<Colour>#0026D1</Colour>
 			</Specialty><Specialty>
 				<Name>Surgery-general</Name>
-				<Colour></Colour>
+				<Colour>#2C9914</Colour>
 			</Specialty>
 			<Specialty>
 				<Name>Thoracic surgery</Name>
-				<Colour></Colour>
+				<Colour>#EA7C00</Colour>
 			</Specialty>
 			<Specialty>
 				<Name>Unknown</Name>
-				<Colour></Colour>
+				<Colour>#cecece</Colour>
 			</Specialty>
 			<Specialty>
 				<Name>Urology</Name>
-				<Colour></Colour>
+				<Colour>#CCCE6B</Colour>
 			</Specialty>
 			<Specialty>
 				<Name>Vascular surgery</Name>
-				<Colour></Colour>
+				<Colour>#DA1B21</Colour>
 			</Specialty>
 		</Specialties>
 	</Configuration>

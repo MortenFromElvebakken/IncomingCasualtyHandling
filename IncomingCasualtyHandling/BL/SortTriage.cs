@@ -88,6 +88,7 @@ namespace IncomingCasualtyHandling.BL
                     foreach (var unknownTriagePatient in triageResultList)
                     {
                         unknownTriagePatient.Triage.Name = unknownTriageName;
+                        unknownTriagePatient.Triage.Colour = unknownTriage.Colour;
                     }
 
                     // Add the patients to the list

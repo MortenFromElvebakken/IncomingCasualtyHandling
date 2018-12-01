@@ -42,49 +42,49 @@ namespace IncomingCasualtyHandling.Test.Unit.DAL.Test.Unit
                 new Specialty
                 {
                     Name = "Diagnostic radiology",
-                    Colour = "#af3205",
+                    Colour = "#007F7F",
                     Amount = 0,
                     ShowAs = Visibility.Collapsed
                 },
                 new Specialty
                 {
                     Name = "Emergency medicine",
-                    Colour = "#af3205",
+                    Colour = "#975EC8",
                     Amount = 0,
                     ShowAs = Visibility.Collapsed
                 },
-                new Specialty {Name = "Neurology", Colour = "#af3205", Amount = 0, ShowAs = Visibility.Collapsed},
+                new Specialty {Name = "Neurology", Colour = "#47B72C", Amount = 0, ShowAs = Visibility.Collapsed},
                 new Specialty
                 {
                     Name = "Obstetrics and Gynecology",
-                    Colour = "#af3205",
+                    Colour = "#FFB27F",
                     Amount = 0,
                     ShowAs = Visibility.Collapsed
                 },
-                new Specialty {Name = "Opthalmology", Colour = "#af3205", Amount = 0, ShowAs = Visibility.Collapsed},
+                new Specialty {Name = "Opthalmology", Colour = "#FF99E3", Amount = 0, ShowAs = Visibility.Collapsed},
                 new Specialty
                 {
                     Name = "Orthopaedic surgery",
-                    Colour = "#af3205",
+                    Colour = "#BB1282",
                     Amount = 0,
                     ShowAs = Visibility.Collapsed
                 },
-                new Specialty {Name = "Otolaryngology", Colour = "#af3205", Amount = 0, ShowAs = Visibility.Collapsed},
+                new Specialty {Name = "Otolaryngology", Colour = "#8200BF", Amount = 0, ShowAs = Visibility.Collapsed},
                 new Specialty
                 {
                     Name = "Pathology-Anatomic and Clinical",
-                    Colour = "#af3205",
+                    Colour = "#B8BC34",
                     Amount = 0,
                     ShowAs = Visibility.Collapsed
                 },
-                new Specialty {Name = "Pediatrics", Colour = "#af3205", Amount = 0, ShowAs = Visibility.Collapsed},
-                new Specialty {Name = "Plastic surgery", Colour = "#af3205", Amount = 0, ShowAs = Visibility.Collapsed},
-                new Specialty {Name = "Psychiatry", Colour = "#af3205", Amount = 0, ShowAs = Visibility.Collapsed},
-                new Specialty {Name = "Surgery-general", Colour = "#af3205", Amount = 0, ShowAs = Visibility.Collapsed},
-                new Specialty {Name = "Thoracic sugery", Colour = "#af3205", Amount = 0, ShowAs = Visibility.Collapsed},
-                new Specialty {Name = "Unknown", Colour = "#af3205", Amount = 0, ShowAs = Visibility.Collapsed},
-                new Specialty {Name = "Urology", Colour = "#af3205", Amount = 0, ShowAs = Visibility.Collapsed},
-                new Specialty {Name = "Vascular surgery", Colour = "#af3205", Amount = 0, ShowAs = Visibility.Collapsed}
+                new Specialty {Name = "Pediatrics", Colour = "#A3CC92", Amount = 0, ShowAs = Visibility.Collapsed},
+                new Specialty {Name = "Plastic surgery", Colour = "#00137F", Amount = 0, ShowAs = Visibility.Collapsed},
+                new Specialty {Name = "Psychiatry", Colour = "#0026D1", Amount = 0, ShowAs = Visibility.Collapsed},
+                new Specialty {Name = "Surgery-general", Colour = "#2C9914", Amount = 0, ShowAs = Visibility.Collapsed},
+                new Specialty {Name = "Thoracic sugery", Colour = "#EA7C00", Amount = 0, ShowAs = Visibility.Collapsed},
+                new Specialty {Name = "Unknown", Colour = "#cecece", Amount = 0, ShowAs = Visibility.Collapsed},
+                new Specialty {Name = "Urology", Colour = "#CCCE6B", Amount = 0, ShowAs = Visibility.Collapsed},
+                new Specialty {Name = "Vascular surgery", Colour = "#DA1B21", Amount = 0, ShowAs = Visibility.Collapsed}
             };
 
             var currentDirectory = Path.GetDirectoryName(Path.GetDirectoryName(

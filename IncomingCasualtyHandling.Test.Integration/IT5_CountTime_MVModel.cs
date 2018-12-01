@@ -21,15 +21,15 @@ using NUnit.Framework;
 namespace IncomingCasualtyHandling.Test.Integration
 {
     [TestFixture]
-    class IT5_CountTime_Models
+    class IT5_CountTime_MVModel
     {
         // Fakes
         private IFhirClient _client;
+        private IOverviewView_Model _OV_M;
+        private IDetailView_Model _DV_M;
 
         // System under test        
         private IMainView_Model _MV_M;
-        private IOverviewView_Model _OV_M;
-        private IDetailView_Model _DV_M;
 
         // Drivers
         private LoadData _getPatients;
@@ -65,7 +65,8 @@ namespace IncomingCasualtyHandling.Test.Integration
         [SetUp]
         public void SetUp()
         {
-           
+            _OV_M = Substitute.For<IOverviewView_Model>();
+            _DV_M = Substitute.For<IDetailView_Model>();
 
             var currentDirectory = Path.GetDirectoryName(Path.GetDirectoryName(
                 TestContext.CurrentContext.TestDirectory));
@@ -76,10 +77,8 @@ namespace IncomingCasualtyHandling.Test.Integration
             _getPatients = new LoadData(_loadConfig, _convert);
 
             _MV_M = new MainView_Model(_getPatients);
-            _OV_M = new OverviewView_Model();
-            _DV_M = new DetailView_Model();
 
-            _countTime = new CountTime(_MV_M, _OV_M);
+            _countTime = new CountTime(_MV_M);
 
             _sortEta = new SortETA(_DV_M, _countTime, _getPatients);
 

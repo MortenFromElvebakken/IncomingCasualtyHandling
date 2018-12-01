@@ -78,7 +78,7 @@ namespace IncomingCasualtyHandling.Test.Integration
             _OV_M = new OverviewView_Model();
             _DV_M = new DetailView_Model();
 
-            _countTime = new CountTime(_MV_M, _OV_M);
+            _countTime = new CountTime(_MV_M);
 
             _sortEta = new SortETA(_DV_M, _countTime, _getPatients);
 
