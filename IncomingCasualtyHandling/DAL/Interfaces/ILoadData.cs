@@ -10,6 +10,6 @@ namespace IncomingCasualtyHandling.DAL.Interface
     {
         event LoadData.PatientUpdateHandler PatientDataReady;
         event LoadData.NoInterNetUpdateHandler NoInternet;
-        void setFhirClientURL(string s);
+        void SetFhirClientURL(string s);
     }
 }

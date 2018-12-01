@@ -46,7 +46,7 @@ namespace IncomingCasualtyHandling.BL.Models
             set
             {
                 _serverName = value;
-                _iLoadData.setFhirClientURL(_serverName);
+                _iLoadData.SetFhirClientURL(_serverName);
             }
         }
 

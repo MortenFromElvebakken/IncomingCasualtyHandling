@@ -63,7 +63,10 @@ namespace IncomingCasualtyHandling.DAL
                 firstBundle = Client.Search<Patient>(_sParameters);
                 _dateOfLastSearch = DateTime.Now;
                 if (_internet == false)
+                {
                     _internet = true;
+                    InternetConnection(true);
+                }
             }
             catch (Exception e)
             {
@@ -71,7 +74,7 @@ namespace IncomingCasualtyHandling.DAL
                 //Sends event that there is no internetconnection, and sets internet bool to false.
                 Debug.WriteLine(e.Message);
                 _internet = false;
-                NoInternetConnection(false);
+                InternetConnection(false);
                 
             }
 
@@ -109,7 +112,7 @@ namespace IncomingCasualtyHandling.DAL
         public delegate void NoInterNetUpdateHandler(bool b);
         public event NoInterNetUpdateHandler NoInternet;
 
-        private void NoInternetConnection(bool b)
+        private void InternetConnection(bool b)
         {
             var handler = NoInternet;
             handler?.Invoke(b);
@@ -167,11 +170,11 @@ namespace IncomingCasualtyHandling.DAL
             {
                 //throw new Exception("test");
                 anyChangedResources = Client.WholeSystemHistory(_dateOfLastSearch, 10);
-                _dateOfLastSearch = DateTime.Now.AddSeconds(-5);
+                _dateOfLastSearch = DateTime.Now.AddSeconds(-1);
                 if (_internet == false)
-                {
+                {   
                     _internet = true;
-                    NoInternetConnection(true);
+                    InternetConnection(true);
                 }
 
                 _sameAsLast = CheckIfSamePatientsReturned(anyChangedResources);
@@ -180,7 +183,7 @@ namespace IncomingCasualtyHandling.DAL
             {
                 Debug.WriteLine(e.Message);
                 _internet = false;
-                NoInternetConnection(false);
+                InternetConnection(false);
             }
 
             if (anyChangedResources != null && !_sameAsLast)
@@ -190,9 +193,9 @@ namespace IncomingCasualtyHandling.DAL
                 
                 while (newBundle != null)
                 {
-                    foreach (var x in newBundle.Entry)
+                    foreach (var entries in newBundle.Entry)
                     {
-                        var testpatient = (Patient)x.Resource;
+                        var testpatient = (Patient)entries.Resource;
                         ICHPatient op = _convertICHPatient.ReturnPatient(testpatient);
                         listOfPatients.Add(op);
                     }
@@ -240,7 +243,7 @@ namespace IncomingCasualtyHandling.DAL
             AsyncGetAllPatients();
         }
 
-        public void setFhirClientURL(string s)
+        public void SetFhirClientURL(string s)
         {
             Client = new FhirClient(s); 
             //var newSearchParams = new SearchParams();

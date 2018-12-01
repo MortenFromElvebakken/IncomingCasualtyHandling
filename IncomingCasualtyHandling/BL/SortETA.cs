@@ -69,7 +69,7 @@ namespace IncomingCasualtyHandling.BL
                 {
                     // Save the patient in the no-ETA list and save the index
                     _patientsWithoutEta.Add(patient);
-                    _range = ++_range;
+                    _range++;
                 }
                 
             }
