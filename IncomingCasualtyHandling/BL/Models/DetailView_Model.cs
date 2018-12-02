@@ -325,7 +325,7 @@ namespace IncomingCasualtyHandling.BL.Models
             //determine which tabs are to be made. 
             string[] parameters = StringFromChangeViewCommandParameter.Split(' ');
             SelectedOverview = parameters[0];
-            //SelectedTabIndex = Convert.ToInt16(parameters[1]);
+            
 
             switch (SelectedOverview)
             {
@@ -388,7 +388,9 @@ namespace IncomingCasualtyHandling.BL.Models
                         }
                         // Sort the list alphabetically
                         //ObservableCollectionTabs = new ObservableCollection<TabControl>(_tempTabList.OrderBy(x => x.Name).ToList());
-                        //var test = _tempTabList.OrderBy(t => t.Name);
+                        
+                        _tempTabList = _tempTabList.OrderBy(a => a.Name).ToList();
+                        var test = _tempTabList;
                         //ObservableCollectionTabs = test;
                         //ListOfTabs = _tempTabList.OrderBy(t => t.Name).ToList();
                         break;
@@ -408,6 +410,31 @@ namespace IncomingCasualtyHandling.BL.Models
                 }
 
             }
+
+            //Checks if tabname of selected index has changed, if it has it sets find the new index of the tab
+            //If the tab is now not visible, it finds the first ocurrence of a visible tab and sets this as 
+            //the new index in the end. Only checks if it has been run before
+            
+
+            int newTabIndex = SelectedTabIndex;
+            if (ChangesFromUser == "No")
+            {
+
+                var oldTabName = ObservableCollectionTabs[SelectedTabIndex].Name;
+                if (oldTabName != _tempTabList[SelectedTabIndex].Name)
+                {
+                    var findIndex = _tempTabList.FindIndex(a => a.Name == oldTabName);
+                    if (_tempTabList[findIndex].isVisible == Visibility.Visible)
+                    {
+                        newTabIndex = findIndex;
+                    }
+                    else
+                    {
+                        newTabIndex = _tempTabList.FindIndex(a => a.isVisible == Visibility.Visible);
+                    }
+                }
+            }
+
             if (_sortColumn != "ETA" | _sortDirection != ListSortDirection.Ascending)
             {
                 //If _sortColumn wasnt ETA and _sortDirection wasnt ascending then it needs to sort the new data based on
@@ -420,7 +447,6 @@ namespace IncomingCasualtyHandling.BL.Models
                 {
                     _sortDirection = ListSortDirection.Descending;
                 }
-                
                 ObservableCollectionTabs = new ObservableCollection<TabControl>(_tempTabList);
                 GridViewColumnHeaderClicked(_sortColumn);
             }
@@ -428,8 +454,16 @@ namespace IncomingCasualtyHandling.BL.Models
             {
                 ObservableCollectionTabs = new ObservableCollection<TabControl>(_tempTabList);
             }
+
+            if (newTabIndex != SelectedTabIndex)
+            {
+                SelectedTabIndex = newTabIndex;
+            }
+
+            
         }
         public bool ChangedFromMain { get; set; }
+        public string ChangesFromUser = "";
 
         public void ChangeTabsAllowed(string s)
         {
@@ -445,23 +479,13 @@ namespace IncomingCasualtyHandling.BL.Models
                     var sortedSpecialtiesList = new List<Specialty>();
                     sortedSpecialtiesList = ListOfSpecialties.OrderBy(a => a.Name).ToList();
                     var newIndex = sortedSpecialtiesList.FindIndex(x => x.Name == chosenSpecialtyName);
-                    //if (ChangedFromMain)
-                    //{
-                    //    CreateTabs();
-                    //    ChangedFromMain = false;
-                    //}
+                    
                     SelectedTabIndex = newIndex;
                 }
                 else
                 {
-                    //if (ChangedFromMain)
-                    //{
-                    //    CreateTabs();
-                    //    ChangedFromMain = false;
-                    //}
                     if (_observableCollectionTabs[tryTabIndex].isVisible == Visibility.Visible)    //_tabsList[tryTabIndex].isVisible == Visibility.Visible)
                     {
-                        
                         SelectedTabIndex = tryTabIndex;
                     }
                 }
@@ -470,6 +494,7 @@ namespace IncomingCasualtyHandling.BL.Models
             {
                 _sortDirection = ListSortDirection.Ascending;
                 _sortColumn = "ETA";
+                ChangesFromUser = "Yes";
                 switch (tryChangeTabs)
                 {
                         
@@ -499,6 +524,7 @@ namespace IncomingCasualtyHandling.BL.Models
                 }
 
                 ChangedFromMain = false;
+                ChangesFromUser = "No";
             }
 
         }
