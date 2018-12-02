@@ -356,7 +356,7 @@ namespace IncomingCasualtyHandling.BL.Models
                             counter++;
                         }
 
-                        ObservableCollectionTabs = new ObservableCollection<TabControl>(_tempTabList);
+                        //ObservableCollectionTabs = new ObservableCollection<TabControl>(_tempTabList);
                         //ListOfTabs = _tempTabList;
                         break;
                     }
@@ -387,25 +387,46 @@ namespace IncomingCasualtyHandling.BL.Models
                             counter++;
                         }
                         // Sort the list alphabetically
-                        ObservableCollectionTabs = new ObservableCollection<TabControl>(_tempTabList.OrderBy(x => x.Name).ToList());
+                        //ObservableCollectionTabs = new ObservableCollection<TabControl>(_tempTabList.OrderBy(x => x.Name).ToList());
                         //var test = _tempTabList.OrderBy(t => t.Name);
                         //ObservableCollectionTabs = test;
                         //ListOfTabs = _tempTabList.OrderBy(t => t.Name).ToList();
                         break;
                     }
                 default:
+                {
+                    var _tab = new TabControl()
                     {
-                        var _tab = new TabControl()
-                        {
-                            Name = "ETA",
-                            Data = new ObservableCollection<ICHPatient>(ETAPatients),
-                            isVisible = Visibility.Visible
-                        };
-                        _tempTabList.Add(_tab);
-                        ObservableCollectionTabs = new ObservableCollection<TabControl>(_tempTabList);
-                        //ListOfTabs = _tempTabList;
-                        break;
-                    }
+                        Name = "ETA",
+                        Data = new ObservableCollection<ICHPatient>(ETAPatients),
+                        isVisible = Visibility.Visible
+                    };
+                    _tempTabList.Add(_tab);
+                    //ObservableCollectionTabs = new ObservableCollection<TabControl>(_tempTabList);
+                    //ListOfTabs = _tempTabList;
+                    break;
+                }
+
+            }
+            if (_sortColumn != "ETA" | _sortDirection != ListSortDirection.Ascending)
+            {
+                //If _sortColumn wasnt ETA and _sortDirection wasnt ascending then it needs to sort the new data based on
+                //last sorted specification. 
+                if (_sortDirection != ListSortDirection.Ascending)
+                {
+                    _sortDirection = ListSortDirection.Ascending;
+                }
+                else
+                {
+                    _sortDirection = ListSortDirection.Descending;
+                }
+                
+                ObservableCollectionTabs = new ObservableCollection<TabControl>(_tempTabList);
+                GridViewColumnHeaderClicked(_sortColumn);
+            }
+            else
+            {
+                ObservableCollectionTabs = new ObservableCollection<TabControl>(_tempTabList);
             }
         }
         public bool ChangedFromMain { get; set; }
@@ -447,8 +468,11 @@ namespace IncomingCasualtyHandling.BL.Models
             }
             else
             {
+                _sortDirection = ListSortDirection.Ascending;
+                _sortColumn = "ETA";
                 switch (tryChangeTabs)
                 {
+                        
                     case "Triage":
                         StringFromChangeViewCommandParameter = s;
                         CreateTabs();
@@ -487,6 +511,7 @@ namespace IncomingCasualtyHandling.BL.Models
 
         private string _sortColumn = "ETA";
         private ListSortDirection _sortDirection = ListSortDirection.Ascending;
+        
 
         public void GridViewColumnHeaderClicked(string s)
         {
@@ -702,7 +727,7 @@ namespace IncomingCasualtyHandling.BL.Models
                         break;
                     }
             }
-
+           // OnPropertyChanged("Data");
         }
         
 

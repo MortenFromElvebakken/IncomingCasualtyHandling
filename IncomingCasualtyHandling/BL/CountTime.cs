@@ -27,7 +27,6 @@ namespace IncomingCasualtyHandling.BL
         {
             // Set Model
             _mainViewModel = mainViewModel;
-
             _currentDateTimeTimer.Elapsed += new ElapsedEventHandler(CurrentDateTime_TimerTick);
             _currentDateTimeTimer.Interval = 1000;
             _currentDateTimeTimer.AutoReset = true;
