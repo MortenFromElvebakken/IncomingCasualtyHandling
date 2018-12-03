@@ -54,7 +54,7 @@ namespace IncomingCasualtyHandling.GUI.View
                 {
                     XmlDocument test = new XmlDocument();
                     test.Load(ServerTextBoxName.Text);
-                    _client2 = new FhirClient(test.ChildNodes[0].InnerText);
+                    _client2 = new FhirClient(test.LastChild.ChildNodes[0].InnerText);
                     
                 }
                 catch (Exception exception)
