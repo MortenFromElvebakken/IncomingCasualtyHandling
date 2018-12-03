@@ -32,6 +32,7 @@
 
                     <Border Style="{StaticResource GridBorderTriage}">
                         <Border.InputBindings>
+
                             <MouseBinding MouseAction="LeftClick" Command="{Binding RelativeSource={RelativeSource AncestorType=Window}, Path=DataContext.ChangeViewCommandWithProperty}" CommandParameter="Triage 0"></MouseBinding>
                         </Border.InputBindings>
                         <Grid Margin="0,2,0,0">

@@ -128,6 +128,10 @@ namespace IncomingCasualtyHandling.DAL
             {
                 return true;
             }
+            else if(_lastChangedPatients != null && b.Entry.Count != _lastChangedPatients.Count)
+            {
+                return false;
+            }
             else
             {
                 int counterTest = 0;
@@ -166,81 +170,98 @@ namespace IncomingCasualtyHandling.DAL
             _sameAsLast = true;
             var anyChangedResources = default(Bundle);
             Thread.Sleep(5000);
+            var _lastSearch = default(DateTime);
             try
             {
                 //throw new Exception("test");
                 anyChangedResources = Client.WholeSystemHistory(_dateOfLastSearch, 10);
-                _dateOfLastSearch = DateTime.Now.AddSeconds(-3);
+                _lastSearch = DateTime.Now.AddSeconds(-3);
                 if (_internet == false)
-                {   
+                {
                     _internet = true;
                     InternetConnection(true);
                 }
 
                 _sameAsLast = CheckIfSamePatientsReturned(anyChangedResources);
+                if (anyChangedResources != null && !_sameAsLast)
+                {
+                    Thread.Sleep(500);
+                    var newBundle = Client.SearchAsync<Patient>(_sParameters).Result;
+                    List<ICHPatient> listOfPatients = new List<ICHPatient>();
+
+                    while (newBundle != null)
+                    {
+                        foreach (var entries in newBundle.Entry)
+                        {
+                            var testpatient = (Patient) entries.Resource;
+                            ICHPatient op = _convertICHPatient.ReturnPatient(testpatient);
+                            listOfPatients.Add(op);
+                        }
+
+                        newBundle = Client.Continue(newBundle, PageDirection.Next);
+                    }
+
+                    //var testListe = new List<ICHPatient>(listOfPatients);
+                    foreach (var patient in _lastChangedPatients)
+                    {
+
+                        if (patient.Active == false)
+                        {
+                            var cpr = patient.Identifier[0].Value;
+                            foreach (var p in listOfPatients)
+                            {
+                                if (p.CPR == cpr)
+                                {
+                                    listOfPatients.Remove(p);
+                                    break;
+                                }
+                            }
+                        }
+
+                        if (patient.Active == true)
+                        {
+                            var cpr = patient.Identifier[0].Value;
+                            int counter2 = 0;
+                            bool didItContainElement = false;
+                            //listOfPatients.RemoveAll(p => p.CPR == cpr);
+                            //listOfPatients.Add(_convertICHPatient.ReturnPatient(patient));
+                            //var newList = listOfPatients;
+                            foreach (var p in listOfPatients)
+                            {
+                                if (p.CPR == cpr)
+                                {
+                                    listOfPatients[counter2] = _convertICHPatient.ReturnPatient(patient);
+                                    didItContainElement = true;
+                                    break;
+                                }
+
+                                counter2++;
+                            }
+
+                            if (!didItContainElement)
+                            {
+                                listOfPatients.Add(_convertICHPatient.ReturnPatient(patient));
+                            }
+                        }
+                    }
+
+                    UpdatePatients(listOfPatients);
+                    _dateOfLastSearch = _lastSearch;
+                }
+                AsyncGetAllPatients();
             }
+            
+
             catch (Exception e)
             {
                 Debug.WriteLine(e.Message);
-                _internet = false;
-                InternetConnection(false);
-            }
-
-            if (anyChangedResources != null && !_sameAsLast)
-            {
-                var newBundle = Client.SearchAsync<Patient>(_sParameters).Result;
-                List<ICHPatient> listOfPatients = new List<ICHPatient>();
-                
-                while (newBundle != null)
+                if (_internet == true)
                 {
-                    foreach (var entries in newBundle.Entry)
-                    {
-                        var testpatient = (Patient)entries.Resource;
-                        ICHPatient op = _convertICHPatient.ReturnPatient(testpatient);
-                        listOfPatients.Add(op);
-                    }
-                    newBundle = Client.Continue(newBundle, PageDirection.Next);
-                }
-                foreach (var patient in _lastChangedPatients)
-                {
-                    if (patient.Active == false)
-                    {
-                        var cpr = patient.Identifier[0].Value;
-                        foreach (var p in listOfPatients)
-                        {
-                            if (p.CPR == cpr)
-                            {
-                                listOfPatients.Remove(p);
-                                break;
-                            }
-                        }
-                    }
-                    if (patient.Active == true)
-                    {
-                        var cpr = patient.Identifier[0].Value;
-                        int counter2 = 0;
-                        bool didItContainElement = false;
-                        foreach (var p in listOfPatients)
-                        {
-                            if (p.CPR == cpr)
-                            {
-                                    listOfPatients[counter2] = _convertICHPatient.ReturnPatient(patient);
-                                    didItContainElement = true;
-                                break;
-                            }
 
-                            counter2++;
-                        }
-
-                        if (!didItContainElement)
-                        {
-                            listOfPatients.Add(_convertICHPatient.ReturnPatient(patient));
-                        }
-                    }
+                    _internet = false;
+                    InternetConnection(false);
                 }
-                    UpdatePatients(listOfPatients);
             }
-            AsyncGetAllPatients();
         }
 
         public void SetFhirClientURL(string s)
