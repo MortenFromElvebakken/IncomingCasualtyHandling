@@ -59,7 +59,7 @@
                                     <ListView.View>
                                         <GridView>
                                             <GridView.Columns>
-                                                <GridViewColumn CellTemplate="{StaticResource CellTemplateForListviewName}" Width="150">
+                                                <GridViewColumn CellTemplate="{StaticResource CellTemplateForListviewName}" Width="300">
                                                     <GridViewColumnHeader Content="Name" Background="White" FontSize="14">
                                                         <i:Interaction.Triggers>
                                                             <i:EventTrigger EventName="Click">
@@ -83,7 +83,7 @@
                                                         </i:Interaction.Triggers>
                                                     </GridViewColumnHeader>
                                                 </GridViewColumn>
-                                                <GridViewColumn CellTemplate="{StaticResource CellTemplateForListviewAge}" Width="40">
+                                                <GridViewColumn CellTemplate="{StaticResource CellTemplateForListviewAge}" Width="Auto">
                                                     <GridViewColumnHeader Content="Age" Background="White" FontSize="14">
                                                         <i:Interaction.Triggers>
                                                             <i:EventTrigger EventName="Click">
@@ -143,7 +143,7 @@
                                                         </i:Interaction.Triggers>
                                                     </GridViewColumnHeader>
                                                 </GridViewColumn>
-                                                <GridViewColumn CellTemplate="{StaticResource CellTemplateForListviewFromDestination}">
+                                                <GridViewColumn CellTemplate="{StaticResource CellTemplateForListviewFromDestination}" Width="300">
                                                     <GridViewColumnHeader Content="From destination" Background="White" FontSize="14">
                                                         <i:Interaction.Triggers>
                                                             <i:EventTrigger EventName="Click">
