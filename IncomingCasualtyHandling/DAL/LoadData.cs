@@ -170,7 +170,7 @@ namespace IncomingCasualtyHandling.DAL
             {
                 //throw new Exception("test");
                 anyChangedResources = Client.WholeSystemHistory(_dateOfLastSearch, 10);
-                _dateOfLastSearch = DateTime.Now.AddSeconds(-1);
+                _dateOfLastSearch = DateTime.Now.AddSeconds(-3);
                 if (_internet == false)
                 {   
                     _internet = true;

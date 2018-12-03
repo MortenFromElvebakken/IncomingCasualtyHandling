@@ -5,7 +5,7 @@
         <Setter Property="MaxHeight" Value="500px"/>
         <Setter Property="MinHeight" Value="50px"/>
         <Setter Property="Margin" Value="10,2.5,10,2.5"/>
-        <Setter Property="VerticalAlignment" Value="Top"/>
+        <Setter Property="VerticalAlignment" Value="Stretch"/>
     </Style>
 
     <Style x:Key="ColourColumn" TargetType="{x:Type ColumnDefinition}">
