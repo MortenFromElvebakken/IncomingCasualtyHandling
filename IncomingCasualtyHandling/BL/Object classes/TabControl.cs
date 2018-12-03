@@ -31,7 +31,7 @@ namespace IncomingCasualtyHandling.BL.Models
             {
                 if (Data != null)
                 {
-                    return string.Format(Data.Count + " Patient(s)");
+                    return string.Format(Data.Count + " patient(s)");
                 }
                 else
                 {
