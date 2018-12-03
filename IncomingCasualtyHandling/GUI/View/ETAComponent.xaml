@@ -9,12 +9,12 @@
              Background="White">
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="50px"/>
+            <RowDefinition Height="0.25*"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
 
         <Grid Grid.Row="0">
-            <Label Name="EtaHeaderText" VerticalAlignment="Center" HorizontalAlignment="Center">ETA</Label>
+            <Label Name="EtaHeaderText" VerticalAlignment="Center" HorizontalAlignment="Center" Style="{StaticResource HeaderLabel}">ETA</Label>
         </Grid>
 
         <Grid Grid.Row="1">

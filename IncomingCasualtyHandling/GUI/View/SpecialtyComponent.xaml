@@ -15,7 +15,7 @@
         </Grid.RowDefinitions>
 
         <Grid Grid.Row="0">
-            <Label Name="SpecialtyHeaderText" VerticalAlignment="Center" HorizontalAlignment="Center">SPECIALTY</Label>
+            <Label Name="SpecialtyHeaderText" VerticalAlignment="Center" HorizontalAlignment="Center" Style="{StaticResource HeaderLabel}">SPECIALTY</Label>
         </Grid>
         <Grid Grid.Row="1">
             <UniformGrid Name="SpecialtyGrid" Columns="1" Margin="5,0,5,10" VerticalAlignment="Stretch">
@@ -32,8 +32,8 @@
                                 <ColumnDefinition Style="{StaticResource AmountColumn}"/>
                             </Grid.ColumnDefinitions>
                             <Button Grid.Column="0" IsEnabled="False" Name="Specialty1Colour" Style="{StaticResource SquaredRoundedButton}" Background="{Binding Specialty1.Colour}"></Button>
-                            <Label Grid.Column="1" Name="Specialty1Name" Content="{Binding Specialty1.Name}" VerticalAlignment="Center" HorizontalAlignment="Left"></Label>
-                            <Label Grid.Column="2" Name="Specialty1Amount" Content="{Binding Specialty1.Amount}" VerticalAlignment="Center" HorizontalAlignment="Right"></Label>
+                            <Label Grid.Column="1" Name="Specialty1Name" Content="{Binding Specialty1.Name}" VerticalAlignment="Center" HorizontalAlignment="Left" Style="{StaticResource DescriptiveLabel}"></Label>
+                            <Label Grid.Column="2" Name="Specialty1Amount" Content="{Binding Specialty1.Amount}" VerticalAlignment="Center" HorizontalAlignment="Right" Style="{StaticResource DescriptiveLabel}"></Label>
                         </Grid>
                     </Border>
                 </Grid>
@@ -50,8 +50,8 @@
                                 <ColumnDefinition Style="{StaticResource AmountColumn}"/>
                             </Grid.ColumnDefinitions>
                             <Button Grid.Column="0" IsEnabled="False" Name="Specialty2Colour" Style="{StaticResource SquaredRoundedButton}" Background="{Binding Specialty2.Colour}"></Button>
-                            <Label Grid.Column="1" Name="Specialty2Name" Content="{Binding Specialty2.Name}" VerticalAlignment="Center" HorizontalAlignment="Left"></Label>
-                            <Label Grid.Column="2" Name="Specialty2Amount" Content="{Binding Specialty2.Amount}" VerticalAlignment="Center" HorizontalAlignment="Right"></Label>
+                            <Label Grid.Column="1" Name="Specialty2Name" Content="{Binding Specialty2.Name}" VerticalAlignment="Center" HorizontalAlignment="Left" Style="{StaticResource DescriptiveLabel}"></Label>
+                            <Label Grid.Column="2" Name="Specialty2Amount" Content="{Binding Specialty2.Amount}" VerticalAlignment="Center" HorizontalAlignment="Right" Style="{StaticResource DescriptiveLabel}"></Label>
 
                         </Grid>
                     </Border>
@@ -69,8 +69,8 @@
                                 <ColumnDefinition Style="{StaticResource AmountColumn}"/>
                             </Grid.ColumnDefinitions>
                             <Button Grid.Column="0" IsEnabled="False" Name="Specialty3Colour" Style="{StaticResource SquaredRoundedButton}" Background="{Binding Specialty3.Colour}"></Button>
-                            <Label Grid.Column="1" Name="Specialty3Name" Content="{Binding Specialty3.Name}" VerticalAlignment="Center" HorizontalAlignment="Left"></Label>
-                            <Label Grid.Column="2" Name="Specialty3Amount" Content="{Binding Specialty3.Amount}" VerticalAlignment="Center" HorizontalAlignment="Right"></Label>
+                            <Label Grid.Column="1" Name="Specialty3Name" Content="{Binding Specialty3.Name}" VerticalAlignment="Center" HorizontalAlignment="Left" Style="{StaticResource DescriptiveLabel}"></Label>
+                            <Label Grid.Column="2" Name="Specialty3Amount" Content="{Binding Specialty3.Amount}" VerticalAlignment="Center" HorizontalAlignment="Right" Style="{StaticResource DescriptiveLabel}"></Label>
                         </Grid>
                     </Border>
 
@@ -89,8 +89,8 @@
                                 <ColumnDefinition Style="{StaticResource AmountColumn}"/>
                             </Grid.ColumnDefinitions>
                             <Button Grid.Column="0" IsEnabled="False" Name="Specialty4Colour" Style="{StaticResource SquaredRoundedButton}" Background="{Binding Specialty4.Colour}"></Button>
-                            <Label Grid.Column="1" Name="Specialty4Name" Content="{Binding Specialty4.Name}" VerticalAlignment="Center" HorizontalAlignment="Left"></Label>
-                            <Label Grid.Column="2" Name="Specialty4Amount" Content="{Binding Specialty4.Amount}" VerticalAlignment="Center" HorizontalAlignment="Right"></Label>
+                            <Label Grid.Column="1" Name="Specialty4Name" Content="{Binding Specialty4.Name}" VerticalAlignment="Center" HorizontalAlignment="Left" Style="{StaticResource DescriptiveLabel}"></Label>
+                            <Label Grid.Column="2" Name="Specialty4Amount" Content="{Binding Specialty4.Amount}" VerticalAlignment="Center" HorizontalAlignment="Right" Style="{StaticResource DescriptiveLabel}"></Label>
                         </Grid>
                     </Border>
                 </Grid>
@@ -107,8 +107,8 @@
                                 <ColumnDefinition Style="{StaticResource AmountColumn}"/>
                             </Grid.ColumnDefinitions>
                             <Button Grid.Column="0" IsEnabled="False" Name="Specialty5Colour" Style="{StaticResource SquaredRoundedButton}" Background="{Binding Specialty5.Colour}"></Button>
-                            <Label Grid.Column="1" Name="Specialty5Name" Content="{Binding Specialty5.Name}" VerticalAlignment="Center" HorizontalAlignment="Left"></Label>
-                            <Label Grid.Column="2" Name="Specialty5Amount" Content="{Binding Specialty5.Amount}" VerticalAlignment="Center" HorizontalAlignment="Right"></Label>
+                            <Label Grid.Column="1" Name="Specialty5Name" Content="{Binding Specialty5.Name}" VerticalAlignment="Center" HorizontalAlignment="Left" Style="{StaticResource DescriptiveLabel}"></Label>
+                            <Label Grid.Column="2" Name="Specialty5Amount" Content="{Binding Specialty5.Amount}" VerticalAlignment="Center" HorizontalAlignment="Right" Style="{StaticResource DescriptiveLabel}"></Label>
                         </Grid>
                     </Border>
                 </Grid>
@@ -125,8 +125,8 @@
                                 <ColumnDefinition Style="{StaticResource AmountColumn}"/>
                             </Grid.ColumnDefinitions>
                             <Button Grid.Column="0" IsEnabled="False" Name="Specialty6Colour" Style="{StaticResource SquaredRoundedButton}" Background="{Binding Specialty6.Colour}"></Button>
-                            <Label Grid.Column="1" Name="Specialty6Name" Content="{Binding Specialty6.Name}" VerticalAlignment="Center" HorizontalAlignment="Left"></Label>
-                            <Label Grid.Column="2" Name="Specialty6Amount" Content="{Binding Specialty6.Amount}" VerticalAlignment="Center" HorizontalAlignment="Right"></Label>
+                            <Label Grid.Column="1" Name="Specialty6Name" Content="{Binding Specialty6.Name}" VerticalAlignment="Center" HorizontalAlignment="Left" Style="{StaticResource DescriptiveLabel}"></Label>
+                            <Label Grid.Column="2" Name="Specialty6Amount" Content="{Binding Specialty6.Amount}" VerticalAlignment="Center" HorizontalAlignment="Right" Style="{StaticResource DescriptiveLabel}"></Label>
                         </Grid>
                     </Border>
                 </Grid>
@@ -143,8 +143,8 @@
                                 <ColumnDefinition Style="{StaticResource AmountColumn}"/>
                             </Grid.ColumnDefinitions>
                             <Button Grid.Column="0" IsEnabled="False" Name="Specialty7Colour" Style="{StaticResource SquaredRoundedButton}" Background="{Binding Specialty7.Colour}"></Button>
-                            <Label Grid.Column="1" Name="Specialty7Name" Content="{Binding Specialty7.Name}" VerticalAlignment="Center" HorizontalAlignment="Left"></Label>
-                            <Label Grid.Column="2" Name="Specialty7Amount" Content="{Binding Specialty7.Amount}" VerticalAlignment="Center" HorizontalAlignment="Right"></Label>
+                            <Label Grid.Column="1" Name="Specialty7Name" Content="{Binding Specialty7.Name}" VerticalAlignment="Center" HorizontalAlignment="Left" Style="{StaticResource DescriptiveLabel}"></Label>
+                            <Label Grid.Column="2" Name="Specialty7Amount" Content="{Binding Specialty7.Amount}" VerticalAlignment="Center" HorizontalAlignment="Right" Style="{StaticResource DescriptiveLabel}"></Label>
                         </Grid>
                     </Border>
                 </Grid>
@@ -161,8 +161,8 @@
                                 <ColumnDefinition Style="{StaticResource AmountColumn}"/>
                             </Grid.ColumnDefinitions>
                             <Button Grid.Column="0" IsEnabled="False" Name="Specialty8Colour" Style="{StaticResource SquaredRoundedButton}" Background="{Binding Specialty8.Colour}"></Button>
-                            <Label Grid.Column="1" Name="Specialty8Name" Content="{Binding Specialty8.Name}" VerticalAlignment="Center" HorizontalAlignment="Left"></Label>
-                            <Label Grid.Column="2" Name="Specialty8Amount" Content="{Binding Specialty8.Amount}" VerticalAlignment="Center" HorizontalAlignment="Right"></Label>
+                            <Label Grid.Column="1" Name="Specialty8Name" Content="{Binding Specialty8.Name}" VerticalAlignment="Center" HorizontalAlignment="Left" Style="{StaticResource DescriptiveLabel}"></Label>
+                            <Label Grid.Column="2" Name="Specialty8Amount" Content="{Binding Specialty8.Amount}" VerticalAlignment="Center" HorizontalAlignment="Right" Style="{StaticResource DescriptiveLabel}"></Label>
                         </Grid>
                     </Border>
                 </Grid>
@@ -179,8 +179,8 @@
                                 <ColumnDefinition Style="{StaticResource AmountColumn}"/>
                             </Grid.ColumnDefinitions>
                             <Button Grid.Column="0" IsEnabled="False" Name="Specialty9Colour" Style="{StaticResource SquaredRoundedButton}" Background="{Binding Specialty9.Colour}"></Button>
-                            <Label Grid.Column="1" Name="Specialty9Name" Content="{Binding Specialty9.Name}" VerticalAlignment="Center" HorizontalAlignment="Left"></Label>
-                            <Label Grid.Column="2" Name="Specialty9Amount" Content="{Binding Specialty9.Amount}" VerticalAlignment="Center" HorizontalAlignment="Right"></Label>
+                            <Label Grid.Column="1" Name="Specialty9Name" Content="{Binding Specialty9.Name}" VerticalAlignment="Center" HorizontalAlignment="Left" Style="{StaticResource DescriptiveLabel}"></Label>
+                            <Label Grid.Column="2" Name="Specialty9Amount" Content="{Binding Specialty9.Amount}" VerticalAlignment="Center" HorizontalAlignment="Right" Style="{StaticResource DescriptiveLabel}"></Label>
                         </Grid>
                     </Border>
                 </Grid>
@@ -197,8 +197,8 @@
                                 <ColumnDefinition Style="{StaticResource AmountColumn}"/>
                             </Grid.ColumnDefinitions>
                             <Button Grid.Column="0" IsEnabled="False" Name="Specialty10Colour" Style="{StaticResource SquaredRoundedButton}" Background="{Binding Specialty10.Colour}"></Button>
-                            <Label Grid.Column="1" Name="Specialty10Name" Content="{Binding Specialty10.Name}" VerticalAlignment="Center" HorizontalAlignment="Left"></Label>
-                            <Label Grid.Column="2" Name="Specialty10Amount" Content="{Binding Specialty10.Amount}" VerticalAlignment="Center" HorizontalAlignment="Right"></Label>
+                            <Label Grid.Column="1" Name="Specialty10Name" Content="{Binding Specialty10.Name}" VerticalAlignment="Center" HorizontalAlignment="Left" Style="{StaticResource DescriptiveLabel}"></Label>
+                            <Label Grid.Column="2" Name="Specialty10Amount" Content="{Binding Specialty10.Amount}" VerticalAlignment="Center" HorizontalAlignment="Right" Style="{StaticResource DescriptiveLabel}"></Label>
                         </Grid>
                     </Border>
                 </Grid>
@@ -215,8 +215,8 @@
                                 <ColumnDefinition Style="{StaticResource AmountColumn}"/>
                             </Grid.ColumnDefinitions>
                             <Button Grid.Column="0" IsEnabled="False" Name="Specialty11Colour" Style="{StaticResource SquaredRoundedButton}" Background="{Binding Specialty11.Colour}"></Button>
-                            <Label Grid.Column="1" Name="Specialty11Name" Content="{Binding Specialty11.Name}" VerticalAlignment="Center" HorizontalAlignment="Left"></Label>
-                            <Label Grid.Column="2" Name="Specialty11Amount" Content="{Binding Specialty11.Amount}" VerticalAlignment="Center" HorizontalAlignment="Right"></Label>
+                            <Label Grid.Column="1" Name="Specialty11Name" Content="{Binding Specialty11.Name}" VerticalAlignment="Center" HorizontalAlignment="Left" Style="{StaticResource DescriptiveLabel}"></Label>
+                            <Label Grid.Column="2" Name="Specialty11Amount" Content="{Binding Specialty11.Amount}" VerticalAlignment="Center" HorizontalAlignment="Right" Style="{StaticResource DescriptiveLabel}"></Label>
                         </Grid>
                     </Border>
                 </Grid>
@@ -233,8 +233,8 @@
                                 <ColumnDefinition Style="{StaticResource AmountColumn}"/>
                             </Grid.ColumnDefinitions>
                             <Button Grid.Column="0" IsEnabled="False" Name="Specialty12Colour" Style="{StaticResource SquaredRoundedButton}" Background="{Binding Specialty12.Colour}"></Button>
-                            <Label Grid.Column="1" Name="Specialty12Name" Content="{Binding Specialty12.Name}" VerticalAlignment="Center" HorizontalAlignment="Left"></Label>
-                            <Label Grid.Column="2" Name="Specialty12Amount" Content="{Binding Specialty12.Amount}" VerticalAlignment="Center" HorizontalAlignment="Right"></Label>
+                            <Label Grid.Column="1" Name="Specialty12Name" Content="{Binding Specialty12.Name}" VerticalAlignment="Center" HorizontalAlignment="Left" Style="{StaticResource DescriptiveLabel}"></Label>
+                            <Label Grid.Column="2" Name="Specialty12Amount" Content="{Binding Specialty12.Amount}" VerticalAlignment="Center" HorizontalAlignment="Right" Style="{StaticResource DescriptiveLabel}"></Label>
                         </Grid>
                     </Border>
                 </Grid>
@@ -251,8 +251,8 @@
                                 <ColumnDefinition Style="{StaticResource AmountColumn}"/>
                             </Grid.ColumnDefinitions>
                             <Button Grid.Column="0" IsEnabled="False" Name="Specialty13Colour" Style="{StaticResource SquaredRoundedButton}" Background="{Binding Specialty13.Colour}"></Button>
-                            <Label Grid.Column="1" Name="Specialty13Name" Content="{Binding Specialty13.Name}" VerticalAlignment="Center" HorizontalAlignment="Left"></Label>
-                            <Label Grid.Column="2" Name="Specialty13Amount" Content="{Binding Specialty13.Amount}" VerticalAlignment="Center" HorizontalAlignment="Right"></Label>
+                            <Label Grid.Column="1" Name="Specialty13Name" Content="{Binding Specialty13.Name}" VerticalAlignment="Center" HorizontalAlignment="Left" Style="{StaticResource DescriptiveLabel}"></Label>
+                            <Label Grid.Column="2" Name="Specialty13Amount" Content="{Binding Specialty13.Amount}" VerticalAlignment="Center" HorizontalAlignment="Right" Style="{StaticResource DescriptiveLabel}"></Label>
                         </Grid>
                     </Border>
                 </Grid>
@@ -269,8 +269,8 @@
                                 <ColumnDefinition Style="{StaticResource AmountColumn}"/>
                             </Grid.ColumnDefinitions>
                             <Button Grid.Column="0" IsEnabled="False" Name="Specialty14Colour" Style="{StaticResource SquaredRoundedButton}" Background="{Binding Specialty14.Colour}"></Button>
-                            <Label Grid.Column="1" Name="Specialty14Name" Content="{Binding Specialty14.Name}" VerticalAlignment="Center" HorizontalAlignment="Left"></Label>
-                            <Label Grid.Column="2" Name="Specialty14Amount" Content="{Binding Specialty14.Amount}" VerticalAlignment="Center" HorizontalAlignment="Right"></Label>
+                            <Label Grid.Column="1" Name="Specialty14Name" Content="{Binding Specialty14.Name}" VerticalAlignment="Center" HorizontalAlignment="Left" Style="{StaticResource DescriptiveLabel}"></Label>
+                            <Label Grid.Column="2" Name="Specialty14Amount" Content="{Binding Specialty14.Amount}" VerticalAlignment="Center" HorizontalAlignment="Right" Style="{StaticResource DescriptiveLabel}"></Label>
                         </Grid>
                     </Border>
                 </Grid>
@@ -287,8 +287,8 @@
                                 <ColumnDefinition Style="{StaticResource AmountColumn}"/>
                             </Grid.ColumnDefinitions>
                             <Button Grid.Column="0" IsEnabled="False" Name="Specialty15Colour" Style="{StaticResource SquaredRoundedButton}" Background="{Binding Specialty15.Colour}"></Button>
-                            <Label Grid.Column="1" Name="Specialty15Name" Content="{Binding Specialty15.Name}" VerticalAlignment="Center" HorizontalAlignment="Left"></Label>
-                            <Label Grid.Column="2" Name="Specialty15Amount" Content="{Binding Specialty15.Amount}" VerticalAlignment="Center" HorizontalAlignment="Right"></Label>
+                            <Label Grid.Column="1" Name="Specialty15Name" Content="{Binding Specialty15.Name}" VerticalAlignment="Center" HorizontalAlignment="Left" Style="{StaticResource DescriptiveLabel}"></Label>
+                            <Label Grid.Column="2" Name="Specialty15Amount" Content="{Binding Specialty15.Amount}" VerticalAlignment="Center" HorizontalAlignment="Right" Style="{StaticResource DescriptiveLabel}"></Label>
                         </Grid>
                     </Border>
                 </Grid>
@@ -305,8 +305,8 @@
                                 <ColumnDefinition Style="{StaticResource AmountColumn}"/>
                             </Grid.ColumnDefinitions>
                             <Button Grid.Column="0" IsEnabled="False" Name="Specialty16Colour" Style="{StaticResource SquaredRoundedButton}" Background="{Binding Specialty16.Colour}"></Button>
-                            <Label Grid.Column="1" Name="Specialty16Name" Content="{Binding Specialty16.Name}" VerticalAlignment="Center" HorizontalAlignment="Left"></Label>
-                            <Label Grid.Column="2" Name="Specialty16Amount" Content="{Binding Specialty16.Amount}" VerticalAlignment="Center" HorizontalAlignment="Right"></Label>
+                            <Label Grid.Column="1" Name="Specialty16Name" Content="{Binding Specialty16.Name}" VerticalAlignment="Center" HorizontalAlignment="Left" Style="{StaticResource DescriptiveLabel}"></Label>
+                            <Label Grid.Column="2" Name="Specialty16Amount" Content="{Binding Specialty16.Amount}" VerticalAlignment="Center" HorizontalAlignment="Right" Style="{StaticResource DescriptiveLabel}"></Label>
                         </Grid>
                     </Border>
                 </Grid>

@@ -21,7 +21,7 @@
         </Grid.RowDefinitions>
 
         <Grid Grid.Row="0">
-            <Label Name="TriageHeaderText" VerticalAlignment="Center" HorizontalAlignment="Center">TRIAGE</Label>
+            <Label Name="TriageHeaderText" VerticalAlignment="Center" HorizontalAlignment="Center" Style="{StaticResource HeaderLabel}">TRIAGE</Label>
         </Grid>
 
         <Grid Grid.Row="1">
@@ -41,7 +41,7 @@
                                 <RowDefinition Style="{StaticResource LabelRow}"/>
                             </Grid.RowDefinitions>
                             <ProgressBar Grid.Row="0" Name="Triage1Bar" Foreground="{Binding RelativeSource={RelativeSource AncestorType=Window}, Path=DataContext.Triage1.Colour}" Height="Auto" Maximum="{Binding MaximumTriagePatients}" Value="{Binding RelativeSource={RelativeSource AncestorType=Window}, Path=DataContext.Triage1.Amount}" Orientation="Vertical"></ProgressBar>
-                        <Label Grid.Row="1" Name="Triage1Amount" HorizontalAlignment="Center" VerticalAlignment="Bottom" Content="{Binding RelativeSource={RelativeSource AncestorType=Window}, Path=DataContext.Triage1.Amount}"></Label>
+                            <Label Grid.Row="1" Name="Triage1Amount" HorizontalAlignment="Center" VerticalAlignment="Bottom" Content="{Binding RelativeSource={RelativeSource AncestorType=Window}, Path=DataContext.Triage1.Amount}" Style="{StaticResource DescriptiveLabel}"></Label>
                         </Grid>
                     </Border>
                 </Grid>
@@ -58,7 +58,7 @@
                                 <RowDefinition Style="{StaticResource LabelRow}"/>
                             </Grid.RowDefinitions>
                             <ProgressBar Grid.Row="0" Name="Triage2Bar" Foreground="{Binding RelativeSource={RelativeSource AncestorType=Window}, Path=DataContext.Triage2.Colour}" Height="Auto" Maximum="{Binding MaximumTriagePatients}" Value="{Binding RelativeSource={RelativeSource AncestorType=Window}, Path=DataContext.Triage2.Amount}" Orientation="Vertical"></ProgressBar>
-                            <Label Grid.Row="1" Name="Triage2Amount" HorizontalAlignment="Center" VerticalAlignment="Bottom" Content="{Binding RelativeSource={RelativeSource AncestorType=Window}, Path=DataContext.Triage2.Amount}"></Label>
+                            <Label Grid.Row="1" Name="Triage2Amount" HorizontalAlignment="Center" VerticalAlignment="Bottom" Content="{Binding RelativeSource={RelativeSource AncestorType=Window}, Path=DataContext.Triage2.Amount}" Style="{StaticResource DescriptiveLabel}"></Label>
                         </Grid>
                     </Border>
                 </Grid>
@@ -73,7 +73,7 @@
                                 <RowDefinition Style="{StaticResource LabelRow}"/>
                             </Grid.RowDefinitions>
                             <ProgressBar Grid.Row="0" Name="Triage3Bar" Foreground="{Binding RelativeSource={RelativeSource AncestorType=Window}, Path=DataContext.Triage3.Colour}" Height="Auto" Maximum="{Binding MaximumTriagePatients}" Value="{Binding RelativeSource={RelativeSource AncestorType=Window}, Path=DataContext.Triage3.Amount}" Orientation="Vertical"></ProgressBar>
-                            <Label Grid.Row="1" Name="Triage3Amount" HorizontalAlignment="Center" VerticalAlignment="Bottom" Content="{Binding RelativeSource={RelativeSource AncestorType=Window}, Path=DataContext.Triage3.Amount}"></Label>
+                            <Label Grid.Row="1" Name="Triage3Amount" HorizontalAlignment="Center" VerticalAlignment="Bottom" Content="{Binding RelativeSource={RelativeSource AncestorType=Window}, Path=DataContext.Triage3.Amount}" Style="{StaticResource DescriptiveLabel}"></Label>
                         </Grid>
                     </Border>
                 </Grid>
@@ -88,7 +88,7 @@
                                 <RowDefinition Style="{StaticResource LabelRow}"/>
                             </Grid.RowDefinitions>
                             <ProgressBar Grid.Row="0" Name="Triage4Bar" Foreground="{Binding RelativeSource={RelativeSource AncestorType=Window}, Path=DataContext.Triage4.Colour}" Height="Auto" Maximum="{Binding MaximumTriagePatients}" Value="{Binding RelativeSource={RelativeSource AncestorType=Window}, Path=DataContext.Triage4.Amount}" Orientation="Vertical"></ProgressBar>
-                            <Label Grid.Row="1" Name="Triage4Amount" HorizontalAlignment="Center" VerticalAlignment="Bottom" Content="{Binding RelativeSource={RelativeSource AncestorType=Window}, Path=DataContext.Triage4.Amount}"></Label>
+                            <Label Grid.Row="1" Name="Triage4Amount" HorizontalAlignment="Center" VerticalAlignment="Bottom" Content="{Binding RelativeSource={RelativeSource AncestorType=Window}, Path=DataContext.Triage4.Amount}" Style="{StaticResource DescriptiveLabel}"></Label>
                         </Grid>
                     </Border>
                 </Grid>
@@ -103,7 +103,7 @@
                                 <RowDefinition Style="{StaticResource LabelRow}"/>
                             </Grid.RowDefinitions>
                             <ProgressBar Grid.Row="0" Name="Triage5Bar" Foreground="{Binding RelativeSource={RelativeSource AncestorType=Window}, Path=DataContext.Triage5.Colour}" Height="Auto" Maximum="{Binding MaximumTriagePatients}" Value="{Binding RelativeSource={RelativeSource AncestorType=Window}, Path=DataContext.Triage5.Amount}" Orientation="Vertical"></ProgressBar>
-                        <Label Grid.Row="1" Name="Triage5Amount" HorizontalAlignment="Center" VerticalAlignment="Bottom" Content="{Binding RelativeSource={RelativeSource AncestorType=Window}, Path=DataContext.Triage5.Amount}"></Label>
+                        <Label Grid.Row="1" Name="Triage5Amount" HorizontalAlignment="Center" VerticalAlignment="Bottom" Content="{Binding RelativeSource={RelativeSource AncestorType=Window}, Path=DataContext.Triage5.Amount}" Style="{StaticResource DescriptiveLabel}"></Label>
                         </Grid>
                     </Border>
                 </Grid>

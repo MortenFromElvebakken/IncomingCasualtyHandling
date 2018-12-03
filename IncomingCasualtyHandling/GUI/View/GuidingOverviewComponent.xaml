@@ -18,7 +18,7 @@
                     
                         <UniformGrid Rows="1" VerticalAlignment="Stretch">
 
-                            <Grid Name="Triage1Circle" Visibility="{Binding Triage1.ShowAs}">
+                            <Grid Name="Triage1Circle" Visibility="{Binding Triage1.ShowAs}" MaxWidth="100px">
                                 <Grid.InputBindings>
                                     <MouseBinding MouseAction="LeftClick" Command="{Binding ChangeTabsCommand}" CommandParameter="Triage 0"></MouseBinding>
                                 </Grid.InputBindings>
@@ -27,13 +27,13 @@
                                         <Border.BorderBrush>
                                             <SolidColorBrush Color="{Binding RelativeSource={RelativeSource AncestorType=Window}, Path=DataContext.Triage1.Colour}" Opacity="0.5"></SolidColorBrush>
                                         </Border.BorderBrush>
-                                        <TextBlock Text="{Binding RelativeSource={RelativeSource AncestorType=Window}, Path=DataContext.Triage1.Amount}" VerticalAlignment="Center" FontSize="20" HorizontalAlignment="Center"></TextBlock>
+                                    <TextBlock Text="{Binding RelativeSource={RelativeSource AncestorType=Window}, Path=DataContext.Triage1.Amount}" VerticalAlignment="Center" HorizontalAlignment="Center" Style="{StaticResource GuidingTextBlock}"></TextBlock>
                                     </Border>
                                 </Viewbox>
 
 
                             </Grid>
-                            <Grid Name="Triage2Circle" Visibility="{Binding Triage2.ShowAs}">
+                            <Grid Name="Triage2Circle" Visibility="{Binding Triage2.ShowAs}" MaxWidth="100px">
 
                                 <Grid.InputBindings>
                                     <MouseBinding MouseAction="LeftClick" Command="{Binding ChangeTabsCommand}" CommandParameter="Triage 1"></MouseBinding>
@@ -43,7 +43,7 @@
                                         <Border.BorderBrush>
                                             <SolidColorBrush Color="{Binding RelativeSource={RelativeSource AncestorType=Window}, Path=DataContext.Triage2.Colour}" Opacity="0.5"></SolidColorBrush>
                                         </Border.BorderBrush>
-                                        <TextBlock Text="{Binding RelativeSource={RelativeSource AncestorType=Window}, Path=DataContext.Triage2.Amount}" VerticalAlignment="Center" FontSize="20" HorizontalAlignment="Center"></TextBlock>
+                                    <TextBlock Text="{Binding RelativeSource={RelativeSource AncestorType=Window}, Path=DataContext.Triage2.Amount}" VerticalAlignment="Center" HorizontalAlignment="Center" Style="{StaticResource GuidingTextBlock}"></TextBlock>
                                     </Border>
                                 </Viewbox>
 
@@ -60,7 +60,7 @@
                                         <Border.BorderBrush>
                                             <SolidColorBrush Color="{Binding RelativeSource={RelativeSource AncestorType=Window}, Path=DataContext.Triage3.Colour}" Opacity="0.5"></SolidColorBrush>
                                         </Border.BorderBrush>
-                                        <TextBlock Text="{Binding RelativeSource={RelativeSource AncestorType=Window}, Path=DataContext.Triage3.Amount}" VerticalAlignment="Center" FontSize="20" HorizontalAlignment="Center"></TextBlock>
+                                        <TextBlock Text="{Binding RelativeSource={RelativeSource AncestorType=Window}, Path=DataContext.Triage3.Amount}" VerticalAlignment="Center" HorizontalAlignment="Center" Style="{StaticResource GuidingTextBlock}"></TextBlock>
                                     </Border>
                                 </Viewbox>
 
@@ -74,7 +74,7 @@
                                         <Border.BorderBrush>
                                             <SolidColorBrush Color="{Binding RelativeSource={RelativeSource AncestorType=Window}, Path=DataContext.Triage4.Colour}" Opacity="0.5"></SolidColorBrush>
                                         </Border.BorderBrush>
-                                        <TextBlock Text="{Binding RelativeSource={RelativeSource AncestorType=Window}, Path=DataContext.Triage4.Amount}" VerticalAlignment="Center" FontSize="20" HorizontalAlignment="Center"></TextBlock>
+                                        <TextBlock Text="{Binding RelativeSource={RelativeSource AncestorType=Window}, Path=DataContext.Triage4.Amount}" VerticalAlignment="Center" HorizontalAlignment="Center" Style="{StaticResource GuidingTextBlock}"></TextBlock>
                                     </Border>
                                 </Viewbox>
 
@@ -89,7 +89,7 @@
                                         <Border.BorderBrush>
                                             <SolidColorBrush Color="{Binding RelativeSource={RelativeSource AncestorType=Window}, Path=DataContext.Triage5.Colour}" Opacity="0.5"></SolidColorBrush>
                                         </Border.BorderBrush>
-                                        <TextBlock Text="{Binding RelativeSource={RelativeSource AncestorType=Window}, Path=DataContext.Triage5.Amount}" VerticalAlignment="Center" FontSize="20" HorizontalAlignment="Center"></TextBlock>
+                                        <TextBlock Text="{Binding RelativeSource={RelativeSource AncestorType=Window}, Path=DataContext.Triage5.Amount}" VerticalAlignment="Center" HorizontalAlignment="Center" Style="{StaticResource GuidingTextBlock}"></TextBlock>
                                     </Border>
                                 </Viewbox>
 
@@ -104,7 +104,7 @@
                                         <Border.BorderBrush>
                                             <SolidColorBrush Color="{Binding RelativeSource={RelativeSource AncestorType=Window}, Path=DataContext.Triage6.Colour}" Opacity="0.5"></SolidColorBrush>
                                         </Border.BorderBrush>
-                                        <TextBlock Text="{Binding RelativeSource={RelativeSource AncestorType=Window}, Path=DataContext.Triage6.Amount}" VerticalAlignment="Center" FontSize="20" HorizontalAlignment="Center"></TextBlock>
+                                        <TextBlock Text="{Binding RelativeSource={RelativeSource AncestorType=Window}, Path=DataContext.Triage6.Amount}" VerticalAlignment="Center" HorizontalAlignment="Center" Style="{StaticResource GuidingTextBlock}"></TextBlock>
                                     </Border>
                                 </Viewbox>
 
@@ -129,8 +129,8 @@
                         </Grid.InputBindings>
 
                         <Button Grid.Column="0" Name="Specialty1Colour" IsEnabled="False" Style="{StaticResource SquaredRoundedButton}" Background="{Binding RelativeSource={RelativeSource AncestorType=Window}, Path=DataContext.Specialty1.Colour}" ></Button>
-                        <Label Grid.Column="1" Name="Specialty1Name" Content="{Binding RelativeSource={RelativeSource AncestorType=Window}, Path=DataContext.Specialty1.Name}" VerticalAlignment="Center" HorizontalAlignment="Left"></Label>
-                        <Label Grid.Column="2" Name="Specialty1Amount" Content="{Binding RelativeSource={RelativeSource AncestorType=Window}, Path=DataContext.Specialty1.Amount}" VerticalAlignment="Center" HorizontalAlignment="Left"></Label>
+                            <Label Grid.Column="1" Name="Specialty1Name" Content="{Binding RelativeSource={RelativeSource AncestorType=Window}, Path=DataContext.Specialty1.Name}" VerticalAlignment="Center" HorizontalAlignment="Left" Style="{StaticResource GuidingLabel}"></Label>
+                            <Label Grid.Column="2" Name="Specialty1Amount" Content="{Binding RelativeSource={RelativeSource AncestorType=Window}, Path=DataContext.Specialty1.Amount}" VerticalAlignment="Center" HorizontalAlignment="Left" Style="{StaticResource GuidingLabel}"></Label>
                     </Grid>
                     </Border>
                 </Grid>
@@ -142,8 +142,8 @@
                     <Grid.InputBindings>
                         <MouseBinding MouseAction="LeftClick"  Command="{Binding ChangeTabsCommand}" CommandParameter="Eta 0"></MouseBinding>
                     </Grid.InputBindings>
-                    <Label Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Center">ETA</Label>
-                    <Label Grid.Column="1" Name="EtaRelativeTimeText" VerticalAlignment="Center" HorizontalAlignment="Left" Content="{Binding RelativeSource={RelativeSource AncestorType=Window}, Path=DataContext.ETA.AbsoluteTime}"></Label>
+                    <Label Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Center" Style="{StaticResource GuidingLabel}">ETA</Label>
+                    <Label Grid.Column="1" Name="EtaRelativeTimeText" VerticalAlignment="Center" HorizontalAlignment="Left" Content="{Binding RelativeSource={RelativeSource AncestorType=Window}, Path=DataContext.ETA.AbsoluteTime}" Style="{StaticResource GuidingLabel}"></Label>
                 </Grid>
             </Grid>
         </Border>
