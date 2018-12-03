@@ -9,6 +9,7 @@ using IncomingCasualtyHandling.BL.Interfaces;
 using IncomingCasualtyHandling.BL.Object_classes;
 using IncomingCasualtyHandling.DAL;
 using IncomingCasualtyHandling.DAL.Interface;
+using Xceed.Wpf.DataGrid;
 
 namespace IncomingCasualtyHandling.BL.Models
 {
@@ -150,7 +151,9 @@ namespace IncomingCasualtyHandling.BL.Models
             {
                 _whenServerStoppedResponding = DateTime.Now;
                 ConnectionToInternet = Visibility.Visible;
-                OnPropertyChanged(NoConnectionString);
+                var test = _whenServerStoppedResponding.ToString(CultureInfo.CurrentUICulture);
+                
+                OnPropertyChanged("NoConnectionString");
             }
             else
             {
@@ -158,7 +161,9 @@ namespace IncomingCasualtyHandling.BL.Models
                 ConnectionToInternet = Visibility.Collapsed;
             }
         }
-        public string NoConnectionString { get; } = string.Format("Could not contact server, no updates are made. Last update: " + _whenServerStoppedResponding);
+        
+        
+        public string NoConnectionString => string.Format("Could not contact server, no updates are made. Last update: " + _whenServerStoppedResponding.ToString(new CultureInfo("es-ES")));
         #endregion
 
     }

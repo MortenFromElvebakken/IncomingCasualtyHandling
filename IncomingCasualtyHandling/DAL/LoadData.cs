@@ -90,7 +90,7 @@ namespace IncomingCasualtyHandling.DAL
                 firstBundle = Client.Continue(firstBundle, PageDirection.Next);
             }
             UpdatePatients(listOfPatients);
-            if (!_myThread.IsAlive)
+            if (_myThread.IsAlive != true)
             {
                 _myThread.Start();
             }
@@ -124,6 +124,7 @@ namespace IncomingCasualtyHandling.DAL
 
         private bool CheckIfSamePatientsReturned(Bundle b)
         {
+            
             if (b.Entry.Count == 0)
             {
                 return true;
@@ -138,9 +139,13 @@ namespace IncomingCasualtyHandling.DAL
                 List<Patient> changedPatients = new List<Patient>();
                 foreach (var entry in b.Entry)
                 {
-                    var testEntry = Client.Read<Patient>(FhirServerUrl + "/Patient/" + b.Entry[counterTest].Resource.Id);
-                    changedPatients.Add(testEntry);
-                    counterTest++;
+                    //if (entry. == "Patient")
+                    //{
+
+                        var testEntry = Client.Read<Patient>(FhirServerUrl + "/Patient/" + b.Entry[counterTest].Resource.Id);
+                        changedPatients.Add(testEntry);
+                        counterTest++;
+                    //}
                 }
 
                 int CheckIfPatientsAreTheSame = counterTest;
@@ -164,18 +169,18 @@ namespace IncomingCasualtyHandling.DAL
                 
             }
         }
-
+        DateTime _lastSearch = default(DateTime);
         private void AsyncGetAllPatients()
         {
             _sameAsLast = true;
             var anyChangedResources = default(Bundle);
             Thread.Sleep(5000);
-            var _lastSearch = default(DateTime);
+            
             try
             {
                 //throw new Exception("test");
                 anyChangedResources = Client.WholeSystemHistory(_dateOfLastSearch, 10);
-                _lastSearch = DateTime.Now.AddSeconds(-3);
+                    _lastSearch = DateTime.Now.AddSeconds(-3);
                 if (_internet == false)
                 {
                     _internet = true;
@@ -248,7 +253,9 @@ namespace IncomingCasualtyHandling.DAL
                     UpdatePatients(listOfPatients);
                     _dateOfLastSearch = _lastSearch;
                 }
-                AsyncGetAllPatients();
+
+                
+                
             }
             
 
@@ -262,7 +269,23 @@ namespace IncomingCasualtyHandling.DAL
                     InternetConnection(false);
                 }
             }
+            //while (_internet == false)
+            //{
+            //    try
+            //    {
+            //        Client.CapabilityStatement();
+            //        _internet = true;
+            //    }
+            //    catch (Exception e)
+            //    {
+
+            //        Debug.WriteLine("Still no connection");
+            //        Thread.Sleep(2000);
+            //    }
+            //}
+            AsyncGetAllPatients();
         }
+        
 
         public void SetFhirClientURL(string s)
         {
