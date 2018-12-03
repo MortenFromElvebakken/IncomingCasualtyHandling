@@ -15,5 +15,20 @@
         <Setter Property="Label.FontFamily" Value="Calibri"/>
         <Setter Property="Label.Foreground" Value="DarkGray"/>
     </Style>
+    
+    <!-- Style a label to be black with bold font, font Segoe UI - used on guiding component-->
+    <Style x:Key="GuidingLabel">
+        <Setter Property="Label.FontFamily" Value="Segoe UI"/>
+        <Setter Property="Label.Foreground" Value="Black"/>
+        <Setter Property="Label.FontWeight" Value="Bold"/>
+    </Style>
+
+    <!-- Style a textblock to be black with bold font, font Segoe UI - used on guiding component-->
+    <Style x:Key="GuidingTextBlock">
+        <Setter Property="TextBlock.FontFamily" Value="Segoe UI"/>
+        <Setter Property="TextBlock.Foreground" Value="Black"/>
+        <Setter Property="TextBlock.FontWeight" Value="Bold"/>
+        <Setter Property="TextBlock.FontSize" Value="20"/>
+    </Style>
 
 </ResourceDictionary>
