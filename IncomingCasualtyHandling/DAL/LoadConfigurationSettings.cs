@@ -100,6 +100,21 @@ namespace IncomingCasualtyHandling.DAL
                 specialtiesList.Add(_specialty);
             }
 
+            if (specialtiesList.Count < 16)
+            {
+                while (specialtiesList.Count<16)
+                {
+                    Specialty specialtyExtra = new Specialty()
+                    {
+                        Name = "",
+                        Amount = 0,
+                        Colour = "",
+                        ShowAs = Visibility.Collapsed
+                    };
+                    specialtiesList.Add(specialtyExtra);
+                }
+            }
+
             return specialtiesList;
         }
 
