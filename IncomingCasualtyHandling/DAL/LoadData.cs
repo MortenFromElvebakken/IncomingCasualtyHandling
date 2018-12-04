@@ -131,6 +131,20 @@ namespace IncomingCasualtyHandling.DAL
             }
             else if(_lastChangedPatients != null && b.Entry.Count != _lastChangedPatients.Count)
             {
+                int counterTest = 0;
+                List<Patient> changedPatients = new List<Patient>();
+                foreach (var entry in b.Entry)
+                {
+                    //if (entry. == "Patient")
+                    //{
+
+                    var testEntry = Client.Read<Patient>(FhirServerUrl + "/Patient/" + b.Entry[counterTest].Resource.Id);
+                    changedPatients.Add(testEntry);
+                 
+                    //}
+                }
+
+                _lastChangedPatients = changedPatients;
                 return false;
             }
             else
@@ -180,6 +194,7 @@ namespace IncomingCasualtyHandling.DAL
             {
                 //throw new Exception("test");
                 anyChangedResources = Client.WholeSystemHistory(_dateOfLastSearch, 10);
+                var test = Client.Endpoint;
                     _lastSearch = DateTime.Now.AddSeconds(-3);
                 if (_internet == false)
                 {
@@ -251,11 +266,11 @@ namespace IncomingCasualtyHandling.DAL
                     }
 
                     UpdatePatients(listOfPatients);
-                    _dateOfLastSearch = _lastSearch;
+                    
                 }
+                _dateOfLastSearch = _lastSearch;
 
-                
-                
+
             }
             
 

@@ -26,7 +26,7 @@ namespace IncomingCasualtyHandling.DAL
 
         public LoadConfigurationSettings()
         {
-            XmlServerName = "http://localhost:8080/Conf.Fapi/Configuration.xml";
+            XmlServerName = "http://10.192.154.107:8080/Conf.Fapi/Configuration.xml";
             _configFile = new XmlDocument();
             _configFile.Load(XmlServerName);
             GetHospitalShortName();
