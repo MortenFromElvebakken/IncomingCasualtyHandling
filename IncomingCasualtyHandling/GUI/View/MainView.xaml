@@ -32,7 +32,7 @@
         <Grid Grid.Row="0" ZIndex="1">
             <view:TopComponent x:Name="TopComponent" DataContext="CurrentDateTime"></view:TopComponent>
         </Grid>
-        <Grid Grid.Row="0" Grid.RowSpan="2" ZIndex="2">
+        <Grid Grid.Row="0" Grid.RowSpan="1" ZIndex="2">
             <TextBlock Opacity="0.35" Background="Yellow" Visibility="{Binding ConnectionToInternet}" Text="{Binding NoConnectionString}" TextAlignment="Center" FontSize="30"></TextBlock>
         </Grid>
 
