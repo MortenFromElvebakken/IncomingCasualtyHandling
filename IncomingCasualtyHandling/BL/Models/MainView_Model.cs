@@ -151,7 +151,6 @@ namespace IncomingCasualtyHandling.BL.Models
             {
                 _whenServerStoppedResponding = DateTime.Now;
                 ConnectionToInternet = Visibility.Visible;
-                var test = _whenServerStoppedResponding.ToString(CultureInfo.CurrentUICulture);
                 
                 OnPropertyChanged("NoConnectionString");
             }
