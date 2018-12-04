@@ -5,13 +5,17 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:IncomingCasualtyHandling.GUI.View"
         mc:Ignorable="d"
-        Title="Window1" Height="200" Width="400"
-        WindowStartupLocation="CenterScreen">
+        Title="Choose FHIR server" Height="250" Width="600"
+        WindowStartupLocation="CenterScreen"
+        ResizeMode="NoResize">
     <Grid>
         <StackPanel>
-            <Label Margin="10" VerticalAlignment="Center" HorizontalAlignment="Center">Specify name of new FHIR compliant server</Label>
-            <TextBox Margin="10" Name="ServerName"></TextBox>
-            <Button Margin="10" Content="OK" IsDefault="True" Click="btnOk_Click" ></Button>
+            <Label Margin="10,10,10,5" VerticalAlignment="Center" HorizontalAlignment="Center">Specify name of new FHIR compliant server</Label>
+            <TextBox Margin="10,5,10,10" Name="ServerName" Height="40px" FontSize="16" VerticalContentAlignment="Center"></TextBox>
+            <Label VerticalAlignment="Center" HorizontalAlignment="Center">
+                Example of FHIR server URL "http://localhost:8080/hapi-fhir-jpaserver-example/baseDstu3"
+            </Label>
+            <Button Margin="10" Content="OK" IsDefault="True" Click="btnOk_Click" Height="30px"></Button>
         </StackPanel>
     </Grid>
 </Window>

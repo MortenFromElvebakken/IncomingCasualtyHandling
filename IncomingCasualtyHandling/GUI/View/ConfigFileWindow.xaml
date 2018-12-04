@@ -6,7 +6,8 @@
         xmlns:local="clr-namespace:IncomingCasualtyHandling.GUI.View"
         mc:Ignorable="d"
         Title="URL for configuration file" Height="300" Width="600"
-        WindowStartupLocation="CenterScreen">
+        WindowStartupLocation="CenterScreen"
+        ResizeMode="NoResize">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition/>
@@ -20,18 +21,18 @@
             <Label VerticalAlignment="Center" HorizontalAlignment="Center">
                 Specify a new URL for configuration file location in texbox below
             </Label>
-            
+
         </StackPanel>
         <StackPanel Grid.Row="1">
-            <TextBox Name="ServerTextBoxName" Margin="100,10,100,10" Text="{Binding ConfigurationFilePath}"></TextBox>
+            <TextBox Name="ServerTextBoxName" Margin="100,10,100,10" Text="{Binding ConfigurationFilePath}" Height="40px" FontSize="16" VerticalContentAlignment="Center"></TextBox>
             <Label VerticalAlignment="Center" HorizontalAlignment="Center">
                 Example of file location "http://localhost:8080/Conf.Fapi/Configuration.xml"
             </Label>
         </StackPanel>
-<StackPanel Grid.Row="2" Orientation="Horizontal" >
-    <Button  Margin="100,10,10,10" Click="btnOk_Click" Width="150">Find new configuration file</Button>
-    <Button  Margin="10,10,100,10" IsCancel="True" Click="btnCancel_Click" Width="150">Close application</Button>
+        <StackPanel Grid.Row="2" Orientation="Horizontal" >
+            <Button  Margin="135,10,10,10" Click="btnOk_Click" Width="150">Find new configuration file</Button>
+            <Button  Margin="10,10,140,10" IsCancel="True" Click="btnCancel_Click" Width="150">Close application</Button>
         </StackPanel>
-        
+
     </Grid>
 </Window>
