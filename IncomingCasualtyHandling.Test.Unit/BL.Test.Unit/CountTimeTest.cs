@@ -23,7 +23,6 @@ namespace IncomingCasualtyHandling.Test.Unit.BL.Test.Unit
 
         private CountTime _uut;
 
-        private IOverviewView_Model _overviewViewModel;
         private IMainView_Model _mainViewModel;
 
         private List<ICHPatient> _listOfPatients;
@@ -32,7 +31,6 @@ namespace IncomingCasualtyHandling.Test.Unit.BL.Test.Unit
         [SetUp]
         public void Setup()
         {
-            _overviewViewModel = Substitute.For<IOverviewView_Model>();
             _mainViewModel = Substitute.For<IMainView_Model>();
             _uut = new CountTime(_mainViewModel);            
 
@@ -97,16 +95,18 @@ namespace IncomingCasualtyHandling.Test.Unit.BL.Test.Unit
             Assert.That(_mainViewModel.ETA.RelativeTime, Is.EqualTo(afterAMinute));
         }
 
-        // Find the next coming patient and calculate ETA, put in Main Model
+        // Relative time reaches 0 minutes, find new ETA
         [Test]
         public void ETATimeTimerTick_RelativeTimeIsReducedWithAMinute_OverviewViewModelUpdated()
         {
-            string twoHoursInMinutes = "(-120 minutes)";
-            _patient1.ETA = DateTime.Now.AddHours(2);
-            _patient2.ETA = DateTime.Now.AddHours(3);
+            string twoHoursInMinutesAfterAMinute = "(-119 minutes)";
+            _patient1.ETA = DateTime.Now.AddMinutes(1);
+            _patient2.ETA = DateTime.Now.AddHours(2);
             _uut.FindRelativeTime(_listOfPatients);
 
-            Assert.That(_mainViewModel.ETA.RelativeTime, Is.EqualTo(twoHoursInMinutes));
+            Thread.Sleep(65000); //Wait at least a minute
+
+            Assert.That(_mainViewModel.ETA.RelativeTime, Is.EqualTo(twoHoursInMinutesAfterAMinute));
         }
 
         // Test that only future ETA's are used
@@ -121,7 +121,7 @@ namespace IncomingCasualtyHandling.Test.Unit.BL.Test.Unit
             Assert.That(_mainViewModel.ETA.RelativeTime, Is.EqualTo(threeHoursInMinutes));
         }
 
-        // Test reaction to no future ETAs
+        // Test reaction to no future ETAs, absolute time
         [Test]
         public void FindRelativeTime_NoFutureETAs_ModelContainsRightUnknownAbsoluteTime()
         {
@@ -132,7 +132,7 @@ namespace IncomingCasualtyHandling.Test.Unit.BL.Test.Unit
             Assert.That(_mainViewModel.ETA.AbsoluteTime, Is.EqualTo("--:--"));
         }
 
-        // Test reaction to no future ETAs
+        // Test reaction to no future ETAs, relative time
         [Test]
         public void FindRelativeTime_NoFutureETAs_ModelContainsRightUnknownRelativeTime()
         {
@@ -143,7 +143,7 @@ namespace IncomingCasualtyHandling.Test.Unit.BL.Test.Unit
             Assert.That(_mainViewModel.ETA.RelativeTime, Is.EqualTo(""));
         }
 
-        // Test reaction to ETA further into the future than 999 minutes
+        // Test reaction to ETA further into the future than 999 minutes, absolute time
         [Test]
         public void FindRelativeTime_ETAFurtherIntoTheFuture_ModelContainsRightAbsoluteTime()
         {
@@ -156,9 +156,9 @@ namespace IncomingCasualtyHandling.Test.Unit.BL.Test.Unit
             Assert.That(_mainViewModel.ETA.AbsoluteTime, Is.EqualTo(absoluteTime));
         }
 
-        // Test reaction to ETA further into the future than 999 minutes
+        // Test reaction to ETA further into the future than 999 minutes, relative time
         [Test]
-        public void FindRelativeTime_ETAFurhterIntoTheFuture_ModelContainsRightRlativeTime()
+        public void FindRelativeTime_ETAFurhterIntoTheFuture_ModelContainsRightRelativeTime()
         {
             _patient1.ETA = DateTime.Now.AddDays(1);
             _listOfPatients.Remove(_patient2);
@@ -168,10 +168,6 @@ namespace IncomingCasualtyHandling.Test.Unit.BL.Test.Unit
         }
 
         #endregion
-
-
-
-
 
 
     }
