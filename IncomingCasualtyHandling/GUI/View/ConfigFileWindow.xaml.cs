@@ -64,17 +64,17 @@ namespace IncomingCasualtyHandling.GUI.View
                     MessageBox.Show("Invalid configuration file URL");
                 }
 
-                try
-                {
-                    _client2.CapabilityStatement();
-                    e.Cancel = false;
-                }
-                catch (Exception exception)
-                {
-                    Debug.WriteLine(exception);
-                    e.Cancel = true;
-                    MessageBox.Show("Invalid server URL in configuration file");
-                }
+                //try
+                //{
+                //    _client2.CapabilityStatement();
+                //    e.Cancel = false;
+                //}
+                //catch (Exception exception)
+                //{
+                //    Debug.WriteLine(exception);
+                //    e.Cancel = true;
+                //    MessageBox.Show("Invalid server URL in configuration file");
+                //}
             }
             else
             {
