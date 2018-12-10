@@ -421,18 +421,37 @@ namespace IncomingCasualtyHandling.BL.Models
             {
 
                 var oldTabName = ObservableCollectionTabs[SelectedTabIndex].Name;
-                if (oldTabName != _tempTabList[SelectedTabIndex].Name)
+                if (oldTabName == _tempTabList[SelectedTabIndex].Name)
+                {
+                    if (_tempTabList[SelectedTabIndex].isVisible != Visibility.Visible) //oldTabName !=
+                    {
+                        var findIndex = _tempTabList.FindIndex(a => a.Name == oldTabName);
+                        if (_tempTabList[findIndex].isVisible == Visibility.Visible)
+                        {
+                            newTabIndex = findIndex;
+                        }
+                        else
+                        {
+                            newTabIndex = _tempTabList.FindIndex(a => a.isVisible == Visibility.Visible);
+                        }
+                    }
+                }
+
+                else
                 {
                     var findIndex = _tempTabList.FindIndex(a => a.Name == oldTabName);
-                    if (_tempTabList[findIndex].isVisible == Visibility.Visible)
+                    if (_tempTabList[findIndex].isVisible != Visibility.Visible) //oldTabName !=
                     {
-                        newTabIndex = findIndex;
+                            newTabIndex = _tempTabList.FindIndex(a => a.isVisible == Visibility.Visible);
                     }
                     else
                     {
-                        newTabIndex = _tempTabList.FindIndex(a => a.isVisible == Visibility.Visible);
+                        newTabIndex = findIndex;
                     }
+                        
                 }
+
+                
             }
 
             if (_sortColumn != "ETA" | _sortDirection != ListSortDirection.Ascending)
@@ -479,8 +498,11 @@ namespace IncomingCasualtyHandling.BL.Models
                     var sortedSpecialtiesList = new List<Specialty>();
                     sortedSpecialtiesList = ListOfSpecialties.OrderBy(a => a.Name).ToList();
                     var newIndex = sortedSpecialtiesList.FindIndex(x => x.Name == chosenSpecialtyName);
+                    if (_observableCollectionTabs[newIndex].isVisible == Visibility.Visible)
+                    {
+                        SelectedTabIndex = newIndex;
+                    }
                     
-                    SelectedTabIndex = newIndex;
                 }
                 else
                 {
@@ -488,6 +510,52 @@ namespace IncomingCasualtyHandling.BL.Models
                     {
                         SelectedTabIndex = tryTabIndex;
                     }
+                }
+            }
+            //If the user is in detail view and clicks another overview component, to null check the list for information
+            else if (tryChangeTabs != SelectedOverview && !ChangedFromMain)
+            {
+
+                switch (tryChangeTabs)
+                {
+                    case "Triage":
+                        if (ListOfTriages[tryTabIndex].ShowAs == Visibility.Visible)
+                        {
+                            _sortDirection = ListSortDirection.Ascending;
+                            _sortColumn = "ETA";
+                            ChangesFromUser = "Yes";
+                            StringFromChangeViewCommandParameter = s;
+                            CreateTabs();
+                            SelectedTabIndex = tryTabIndex;
+                            ChangesFromUser = "No";
+                        }
+                        break;
+                    case "Specialty":
+                            var chosenSpecialtyName = ListOfSpecialties[tryTabIndex].Name;
+                            var sortedSpecialtiesList = new List<Specialty>();
+                            sortedSpecialtiesList = ListOfSpecialties.OrderBy(a => a.Name).ToList();
+                            var newIndex = sortedSpecialtiesList.FindIndex(x => x.Name == chosenSpecialtyName);
+                            StringFromChangeViewCommandParameter = string.Format("Specialty " + newIndex);
+                        if (sortedSpecialtiesList[newIndex].ShowAs == Visibility.Visible)
+                        {
+                            ChangesFromUser = "Yes";
+                            CreateTabs();
+                            
+                            ChangesFromUser = "No";
+                            SelectedTabIndex = newIndex;
+                        }
+                        
+                        break;
+                    default:
+                        if (ETAPatients.Count > 0)
+                        {
+                            ChangesFromUser = "Yes";
+                            StringFromChangeViewCommandParameter = s;
+                            CreateTabs();
+                            SelectedTabIndex = tryTabIndex;
+                            ChangesFromUser = "No";
+                        }
+                        break;
                 }
             }
             else
@@ -504,7 +572,6 @@ namespace IncomingCasualtyHandling.BL.Models
                         SelectedTabIndex = tryTabIndex;
                         break;
                     case "Specialty": 
-                    {
                         //If specialty is the case, it needs another index than the one sent from view, this is due to
                         //the alfabetic sort on tabs. 
                         var chosenSpecialtyName = ListOfSpecialties[tryTabIndex].Name;
@@ -515,7 +582,6 @@ namespace IncomingCasualtyHandling.BL.Models
                         CreateTabs();
                         SelectedTabIndex = newIndex;
                         break;
-                    }
                     default:
                         StringFromChangeViewCommandParameter = s;
                         CreateTabs();
@@ -611,7 +677,10 @@ namespace IncomingCasualtyHandling.BL.Models
                             if (tab.Data != null)
                             {
                                 var listOfPatients = new List<ICHPatient>(tab.Data.ToList());
-                                listOfPatients.Sort((p1, p2) => String.Compare(p1.Age, p2.Age, StringComparison.CurrentCulture));
+                                //listOfPatients.Sort((p1, p2) => p1.Age.CompareTo(p2.Age));
+
+                                listOfPatients.Sort((p1, p2) => int.Parse(p1.Age).CompareTo(int.Parse(p2.Age))); //New sort on age, since age is string
+
                                 if (_sortDirection == ListSortDirection.Descending)
                                 {
                                     listOfPatients.Reverse();
