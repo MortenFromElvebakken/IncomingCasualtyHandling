@@ -42,7 +42,6 @@
             <TabControl ItemsSource="{Binding Tabs}" Name="TabControl" SelectedIndex="{Binding SelectedTabIndex, Mode=TwoWay}" Style="{DynamicResource TabControlAsWrapPanel}">
                 <TabControl.ItemTemplate>
                     <DataTemplate>
-
                         <TextBlock Text="{Binding Name}" Margin="0,2" FontSize="20" LineHeight="20" />
                     </DataTemplate>
                 </TabControl.ItemTemplate>
@@ -55,7 +54,7 @@
                     <DataTemplate>
                         <Grid>
                             <Grid ZIndex="20">
-                                <ListView ItemsSource="{Binding Data}" ItemContainerStyle="{StaticResource RowColourAlternate}" AlternationCount="2" IsSynchronizedWithCurrentItem="True" >
+                                <ListView Name="DetailListView"  ItemsSource="{Binding Data}" ItemContainerStyle="{StaticResource RowColourAlternate}" AlternationCount="2" IsSynchronizedWithCurrentItem="True" >
                                     <ListView.View>
                                         <GridView>
                                             <GridView.Columns>
