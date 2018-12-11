@@ -10,7 +10,11 @@ using IncomingCasualtyHandling.BL.Interfaces;
 using IncomingCasualtyHandling.BL.Models;
 using IncomingCasualtyHandling.BL.Object_classes;
 using TabControl = IncomingCasualtyHandling.BL.Models.TabControl;
-
+// **********************************
+// Group: 2018E73
+// Anni Lykke Wilhelmsen, 201509504
+// Morten From Elvebakken, 201509095
+// **********************************
 namespace IncomingCasualtyHandling.GUI.ViewModels
 {
     public class DetailView_ViewModel : Workspace_ViewModel

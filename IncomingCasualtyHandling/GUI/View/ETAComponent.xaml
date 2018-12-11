@@ -7,6 +7,13 @@
              mc:Ignorable="d"
              d:DesignHeight="200" d:DesignWidth="250"
              Background="White">
+    <!--
+ **********************************
+ Group: 2018E73
+ Anni Lykke Wilhelmsen, 201509504
+ Morten From Elvebakken, 201509095
+ **********************************
+    -->
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="0.25*"/>

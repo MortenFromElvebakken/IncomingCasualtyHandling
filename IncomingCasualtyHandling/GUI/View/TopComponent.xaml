@@ -8,6 +8,13 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800"
              Background="#2D3843">
+    <!--
+ **********************************
+ Group: 2018E73
+ Anni Lykke Wilhelmsen, 201509504
+ Morten From Elvebakken, 201509095
+ **********************************
+    -->
     <UserControl.DataContext>
         <viewmodel:MainView_ViewModel/>
     </UserControl.DataContext>

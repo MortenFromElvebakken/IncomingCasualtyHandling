@@ -6,6 +6,13 @@
              xmlns:local="clr-namespace:IncomingCasualtyHandling.GUI.View"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
+    <!--
+ **********************************
+ Group: 2018E73
+ Anni Lykke Wilhelmsen, 201509504
+ Morten From Elvebakken, 201509095
+ **********************************
+    -->
     <Grid>
         <Border Background="#415262" Margin="1,1,1,1" BorderThickness="1" BorderBrush="Black" CornerRadius="10">
             <Grid>

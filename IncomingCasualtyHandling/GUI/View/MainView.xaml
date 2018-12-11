@@ -13,7 +13,13 @@
         Background="#252E37" BorderBrush="Black"
         WindowStyle="None" AllowsTransparency="True"
         WindowStartupLocation="Manual" Top="0" Left="0">
-
+    <!--
+ **********************************
+ Group: 2018E73
+ Anni Lykke Wilhelmsen, 201509504
+ Morten From Elvebakken, 201509095
+ **********************************
+    -->
     <!--Width="1366" Height="768"-->
 
     <Window.InputBindings>

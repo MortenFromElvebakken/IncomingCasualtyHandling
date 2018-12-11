@@ -1,6 +1,10 @@
 ﻿using System;
 using Hl7.Fhir.Model;
-
+// **********************************
+// Group: 2018E73
+// Anni Lykke Wilhelmsen, 201509504
+// Morten From Elvebakken, 201509095
+// **********************************
 namespace IncomingCasualtyHandling.BL.Object_classes
 {
     public class ICHPatient : ObservableObject

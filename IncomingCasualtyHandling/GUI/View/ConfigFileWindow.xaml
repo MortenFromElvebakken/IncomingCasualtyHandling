@@ -8,6 +8,13 @@
         Title="URL for configuration file" Height="300" Width="600"
         WindowStartupLocation="CenterScreen"
         ResizeMode="NoResize">
+    <!--
+ **********************************
+ Group: 2018E73
+ Anni Lykke Wilhelmsen, 201509504
+ Morten From Elvebakken, 201509095
+ **********************************
+    -->
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition/>

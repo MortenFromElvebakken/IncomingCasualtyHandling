@@ -2,8 +2,14 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:local="clr-namespace:UserControlLibrary">
 
-
-  <!-- Style the headers of a tabitems in a tabcontrol-->
+    <!--
+ **********************************
+ Group: 2018E73
+ Anni Lykke Wilhelmsen, 201509504
+ Morten From Elvebakken, 201509095
+ **********************************
+    -->
+    <!-- Style the headers of a tabitems in a tabcontrol-->
     <Style x:Key="ChosenTab" TargetType="TabItem">
         <Setter Property="Template">
             <Setter.Value>

@@ -10,7 +10,11 @@ using IncomingCasualtyHandling.BL.Models;
 using IncomingCasualtyHandling.BL.Object_classes;
 using IncomingCasualtyHandling.DAL;
 using IncomingCasualtyHandling.GUI.View;
-
+// **********************************
+// Group: 2018E73
+// Anni Lykke Wilhelmsen, 201509504
+// Morten From Elvebakken, 201509095
+// **********************************
 namespace IncomingCasualtyHandling.GUI.ViewModels
 {
     // the class is an ObservableObject in order to be able to call OnPropertyChanged on properties

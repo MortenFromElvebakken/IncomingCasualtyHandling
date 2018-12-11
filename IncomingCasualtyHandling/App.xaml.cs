@@ -12,7 +12,11 @@ using IncomingCasualtyHandling.DAL;
 using IncomingCasualtyHandling.DAL.Interface;
 using IncomingCasualtyHandling.GUI.View;
 using IncomingCasualtyHandling.GUI.ViewModels;
-
+// **********************************
+// Group: 2018E73
+// Anni Lykke Wilhelmsen, 201509504
+// Morten From Elvebakken, 201509095
+// **********************************
 namespace IncomingCasualtyHandling
 {
     /// <summary>

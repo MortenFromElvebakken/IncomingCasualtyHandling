@@ -12,6 +12,12 @@ using IncomingCasualtyHandling.BL.Object_classes;
 using IncomingCasualtyHandling.DAL.Interface;
 using Task = Hl7.Fhir.Model.Task;
 
+// **********************************
+// Group: 2018E73
+// Anni Lykke Wilhelmsen, 201509504
+// Morten From Elvebakken, 201509095
+// **********************************
+
 namespace IncomingCasualtyHandling.DAL
 {
     public class LoadData : ILoadData
