@@ -33,6 +33,10 @@
 				<Name>Emergency medicine</Name>
 				<Colour>#975EC8</Colour>
 			</Specialty>
+		  <Specialty>
+		    <Name>Internal medicine</Name>
+		    <Colour>#B8BC34</Colour>
+		  </Specialty>
 			<Specialty>
 				<Name>Neurology</Name>
 				<Colour>#47B72C</Colour>
@@ -52,10 +56,6 @@
 			<Specialty>
 				<Name>Otolaryngology</Name>
 				<Colour>#8200BF</Colour>
-			</Specialty>
-			<Specialty>
-				<Name>Pathology-Anatomic &amp; Clinical</Name>
-				<Colour>#B8BC34</Colour>
 			</Specialty>
 			<Specialty>
 				<Name>Pediatrics</Name>

@@ -489,6 +489,7 @@ namespace IncomingCasualtyHandling.BL.Models
             string[] parameters = s.Split(' ');
             var tryChangeTabs = parameters[0];
             var tryTabIndex = Convert.ToInt16(parameters[1]);
+            //If the user is in detailview, and the pressed item is in the current tabs
             if (tryChangeTabs == SelectedOverview && !ChangedFromMain)
             {
                 
@@ -512,7 +513,7 @@ namespace IncomingCasualtyHandling.BL.Models
                     }
                 }
             }
-            //If the user is in detail view and clicks another overview component, to null check the list for information
+            //If the user is in detail view and clicks something that needs new tabs
             else if (tryChangeTabs != SelectedOverview && !ChangedFromMain)
             {
 

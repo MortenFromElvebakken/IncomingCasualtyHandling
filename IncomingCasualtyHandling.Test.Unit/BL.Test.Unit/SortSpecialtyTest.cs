@@ -47,12 +47,12 @@ namespace IncomingCasualtyHandling.Test.Unit.BL.Test.Unit
             _listOfSpecialties = new List<Specialty>();
             _listOfSpecialties.Add(new Specialty{Name = "Diagnostic radiology"});
             _listOfSpecialties.Add(new Specialty { Name = "Emergency medicine" });
+            _listOfSpecialties.Add(new Specialty { Name = "Internal medicine" });
             _listOfSpecialties.Add(new Specialty { Name = "Neurology" });
             _listOfSpecialties.Add(new Specialty { Name = "Obstetrics and Gynecology" });
             _listOfSpecialties.Add(new Specialty { Name = "Opthalmology" });
             _listOfSpecialties.Add(new Specialty { Name = "Orthopaedic surgery" });
             _listOfSpecialties.Add(new Specialty { Name = "Otolaryngology" });
-            _listOfSpecialties.Add(new Specialty { Name = "Pathology-Anatomic and Clinical" });
             _listOfSpecialties.Add(new Specialty { Name = "Pediatrics" });
             _listOfSpecialties.Add(new Specialty { Name = "Plastic surgery" });
             _listOfSpecialties.Add(new Specialty { Name = "Psychiatry" });

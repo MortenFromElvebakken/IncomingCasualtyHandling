@@ -114,19 +114,20 @@
 
                 </Grid>
                 <Grid Grid.Column="1">
-                    <Border CornerRadius="0" Background="Transparent"  BorderThickness="2,0,2,0" Padding="1" Margin="1">
+                    <Border CornerRadius="0" Background="Transparent"  BorderThickness="2,0,2,0" Padding="1" Margin="5,1,5,1">
                         <Border.BorderBrush>
                             <SolidColorBrush Color="Gray" Opacity="0.4"></SolidColorBrush>
                         </Border.BorderBrush>
-                        <Grid Name="Specialty1Panel" Margin="20,2.5,10,2.5" Visibility="{Binding RelativeSource={RelativeSource AncestorType=Window}, Path=DataContext.Specialty1.ShowAs}" VerticalAlignment="Center">
+                        <Border.InputBindings>
+                                <MouseBinding MouseAction="LeftClick"  Command="{Binding RelativeSource={RelativeSource AncestorType=Window}, Path=DataContext.ChangeViewCommandWithProperty}" CommandParameter="Specialty 0"></MouseBinding>
+                            </Border.InputBindings>
+                            <Grid Name="Specialty1Panel" Margin="20,2.5,10,2.5" Visibility="{Binding RelativeSource={RelativeSource AncestorType=Window}, Path=DataContext.Specialty1.ShowAs}" VerticalAlignment="Center">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Style="{StaticResource ColourColumn}"/>
                             <ColumnDefinition Width="1*"/>
                             <ColumnDefinition Style="{StaticResource AmountColumn}"/>
                         </Grid.ColumnDefinitions>
-                        <Grid.InputBindings>
-                            <MouseBinding MouseAction="LeftClick"  Command="{Binding ChangeTabsCommand}" CommandParameter="Specialty 0"></MouseBinding>
-                        </Grid.InputBindings>
+                        
 
                         <Button Grid.Column="0" Name="Specialty1Colour" IsEnabled="False" Style="{StaticResource SquaredRoundedButton}" Background="{Binding RelativeSource={RelativeSource AncestorType=Window}, Path=DataContext.Specialty1.Colour}" ></Button>
                             <Label Grid.Column="1" Name="Specialty1Name" Content="{Binding RelativeSource={RelativeSource AncestorType=Window}, Path=DataContext.Specialty1.Name}" VerticalAlignment="Center" HorizontalAlignment="Left" Style="{StaticResource GuidingLabel}"></Label>
@@ -135,15 +136,19 @@
                     </Border>
                 </Grid>
                 <Grid Grid.Column="2">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition/>
-                        <ColumnDefinition/>
-                    </Grid.ColumnDefinitions>
-                    <Grid.InputBindings>
-                        <MouseBinding MouseAction="LeftClick"  Command="{Binding ChangeTabsCommand}" CommandParameter="Eta 0"></MouseBinding>
-                    </Grid.InputBindings>
-                    <Label Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Center" Style="{StaticResource GuidingLabel}">ETA</Label>
-                    <Label Grid.Column="1" Name="EtaRelativeTimeText" VerticalAlignment="Center" HorizontalAlignment="Left" Content="{Binding RelativeSource={RelativeSource AncestorType=Window}, Path=DataContext.ETA.AbsoluteTime}" Style="{StaticResource GuidingLabel}"></Label>
+                    <Border Margin="5,0,5,0" Background="Transparent">
+                        <Border.InputBindings>
+                            <MouseBinding MouseAction="LeftClick"  Command="{Binding RelativeSource={RelativeSource AncestorType=Window}, Path=DataContext.ChangeViewCommandWithProperty}" CommandParameter="ETA 0"></MouseBinding>
+                        </Border.InputBindings>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <Label Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Center" Style="{StaticResource GuidingLabel}">ETA</Label>
+                        <Label Grid.Column="1" Name="EtaRelativeTimeText" VerticalAlignment="Center" HorizontalAlignment="Left" Content="{Binding RelativeSource={RelativeSource AncestorType=Window}, Path=DataContext.ETA.AbsoluteTime}" Style="{StaticResource GuidingLabel}"></Label>
+                        </Grid>
+                    </Border>
                 </Grid>
             </Grid>
         </Border>

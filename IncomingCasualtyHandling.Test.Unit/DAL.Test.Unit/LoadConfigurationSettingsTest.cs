@@ -53,6 +53,13 @@ namespace IncomingCasualtyHandling.Test.Unit.DAL.Test.Unit
                     Amount = 0,
                     ShowAs = Visibility.Collapsed
                 },
+                new Specialty
+                {
+                    Name = "Internal medicine",
+                    Colour = "#B8BC34",
+                    Amount = 0,
+                    ShowAs = Visibility.Collapsed
+                },
                 new Specialty {Name = "Neurology", Colour = "#47B72C", Amount = 0, ShowAs = Visibility.Collapsed},
                 new Specialty
                 {
@@ -70,13 +77,7 @@ namespace IncomingCasualtyHandling.Test.Unit.DAL.Test.Unit
                     ShowAs = Visibility.Collapsed
                 },
                 new Specialty {Name = "Otolaryngology", Colour = "#8200BF", Amount = 0, ShowAs = Visibility.Collapsed},
-                new Specialty
-                {
-                    Name = "Pathology-Anatomic and Clinical",
-                    Colour = "#B8BC34",
-                    Amount = 0,
-                    ShowAs = Visibility.Collapsed
-                },
+                
                 new Specialty {Name = "Pediatrics", Colour = "#A3CC92", Amount = 0, ShowAs = Visibility.Collapsed},
                 new Specialty {Name = "Plastic surgery", Colour = "#00137F", Amount = 0, ShowAs = Visibility.Collapsed},
                 new Specialty {Name = "Psychiatry", Colour = "#0026D1", Amount = 0, ShowAs = Visibility.Collapsed},

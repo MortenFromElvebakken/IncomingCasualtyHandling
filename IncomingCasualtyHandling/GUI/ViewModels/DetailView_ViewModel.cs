@@ -17,7 +17,7 @@ namespace IncomingCasualtyHandling.GUI.ViewModels
     {
         public string IconPath => _detailView_Model.IconPath;
 
-        //To specify which tab is opened, and which is currently open
+        //To specify which tab to open, and which is currently open
         public int SelectedTabIndex
         {
             get => _detailView_Model.SelectedTabIndex;
