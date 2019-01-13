@@ -145,6 +145,7 @@ namespace IncomingCasualtyHandling.DAL
                     //{
 
                     var testEntry = Client.Read<Patient>(FhirServerUrl + "/Patient/" + b.Entry[counterTest].Resource.Id);
+                    counterTest++;
                     changedPatients.Add(testEntry);
                  
                     //}
@@ -254,7 +255,7 @@ namespace IncomingCasualtyHandling.DAL
                             //var newList = listOfPatients;
                             foreach (var p in listOfPatients)
                             {
-                                if (p.CPR == cpr)
+                                if (p.CPR == cpr) // Bør finde alle med det cpr.
                                 {
                                     listOfPatients[counter2] = _convertICHPatient.ReturnPatient(patient);
                                     didItContainElement = true;

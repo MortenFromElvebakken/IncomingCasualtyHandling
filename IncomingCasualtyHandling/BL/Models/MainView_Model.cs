@@ -119,7 +119,7 @@ namespace IncomingCasualtyHandling.BL.Models
             get => _ETA;
             set
             {
-                if (value != null)
+                if (_ETA == null || (value != null && !string.Equals(value.RelativeTime,_ETA.RelativeTime)))
                 {
                     _ETA = value;
                     OnPropertyChanged();

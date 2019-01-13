@@ -27,7 +27,7 @@ namespace IncomingCasualtyHandling.Test.Unit.DAL.Test.Unit
         private ILoadConfigurationSettings _loadConfig;
         private IConvertToICHPatient _convert;
 
-        private string _testServerName = "http://localhost:8080/hapi-fhir-jpaserver-example/baseDstu3";
+        private string _testServerName = "http://localhostas:8080/hapi-fhir-jpaserver-example/baseDstu3";
         private List<ICHPatient> _patientList;
 
         // Create FHIR patient
